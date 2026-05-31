@@ -2,6 +2,7 @@
 
 namespace App\Models\Landlord;
 
+use App\Modules\Billing\Enums\SubscriptionStatus;
 use Illuminate\Database\Eloquent\Model;
 
 final class Subscription extends Model
@@ -30,6 +31,7 @@ final class Subscription extends Model
             'current_period_ends_at' => 'datetime',
             'cancelled_at' => 'datetime',
             'provider_payload' => 'array',
+            'status' => SubscriptionStatus::class,
         ];
     }
 }

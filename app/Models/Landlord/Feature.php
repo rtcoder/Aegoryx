@@ -2,6 +2,7 @@
 
 namespace App\Models\Landlord;
 
+use App\Modules\Entitlements\Enums\FeatureStatus;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -27,6 +28,7 @@ final class Feature extends Model
     {
         return [
             'default_config' => 'array',
+            'status' => FeatureStatus::class,
         ];
     }
 }

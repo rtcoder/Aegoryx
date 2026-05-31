@@ -2,6 +2,7 @@
 
 namespace App\Models\Landlord;
 
+use App\Modules\Billing\Enums\PlanStatus;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -30,6 +31,7 @@ final class Plan extends Model
         return [
             'limits' => 'array',
             'metadata' => 'array',
+            'status' => PlanStatus::class,
         ];
     }
 }

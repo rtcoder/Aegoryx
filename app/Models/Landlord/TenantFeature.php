@@ -2,6 +2,7 @@
 
 namespace App\Models\Landlord;
 
+use App\Modules\Entitlements\Enums\TenantFeatureSource;
 use Illuminate\Database\Eloquent\Model;
 
 final class TenantFeature extends Model
@@ -25,6 +26,7 @@ final class TenantFeature extends Model
         return [
             'enabled' => 'boolean',
             'config' => 'array',
+            'source' => TenantFeatureSource::class,
         ];
     }
 }

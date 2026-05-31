@@ -2,6 +2,7 @@
 
 namespace App\Models\Landlord;
 
+use App\Modules\Licensing\Enums\LicenseStatus;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -33,6 +34,7 @@ final class License extends Model
             'expires_at' => 'datetime',
             'last_verified_at' => 'datetime',
             'payload' => 'array',
+            'status' => LicenseStatus::class,
         ];
     }
 }
