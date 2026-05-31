@@ -1,5 +1,6 @@
-# CODEX.md — CMS+CRM SaaS / Self-hosted Platform
+# CODEX.md — Aegoryx - CMS+CRM SaaS / Self-hosted Platform
 
+Aegoryx is a privacy-first CMS + CRM platform designed for SaaS and self-hosted deployments.
 ## 1. Cel projektu
 
 Budujemy modularny system **CMS + CRM** z naciskiem na:
