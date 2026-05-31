@@ -4,6 +4,7 @@ namespace App\Models\Landlord;
 
 use App\Modules\Entitlements\Enums\FeatureStatus;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 final class Feature extends Model
@@ -30,5 +31,13 @@ final class Feature extends Model
             'default_config' => 'array',
             'status' => FeatureStatus::class,
         ];
+    }
+
+    /**
+     * @return HasMany<TenantFeature, $this>
+     */
+    public function tenantFeatures(): HasMany
+    {
+        return $this->hasMany(TenantFeature::class);
     }
 }

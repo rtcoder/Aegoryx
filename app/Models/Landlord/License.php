@@ -4,6 +4,7 @@ namespace App\Models\Landlord;
 
 use App\Modules\Licensing\Enums\LicenseStatus;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 final class License extends Model
@@ -36,5 +37,13 @@ final class License extends Model
             'payload' => 'array',
             'status' => LicenseStatus::class,
         ];
+    }
+
+    /**
+     * @return BelongsTo<Tenant, $this>
+     */
+    public function tenant(): BelongsTo
+    {
+        return $this->belongsTo(Tenant::class);
     }
 }

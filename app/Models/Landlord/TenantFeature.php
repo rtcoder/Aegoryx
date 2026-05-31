@@ -4,6 +4,7 @@ namespace App\Models\Landlord;
 
 use App\Modules\Entitlements\Enums\TenantFeatureSource;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 final class TenantFeature extends Model
 {
@@ -28,5 +29,21 @@ final class TenantFeature extends Model
             'config' => 'array',
             'source' => TenantFeatureSource::class,
         ];
+    }
+
+    /**
+     * @return BelongsTo<Feature, $this>
+     */
+    public function feature(): BelongsTo
+    {
+        return $this->belongsTo(Feature::class);
+    }
+
+    /**
+     * @return BelongsTo<Tenant, $this>
+     */
+    public function tenant(): BelongsTo
+    {
+        return $this->belongsTo(Tenant::class);
     }
 }

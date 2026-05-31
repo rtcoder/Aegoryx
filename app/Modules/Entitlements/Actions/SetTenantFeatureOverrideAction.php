@@ -1,0 +1,68 @@
+<?php
+
+namespace App\Modules\Entitlements\Actions;
+
+use App\Models\Landlord\AuditLog;
+use App\Models\Landlord\Feature;
+use App\Models\Landlord\Identity;
+use App\Models\Landlord\Tenant;
+use App\Models\Landlord\TenantFeature;
+use App\Modules\Entitlements\Enums\TenantFeatureSource;
+use Illuminate\Support\Facades\DB;
+
+final readonly class SetTenantFeatureOverrideAction
+{
+    public function handle(
+        Tenant $tenant,
+        Feature $feature,
+        bool $enabled,
+        string $reason,
+        Identity $actor,
+        ?string $ip,
+        ?string $userAgent,
+    ): TenantFeature {
+        return DB::transaction(function () use ($tenant, $feature, $enabled, $reason, $actor, $ip, $userAgent): TenantFeature {
+            $override = TenantFeature::query()->firstOrNew([
+                'tenant_id' => $tenant->id,
+                'feature_id' => $feature->id,
+                'source' => TenantFeatureSource::Manual->value,
+            ]);
+
+            $before = $override->exists ? [
+                'enabled' => $override->enabled,
+                'reason' => $override->reason,
+                'source' => $override->source->value,
+            ] : null;
+
+            $override->forceFill([
+                'enabled' => $enabled,
+                'reason' => $reason,
+                'created_by' => $override->exists ? $override->created_by : $actor->id,
+                'updated_by' => $actor->id,
+            ])->save();
+
+            AuditLog::query()->create([
+                'actor_type' => 'superadmin',
+                'actor_id' => $actor->id,
+                'subject_type' => TenantFeature::class,
+                'subject_id' => $override->id,
+                'action' => 'tenant_feature_override_set',
+                'description' => "Manual feature override [{$feature->key}] for tenant [{$tenant->slug}] set to [".($enabled ? 'enabled' : 'disabled').'].',
+                'before_json' => $before,
+                'after_json' => [
+                    'enabled' => $enabled,
+                    'reason' => $reason,
+                    'source' => TenantFeatureSource::Manual->value,
+                ],
+                'metadata_json' => [
+                    'feature_key' => $feature->key,
+                    'tenant_slug' => $tenant->slug,
+                ],
+                'ip' => $ip,
+                'user_agent' => $userAgent,
+            ]);
+
+            return $override->refresh();
+        });
+    }
+}
