@@ -5,20 +5,28 @@ namespace App\Models\Landlord;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-final class Tenant extends Model
+final class Feature extends Model
 {
     use SoftDeletes;
 
     protected $fillable = [
+        'key',
         'name',
-        'slug',
-        'schema_name',
+        'description',
         'status',
-        'deployment_type',
-        'billing_model',
-        'license_type',
+        'default_config',
         'created_by',
         'updated_by',
         'deleted_by',
     ];
+
+    /**
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'default_config' => 'array',
+        ];
+    }
 }
