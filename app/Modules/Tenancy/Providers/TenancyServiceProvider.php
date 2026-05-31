@@ -5,6 +5,8 @@ namespace App\Modules\Tenancy\Providers;
 use App\Console\Commands\MigrateLandlordCommand;
 use App\Console\Commands\MigrateTenantCommand;
 use App\Console\Commands\MigrateTenantsCommand;
+use App\Console\Commands\RollbackLandlordMigrationCommand;
+use App\Console\Commands\RollbackTenantsMigrationCommand;
 use App\Services\Tenancy\PostgresSchemaTenancyManager;
 use App\Services\Tenancy\TenancyManager;
 use App\Support\Modules\ModuleServiceProvider;
@@ -25,6 +27,8 @@ final class TenancyServiceProvider extends ModuleServiceProvider
                 MigrateLandlordCommand::class,
                 MigrateTenantsCommand::class,
                 MigrateTenantCommand::class,
+                RollbackLandlordMigrationCommand::class,
+                RollbackTenantsMigrationCommand::class,
             ]);
         }
     }
