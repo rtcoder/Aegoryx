@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Landlord\Identity;
 use App\Models\Tenant\User;
 
 return [
@@ -42,6 +43,11 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+
+        'landlord' => [
+            'driver' => 'session',
+            'provider' => 'landlord_identities',
+        ],
     ],
 
     /*
@@ -65,6 +71,11 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => env('AUTH_MODEL', User::class),
+        ],
+
+        'landlord_identities' => [
+            'driver' => 'eloquent',
+            'model' => Identity::class,
         ],
 
         // 'users' => [

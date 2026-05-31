@@ -16,6 +16,10 @@ use App\Modules\Tenancy\Providers\TenancyServiceProvider;
 use App\Modules\TenantPanel\Providers\TenantPanelServiceProvider;
 
 return [
+    'landlord' => [
+        'domain' => env('LANDLORD_DOMAIN', 'admin.aegoryx.test'),
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Aegoryx Modules

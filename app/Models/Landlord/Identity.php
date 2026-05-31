@@ -4,13 +4,14 @@ namespace App\Models\Landlord;
 
 use App\Modules\Identity\Enums\IdentityStatus;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 #[Hidden(['password'])]
-final class Identity extends Model
+final class Identity extends Authenticatable
 {
-    use SoftDeletes;
+    use Notifiable, SoftDeletes;
 
     protected $fillable = [
         'name',
