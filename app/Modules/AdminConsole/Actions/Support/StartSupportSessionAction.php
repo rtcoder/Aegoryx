@@ -7,6 +7,7 @@ use App\Models\Landlord\Identity;
 use App\Models\Landlord\SupportSession;
 use App\Models\Landlord\Tenant;
 use App\Modules\AdminConsole\Enums\SupportSessionStatus;
+use App\Modules\Audit\Enums\AuditLogAction;
 use Illuminate\Support\Facades\DB;
 
 final readonly class StartSupportSessionAction
@@ -44,7 +45,7 @@ final readonly class StartSupportSessionAction
                 'actor_id' => $actor->id,
                 'subject_type' => SupportSession::class,
                 'subject_id' => $supportSession->id,
-                'action' => 'support_session_started',
+                'action' => AuditLogAction::SupportSessionStarted,
                 'description' => "Support session [{$supportSession->id}] started for tenant [{$tenant->slug}].",
                 'before_json' => null,
                 'after_json' => [

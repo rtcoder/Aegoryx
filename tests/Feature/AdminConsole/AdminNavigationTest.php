@@ -5,6 +5,7 @@ namespace Tests\Feature\AdminConsole;
 use App\Models\Landlord\AuditLog;
 use App\Models\Landlord\Identity;
 use App\Models\Landlord\Tenant;
+use App\Modules\Audit\Enums\AuditLogAction;
 use App\Modules\Identity\Enums\IdentityStatus;
 use App\Modules\Tenancy\Enums\TenantBillingModel;
 use App\Modules\Tenancy\Enums\TenantDeploymentType;
@@ -99,7 +100,7 @@ final class AdminNavigationTest extends TestCase
         $this->assertSame($superadmin->id, $tenant->updated_by);
 
         $auditLog = AuditLog::query()
-            ->where('action', 'tenant_status_changed')
+            ->where('action', AuditLogAction::TenantStatusChanged)
             ->where('subject_id', $tenant->id)
             ->firstOrFail();
 

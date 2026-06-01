@@ -5,6 +5,7 @@ namespace App\Modules\Entitlements\Actions;
 use App\Models\Landlord\AuditLog;
 use App\Models\Landlord\Feature;
 use App\Models\Landlord\Identity;
+use App\Modules\Audit\Enums\AuditLogAction;
 use App\Modules\Entitlements\Enums\FeatureStatus;
 use Illuminate\Support\Facades\DB;
 
@@ -32,7 +33,7 @@ final readonly class UpdateFeatureStatusAction
                 'actor_id' => $actor->id,
                 'subject_type' => Feature::class,
                 'subject_id' => $feature->id,
-                'action' => 'feature_status_changed',
+                'action' => AuditLogAction::FeatureStatusChanged,
                 'description' => "Feature [{$feature->key}] status changed to [{$status->value}].",
                 'before_json' => $before,
                 'after_json' => ['status' => $status->value],

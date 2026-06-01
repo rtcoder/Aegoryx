@@ -7,6 +7,7 @@ use App\Models\Landlord\Feature;
 use App\Models\Landlord\Identity;
 use App\Models\Landlord\Tenant;
 use App\Models\Landlord\TenantFeature;
+use App\Modules\Audit\Enums\AuditLogAction;
 use App\Modules\Entitlements\Enums\TenantFeatureSource;
 use Illuminate\Support\Facades\DB;
 
@@ -46,7 +47,7 @@ final readonly class SetTenantFeatureOverrideAction
                 'actor_id' => $actor->id,
                 'subject_type' => TenantFeature::class,
                 'subject_id' => $override->id,
-                'action' => 'tenant_feature_override_set',
+                'action' => AuditLogAction::TenantFeatureOverrideSet,
                 'description' => "Manual feature override [{$feature->key}] for tenant [{$tenant->slug}] set to [".($enabled ? 'enabled' : 'disabled').'].',
                 'before_json' => $before,
                 'after_json' => [

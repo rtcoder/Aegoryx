@@ -7,6 +7,7 @@ use App\Models\Landlord\Feature;
 use App\Models\Landlord\Identity;
 use App\Models\Landlord\Tenant;
 use App\Models\Landlord\TenantFeature;
+use App\Modules\Audit\Enums\AuditLogAction;
 use App\Modules\Entitlements\Enums\FeatureStatus;
 use App\Modules\Entitlements\Enums\TenantFeatureSource;
 use App\Modules\Identity\Enums\IdentityStatus;
@@ -53,7 +54,7 @@ final class AdminFeatureManagementTest extends TestCase
             'actor_id' => $superadmin->id,
             'subject_type' => Feature::class,
             'subject_id' => $feature->id,
-            'action' => 'feature_created',
+            'action' => AuditLogAction::FeatureCreated->value,
         ]);
     }
 
@@ -76,7 +77,7 @@ final class AdminFeatureManagementTest extends TestCase
         $this->assertSame($superadmin->id, $feature->updated_by);
 
         $auditLog = AuditLog::query()
-            ->where('action', 'feature_status_changed')
+            ->where('action', AuditLogAction::FeatureStatusChanged)
             ->where('subject_id', $feature->id)
             ->firstOrFail();
 
@@ -112,7 +113,7 @@ final class AdminFeatureManagementTest extends TestCase
         $this->assertSame($superadmin->id, $override->updated_by);
 
         $auditLog = AuditLog::query()
-            ->where('action', 'tenant_feature_override_set')
+            ->where('action', AuditLogAction::TenantFeatureOverrideSet)
             ->where('subject_id', $override->id)
             ->firstOrFail();
 

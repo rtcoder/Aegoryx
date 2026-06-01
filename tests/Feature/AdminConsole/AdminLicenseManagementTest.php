@@ -6,6 +6,7 @@ use App\Models\Landlord\AuditLog;
 use App\Models\Landlord\Identity;
 use App\Models\Landlord\License;
 use App\Models\Landlord\Tenant;
+use App\Modules\Audit\Enums\AuditLogAction;
 use App\Modules\Identity\Enums\IdentityStatus;
 use App\Modules\Licensing\Enums\LicenseStatus;
 use App\Modules\Tenancy\Enums\TenantBillingModel;
@@ -70,7 +71,7 @@ final class AdminLicenseManagementTest extends TestCase
         $this->assertSame($superadmin->id, $license->updated_by);
 
         $auditLog = AuditLog::query()
-            ->where('action', 'license_verified')
+            ->where('action', AuditLogAction::LicenseVerified)
             ->where('subject_id', $license->id)
             ->firstOrFail();
 

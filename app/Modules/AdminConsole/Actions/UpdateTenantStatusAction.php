@@ -5,6 +5,7 @@ namespace App\Modules\AdminConsole\Actions;
 use App\Models\Landlord\AuditLog;
 use App\Models\Landlord\Identity;
 use App\Models\Landlord\Tenant;
+use App\Modules\Audit\Enums\AuditLogAction;
 use App\Modules\Tenancy\Enums\TenantStatus;
 use Illuminate\Support\Facades\DB;
 
@@ -32,7 +33,7 @@ final readonly class UpdateTenantStatusAction
                 'actor_id' => $actor->id,
                 'subject_type' => Tenant::class,
                 'subject_id' => $tenant->id,
-                'action' => 'tenant_status_changed',
+                'action' => AuditLogAction::TenantStatusChanged,
                 'description' => "Tenant [{$tenant->slug}] status changed to [{$status->value}].",
                 'before_json' => $before,
                 'after_json' => ['status' => $status->value],

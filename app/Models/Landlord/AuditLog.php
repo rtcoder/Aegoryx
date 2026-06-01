@@ -2,6 +2,7 @@
 
 namespace App\Models\Landlord;
 
+use App\Modules\Audit\Enums\AuditLogAction;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
@@ -12,7 +13,7 @@ use Illuminate\Support\Carbon;
  * @property int|null $actor_id
  * @property string $subject_type
  * @property int|null $subject_id
- * @property string $action
+ * @property AuditLogAction $action
  * @property string|null $description
  * @property array<string, mixed>|null $before_json
  * @property array<string, mixed>|null $after_json
@@ -44,6 +45,7 @@ final class AuditLog extends Model
     {
         return [
             'after_json' => 'array',
+            'action' => AuditLogAction::class,
             'before_json' => 'array',
             'metadata_json' => 'array',
         ];

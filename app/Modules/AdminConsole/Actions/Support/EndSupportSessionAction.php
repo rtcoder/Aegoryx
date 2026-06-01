@@ -6,6 +6,7 @@ use App\Models\Landlord\AuditLog;
 use App\Models\Landlord\Identity;
 use App\Models\Landlord\SupportSession;
 use App\Modules\AdminConsole\Enums\SupportSessionStatus;
+use App\Modules\Audit\Enums\AuditLogAction;
 use Illuminate\Support\Facades\DB;
 
 final readonly class EndSupportSessionAction
@@ -33,7 +34,9 @@ final readonly class EndSupportSessionAction
                 'actor_id' => $actor->id,
                 'subject_type' => SupportSession::class,
                 'subject_id' => $supportSession->id,
-                'action' => $status === SupportSessionStatus::Expired->value ? 'support_session_expired' : 'support_session_ended',
+                'action' => $status === SupportSessionStatus::Expired->value
+                    ? AuditLogAction::SupportSessionExpired
+                    : AuditLogAction::SupportSessionEnded,
                 'description' => "Support session [{$supportSession->id}] marked as [{$status}].",
                 'before_json' => $before,
                 'after_json' => [

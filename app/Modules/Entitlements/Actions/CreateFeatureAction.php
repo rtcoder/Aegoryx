@@ -5,6 +5,7 @@ namespace App\Modules\Entitlements\Actions;
 use App\Models\Landlord\AuditLog;
 use App\Models\Landlord\Feature;
 use App\Models\Landlord\Identity;
+use App\Modules\Audit\Enums\AuditLogAction;
 use App\Modules\Entitlements\Enums\FeatureStatus;
 use Illuminate\Support\Facades\DB;
 
@@ -34,7 +35,7 @@ final readonly class CreateFeatureAction
                 'actor_id' => $actor->id,
                 'subject_type' => Feature::class,
                 'subject_id' => $feature->id,
-                'action' => 'feature_created',
+                'action' => AuditLogAction::FeatureCreated,
                 'description' => "Feature [{$feature->key}] created.",
                 'before_json' => null,
                 'after_json' => [

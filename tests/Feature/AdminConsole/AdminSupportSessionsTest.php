@@ -7,6 +7,7 @@ use App\Models\Landlord\Identity;
 use App\Models\Landlord\SupportSession;
 use App\Models\Landlord\Tenant;
 use App\Modules\AdminConsole\Enums\SupportSessionStatus;
+use App\Modules\Audit\Enums\AuditLogAction;
 use App\Modules\Identity\Enums\IdentityStatus;
 use App\Modules\Tenancy\Enums\TenantBillingModel;
 use App\Modules\Tenancy\Enums\TenantDeploymentType;
@@ -54,7 +55,7 @@ final class AdminSupportSessionsTest extends TestCase
             'actor_id' => $superadmin->id,
             'subject_type' => SupportSession::class,
             'subject_id' => $supportSession->id,
-            'action' => 'support_session_started',
+            'action' => AuditLogAction::SupportSessionStarted->value,
         ]);
     }
 
@@ -97,7 +98,7 @@ final class AdminSupportSessionsTest extends TestCase
             'actor_id' => $superadmin->id,
             'subject_type' => SupportSession::class,
             'subject_id' => $supportSession->id,
-            'action' => 'support_session_ended',
+            'action' => AuditLogAction::SupportSessionEnded->value,
         ]);
     }
 
@@ -126,7 +127,7 @@ final class AdminSupportSessionsTest extends TestCase
             'actor_id' => $superadmin->id,
             'subject_type' => SupportSession::class,
             'subject_id' => $supportSession->id,
-            'action' => 'support_session_expired',
+            'action' => AuditLogAction::SupportSessionExpired->value,
         ]);
     }
 

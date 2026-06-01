@@ -5,6 +5,7 @@ namespace App\Modules\Licensing\Actions;
 use App\Models\Landlord\AuditLog;
 use App\Models\Landlord\Identity;
 use App\Models\Landlord\License;
+use App\Modules\Audit\Enums\AuditLogAction;
 use App\Modules\Licensing\Enums\LicenseStatus;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -36,7 +37,7 @@ final readonly class VerifyLicenseAction
                 'actor_id' => $actor->id,
                 'subject_type' => License::class,
                 'subject_id' => $license->id,
-                'action' => 'license_verified',
+                'action' => AuditLogAction::LicenseVerified,
                 'description' => "License [{$license->id}] verified as [{$status->value}].",
                 'before_json' => $before,
                 'after_json' => [
