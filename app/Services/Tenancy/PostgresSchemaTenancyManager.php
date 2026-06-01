@@ -13,6 +13,10 @@ final class PostgresSchemaTenancyManager implements TenancyManager
     {
         $this->tenant = $tenant;
 
+        if (! $this->usesPostgres()) {
+            return;
+        }
+
         DB::statement(sprintf(
             'SET search_path TO %s, public',
             $this->quoteIdentifier($tenant->schema_name),
@@ -21,7 +25,9 @@ final class PostgresSchemaTenancyManager implements TenancyManager
 
     public function end(): void
     {
-        DB::statement('RESET search_path');
+        if ($this->usesPostgres()) {
+            DB::statement('RESET search_path');
+        }
 
         $this->tenant = null;
     }
@@ -34,5 +40,10 @@ final class PostgresSchemaTenancyManager implements TenancyManager
     private function quoteIdentifier(string $identifier): string
     {
         return '"'.str_replace('"', '""', $identifier).'"';
+    }
+
+    private function usesPostgres(): bool
+    {
+        return DB::connection()->getDriverName() === 'pgsql';
     }
 }

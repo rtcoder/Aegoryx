@@ -1,5 +1,9 @@
 # Task: CMS Activity History
 
+## Status
+
+Done.
+
 ## Cel
 
 Rejestrować historię istotnych akcji CMS.

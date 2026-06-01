@@ -1,5 +1,9 @@
 # Task: Public Tenant Resolving
 
+## Status
+
+Done.
+
 ## Cel
 
 Rozwiązywać tenanta dla publicznego API na podstawie domeny lub publicznego identyfikatora.

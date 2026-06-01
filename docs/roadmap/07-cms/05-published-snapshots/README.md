@@ -1,5 +1,9 @@
 # Task: Published Snapshots
 
+## Status
+
+Done.
+
 ## Cel
 
 Przechowywać opublikowaną wersję strony w formie bezpiecznej dla public API.

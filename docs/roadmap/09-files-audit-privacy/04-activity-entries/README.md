@@ -1,5 +1,9 @@
 # Task: Activity Entries
 
+## Status
+
+Done.
+
 ## Cel
 
 Zbudować reusable activity history per element.

@@ -1,5 +1,9 @@
 # Task: Publish Flow
 
+## Status
+
+Done.
+
 ## Cel
 
 Zbudować kontrolowany proces publikacji strony CMS z drafta do published snapshot.

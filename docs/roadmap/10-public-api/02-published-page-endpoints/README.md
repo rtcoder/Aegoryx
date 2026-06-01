@@ -1,5 +1,9 @@
 # Task: Published Page Endpoints
 
+## Status
+
+Done.
+
 ## Cel
 
 Udostępnić endpointy read-only dla opublikowanych stron.

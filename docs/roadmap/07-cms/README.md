@@ -14,14 +14,19 @@ CMS musi rozdzielać pracę redakcyjną od opublikowanych treści, żeby publicz
 - Audit/activity foundation.
 - Public API foundation.
 
+## Status
+
+- Done: Page Model, Page Revisions, Publish Flow, Published Snapshots, CMS Activity History.
+- Pending: Blocks Content Structure as full builder/validation layer.
+
 ## Taski
 
-- [Page Model](01-page-model/)
-- [Page Revisions](02-page-revisions/)
-- [Publish Flow](03-publish-flow/)
-- [Blocks Content Structure](04-blocks-content-structure/)
-- [Published Snapshots](05-published-snapshots/)
-- [CMS Activity History](06-cms-activity-history/)
+- [x] [Page Model](01-page-model/)
+- [x] [Page Revisions](02-page-revisions/)
+- [x] [Publish Flow](03-publish-flow/)
+- [ ] [Blocks Content Structure](04-blocks-content-structure/)
+- [x] [Published Snapshots](05-published-snapshots/)
+- [x] [CMS Activity History](06-cms-activity-history/)
 
 ## Definicja Ukończenia
 

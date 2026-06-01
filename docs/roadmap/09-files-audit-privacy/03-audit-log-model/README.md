@@ -1,5 +1,9 @@
 # Task: Audit Log Model
 
+## Status
+
+Done.
+
 ## Cel
 
 Zbudować techniczny audit log dla zdarzeń bezpieczeństwa i operacji krytycznych.

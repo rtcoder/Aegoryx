@@ -1,5 +1,9 @@
 # Task: Page Revisions
 
+## Status
+
+Done.
+
 ## Cel
 
 Zapisywać historię edycji stron CMS jako rewizje.

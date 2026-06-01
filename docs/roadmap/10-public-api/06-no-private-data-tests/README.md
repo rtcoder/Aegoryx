@@ -1,5 +1,9 @@
 # Task: No Private Data Tests
 
+## Status
+
+Done for CMS draft visibility and panel-only published page fields.
+
 ## Cel
 
 Utworzyć testy gwarantujące, że public API nie zwraca danych prywatnych, draftów ani CRM.

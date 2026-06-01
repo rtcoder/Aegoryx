@@ -14,14 +14,19 @@ Prywatność i audyt są częścią produktu, nie dodatkiem. Każda istotna oper
 - Identity/auth/security.
 - Tenant Panel.
 
+## Status
+
+- Done: Audit Log Model, Activity Entries.
+- Pending: File Metadata, Private File Access, Export Audit, Retention Strategy.
+
 ## Taski
 
-- [File Metadata](01-file-metadata/)
-- [Private File Access](02-private-file-access/)
-- [Audit Log Model](03-audit-log-model/)
-- [Activity Entries](04-activity-entries/)
-- [Export Audit](05-export-audit/)
-- [Retention Strategy](06-retention-strategy/)
+- [ ] [File Metadata](01-file-metadata/)
+- [ ] [Private File Access](02-private-file-access/)
+- [x] [Audit Log Model](03-audit-log-model/)
+- [x] [Activity Entries](04-activity-entries/)
+- [ ] [Export Audit](05-export-audit/)
+- [ ] [Retention Strategy](06-retention-strategy/)
 
 ## Definicja Ukończenia
 

@@ -1,5 +1,9 @@
 # Task: Page Model
 
+## Status
+
+Done.
+
 ## Cel
 
 Zbudować tenantowy model stron CMS jako bazę dla draftów, rewizji i publikacji.
