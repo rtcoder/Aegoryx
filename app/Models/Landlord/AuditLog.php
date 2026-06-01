@@ -2,24 +2,41 @@
 
 namespace App\Models\Landlord;
 
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
+/**
+ * @property int $id
+ * @property string $actor_type
+ * @property int|null $actor_id
+ * @property string $subject_type
+ * @property int|null $subject_id
+ * @property string $action
+ * @property string|null $description
+ * @property array<string, mixed>|null $before_json
+ * @property array<string, mixed>|null $after_json
+ * @property array<string, mixed>|null $metadata_json
+ * @property string|null $ip
+ * @property string|null $user_agent
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ */
+#[Fillable([
+    'actor_type',
+    'actor_id',
+    'subject_type',
+    'subject_id',
+    'action',
+    'description',
+    'before_json',
+    'after_json',
+    'metadata_json',
+    'ip',
+    'user_agent',
+])]
 final class AuditLog extends Model
 {
-    protected $fillable = [
-        'actor_type',
-        'actor_id',
-        'subject_type',
-        'subject_id',
-        'action',
-        'description',
-        'before_json',
-        'after_json',
-        'metadata_json',
-        'ip',
-        'user_agent',
-    ];
-
     /**
      * @return array<string, string>
      */

@@ -3,24 +3,41 @@
 namespace App\Models\Landlord;
 
 use App\Modules\Billing\Enums\SubscriptionStatus;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
+/**
+ * @property int $id
+ * @property int $tenant_id
+ * @property int|null $plan_id
+ * @property string $provider
+ * @property string|null $provider_subscription_id
+ * @property SubscriptionStatus $status
+ * @property Carbon|null $trial_ends_at
+ * @property Carbon|null $current_period_ends_at
+ * @property Carbon|null $cancelled_at
+ * @property array<string, mixed>|null $provider_payload
+ * @property int|null $created_by
+ * @property int|null $updated_by
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ */
+#[Fillable([
+    'tenant_id',
+    'plan_id',
+    'provider',
+    'provider_subscription_id',
+    'status',
+    'trial_ends_at',
+    'current_period_ends_at',
+    'cancelled_at',
+    'provider_payload',
+    'created_by',
+    'updated_by',
+])]
 final class Subscription extends Model
 {
-    protected $fillable = [
-        'tenant_id',
-        'plan_id',
-        'provider',
-        'provider_subscription_id',
-        'status',
-        'trial_ends_at',
-        'current_period_ends_at',
-        'cancelled_at',
-        'provider_payload',
-        'created_by',
-        'updated_by',
-    ];
-
     /**
      * @return array<string, string>
      */
