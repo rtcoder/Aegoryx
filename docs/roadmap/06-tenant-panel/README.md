@@ -16,17 +16,17 @@ To główna powierzchnia pracy użytkownika tenanta. Musi być ergonomiczna, mod
 
 ## Status
 
-- Done: Livewire Setup, Panel Shell.
+- Done: Livewire Setup, Panel Shell, Tenant Navigation, Authorization UX, Entitlement Aware UI.
 - In progress: none.
-- Pending: Tenant Navigation, Authorization UX, Entitlement Aware UI.
+- Pending: none.
 
 ## Taski
 
 - [x] [Livewire Setup](01-livewire-setup/)
 - [x] [Panel Shell](02-panel-shell/)
-- [Tenant Navigation](03-tenant-navigation/)
-- [Authorization UX](04-authorization-ux/)
-- [Entitlement Aware UI](05-entitlement-aware-ui/)
+- [x] [Tenant Navigation](03-tenant-navigation/)
+- [x] [Authorization UX](04-authorization-ux/)
+- [x] [Entitlement Aware UI](05-entitlement-aware-ui/)
 
 ## Definicja Ukończenia
 

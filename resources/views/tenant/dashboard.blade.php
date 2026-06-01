@@ -13,22 +13,19 @@
             </p>
 
             <div class="mt-6 grid gap-4 sm:grid-cols-2">
-                <div class="rounded border border-neutral-800 bg-neutral-950 p-4">
-                    <p class="text-xs uppercase tracking-wide text-neutral-500">CMS</p>
-                    <p class="mt-2 text-sm text-neutral-300">Publishing module placeholder.</p>
-                </div>
-                <div class="rounded border border-neutral-800 bg-neutral-950 p-4">
-                    <p class="text-xs uppercase tracking-wide text-neutral-500">CRM</p>
-                    <p class="mt-2 text-sm text-neutral-300">Customer work module placeholder.</p>
-                </div>
-                <div class="rounded border border-neutral-800 bg-neutral-950 p-4">
-                    <p class="text-xs uppercase tracking-wide text-neutral-500">Files</p>
-                    <p class="mt-2 text-sm text-neutral-300">Private file access placeholder.</p>
-                </div>
-                <div class="rounded border border-neutral-800 bg-neutral-950 p-4">
-                    <p class="text-xs uppercase tracking-wide text-neutral-500">Settings</p>
-                    <p class="mt-2 text-sm text-neutral-300">Workspace configuration placeholder.</p>
-                </div>
+                @foreach ($tenantModuleCards as $module)
+                    @if ($module['enabled'])
+                        <a href="{{ route($module['route']) }}" wire:navigate class="rounded border border-neutral-800 bg-neutral-950 p-4 hover:border-neutral-600">
+                            <p class="text-xs uppercase tracking-wide text-neutral-500">{{ $module['label'] }}</p>
+                            <p class="mt-2 text-sm text-neutral-300">{{ $module['description'] }}</p>
+                        </a>
+                    @else
+                        <div class="rounded border border-neutral-800 bg-neutral-950 p-4 opacity-60">
+                            <p class="text-xs uppercase tracking-wide text-neutral-500">{{ $module['label'] }}</p>
+                            <p class="mt-2 text-sm text-neutral-500">Not enabled for this tenant.</p>
+                        </div>
+                    @endif
+                @endforeach
             </div>
         </section>
 

@@ -1,5 +1,9 @@
 # Task: Tenant Navigation
 
+## Status
+
+Done.
+
 ## Cel
 
 Zbudować tenant-aware navigation dla modułów CMS, CRM, Files i Settings.

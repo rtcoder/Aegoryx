@@ -3,13 +3,20 @@
 namespace App\Modules\TenantPanel\Http\Middleware;
 
 use App\Models\Landlord\TenantDomain;
+use App\Modules\Entitlements\Services\EffectiveEntitlements;
 use App\Modules\Tenancy\Enums\TenantDomainStatus;
+use App\Modules\TenantPanel\Navigation\TenantNavigation;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-final class ResolveTenantFromDomain
+final readonly class ResolveTenantFromDomain
 {
+    public function __construct(
+        private EffectiveEntitlements $entitlements,
+        private TenantNavigation $navigation,
+    ) {}
+
     /**
      * @param  Closure(Request): Response  $next
      */
@@ -31,6 +38,9 @@ final class ResolveTenantFromDomain
 
         $request->attributes->set('tenant', $domain->tenant);
         view()->share('tenant', $domain->tenant);
+        view()->share('tenantEntitlements', $this->entitlements->forTenant($domain->tenant));
+        view()->share('tenantNavigation', $this->navigation->visibleForTenant($domain->tenant));
+        view()->share('tenantModuleCards', $this->navigation->moduleCardsForTenant($domain->tenant));
 
         return $next($request);
     }

@@ -1,16 +1,9 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 @php
-    $navigation = [
-        ['label' => 'Dashboard', 'route' => 'tenant.dashboard'],
-    ];
-
-    $moduleSlots = [
-        ['label' => 'CMS', 'description' => 'Pages, publishing, revisions'],
-        ['label' => 'CRM', 'description' => 'Contacts, companies, deals'],
-        ['label' => 'Files', 'description' => 'Private storage and downloads'],
-        ['label' => 'Settings', 'description' => 'Workspace configuration'],
-    ];
+    $tenantNavigation = $tenantNavigation ?? [];
+    $tenantModuleCards = $tenantModuleCards ?? [];
+    $tenantEntitlements = $tenantEntitlements ?? [];
 @endphp
 <head>
     <meta charset="utf-8">
@@ -34,7 +27,7 @@
             </div>
 
             <nav class="mt-8 space-y-1" aria-label="Tenant navigation">
-                @foreach ($navigation as $item)
+                @foreach ($tenantNavigation as $item)
                     <a
                         href="{{ route($item['route']) }}"
                         wire:navigate
@@ -48,11 +41,18 @@
             <div class="mt-8">
                 <p class="px-3 text-xs uppercase tracking-wide text-neutral-500">Modules</p>
                 <div class="mt-3 space-y-2">
-                    @foreach ($moduleSlots as $module)
-                        <div class="rounded border border-neutral-800 px-3 py-2">
-                            <p class="text-sm font-medium text-neutral-300">{{ $module['label'] }}</p>
-                            <p class="mt-1 text-xs text-neutral-500">{{ $module['description'] }}</p>
-                        </div>
+                    @foreach ($tenantModuleCards as $module)
+                        @if ($module['enabled'])
+                            <a href="{{ route($module['route']) }}" wire:navigate class="block rounded border border-neutral-800 px-3 py-2 hover:border-neutral-600">
+                                <p class="text-sm font-medium text-neutral-300">{{ $module['label'] }}</p>
+                                <p class="mt-1 text-xs text-neutral-500">{{ $module['description'] }}</p>
+                            </a>
+                        @else
+                            <div class="rounded border border-neutral-800 px-3 py-2 opacity-60">
+                                <p class="text-sm font-medium text-neutral-400">{{ $module['label'] }}</p>
+                                <p class="mt-1 text-xs text-neutral-600">Not enabled for this tenant.</p>
+                            </div>
+                        @endif
                     @endforeach
                 </div>
             </div>
@@ -81,10 +81,16 @@
                     >
                         Dashboard
                     </a>
-                    @foreach ($moduleSlots as $module)
-                        <span class="shrink-0 rounded bg-neutral-900 px-3 py-2 text-sm text-neutral-400">
-                            {{ $module['label'] }}
-                        </span>
+                    @foreach ($tenantModuleCards as $module)
+                        @if ($module['enabled'])
+                            <a href="{{ route($module['route']) }}" wire:navigate class="shrink-0 rounded bg-neutral-900 px-3 py-2 text-sm text-neutral-300">
+                                {{ $module['label'] }}
+                            </a>
+                        @else
+                            <span class="shrink-0 rounded bg-neutral-900 px-3 py-2 text-sm text-neutral-600">
+                                {{ $module['label'] }}
+                            </span>
+                        @endif
                     @endforeach
                 </div>
             </header>
@@ -96,6 +102,7 @@
                         <span class="font-medium text-neutral-100">{{ $tenant->name }}</span>
                         <span class="font-mono text-xs text-neutral-500">{{ $tenant->slug }}</span>
                         <span class="text-neutral-400">{{ $tenant->status->value }}</span>
+                        <span class="text-neutral-500">{{ collect($tenantEntitlements)->where('enabled', true)->count() }} enabled features</span>
                     </div>
                 </div>
 

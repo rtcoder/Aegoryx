@@ -1,5 +1,9 @@
 # Task: Authorization UX
 
+## Status
+
+Done.
+
 ## Cel
 
 Pokazać użytkownikowi jasne stany braku uprawnień bez osłabiania backend security.

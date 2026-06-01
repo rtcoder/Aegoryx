@@ -1,5 +1,9 @@
 # Task: Entitlement Aware UI
 
+## Status
+
+Done.
+
 ## Cel
 
 Dostosować panel do dostępnych features i limitów tenanta.
