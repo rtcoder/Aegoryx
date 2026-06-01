@@ -1,5 +1,22 @@
 # Task: Fortify Jetstream Decision
 
+## Status
+
+Done.
+
+## Decyzja
+
+Aegoryx używa własnej warstwy auth UI opartej o Laravel session guards i Livewire.
+
+Na tym etapie nie używamy Jetstream ani Inertia, bo panel ma być Livewire-first, a tenant context musi być jawnie inicjalizowany przed zapytaniami auth do tenant schema. Fortify może zostać użyty później jako backendowa warstwa 2FA/password reset, ale bez generowania UI i bez narzucania stacka frontendowego.
+
+## Konsekwencje
+
+- Landlord auth używa guard `landlord` i modelu `Identity`.
+- Tenant auth używa guard `web` i modelu `App\Models\Tenant\User` po ustawieniu tenant context.
+- UI logowania pozostaje w Livewire.
+- 2FA będzie projektowane jako własny moduł Security albo jako selektywna integracja Fortify bez Jetstream UI.
+
 ## Cel
 
 Podjąć i udokumentować decyzję, czy użyć Fortify, Jetstream, czy własnej warstwy auth UI.

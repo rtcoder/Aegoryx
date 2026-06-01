@@ -11,7 +11,11 @@ return [
     'context' => 'Contexte tenant',
     'not_enabled' => 'Non activé pour ce tenant.',
     'enabled_features' => ':count fonctionnalités activées',
+    'login_description' => 'Connectez-vous à l’espace de travail :tenant.',
+    'login_heading' => 'Connexion tenant',
     'module_placeholder' => 'Emplacement pour l’implémentation du module.',
+    'sign_in' => 'Se connecter',
+    'sign_out' => 'Se déconnecter',
     'nav' => [
         'dashboard' => 'Tableau de bord',
         'dashboard_description' => 'Vue d’ensemble de l’espace de travail',

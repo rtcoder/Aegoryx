@@ -11,7 +11,11 @@ return [
     'context' => 'Mandantenkontext',
     'not_enabled' => 'Für diesen Mandanten nicht aktiviert.',
     'enabled_features' => ':count aktivierte Features',
+    'login_description' => 'Melden Sie sich im Arbeitsbereich :tenant an.',
+    'login_heading' => 'Mandanten-Anmeldung',
     'module_placeholder' => 'Platzhalter für Modulimplementierung.',
+    'sign_in' => 'Anmelden',
+    'sign_out' => 'Abmelden',
     'nav' => [
         'dashboard' => 'Dashboard',
         'dashboard_description' => 'Arbeitsbereichsübersicht',

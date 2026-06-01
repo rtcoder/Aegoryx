@@ -1,5 +1,9 @@
 # Task: Identity Model
 
+## Status
+
+Done.
+
 ## Cel
 
 Zbudować globalny model identity w landlord schema, oddzielony od tenant users.

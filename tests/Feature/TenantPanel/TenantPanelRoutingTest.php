@@ -6,6 +6,7 @@ use App\Models\Landlord\Feature;
 use App\Models\Landlord\Tenant;
 use App\Models\Landlord\TenantDomain;
 use App\Models\Landlord\TenantFeature;
+use App\Models\Tenant\User;
 use App\Modules\Entitlements\Enums\FeatureStatus;
 use App\Modules\Entitlements\Enums\TenantFeatureSource;
 use App\Modules\Tenancy\Enums\TenantBillingModel;
@@ -27,6 +28,33 @@ final class TenantPanelRoutingTest extends TestCase
             '--database' => 'sqlite',
             '--path' => 'database/migrations/landlord',
         ]);
+
+        Artisan::call('migrate', [
+            '--database' => 'sqlite',
+            '--path' => 'database/migrations/tenant',
+        ]);
+    }
+
+    public function test_guest_is_redirected_to_tenant_login(): void
+    {
+        $tenant = $this->tenant();
+        $this->domain($tenant);
+
+        $this
+            ->get('http://acme.aegoryx.test/panel')
+            ->assertRedirect('http://acme.aegoryx.test/login');
+    }
+
+    public function test_tenant_login_page_renders_in_tenant_context(): void
+    {
+        $tenant = $this->tenant();
+        $this->domain($tenant);
+
+        $this
+            ->get('http://acme.aegoryx.test/login')
+            ->assertOk()
+            ->assertSee('Logowanie tenanta')
+            ->assertSee($tenant->name);
     }
 
     public function test_tenant_panel_resolves_tenant_from_active_domain(): void
@@ -38,13 +66,15 @@ final class TenantPanelRoutingTest extends TestCase
         $this->feature('files');
         $this->manualOverride($tenant, 'cms', true, ['secret_limit' => 'do-not-render']);
         $this->manualOverride($tenant, 'crm', false);
+        $this->actingAs($this->user(), 'web');
 
         $response = $this
             ->get('http://acme.aegoryx.test/panel')
             ->assertOk()
             ->assertSee('Panel tenanta')
             ->assertSee('Aktywny tenant')
-            ->assertSee('Użytkownik tenanta')
+            ->assertSee('Tenant User')
+            ->assertSee('tenant@example.test')
             ->assertSee('CMS')
             ->assertSee($tenant->name)
             ->assertSee($tenant->slug)
@@ -69,6 +99,7 @@ final class TenantPanelRoutingTest extends TestCase
         $this->domain($tenant);
         $this->feature('cms');
         $this->manualOverride($tenant, 'cms', true);
+        $this->actingAs($this->user(), 'web');
 
         $this
             ->get('http://acme.aegoryx.test/panel/cms')
@@ -83,6 +114,7 @@ final class TenantPanelRoutingTest extends TestCase
         $this->domain($tenant);
         $this->feature('crm');
         $this->manualOverride($tenant, 'crm', false);
+        $this->actingAs($this->user(), 'web');
 
         $this
             ->get('http://acme.aegoryx.test/panel/crm')
@@ -101,6 +133,15 @@ final class TenantPanelRoutingTest extends TestCase
             'deployment_type' => TenantDeploymentType::Saas,
             'billing_model' => TenantBillingModel::Subscription,
             'license_type' => TenantLicenseType::SaasSubscription,
+        ]);
+    }
+
+    private function user(): User
+    {
+        return User::query()->create([
+            'name' => 'Tenant User',
+            'email' => 'tenant@example.test',
+            'password' => 'secret-password',
         ]);
     }
 

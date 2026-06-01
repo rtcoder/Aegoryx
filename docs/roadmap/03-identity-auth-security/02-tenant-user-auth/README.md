@@ -1,5 +1,9 @@
 # Task: Tenant User Auth
 
+## Status
+
+Done.
+
 ## Cel
 
 Przygotować logowanie tenant userów w aktywnym tenant context.

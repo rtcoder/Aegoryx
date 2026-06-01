@@ -11,7 +11,11 @@ return [
     'context' => 'Tenant context',
     'not_enabled' => 'Not enabled for this tenant.',
     'enabled_features' => ':count enabled features',
+    'login_description' => 'Sign in to the :tenant workspace.',
+    'login_heading' => 'Tenant login',
     'module_placeholder' => 'Module implementation placeholder.',
+    'sign_in' => 'Sign in',
+    'sign_out' => 'Sign out',
     'nav' => [
         'dashboard' => 'Dashboard',
         'dashboard_description' => 'Workspace overview',

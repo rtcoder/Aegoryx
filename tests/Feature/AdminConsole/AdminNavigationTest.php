@@ -33,6 +33,19 @@ final class AdminNavigationTest extends TestCase
             ->assertRedirect('http://admin.aegoryx.test/login');
     }
 
+    public function test_non_superadmin_identity_cannot_access_landlord_console(): void
+    {
+        $this->actingAs(Identity::query()->create([
+            'email' => 'user@example.test',
+            'is_super_admin' => false,
+            'status' => IdentityStatus::Active,
+        ]), 'landlord');
+
+        $this
+            ->get('http://admin.aegoryx.test/')
+            ->assertForbidden();
+    }
+
     public function test_superadmin_can_see_admin_navigation_pages(): void
     {
         $this->actingAs($this->superadmin(), 'landlord');

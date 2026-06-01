@@ -11,7 +11,11 @@ return [
     'context' => 'Kontekst tenanta',
     'not_enabled' => 'Nie włączono dla tego tenanta.',
     'enabled_features' => ':count włączonych funkcji',
+    'login_description' => 'Zaloguj się do przestrzeni roboczej :tenant.',
+    'login_heading' => 'Logowanie tenanta',
     'module_placeholder' => 'Miejsce na implementację modułu.',
+    'sign_in' => 'Zaloguj',
+    'sign_out' => 'Wyloguj',
     'nav' => [
         'dashboard' => 'Pulpit',
         'dashboard_description' => 'Przegląd przestrzeni roboczej',

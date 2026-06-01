@@ -11,7 +11,11 @@ return [
     'context' => 'Контекст tenant',
     'not_enabled' => 'Не включено для этого tenant.',
     'enabled_features' => ':count включенных функций',
+    'login_description' => 'Войдите в рабочую область :tenant.',
+    'login_heading' => 'Вход tenant',
     'module_placeholder' => 'Место для реализации модуля.',
+    'sign_in' => 'Войти',
+    'sign_out' => 'Выйти',
     'nav' => [
         'dashboard' => 'Панель',
         'dashboard_description' => 'Обзор рабочей области',

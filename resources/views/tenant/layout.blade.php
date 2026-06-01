@@ -67,9 +67,17 @@
                         <p class="mt-1 text-sm text-neutral-400">@yield('subheading', __('tenant_panel.workspace_for', ['tenant' => $tenant->name]))</p>
                     </div>
 
-                    <div class="rounded border border-neutral-800 bg-neutral-900 px-4 py-2 text-sm">
-                        <p class="text-neutral-300">{{ __('common.tenant_user') }}</p>
-                        <p class="mt-1 text-xs text-neutral-500">{{ __('common.auth_setup_pending') }}</p>
+                    <div class="flex items-center gap-3">
+                        <div class="rounded border border-neutral-800 bg-neutral-900 px-4 py-2 text-sm">
+                            <p class="text-neutral-300">{{ auth()->user()?->name ?? __('common.tenant_user') }}</p>
+                            <p class="mt-1 text-xs text-neutral-500">{{ auth()->user()?->email }}</p>
+                        </div>
+                        <form method="POST" action="{{ route('tenant.logout') }}">
+                            @csrf
+                            <button type="submit" class="rounded border border-neutral-700 px-4 py-2 text-sm text-neutral-200 hover:border-neutral-500">
+                                {{ __('tenant_panel.sign_out') }}
+                            </button>
+                        </form>
                     </div>
                 </div>
 

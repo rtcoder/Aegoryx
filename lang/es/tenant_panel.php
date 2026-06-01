@@ -11,7 +11,11 @@ return [
     'context' => 'Contexto del tenant',
     'not_enabled' => 'No habilitado para este tenant.',
     'enabled_features' => ':count funciones habilitadas',
+    'login_description' => 'Inicia sesión en el espacio de trabajo :tenant.',
+    'login_heading' => 'Inicio de sesión tenant',
     'module_placeholder' => 'Marcador para implementación del módulo.',
+    'sign_in' => 'Iniciar sesión',
+    'sign_out' => 'Cerrar sesión',
     'nav' => [
         'dashboard' => 'Panel',
         'dashboard_description' => 'Resumen del espacio de trabajo',

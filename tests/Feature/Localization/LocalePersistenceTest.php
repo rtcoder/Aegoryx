@@ -106,10 +106,10 @@ final class LocalePersistenceTest extends TestCase
         ]);
 
         $this
-            ->get('http://acme.aegoryx.test/panel')
+            ->get('http://acme.aegoryx.test/login')
             ->assertOk()
             ->assertSee('<html lang="fr">', false)
-            ->assertSee('Tableau de bord');
+            ->assertSee('Connexion tenant');
     }
 
     private function tenant(Locale $locale): Tenant
