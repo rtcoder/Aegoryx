@@ -9,6 +9,15 @@
         ['label' => 'Billing', 'route' => 'landlord.billing.index'],
         ['label' => 'Support', 'route' => 'landlord.support.index'],
     ];
+
+    $supportSession = session('landlord_support_session_id')
+        ? \App\Models\Landlord\SupportSession::query()
+            ->with('tenant')
+            ->whereKey(session('landlord_support_session_id'))
+            ->where('actor_id', auth('landlord')->id())
+            ->where('status', \App\Modules\AdminConsole\Enums\SupportSessionStatus::Active->value)
+            ->first()
+        : null;
 @endphp
 <head>
     <meta charset="utf-8">
@@ -68,6 +77,15 @@
             </header>
 
             <main class="flex-1 px-5 py-6 md:px-8">
+                @if ($supportSession && $supportSession->expires_at->isFuture())
+                    <div class="mb-5 rounded border border-amber-700 bg-amber-950 px-4 py-3 text-sm text-amber-100">
+                        Support mode active for {{ $supportSession->tenant?->name }} until {{ $supportSession->expires_at->format('Y-m-d H:i') }}.
+                        <a href="{{ route('landlord.support.index') }}" wire:navigate class="ml-2 font-medium underline">
+                            Manage
+                        </a>
+                    </div>
+                @endif
+
                 @if (session('success'))
                     <div class="mb-5 rounded border border-emerald-800 bg-emerald-950 px-4 py-3 text-sm text-emerald-200">
                         {{ session('success') }}

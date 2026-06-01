@@ -18,13 +18,13 @@ Zbudować podstawowy layout Tenant Panel z miejscem na moduły.
 
 ## Zależności
 
-- Inertia setup.
+- Livewire setup.
 - Tenant resolving.
 
 ## Kroki
 
 - Dodać layout.
-- Przekazać tenant info jako shared prop.
+- Przekazać tenant info do layoutu i komponentów.
 - Dodać placeholder dashboard.
 
 ## Subtaski
@@ -40,4 +40,4 @@ Brak.
 ## Test Plan
 
 - Browser smoke test.
-- Feature test shared props.
+- Feature test tenant context.

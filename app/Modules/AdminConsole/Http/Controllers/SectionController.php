@@ -29,7 +29,7 @@ final class SectionController extends Controller
 
     public function support(): View
     {
-        return $this->section('Support', 'Start audited support sessions and review support access history.');
+        return view('landlord.support.index');
     }
 
     private function section(string $title, string $description): View

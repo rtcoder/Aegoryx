@@ -1,5 +1,9 @@
 # Task: Feature Management
 
+## Status
+
+Done.
+
 ## Cel
 
 Zarządzać globalnymi features i przypisaniami feature access dla tenantów.

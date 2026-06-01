@@ -2,7 +2,7 @@
 
 ## Cel
 
-Zbudować panel klienta w Laravel + Inertia + TypeScript, działający w tenant context.
+Zbudować panel klienta w Laravel + Livewire, działający w tenant context.
 
 ## Dlaczego Jest Ważny
 
@@ -14,9 +14,15 @@ To główna powierzchnia pracy użytkownika tenanta. Musi być ergonomiczna, mod
 - Auth.
 - Entitlements.
 
+## Status
+
+- Done: Livewire Setup.
+- In progress: none.
+- Pending: Panel Shell, Tenant Navigation, Authorization UX, Entitlement Aware UI.
+
 ## Taski
 
-- [Inertia Setup](01-inertia-setup/)
+- [x] [Livewire Setup](01-livewire-setup/)
 - [Panel Shell](02-panel-shell/)
 - [Tenant Navigation](03-tenant-navigation/)
 - [Authorization UX](04-authorization-ux/)
@@ -24,6 +30,6 @@ To główna powierzchnia pracy użytkownika tenanta. Musi być ergonomiczna, mod
 
 ## Definicja Ukończenia
 
-- Panel działa przez Inertia i TypeScript.
+- Panel działa przez Livewire.
 - Routing tenantowy wymaga tenant context.
 - UI pokazuje dostęp według Entitlements, a backend nadal wymusza autoryzację.

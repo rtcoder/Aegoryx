@@ -1,5 +1,9 @@
 # Task: Support Sessions
 
+## Status
+
+Done.
+
 ## Cel
 
 Obsłużyć uruchamianie, widoczność i kończenie support sessions.

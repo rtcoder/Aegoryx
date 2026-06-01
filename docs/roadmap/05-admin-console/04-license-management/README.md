@@ -1,5 +1,9 @@
 # Task: License Management
 
+## Status
+
+Done.
+
 ## Cel
 
 Pokazać i zarządzać stanem licencji tenantów/self-hosted installations.

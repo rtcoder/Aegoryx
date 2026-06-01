@@ -1,13 +1,16 @@
-# Task: Inertia Setup
+# Task: Livewire Setup
+
+## Status
+
+Done.
 
 ## Cel
 
-Skonfigurować Laravel + Inertia + TypeScript jako bazę paneli.
+Skonfigurować Laravel + Livewire jako bazę paneli tenantowych.
 
 ## Zakres
 
-- Inertia adapter.
-- TypeScript entrypoint.
+- Livewire.
 - Shared props.
 - Podstawowy routing panelowy.
 
@@ -23,8 +26,8 @@ Skonfigurować Laravel + Inertia + TypeScript jako bazę paneli.
 
 ## Kroki
 
-- Zainstalować i skonfigurować Inertia.
-- Ustawić TS i strukturę `resources/js/Modules`.
+- Zainstalować i skonfigurować Livewire.
+- Ustawić strukturę widoków tenant panelu.
 - Dodać smoke test build.
 
 ## Subtaski
@@ -34,10 +37,10 @@ Brak.
 ## Acceptance Criteria
 
 - `npm run build` przechodzi.
-- Inertia renderuje pierwszą stronę panelu.
+- Livewire/Blade renderuje pierwszą stronę panelu.
 - Shared props nie wyciekają sekretów.
 
 ## Test Plan
 
 - `npm run build`
-- Feature test renderowania Inertia response.
+- Feature test renderowania tenant panel response.

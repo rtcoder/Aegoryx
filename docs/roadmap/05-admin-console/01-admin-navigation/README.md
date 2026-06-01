@@ -1,5 +1,9 @@
 # Task: Admin Navigation
 
+## Status
+
+Done.
+
 ## Cel
 
 Zbudować osobną nawigację i shell dla superadmina.

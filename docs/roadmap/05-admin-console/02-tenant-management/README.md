@@ -1,5 +1,9 @@
 # Task: Tenant Management
 
+## Status
+
+Done.
+
 ## Cel
 
 Pozwolić superadminowi tworzyć, przeglądać i zarządzać tenantami.

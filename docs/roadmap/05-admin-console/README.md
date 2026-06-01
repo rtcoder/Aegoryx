@@ -14,13 +14,18 @@ SaaS i self-hosted wymagają operacyjnego centrum kontroli bez mieszania konteks
 - Entitlements.
 - Tenant model.
 
+## Status
+
+- Done: Admin Navigation, Tenant Management, Feature Management, License Management, Support Sessions.
+- In progress: none.
+
 ## Taski
 
-- [Admin Navigation](01-admin-navigation/)
-- [Tenant Management](02-tenant-management/)
-- [Feature Management](03-feature-management/)
-- [License Management](04-license-management/)
-- [Support Sessions](05-support-sessions/)
+- [x] [Admin Navigation](01-admin-navigation/)
+- [x] [Tenant Management](02-tenant-management/)
+- [x] [Feature Management](03-feature-management/)
+- [x] [License Management](04-license-management/)
+- [x] [Support Sessions](05-support-sessions/)
 
 ## Definicja Ukończenia
 
