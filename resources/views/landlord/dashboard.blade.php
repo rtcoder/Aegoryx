@@ -1,24 +1,14 @@
 @extends('landlord.layout')
 
-@section('title', 'Aegoryx Admin')
-@section('heading', 'Dashboard')
-@section('subheading', 'System overview for the landlord console.')
+@section('title', 'Dashboard | Aegoryx Admin')
+@section('heading', 'Admin Console')
+@section('subheading', 'System-wide controls for Aegoryx.')
 
 @section('content')
-    <section class="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-        <a href="{{ route('landlord.tenants.index') }}" class="rounded border border-neutral-800 bg-neutral-900 p-5 hover:border-neutral-600">
-            <p class="text-sm text-neutral-400">Tenants</p>
-            <h2 class="mt-2 text-lg font-semibold">Tenant management</h2>
-        </a>
-
-        <a href="{{ route('landlord.features.index') }}" class="rounded border border-neutral-800 bg-neutral-900 p-5 hover:border-neutral-600">
-            <p class="text-sm text-neutral-400">Features</p>
-            <h2 class="mt-2 text-lg font-semibold">Feature access</h2>
-        </a>
-
-        <a href="{{ route('landlord.support.index') }}" class="rounded border border-neutral-800 bg-neutral-900 p-5 hover:border-neutral-600">
-            <p class="text-sm text-neutral-400">Support</p>
-            <h2 class="mt-2 text-lg font-semibold">Audited access</h2>
-        </a>
+    <section class="rounded border border-neutral-800 bg-neutral-900 p-5">
+        <h2 class="text-lg font-semibold">Landlord dashboard</h2>
+        <p class="mt-2 text-sm leading-6 text-neutral-400">
+            Use the navigation to manage tenants, feature access, licenses, billing, and support mode.
+        </p>
     </section>
 @endsection

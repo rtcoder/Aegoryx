@@ -13,18 +13,13 @@ final class LicenseController extends Controller
 {
     public function index(): View
     {
-        return view('landlord.licenses.index', [
-            'licenses' => License::query()
-                ->with('tenant')
-                ->latest()
-                ->paginate(20),
-        ]);
+        return view('landlord.licenses.index');
     }
 
     public function show(License $license): View
     {
         return view('landlord.licenses.show', [
-            'license' => $license->load('tenant'),
+            'license' => $license,
         ]);
     }
 

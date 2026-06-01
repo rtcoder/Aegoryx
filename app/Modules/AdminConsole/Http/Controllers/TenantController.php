@@ -13,11 +13,7 @@ final class TenantController extends Controller
 {
     public function index(): View
     {
-        return view('landlord.tenants.index', [
-            'tenants' => Tenant::query()
-                ->orderBy('name')
-                ->paginate(20),
-        ]);
+        return view('landlord.tenants.index');
     }
 
     public function show(Tenant $tenant): View

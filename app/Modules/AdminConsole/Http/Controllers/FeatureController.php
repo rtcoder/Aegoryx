@@ -18,12 +18,7 @@ final class FeatureController extends Controller
 {
     public function index(): View
     {
-        return view('landlord.features.index', [
-            'features' => Feature::query()
-                ->withCount('tenantFeatures')
-                ->orderBy('key')
-                ->paginate(20),
-        ]);
+        return view('landlord.features.index');
     }
 
     public function store(StoreFeatureRequest $request, CreateFeatureAction $action): RedirectResponse
@@ -46,15 +41,7 @@ final class FeatureController extends Controller
     public function show(Feature $feature): View
     {
         return view('landlord.features.show', [
-            'feature' => $feature->load([
-                'tenantFeatures' => fn ($query) => $query
-                    ->where('source', 'manual')
-                    ->with('tenant')
-                    ->latest(),
-            ]),
-            'tenants' => Tenant::query()
-                ->orderBy('name')
-                ->get(['id', 'name', 'slug']),
+            'feature' => $feature,
         ]);
     }
 
