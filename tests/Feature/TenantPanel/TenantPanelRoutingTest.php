@@ -42,9 +42,9 @@ final class TenantPanelRoutingTest extends TestCase
         $response = $this
             ->get('http://acme.aegoryx.test/panel')
             ->assertOk()
-            ->assertSee('Tenant panel')
-            ->assertSee('Active tenant')
-            ->assertSee('Tenant user')
+            ->assertSee('Panel tenanta')
+            ->assertSee('Aktywny tenant')
+            ->assertSee('Użytkownik tenanta')
             ->assertSee('CMS')
             ->assertSee($tenant->name)
             ->assertSee($tenant->slug)
@@ -74,7 +74,7 @@ final class TenantPanelRoutingTest extends TestCase
             ->get('http://acme.aegoryx.test/panel/cms')
             ->assertOk()
             ->assertSee('CMS')
-            ->assertSee('Module implementation placeholder.');
+            ->assertSee('Miejsce na implementację modułu.');
     }
 
     public function test_disabled_module_route_returns_403(): void
@@ -87,8 +87,8 @@ final class TenantPanelRoutingTest extends TestCase
         $this
             ->get('http://acme.aegoryx.test/panel/crm')
             ->assertForbidden()
-            ->assertSee('Access unavailable')
-            ->assertSee('This module is not available for the active tenant.');
+            ->assertSee('Dostęp niedostępny')
+            ->assertSee('Ten moduł nie jest dostępny dla aktywnego tenanta.');
     }
 
     private function tenant(): Tenant

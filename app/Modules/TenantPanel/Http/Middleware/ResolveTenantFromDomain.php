@@ -6,8 +6,10 @@ use App\Models\Landlord\TenantDomain;
 use App\Modules\Entitlements\Services\EffectiveEntitlements;
 use App\Modules\Tenancy\Enums\TenantDomainStatus;
 use App\Modules\TenantPanel\Navigation\TenantNavigation;
+use App\Support\Localization\Locale;
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 final readonly class ResolveTenantFromDomain
@@ -34,6 +36,12 @@ final readonly class ResolveTenantFromDomain
 
         if (! $domain || ! $domain->tenant) {
             abort(404);
+        }
+
+        $locale = Auth::guard('web')->user()?->locale ?? $domain->tenant->locale;
+
+        if ($locale instanceof Locale) {
+            app()->setLocale($locale->value);
         }
 
         $request->attributes->set('tenant', $domain->tenant);

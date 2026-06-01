@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\UseAuthenticatedLocale;
 use App\Modules\AdminConsole\Http\Controllers\Auth\LoginController;
 use App\Modules\AdminConsole\Http\Controllers\DashboardController;
 use App\Modules\AdminConsole\Http\Controllers\FeatureController;
@@ -17,7 +18,7 @@ Route::domain(config('aegoryx.landlord.domain'))
         Route::get('/login', [LoginController::class, 'create'])->name('login');
         Route::post('/login', [LoginController::class, 'store'])->name('login.store');
 
-        Route::middleware(EnsureLandlordAuthenticated::class)->group(function (): void {
+        Route::middleware([EnsureLandlordAuthenticated::class, UseAuthenticatedLocale::class])->group(function (): void {
             Route::get('/', DashboardController::class)->name('dashboard');
             Route::get('/tenants', [TenantController::class, 'index'])->name('tenants.index');
             Route::get('/tenants/{tenant}', [TenantController::class, 'show'])->name('tenants.show');
