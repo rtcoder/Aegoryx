@@ -1,8 +1,8 @@
 @extends('landlord.layout')
 
-@section('title', 'Licenses | Aegoryx Admin')
-@section('heading', 'Licenses')
-@section('subheading', 'Review license state, verification status, and self-hosted access.')
+@section('title', __('common.licenses').' | '.__('app.admin_title'))
+@section('heading', __('common.licenses'))
+@section('subheading', __('landlord.sections.licenses'))
 
 @section('content')
     <livewire:landlord.licenses.index />

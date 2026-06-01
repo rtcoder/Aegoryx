@@ -1,0 +1,25 @@
+<?php
+
+return [
+    'console' => 'Konsola landlorda',
+    'admin_console' => 'Panel administracyjny',
+    'system_controls' => 'Globalne ustawienia systemu Aegoryx.',
+    'sign_out' => 'Wyloguj',
+    'navigation_label' => 'Nawigacja administracyjna',
+    'dashboard_title' => 'Pulpit landlorda',
+    'dashboard_description' => 'Użyj nawigacji, aby zarządzać tenantami, dostępem do funkcji, licencjami, rozliczeniami i trybem wsparcia.',
+    'support_mode_banner' => 'Tryb wsparcia aktywny dla :tenant do :expires.',
+    'login_heading' => 'Logowanie landlorda',
+    'login_description' => 'Użyj konta superadministratora.',
+    'sign_in' => 'Zaloguj',
+    'sections' => [
+        'tenants' => 'Zarządzaj kontami tenantów, domenami, stanem wdrożenia i punktami wejścia wsparcia.',
+        'features' => 'Zarządzaj globalnymi funkcjami i nadpisaniami funkcji dla tenantów.',
+        'feature_show' => 'Szczegóły rejestru funkcji i ręczne nadpisania tenantów.',
+        'licenses' => 'Przeglądaj stan licencji, status weryfikacji i dostęp self-hosted.',
+        'license_show' => 'Efektywny stan licencji i kontrolki weryfikacji.',
+        'billing' => 'Sprawdzaj plany, subskrypcje, stan rozliczeń i synchronizację z dostawcą.',
+        'support' => 'Rozpoczynaj audytowane sesje wsparcia i przeglądaj historię dostępu.',
+        'tenant_show' => 'Szczegóły tenanta i kontrolki operacyjne.',
+    ],
+];

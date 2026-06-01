@@ -38,7 +38,7 @@ final readonly class VerifyLicenseAction
                 'subject_type' => License::class,
                 'subject_id' => $license->id,
                 'action' => AuditLogAction::LicenseVerified,
-                'description' => "License [{$license->id}] verified as [{$status->value}].",
+                'description' => __('audit.license_verified', ['license' => $license->id, 'status' => $status->value]),
                 'before_json' => $before,
                 'after_json' => [
                     'status' => $status->value,

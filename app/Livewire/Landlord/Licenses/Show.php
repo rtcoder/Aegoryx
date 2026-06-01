@@ -24,7 +24,7 @@ final class Show extends Component
             userAgent: request()->userAgent(),
         )->load('tenant');
 
-        session()->flash('success', 'License verified.');
+        session()->flash('success', __('flash.license_verified'));
     }
 
     public function render()

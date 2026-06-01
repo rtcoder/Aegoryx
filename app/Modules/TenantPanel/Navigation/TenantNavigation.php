@@ -18,33 +18,33 @@ final readonly class TenantNavigation
     {
         return [
             [
-                'label' => 'Dashboard',
+                'label' => __('tenant_panel.nav.dashboard'),
                 'route' => 'tenant.dashboard',
-                'description' => 'Workspace overview',
+                'description' => __('tenant_panel.nav.dashboard_description'),
                 'feature_key' => null,
             ],
             [
-                'label' => 'CMS',
+                'label' => __('tenant_panel.nav.cms'),
                 'route' => 'tenant.cms.index',
-                'description' => 'Pages, publishing, revisions',
+                'description' => __('tenant_panel.nav.cms_description'),
                 'feature_key' => 'cms',
             ],
             [
-                'label' => 'CRM',
+                'label' => __('tenant_panel.nav.crm'),
                 'route' => 'tenant.crm.index',
-                'description' => 'Contacts, companies, deals',
+                'description' => __('tenant_panel.nav.crm_description'),
                 'feature_key' => 'crm',
             ],
             [
-                'label' => 'Files',
+                'label' => __('tenant_panel.nav.files'),
                 'route' => 'tenant.files.index',
-                'description' => 'Private storage and downloads',
+                'description' => __('tenant_panel.nav.files_description'),
                 'feature_key' => 'files',
             ],
             [
-                'label' => 'Settings',
+                'label' => __('tenant_panel.nav.settings'),
                 'route' => 'tenant.settings.index',
-                'description' => 'Workspace configuration',
+                'description' => __('tenant_panel.nav.settings_description'),
                 'feature_key' => null,
             ],
         ];

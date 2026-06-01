@@ -46,7 +46,7 @@ final readonly class StartSupportSessionAction
                 'subject_type' => SupportSession::class,
                 'subject_id' => $supportSession->id,
                 'action' => AuditLogAction::SupportSessionStarted,
-                'description' => "Support session [{$supportSession->id}] started for tenant [{$tenant->slug}].",
+                'description' => __('audit.support_session_started', ['session' => $supportSession->id, 'tenant' => $tenant->slug]),
                 'before_json' => null,
                 'after_json' => [
                     'status' => SupportSessionStatus::Active->value,

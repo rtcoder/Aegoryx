@@ -1,8 +1,8 @@
 @extends('landlord.layout')
 
-@section('title', 'Support | Aegoryx Admin')
-@section('heading', 'Support')
-@section('subheading', 'Start audited support sessions and review support access history.')
+@section('title', __('common.support').' | '.__('app.admin_title'))
+@section('heading', __('common.support'))
+@section('subheading', __('landlord.sections.support'))
 
 @section('content')
     <livewire:landlord.support.index />

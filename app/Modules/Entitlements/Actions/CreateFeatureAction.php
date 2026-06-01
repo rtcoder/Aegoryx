@@ -36,7 +36,7 @@ final readonly class CreateFeatureAction
                 'subject_type' => Feature::class,
                 'subject_id' => $feature->id,
                 'action' => AuditLogAction::FeatureCreated,
-                'description' => "Feature [{$feature->key}] created.",
+                'description' => __('audit.feature_created', ['feature' => $feature->key]),
                 'before_json' => null,
                 'after_json' => [
                     'key' => $feature->key,

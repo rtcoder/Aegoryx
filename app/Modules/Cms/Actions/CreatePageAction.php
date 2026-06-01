@@ -38,7 +38,7 @@ final readonly class CreatePageAction
                 actorId: $actor->id,
                 subject: $page,
                 action: ActivityEntryAction::CmsPageCreated,
-                description: "CMS page [{$page->slug}] created.",
+                description: __('activity.cms_page_created', ['page' => $page->slug]),
                 after: $this->activityPayload($page),
             );
 

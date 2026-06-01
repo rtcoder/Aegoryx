@@ -1,0 +1,27 @@
+<?php
+
+return [
+    'label' => 'Panel tenanta',
+    'active_tenant' => 'Aktywny tenant',
+    'modules' => 'Moduły',
+    'workspace_for' => 'Przestrzeń robocza dla :tenant.',
+    'workspace_overview_for' => 'Przegląd przestrzeni roboczej dla :tenant.',
+    'dashboard_heading' => 'Panel tenanta',
+    'dashboard_description' => 'Ta powłoka jest gotowa na moduły tenanta i ukrywa szczegóły dostępne wyłącznie dla landlorda.',
+    'context' => 'Kontekst tenanta',
+    'not_enabled' => 'Nie włączono dla tego tenanta.',
+    'enabled_features' => ':count włączonych funkcji',
+    'module_placeholder' => 'Miejsce na implementację modułu.',
+    'nav' => [
+        'dashboard' => 'Pulpit',
+        'dashboard_description' => 'Przegląd przestrzeni roboczej',
+        'cms' => 'CMS',
+        'cms_description' => 'Strony, publikacja, rewizje',
+        'crm' => 'CRM',
+        'crm_description' => 'Kontakty, firmy, deale',
+        'files' => 'Pliki',
+        'files_description' => 'Prywatny storage i pobieranie',
+        'settings' => 'Ustawienia',
+        'settings_description' => 'Konfiguracja przestrzeni roboczej',
+    ],
+];

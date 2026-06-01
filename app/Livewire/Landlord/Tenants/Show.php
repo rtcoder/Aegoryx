@@ -34,7 +34,7 @@ final class Show extends Component
             userAgent: request()->userAgent(),
         );
 
-        session()->flash('success', 'Tenant status updated.');
+        session()->flash('success', __('flash.tenant_status_updated'));
     }
 
     public function render()

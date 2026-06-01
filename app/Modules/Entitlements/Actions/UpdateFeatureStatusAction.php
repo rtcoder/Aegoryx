@@ -34,7 +34,7 @@ final readonly class UpdateFeatureStatusAction
                 'subject_type' => Feature::class,
                 'subject_id' => $feature->id,
                 'action' => AuditLogAction::FeatureStatusChanged,
-                'description' => "Feature [{$feature->key}] status changed to [{$status->value}].",
+                'description' => __('audit.feature_status_changed', ['feature' => $feature->key, 'status' => $status->value]),
                 'before_json' => $before,
                 'after_json' => ['status' => $status->value],
                 'metadata_json' => ['feature_key' => $feature->key],

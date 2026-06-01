@@ -37,6 +37,6 @@ final class LicenseController extends Controller
 
         return redirect()
             ->route('landlord.licenses.show', $license)
-            ->with('success', 'License verified.');
+            ->with('success', __('flash.license_verified'));
     }
 }

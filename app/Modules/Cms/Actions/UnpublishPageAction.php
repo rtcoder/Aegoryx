@@ -37,7 +37,7 @@ final readonly class UnpublishPageAction
                 actorId: $actor->id,
                 subject: $page,
                 action: ActivityEntryAction::CmsPageUnpublished,
-                description: "CMS page [{$page->slug}] unpublished.",
+                description: __('activity.cms_page_unpublished', ['page' => $page->slug]),
                 before: $before,
                 after: [
                     'status' => CmsPageStatus::Draft->value,

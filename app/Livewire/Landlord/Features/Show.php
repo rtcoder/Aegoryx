@@ -43,7 +43,7 @@ final class Show extends Component
             userAgent: request()->userAgent(),
         );
 
-        session()->flash('success', 'Feature status updated.');
+        session()->flash('success', __('flash.feature_status_updated'));
     }
 
     public function setTenantOverride(SetTenantFeatureOverrideAction $action): void
@@ -68,7 +68,7 @@ final class Show extends Component
 
         $this->reason = '';
 
-        session()->flash('success', 'Tenant feature override saved.');
+        session()->flash('success', __('flash.tenant_feature_override_saved'));
     }
 
     public function render()

@@ -38,6 +38,6 @@ final class TenantController extends Controller
 
         return redirect()
             ->route('landlord.tenants.show', $tenant)
-            ->with('success', 'Tenant status updated.');
+            ->with('success', __('flash.tenant_status_updated'));
     }
 }

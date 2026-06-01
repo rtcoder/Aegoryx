@@ -35,7 +35,7 @@ final class FeatureController extends Controller
 
         return redirect()
             ->route('landlord.features.show', $feature)
-            ->with('success', 'Feature created.');
+            ->with('success', __('flash.feature_created'));
     }
 
     public function show(Feature $feature): View
@@ -60,7 +60,7 @@ final class FeatureController extends Controller
 
         return redirect()
             ->route('landlord.features.show', $feature)
-            ->with('success', 'Feature status updated.');
+            ->with('success', __('flash.feature_status_updated'));
     }
 
     public function setTenantOverride(
@@ -82,6 +82,6 @@ final class FeatureController extends Controller
 
         return redirect()
             ->route('landlord.features.show', $feature)
-            ->with('success', 'Tenant feature override saved.');
+            ->with('success', __('flash.tenant_feature_override_saved'));
     }
 }

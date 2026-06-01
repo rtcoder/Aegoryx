@@ -37,7 +37,7 @@ final readonly class EndSupportSessionAction
                 'action' => $status === SupportSessionStatus::Expired->value
                     ? AuditLogAction::SupportSessionExpired
                     : AuditLogAction::SupportSessionEnded,
-                'description' => "Support session [{$supportSession->id}] marked as [{$status}].",
+                'description' => __('audit.support_session_marked', ['session' => $supportSession->id, 'status' => $status]),
                 'before_json' => $before,
                 'after_json' => [
                     'status' => $status,

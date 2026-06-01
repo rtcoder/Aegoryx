@@ -34,7 +34,7 @@ final readonly class UpdateTenantStatusAction
                 'subject_type' => Tenant::class,
                 'subject_id' => $tenant->id,
                 'action' => AuditLogAction::TenantStatusChanged,
-                'description' => "Tenant [{$tenant->slug}] status changed to [{$status->value}].",
+                'description' => __('audit.tenant_status_changed', ['tenant' => $tenant->slug, 'status' => $status->value]),
                 'before_json' => $before,
                 'after_json' => ['status' => $status->value],
                 'metadata_json' => ['tenant_slug' => $tenant->slug],

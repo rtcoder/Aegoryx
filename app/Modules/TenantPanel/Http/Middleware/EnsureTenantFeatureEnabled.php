@@ -22,7 +22,7 @@ final readonly class EnsureTenantFeatureEnabled
         $tenant = $request->attributes->get('tenant');
 
         if (! $tenant instanceof Tenant || ! $this->entitlements->allows($tenant, $featureKey)) {
-            abort(403, 'This module is not available for the active tenant.');
+            abort(403, __('errors.module_unavailable'));
         }
 
         return $next($request);

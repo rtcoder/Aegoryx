@@ -1,0 +1,27 @@
+<?php
+
+return [
+    'label' => 'Панель tenant',
+    'active_tenant' => 'Активный tenant',
+    'modules' => 'Модули',
+    'workspace_for' => 'Рабочая область для :tenant.',
+    'workspace_overview_for' => 'Обзор рабочей области для :tenant.',
+    'dashboard_heading' => 'Панель tenant',
+    'dashboard_description' => 'Эта оболочка готова для модулей tenant и скрывает детали, доступные только landlord.',
+    'context' => 'Контекст tenant',
+    'not_enabled' => 'Не включено для этого tenant.',
+    'enabled_features' => ':count включенных функций',
+    'module_placeholder' => 'Место для реализации модуля.',
+    'nav' => [
+        'dashboard' => 'Панель',
+        'dashboard_description' => 'Обзор рабочей области',
+        'cms' => 'CMS',
+        'cms_description' => 'Страницы, публикация, ревизии',
+        'crm' => 'CRM',
+        'crm_description' => 'Контакты, компании, сделки',
+        'files' => 'Файлы',
+        'files_description' => 'Приватное хранилище и загрузки',
+        'settings' => 'Настройки',
+        'settings_description' => 'Конфигурация рабочей области',
+    ],
+];

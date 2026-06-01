@@ -9,22 +9,22 @@ final class SectionController extends Controller
 {
     public function tenants(): View
     {
-        return $this->section('Tenants', 'Manage tenant accounts, domains, deployment state, and support entry points.');
+        return $this->section(__('common.tenants'), __('landlord.sections.tenants'));
     }
 
     public function features(): View
     {
-        return $this->section('Features', 'Manage global features and tenant-specific feature overrides.');
+        return $this->section(__('common.features'), __('landlord.sections.features'));
     }
 
     public function licenses(): View
     {
-        return $this->section('Licenses', 'Review license state, verification status, and self-hosted access.');
+        return $this->section(__('common.licenses'), __('landlord.sections.licenses'));
     }
 
     public function billing(): View
     {
-        return $this->section('Billing', 'Inspect plans, subscriptions, billing state, and provider sync status.');
+        return $this->section(__('common.billing'), __('landlord.sections.billing'));
     }
 
     public function support(): View

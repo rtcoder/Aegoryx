@@ -45,7 +45,7 @@ final readonly class UpdatePageAction
                 actorId: $actor->id,
                 subject: $page,
                 action: ActivityEntryAction::CmsPageUpdated,
-                description: "CMS page [{$page->slug}] updated.",
+                description: __('activity.cms_page_updated', ['page' => $page->slug]),
                 before: $before,
                 after: $this->activityPayload($page),
             );

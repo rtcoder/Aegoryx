@@ -48,7 +48,11 @@ final readonly class SetTenantFeatureOverrideAction
                 'subject_type' => TenantFeature::class,
                 'subject_id' => $override->id,
                 'action' => AuditLogAction::TenantFeatureOverrideSet,
-                'description' => "Manual feature override [{$feature->key}] for tenant [{$tenant->slug}] set to [".($enabled ? 'enabled' : 'disabled').'].',
+                'description' => __('audit.manual_feature_override_set', [
+                    'feature' => $feature->key,
+                    'tenant' => $tenant->slug,
+                    'state' => $enabled ? __('audit.state_enabled') : __('audit.state_disabled'),
+                ]),
                 'before_json' => $before,
                 'after_json' => [
                     'enabled' => $enabled,

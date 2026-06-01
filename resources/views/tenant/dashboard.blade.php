@@ -1,15 +1,15 @@
 @extends('tenant.layout')
 
-@section('title', $tenant->name.' | Aegoryx Tenant Panel')
-@section('heading', 'Dashboard')
-@section('subheading', 'Workspace overview for '.$tenant->name.'.')
+@section('title', $tenant->name.' | '.__('app.tenant_panel_title'))
+@section('heading', __('common.dashboard'))
+@section('subheading', __('tenant_panel.workspace_overview_for', ['tenant' => $tenant->name]))
 
 @section('content')
     <div class="grid gap-5 xl:grid-cols-[1fr_360px]">
         <section class="rounded border border-neutral-800 bg-neutral-900 p-5">
-            <h2 class="text-lg font-semibold">Tenant panel</h2>
+            <h2 class="text-lg font-semibold">{{ __('tenant_panel.dashboard_heading') }}</h2>
             <p class="mt-2 text-sm leading-6 text-neutral-400">
-                This shell is ready for tenant modules while keeping landlord-only details out of the workspace.
+                {{ __('tenant_panel.dashboard_description') }}
             </p>
 
             <div class="mt-6 grid gap-4 sm:grid-cols-2">
@@ -22,7 +22,7 @@
                     @else
                         <div class="rounded border border-neutral-800 bg-neutral-950 p-4 opacity-60">
                             <p class="text-xs uppercase tracking-wide text-neutral-500">{{ $module['label'] }}</p>
-                            <p class="mt-2 text-sm text-neutral-500">Not enabled for this tenant.</p>
+                            <p class="mt-2 text-sm text-neutral-500">{{ __('tenant_panel.not_enabled') }}</p>
                         </div>
                     @endif
                 @endforeach
@@ -30,18 +30,18 @@
         </section>
 
         <aside class="rounded border border-neutral-800 bg-neutral-900 p-5">
-            <h2 class="text-lg font-semibold">Tenant context</h2>
+            <h2 class="text-lg font-semibold">{{ __('tenant_panel.context') }}</h2>
             <dl class="mt-5 space-y-4">
                 <div>
-                    <dt class="text-xs uppercase tracking-wide text-neutral-500">Tenant</dt>
+                    <dt class="text-xs uppercase tracking-wide text-neutral-500">{{ __('common.tenant') }}</dt>
                     <dd class="mt-1 text-neutral-100">{{ $tenant->name }}</dd>
                 </div>
                 <div>
-                    <dt class="text-xs uppercase tracking-wide text-neutral-500">Slug</dt>
+                    <dt class="text-xs uppercase tracking-wide text-neutral-500">{{ __('common.slug') }}</dt>
                     <dd class="mt-1 font-mono text-sm text-neutral-100">{{ $tenant->slug }}</dd>
                 </div>
                 <div>
-                    <dt class="text-xs uppercase tracking-wide text-neutral-500">Status</dt>
+                    <dt class="text-xs uppercase tracking-wide text-neutral-500">{{ __('common.status') }}</dt>
                     <dd class="mt-1 text-neutral-100">{{ $tenant->status->value }}</dd>
                 </div>
             </dl>

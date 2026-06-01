@@ -40,7 +40,7 @@ final class Index extends Component
             userAgent: request()->userAgent(),
         );
 
-        session()->flash('success', 'Feature created.');
+        session()->flash('success', __('flash.feature_created'));
 
         $this->redirectRoute('landlord.features.show', $feature, navigate: true);
     }

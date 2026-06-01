@@ -1,8 +1,8 @@
 @extends('landlord.layout')
 
-@section('title', 'License '.$license->id.' | Aegoryx Admin')
-@section('heading', 'License '.$license->id)
-@section('subheading', 'Effective license state and verification controls.')
+@section('title', __('common.licenses').' '.$license->id.' | '.__('app.admin_title'))
+@section('heading', __('common.licenses').' '.$license->id)
+@section('subheading', __('landlord.sections.license_show'))
 
 @section('content')
     <livewire:landlord.licenses.show :license="$license" />

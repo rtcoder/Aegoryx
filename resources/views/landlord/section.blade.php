@@ -1,6 +1,6 @@
 @extends('landlord.layout')
 
-@section('title', $title.' | Aegoryx Admin')
+@section('title', $title.' | '.__('app.admin_title'))
 @section('heading', $title)
 @section('subheading', $description)
 

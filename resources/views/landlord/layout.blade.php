@@ -2,12 +2,12 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 @php
     $navigation = [
-        ['label' => 'Dashboard', 'route' => 'landlord.dashboard'],
-        ['label' => 'Tenants', 'route' => 'landlord.tenants.index'],
-        ['label' => 'Features', 'route' => 'landlord.features.index'],
-        ['label' => 'Licenses', 'route' => 'landlord.licenses.index'],
-        ['label' => 'Billing', 'route' => 'landlord.billing.index'],
-        ['label' => 'Support', 'route' => 'landlord.support.index'],
+        ['label' => __('common.dashboard'), 'route' => 'landlord.dashboard'],
+        ['label' => __('common.tenants'), 'route' => 'landlord.tenants.index'],
+        ['label' => __('common.features'), 'route' => 'landlord.features.index'],
+        ['label' => __('common.licenses'), 'route' => 'landlord.licenses.index'],
+        ['label' => __('common.billing'), 'route' => 'landlord.billing.index'],
+        ['label' => __('common.support'), 'route' => 'landlord.support.index'],
     ];
 
     $supportSession = session('landlord_support_session_id')
@@ -22,7 +22,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@yield('title', 'Aegoryx Admin')</title>
+    <title>@yield('title', __('app.admin_title'))</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
 </head>
@@ -31,10 +31,10 @@
         <aside class="hidden w-64 shrink-0 border-r border-neutral-800 px-5 py-6 md:block">
             <div>
                 <p class="text-lg font-semibold">Aegoryx</p>
-                <p class="mt-1 text-xs uppercase tracking-wide text-neutral-500">Landlord console</p>
+                <p class="mt-1 text-xs uppercase tracking-wide text-neutral-500">{{ __('landlord.console') }}</p>
             </div>
 
-            <nav class="mt-8 space-y-1" aria-label="Admin navigation">
+            <nav class="mt-8 space-y-1" aria-label="{{ __('landlord.navigation_label') }}">
                 @foreach ($navigation as $item)
                     <a
                         href="{{ route($item['route']) }}"
@@ -51,19 +51,19 @@
             <header class="border-b border-neutral-800 px-5 py-4 md:px-8">
                 <div class="flex flex-wrap items-center justify-between gap-4">
                     <div>
-                        <h1 class="text-xl font-semibold">@yield('heading', 'Admin Console')</h1>
-                        <p class="mt-1 text-sm text-neutral-400">@yield('subheading', 'System-wide controls for Aegoryx.')</p>
+                        <h1 class="text-xl font-semibold">@yield('heading', __('landlord.admin_console'))</h1>
+                        <p class="mt-1 text-sm text-neutral-400">@yield('subheading', __('landlord.system_controls'))</p>
                     </div>
 
                     <form method="POST" action="{{ route('landlord.logout') }}">
                         @csrf
                         <button type="submit" class="rounded border border-neutral-700 px-4 py-2 text-sm text-neutral-200 hover:border-neutral-500">
-                            Sign out
+                            {{ __('landlord.sign_out') }}
                         </button>
                     </form>
                 </div>
 
-                <nav class="mt-5 flex gap-2 overflow-x-auto md:hidden" aria-label="Admin navigation">
+                <nav class="mt-5 flex gap-2 overflow-x-auto md:hidden" aria-label="{{ __('landlord.navigation_label') }}">
                     @foreach ($navigation as $item)
                         <a
                             href="{{ route($item['route']) }}"
@@ -79,9 +79,9 @@
             <main class="flex-1 px-5 py-6 md:px-8">
                 @if ($supportSession && $supportSession->expires_at->isFuture())
                     <div class="mb-5 rounded border border-amber-700 bg-amber-950 px-4 py-3 text-sm text-amber-100">
-                        Support mode active for {{ $supportSession->tenant?->name }} until {{ $supportSession->expires_at->format('Y-m-d H:i') }}.
+                        {{ __('landlord.support_mode_banner', ['tenant' => $supportSession->tenant?->name, 'expires' => $supportSession->expires_at->format('Y-m-d H:i')]) }}
                         <a href="{{ route('landlord.support.index') }}" wire:navigate class="ml-2 font-medium underline">
-                            Manage
+                            {{ __('common.manage') }}
                         </a>
                     </div>
                 @endif

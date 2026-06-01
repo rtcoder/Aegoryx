@@ -52,7 +52,7 @@ final class Index extends Component
 
         $this->reason = '';
 
-        session()->flash('success', 'Support session started.');
+        session()->flash('success', __('flash.support_session_started'));
     }
 
     public function end(EndSupportSessionAction $action): void
@@ -83,7 +83,7 @@ final class Index extends Component
             'landlord_support_expires_at',
         ]);
 
-        session()->flash('success', 'Support session ended.');
+        session()->flash('success', __('flash.support_session_ended'));
     }
 
     public function render()

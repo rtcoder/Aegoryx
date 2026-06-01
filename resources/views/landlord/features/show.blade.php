@@ -1,8 +1,8 @@
 @extends('landlord.layout')
 
-@section('title', $feature->name.' | Aegoryx Admin')
+@section('title', $feature->name.' | '.__('app.admin_title'))
 @section('heading', $feature->name)
-@section('subheading', 'Feature registry details and manual tenant overrides.')
+@section('subheading', __('landlord.sections.feature_show'))
 
 @section('content')
     <livewire:landlord.features.show :feature="$feature" />

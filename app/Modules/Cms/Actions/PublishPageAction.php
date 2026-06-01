@@ -46,7 +46,7 @@ final readonly class PublishPageAction
                 actorId: $actor->id,
                 subject: $page,
                 action: ActivityEntryAction::CmsPagePublished,
-                description: "CMS page [{$page->slug}] published.",
+                description: __('activity.cms_page_published', ['page' => $page->slug]),
                 before: $before,
                 after: [
                     'status' => CmsPageStatus::Published->value,

@@ -1,8 +1,8 @@
 @extends('landlord.layout')
 
-@section('title', 'Tenants | Aegoryx Admin')
-@section('heading', 'Tenants')
-@section('subheading', 'Manage tenant accounts, domains, deployment state, and support entry points.')
+@section('title', __('common.tenants').' | '.__('app.admin_title'))
+@section('heading', __('common.tenants'))
+@section('subheading', __('landlord.sections.tenants'))
 
 @section('content')
     <livewire:landlord.tenants.index />
