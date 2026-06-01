@@ -17,6 +17,6 @@ Generować bezpieczne nazwy schem tenantów.
 
 ## Checklist
 
-- [ ] Test `tenant_1`.
-- [ ] Test odrzuca raw unsafe input.
-- [ ] Schema rename nie jest zależna od zmiany slug.
+- [x] Test `tenant_1`.
+- [x] Test odrzuca raw unsafe input.
+- [x] Schema rename nie jest zależna od zmiany slug.

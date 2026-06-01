@@ -47,7 +47,6 @@ final class MigrateTenantsCommand extends Command
 
                 $exitCode = Artisan::call('migrate', [
                     '--path' => 'database/migrations/tenant',
-                    '--database' => 'pgsql',
                     '--force' => (bool) $this->option('force'),
                 ]);
 

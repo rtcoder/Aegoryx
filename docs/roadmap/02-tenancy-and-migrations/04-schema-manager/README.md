@@ -1,5 +1,9 @@
 # Task: Schema Manager
 
+## Status
+
+Done.
+
 ## Cel
 
 Wyodrębnić bezpieczne operacje PostgreSQL schema, w tym tworzenie schem i cytowanie identyfikatorów.

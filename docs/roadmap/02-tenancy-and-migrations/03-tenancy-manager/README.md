@@ -1,5 +1,9 @@
 # Task: Tenancy Manager
 
+## Status
+
+Done.
+
 ## Cel
 
 Zapewnić centralny mechanizm inicjalizacji i resetowania tenant context.

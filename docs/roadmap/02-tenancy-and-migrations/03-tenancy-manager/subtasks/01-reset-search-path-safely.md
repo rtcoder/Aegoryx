@@ -18,6 +18,6 @@ Wymusić reset `search_path` po każdej tenant-scoped operacji.
 
 ## Checklist
 
-- [ ] Test resetu contextu.
-- [ ] Brak ręcznego `SET search_path` w kontrolerach.
-- [ ] Dokumentacja job pattern gotowa.
+- [x] Test resetu contextu.
+- [x] Brak ręcznego `SET search_path` w kontrolerach.
+- [x] Dokumentacja job pattern gotowa.

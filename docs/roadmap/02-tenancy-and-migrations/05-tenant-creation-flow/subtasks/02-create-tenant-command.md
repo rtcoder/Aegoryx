@@ -18,6 +18,6 @@ Dodać komendę tworzącą tenanta dla developmentu i operacji.
 
 ## Checklist
 
-- [ ] Komenda działa w local/testing.
-- [ ] Tenant schema jest utworzona.
-- [ ] Owner/default settings są gotowe albo jawnie pominięte z TODO.
+- [x] Komenda działa w local/testing.
+- [x] Tenant schema jest utworzona.
+- [x] Owner/default settings są gotowe albo jawnie pominięte z TODO.

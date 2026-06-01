@@ -1,5 +1,9 @@
 # Task: Tenant Creation Flow
 
+## Status
+
+Done.
+
 ## Cel
 
 Zbudować spójny proces tworzenia tenanta: wpis landlord, schema, migracje, seedery i owner membership.

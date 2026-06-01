@@ -1,5 +1,9 @@
 # Task: Tenant Migrations
 
+## Status
+
+Done.
+
 ## Cel
 
 Przygotować migracje tenantowe wykonywane w każdej tenant schema z osobną tabelą `migrations`.

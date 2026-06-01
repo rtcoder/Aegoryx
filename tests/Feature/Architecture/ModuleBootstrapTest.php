@@ -37,6 +37,7 @@ final class ModuleBootstrapTest extends TestCase
     {
         $commands = array_keys(Artisan::all());
 
+        $this->assertContains('tenants:create', $commands);
         $this->assertContains('landlord:migrate', $commands);
         $this->assertContains('tenants:migrate', $commands);
         $this->assertContains('tenant:migrate', $commands);

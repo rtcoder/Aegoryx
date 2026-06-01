@@ -1,5 +1,9 @@
 # Task: Landlord Migrations
 
+## Status
+
+Done.
+
 ## Cel
 
 Przygotować migracje public schema dla danych systemowych: tenants, domains, features, plans, subscriptions, licenses i global identities.

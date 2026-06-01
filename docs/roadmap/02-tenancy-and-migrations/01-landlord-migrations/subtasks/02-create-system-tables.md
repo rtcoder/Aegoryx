@@ -17,6 +17,6 @@ Dodać bazowe tabele systemowe w public schema.
 
 ## Checklist
 
-- [ ] Tabele nie zawierają danych biznesowych tenantów.
-- [ ] Brak FK z tenant schema do public schema.
-- [ ] Testy migracji przechodzą.
+- [x] Tabele nie zawierają danych biznesowych tenantów.
+- [x] Brak FK z tenant schema do public schema.
+- [x] Testy migracji przechodzą.

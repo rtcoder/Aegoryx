@@ -18,6 +18,6 @@ Utrzymać katalog `database/migrations/landlord` jako jedyne miejsce dla migracj
 
 ## Checklist
 
-- [ ] Katalog istnieje.
-- [ ] Komenda wskazuje poprawny path.
-- [ ] Test potwierdza tabelę w `public`.
+- [x] Katalog istnieje.
+- [x] Komenda wskazuje poprawny path.
+- [x] Test potwierdza tabelę w `public`.

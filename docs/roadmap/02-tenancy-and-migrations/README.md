@@ -14,14 +14,19 @@ Izolacja tenantów jest rdzeniem Aegoryx. Błędy w `search_path`, migracjach al
 - Lokalna baza PostgreSQL.
 - Model `Tenant` w public schema.
 
+## Status
+
+- Done: Landlord Migrations, Tenant Migrations, Tenancy Manager, Schema Manager, Tenant Creation Flow.
+- Next: Migration Tests dla izolacji minimum dwóch tenant schema na PostgreSQL.
+
 ## Taski
 
-- [Landlord Migrations](01-landlord-migrations/)
-- [Tenant Migrations](02-tenant-migrations/)
-- [Tenancy Manager](03-tenancy-manager/)
-- [Schema Manager](04-schema-manager/)
-- [Tenant Creation Flow](05-tenant-creation-flow/)
-- [Migration Tests](06-migration-tests/)
+- [x] [Landlord Migrations](01-landlord-migrations/)
+- [x] [Tenant Migrations](02-tenant-migrations/)
+- [x] [Tenancy Manager](03-tenancy-manager/)
+- [x] [Schema Manager](04-schema-manager/)
+- [x] [Tenant Creation Flow](05-tenant-creation-flow/)
+- [ ] [Migration Tests](06-migration-tests/)
 
 ## Definicja Ukończenia
 

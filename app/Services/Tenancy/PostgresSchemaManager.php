@@ -8,6 +8,10 @@ final class PostgresSchemaManager
 {
     public function create(string $schema): void
     {
+        if (! $this->usesPostgres()) {
+            return;
+        }
+
         DB::statement(sprintf(
             'CREATE SCHEMA IF NOT EXISTS %s',
             $this->quoteIdentifier($schema),
@@ -49,7 +53,7 @@ final class PostgresSchemaManager
         return '"'.str_replace('"', '""', $identifier).'"';
     }
 
-    private function usesPostgres(): bool
+    public function usesPostgres(): bool
     {
         return DB::connection()->getDriverName() === 'pgsql';
     }

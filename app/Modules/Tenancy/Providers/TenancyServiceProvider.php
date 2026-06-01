@@ -2,6 +2,7 @@
 
 namespace App\Modules\Tenancy\Providers;
 
+use App\Console\Commands\CreateTenantCommand;
 use App\Console\Commands\MigrateLandlordCommand;
 use App\Console\Commands\MigrateTenantCommand;
 use App\Console\Commands\MigrateTenantsCommand;
@@ -24,6 +25,7 @@ final class TenancyServiceProvider extends ModuleServiceProvider
 
         if ($this->app->runningInConsole()) {
             $this->commands([
+                CreateTenantCommand::class,
                 MigrateLandlordCommand::class,
                 MigrateTenantsCommand::class,
                 MigrateTenantCommand::class,
