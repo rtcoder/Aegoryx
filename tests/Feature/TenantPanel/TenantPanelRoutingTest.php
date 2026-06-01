@@ -40,8 +40,13 @@ final class TenantPanelRoutingTest extends TestCase
             ->get('http://acme.aegoryx.test/panel')
             ->assertOk()
             ->assertSee('Tenant panel')
+            ->assertSee('Active tenant')
+            ->assertSee('Tenant user')
+            ->assertSee('CMS')
+            ->assertSee('CRM')
             ->assertSee($tenant->name)
-            ->assertSee($tenant->schema_name);
+            ->assertSee($tenant->slug)
+            ->assertDontSee($tenant->schema_name);
     }
 
     public function test_tenant_panel_rejects_unknown_domain(): void

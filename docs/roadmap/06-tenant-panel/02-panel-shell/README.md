@@ -1,5 +1,9 @@
 # Task: Panel Shell
 
+## Status
+
+Done.
+
 ## Cel
 
 Zbudować podstawowy layout Tenant Panel z miejscem na moduły.
