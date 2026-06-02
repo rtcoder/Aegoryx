@@ -8,8 +8,10 @@ final readonly class RedactsActivityPayload
     private const SENSITIVE_KEYS = [
         'api_key',
         'authorization',
+        'email',
         'password',
         'password_confirmation',
+        'phone',
         'secret',
         'token',
     ];

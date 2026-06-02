@@ -1,5 +1,9 @@
 # Task: Contacts
 
+## Status
+
+Done.
+
 ## Cel
 
 Zbudować podstawowy CRUD kontaktów CRM w tenant schema.

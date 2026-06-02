@@ -1,5 +1,9 @@
 # Task: Policies
 
+## Status
+
+Done.
+
 ## Cel
 
 Wprowadzić backend authorization dla modyfikujących akcji w modułach.

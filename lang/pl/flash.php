@@ -1,6 +1,9 @@
 <?php
 
 return [
+    'crm_contact_created' => 'Kontakt został utworzony.',
+    'crm_contact_deleted' => 'Kontakt został usunięty.',
+    'crm_contact_updated' => 'Kontakt został zaktualizowany.',
     'feature_created' => 'Funkcja została utworzona.',
     'feature_status_updated' => 'Status funkcji został zaktualizowany.',
     'license_verified' => 'Licencja została zweryfikowana.',
