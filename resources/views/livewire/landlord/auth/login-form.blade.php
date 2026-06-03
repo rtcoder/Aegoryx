@@ -1,7 +1,7 @@
 <main class="flex min-h-screen items-center justify-center bg-neutral-950 px-6 py-12 text-neutral-100">
     <section class="w-full max-w-sm rounded border border-neutral-800 bg-neutral-900 p-6">
         <div>
-            <p class="text-lg font-semibold">Aegoryx</p>
+            <x-logo/>
             <h1 class="mt-6 text-2xl font-semibold">{{ __('landlord.login_heading') }}</h1>
             <p class="mt-2 text-sm text-neutral-400">{{ __('landlord.login_description') }}</p>
         </div>
