@@ -26,8 +26,8 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
 </head>
-<body class="min-h-screen bg-neutral-950 text-neutral-100 antialiased">
-    <div class="mx-auto flex min-h-screen w-full max-w-7xl">
+<body class="ds-app antialiased">
+    <div class="ds-shell flex">
         <aside class="hidden w-64 shrink-0 border-r border-neutral-800 px-5 py-6 md:block">
             <div>
                 <p class="text-lg font-semibold">Aegoryx</p>
@@ -57,9 +57,9 @@
 
                     <form method="POST" action="{{ route('landlord.logout') }}">
                         @csrf
-                        <button type="submit" class="rounded border border-neutral-700 px-4 py-2 text-sm text-neutral-200 hover:border-neutral-500">
+                        <x-ui.button type="submit" variant="secondary" size="sm">
                             {{ __('landlord.sign_out') }}
-                        </button>
+                        </x-ui.button>
                     </form>
                 </div>
 
@@ -78,16 +78,16 @@
 
             <main class="flex-1 px-5 py-6 md:px-8">
                 @if ($supportSession && $supportSession->expires_at->isFuture())
-                    <div class="mb-5 rounded border border-amber-700 bg-amber-950 px-4 py-3 text-sm text-amber-100">
+                    <div class="mb-5 rounded border border-[var(--ui-warning)] bg-[var(--ui-warning-soft)] px-4 py-3 text-sm text-[var(--ui-warning)]">
                         {{ __('landlord.support_mode_banner', ['tenant' => $supportSession->tenant?->name, 'expires' => $supportSession->expires_at->format('Y-m-d H:i')]) }}
-                        <a href="{{ route('landlord.support.index') }}" wire:navigate class="ml-2 font-medium underline">
+                        <a href="{{ route('landlord.support.index') }}" wire:navigate class="ui-link ml-2 underline">
                             {{ __('common.manage') }}
                         </a>
                     </div>
                 @endif
 
                 @if (session('success'))
-                    <div class="mb-5 rounded border border-emerald-800 bg-emerald-950 px-4 py-3 text-sm text-emerald-200">
+                    <div class="mb-5 rounded border border-[var(--ui-success)] bg-[var(--ui-success-soft)] px-4 py-3 text-sm text-[var(--ui-success)]">
                         {{ session('success') }}
                     </div>
                 @endif

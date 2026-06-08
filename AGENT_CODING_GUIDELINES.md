@@ -45,6 +45,22 @@ SOLID — tam, gdzie realnie pomaga
 Nie tworzymy nadmiarowej architektury tylko dlatego, że “może się kiedyś przyda”.  
 Jednocześnie nie piszemy kodu jednorazowego, który rozwali się przy pierwszym module więcej.
 
+### 2.1 UI i design system
+
+Panele Aegoryx budujemy w Blade/Livewire i trzymamy się design systemu z `docs/design-system/README.md`.
+
+Obowiązuje:
+
+- nowe formularze używają komponentów `x-form.*`,
+- nowe akcje używają `x-ui.button`,
+- statusy i krótkie etykiety używają `x-ui.badge`,
+- karty i panele używają `x-ui.card`, `ui-card` albo `ui-muted-panel`,
+- nowe kolory opierają się o tokeny CSS z `resources/css/app.css`,
+- UI musi działać w light i dark mode,
+- nowy tekst widoczny w UI trafia do wszystkich języków: `pl`, `en`, `de`, `es`, `ru`, `fr`.
+
+Nie kopiujemy powtarzalnych bloków `label + input + @error` w widokach.
+
 ---
 
 ## 3. Architektura: modular monolith
@@ -1252,4 +1268,3 @@ Czy ta akcja powinna być widoczna w historii elementu?
 ```
 
 Jeżeli kod nie pozwala odpowiedzieć na te pytania, jest niekompletny.
-

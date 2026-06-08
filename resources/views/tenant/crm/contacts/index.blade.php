@@ -6,19 +6,18 @@
 
 @section('content')
     <div class="grid gap-5 xl:grid-cols-[360px_1fr]">
-        <section class="rounded border border-neutral-800 bg-neutral-900 p-5">
-            <h2 class="text-lg font-semibold">{{ __('crm.create_contact') }}</h2>
+        <x-ui.card :title="__('crm.create_contact')">
 
             <form method="POST" action="{{ route('tenant.crm.contacts.store') }}" class="mt-5 space-y-4">
                 @csrf
 
                 @include('tenant.crm.contacts.partials.fields')
 
-                <button type="submit" class="w-full rounded bg-sky-500 px-4 py-2 font-medium text-white hover:bg-sky-400">
+                <x-ui.button type="submit" class="w-full">
                     {{ __('crm.create_contact') }}
-                </button>
+                </x-ui.button>
             </form>
-        </section>
+        </x-ui.card>
 
         <section class="rounded border border-neutral-800 bg-neutral-900">
             <div class="border-b border-neutral-800 px-5 py-4">
@@ -46,13 +45,13 @@
                                 <td class="px-5 py-4 text-neutral-400">{{ $contact->position ?? __('common.not_set') }}</td>
                                 <td class="px-5 py-4 text-right">
                                     <div class="inline-flex items-center gap-3">
-                                        <a href="{{ route('tenant.crm.contacts.edit', $contact) }}" wire:navigate class="text-sky-300 hover:text-sky-200">
+                                        <a href="{{ route('tenant.crm.contacts.edit', $contact) }}" wire:navigate class="ui-link">
                                             {{ __('common.manage') }}
                                         </a>
                                         <form method="POST" action="{{ route('tenant.crm.contacts.destroy', $contact) }}">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="text-red-300 hover:text-red-200">
+                                            <button type="submit" class="font-medium text-[var(--ui-danger)] hover:brightness-110">
                                                 {{ __('common.delete') }}
                                             </button>
                                         </form>

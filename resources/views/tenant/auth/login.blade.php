@@ -7,7 +7,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
 </head>
-<body class="min-h-screen bg-neutral-950 text-neutral-100 antialiased">
+<body class="ds-app antialiased">
     <livewire:tenant.auth.login-form />
     @livewireScripts
 </body>

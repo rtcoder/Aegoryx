@@ -12,8 +12,8 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
 </head>
-<body class="min-h-screen bg-neutral-950 text-neutral-100 antialiased">
-    <div class="mx-auto flex min-h-screen w-full max-w-7xl">
+<body class="ds-app antialiased">
+    <div class="ds-shell flex">
         <aside class="hidden w-64 shrink-0 border-r border-neutral-800 px-5 py-6 lg:block">
             <div>
                 <p class="text-lg font-semibold">Aegoryx</p>
@@ -74,11 +74,11 @@
                         </div>
                         <form method="POST" action="{{ route('tenant.logout') }}">
                             @csrf
-                            <button type="submit" class="rounded border border-neutral-700 px-4 py-2 text-sm text-neutral-200 hover:border-neutral-500">
-                                {{ __('tenant_panel.sign_out') }}
-                            </button>
-                        </form>
-                    </div>
+                        <x-ui.button type="submit" variant="secondary" size="sm">
+                            {{ __('tenant_panel.sign_out') }}
+                        </x-ui.button>
+                    </form>
+                </div>
                 </div>
 
                 <div class="mt-5 flex gap-2 overflow-x-auto lg:hidden">

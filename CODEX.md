@@ -41,10 +41,10 @@ Backend:
 - Laravel Cashier Paddle
 
 Frontend paneli:
-- Inertia
-- Vue 3 albo React
-- TypeScript
+- Laravel Blade
+- Laravel Livewire
 - Tailwind CSS
+- Aegoryx design system z `docs/design-system/README.md`
 
 Storage:
 - S3-compatible storage
@@ -56,7 +56,7 @@ Publiczne strony:
 - docelowo możliwy osobny frontend typu Astro / Nuxt / Next / SvelteKit
 ```
 
-Domyślnie panel administracyjny i panel klienta robimy przez **Laravel + Inertia**.
+Domyślnie panel administracyjny i panel klienta robimy przez **Laravel Blade + Livewire**.
 
 Publiczne strony klientów nie powinny być sprzęgnięte z panelem. Powinny korzystać z osobnego read-only API.
 
