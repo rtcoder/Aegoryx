@@ -1,16 +1,22 @@
 <?php
 
 return [
-    'create_title' => 'Feature erstellen',
-    'create_button' => 'Feature erstellen',
-    'index_note' => 'Business-Module sollten Zugriff über Entitlements auflösen und nicht direkt aus Admin-Tabellen lesen.',
-    'empty' => 'Noch keine Features.',
-    'information' => 'Feature-Informationen',
-    'no_description' => 'Keine Beschreibung.',
-    'no_overrides' => 'Keine manuellen Überschreibungen für dieses Feature.',
-    'global_status' => 'Globaler Status',
-    'update_status' => 'Status aktualisieren',
-    'tenant_override' => 'Mandanten-Überschreibung',
-    'override_value' => 'Überschreibungswert',
-    'save_override' => 'Überschreibung speichern',
+    'default_override_reason' => 'Manuelle Zugriffskonfiguration für den Mandanten.',
+    'save_access' => 'Zugriff speichern',
+    'tenant_access' => 'Feature-Zugriff',
+    'tenant_access_description' => 'Verfügbare Features sind fest im Anwendungscode definiert. Die Datenbank speichert nur, was dieser Mandant aktiviert hat.',
+    'registry' => [
+        'cms' => [
+            'label' => 'CMS',
+            'description' => 'Seiten, Revisionen und veröffentlichte Inhalts-Snapshots.',
+        ],
+        'crm' => [
+            'label' => 'CRM',
+            'description' => 'Kontakte, Firmen, Deals und Aktivitätshistorie.',
+        ],
+        'files' => [
+            'label' => 'Dateien',
+            'description' => 'Private Dateien, Metadaten und Zugriffskontrolle.',
+        ],
+    ],
 ];

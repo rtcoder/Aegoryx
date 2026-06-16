@@ -14,8 +14,6 @@ return [
     'sign_in' => 'Zaloguj',
     'sections' => [
         'tenants' => 'Zarządzaj kontami tenantów, domenami, stanem wdrożenia i punktami wejścia wsparcia.',
-        'features' => 'Zarządzaj globalnymi funkcjami i nadpisaniami funkcji dla tenantów.',
-        'feature_show' => 'Szczegóły rejestru funkcji i ręczne nadpisania tenantów.',
         'licenses' => 'Przeglądaj stan licencji, status weryfikacji i dostęp self-hosted.',
         'license_show' => 'Efektywny stan licencji i kontrolki weryfikacji.',
         'billing' => 'Sprawdzaj plany, subskrypcje, stan rozliczeń i synchronizację z dostawcą.',

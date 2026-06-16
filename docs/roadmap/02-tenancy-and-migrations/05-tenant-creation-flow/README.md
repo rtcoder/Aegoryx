@@ -13,7 +13,7 @@ Zbudować spójny proces tworzenia tenanta: wpis landlord, schema, migracje, see
 - Action lub Service tworzenia tenanta.
 - Bezpieczne generowanie `schema_name`.
 - Komenda `tenants:create`.
-- Seed default settings/features.
+- Seed default settings i opcjonalnych tenant feature overrides.
 
 ## Poza Zakresem
 

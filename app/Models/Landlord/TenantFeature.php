@@ -2,6 +2,7 @@
 
 namespace App\Models\Landlord;
 
+use App\Modules\Entitlements\Enums\SystemFeature;
 use App\Modules\Entitlements\Enums\TenantFeatureSource;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
@@ -11,7 +12,7 @@ use Illuminate\Support\Carbon;
 /**
  * @property int $id
  * @property int $tenant_id
- * @property int $feature_id
+ * @property SystemFeature $feature
  * @property bool $enabled
  * @property TenantFeatureSource $source
  * @property string|null $reason
@@ -20,12 +21,11 @@ use Illuminate\Support\Carbon;
  * @property int|null $updated_by
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property-read Feature $feature
  * @property-read Tenant $tenant
  */
 #[Fillable([
     'tenant_id',
-    'feature_id',
+    'feature',
     'enabled',
     'source',
     'reason',
@@ -43,16 +43,9 @@ final class TenantFeature extends Model
         return [
             'enabled' => 'boolean',
             'config' => 'array',
+            'feature' => SystemFeature::class,
             'source' => TenantFeatureSource::class,
         ];
-    }
-
-    /**
-     * @return BelongsTo<Feature, $this>
-     */
-    public function feature(): BelongsTo
-    {
-        return $this->belongsTo(Feature::class);
     }
 
     /**

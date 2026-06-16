@@ -2,6 +2,7 @@
 
 namespace App\Models\Landlord;
 
+use App\Modules\Entitlements\Enums\SystemFeature;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
@@ -9,7 +10,7 @@ use Illuminate\Support\Carbon;
 /**
  * @property int $id
  * @property int $plan_id
- * @property int $feature_id
+ * @property SystemFeature $feature
  * @property bool $enabled
  * @property array<string, mixed>|null $config
  * @property Carbon|null $created_at
@@ -17,7 +18,7 @@ use Illuminate\Support\Carbon;
  */
 #[Fillable([
     'plan_id',
-    'feature_id',
+    'feature',
     'enabled',
     'config',
 ])]
@@ -31,6 +32,7 @@ final class PlanFeature extends Model
         return [
             'enabled' => 'boolean',
             'config' => 'array',
+            'feature' => SystemFeature::class,
         ];
     }
 }

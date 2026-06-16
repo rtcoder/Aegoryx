@@ -12,11 +12,6 @@ final class SectionController extends Controller
         return $this->section(__('common.tenants'), __('landlord.sections.tenants'));
     }
 
-    public function features(): View
-    {
-        return $this->section(__('common.features'), __('landlord.sections.features'));
-    }
-
     public function licenses(): View
     {
         return $this->section(__('common.licenses'), __('landlord.sections.licenses'));

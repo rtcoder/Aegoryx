@@ -2,12 +2,10 @@
 
 namespace Tests\Feature\TenantPanel;
 
-use App\Models\Landlord\Feature;
 use App\Models\Landlord\Tenant;
 use App\Models\Landlord\TenantDomain;
 use App\Models\Landlord\TenantFeature;
 use App\Models\Tenant\User;
-use App\Modules\Entitlements\Enums\FeatureStatus;
 use App\Modules\Entitlements\Enums\TenantFeatureSource;
 use App\Modules\Tenancy\Enums\TenantBillingModel;
 use App\Modules\Tenancy\Enums\TenantDeploymentType;
@@ -61,9 +59,6 @@ final class TenantPanelRoutingTest extends TestCase
     {
         $tenant = $this->tenant();
         $this->domain($tenant);
-        $this->feature('cms');
-        $this->feature('crm');
-        $this->feature('files');
         $this->manualOverride($tenant, 'cms', true, ['secret_limit' => 'do-not-render']);
         $this->manualOverride($tenant, 'crm', false);
         $this->actingAs($this->user(), 'web');
@@ -97,7 +92,6 @@ final class TenantPanelRoutingTest extends TestCase
     {
         $tenant = $this->tenant();
         $this->domain($tenant);
-        $this->feature('cms');
         $this->manualOverride($tenant, 'cms', true);
         $this->actingAs($this->user(), 'web');
 
@@ -112,7 +106,6 @@ final class TenantPanelRoutingTest extends TestCase
     {
         $tenant = $this->tenant();
         $this->domain($tenant);
-        $this->feature('crm');
         $this->manualOverride($tenant, 'crm', false);
         $this->actingAs($this->user(), 'web');
 
@@ -155,25 +148,14 @@ final class TenantPanelRoutingTest extends TestCase
         ]);
     }
 
-    private function feature(string $key): Feature
-    {
-        return Feature::query()->create([
-            'key' => $key,
-            'name' => strtoupper($key),
-            'status' => FeatureStatus::Active,
-        ]);
-    }
-
     /**
      * @param  array<string, mixed>  $config
      */
     private function manualOverride(Tenant $tenant, string $featureKey, bool $enabled, array $config = []): TenantFeature
     {
-        $feature = Feature::query()->where('key', $featureKey)->firstOrFail();
-
         return TenantFeature::query()->create([
             'tenant_id' => $tenant->id,
-            'feature_id' => $feature->id,
+            'feature' => $featureKey,
             'enabled' => $enabled,
             'source' => TenantFeatureSource::Manual,
             'reason' => 'Test entitlement.',

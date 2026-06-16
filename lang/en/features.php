@@ -1,16 +1,22 @@
 <?php
 
 return [
-    'create_title' => 'Create feature',
-    'create_button' => 'Create feature',
-    'index_note' => 'Business modules should resolve access through Entitlements, not by reading admin tables directly.',
-    'empty' => 'No features yet.',
-    'information' => 'Feature information',
-    'no_description' => 'No description.',
-    'no_overrides' => 'No manual overrides for this feature.',
-    'global_status' => 'Global status',
-    'update_status' => 'Update status',
-    'tenant_override' => 'Tenant override',
-    'override_value' => 'Override value',
-    'save_override' => 'Save override',
+    'default_override_reason' => 'Manual tenant access configuration.',
+    'save_access' => 'Save access',
+    'tenant_access' => 'Feature access',
+    'tenant_access_description' => 'Available features are fixed in application code. The database stores only what this tenant has enabled.',
+    'registry' => [
+        'cms' => [
+            'label' => 'CMS',
+            'description' => 'Pages, revisions, and published content snapshots.',
+        ],
+        'crm' => [
+            'label' => 'CRM',
+            'description' => 'Contacts, companies, deals, and activity history.',
+        ],
+        'files' => [
+            'label' => 'Files',
+            'description' => 'Private files, metadata, and access control.',
+        ],
+    ],
 ];

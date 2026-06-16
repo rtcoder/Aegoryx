@@ -14,8 +14,6 @@ return [
     'sign_in' => 'Se connecter',
     'sections' => [
         'tenants' => 'Gérer les comptes tenants, domaines, états de déploiement et points d’entrée support.',
-        'features' => 'Gérer les fonctionnalités globales et les surcharges spécifiques aux tenants.',
-        'feature_show' => 'Détails du registre de fonctionnalités et surcharges manuelles des tenants.',
         'licenses' => 'Examiner l’état des licences, la vérification et l’accès self-hosted.',
         'license_show' => 'État effectif de la licence et contrôles de vérification.',
         'billing' => 'Inspecter les plans, abonnements, état de facturation et synchronisation fournisseur.',

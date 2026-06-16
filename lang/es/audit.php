@@ -1,8 +1,6 @@
 <?php
 
 return [
-    'feature_created' => 'Función [:feature] creada.',
-    'feature_status_changed' => 'El estado de la función [:feature] cambió a [:status].',
     'license_verified' => 'Licencia [:license] verificada como [:status].',
     'manual_feature_override_set' => 'Sobrescritura manual de la función [:feature] para el tenant [:tenant] establecida en [:state].',
     'support_session_marked' => 'Sesión de soporte [:session] marcada como [:status].',

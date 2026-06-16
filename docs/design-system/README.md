@@ -114,7 +114,7 @@ Używamy komponentów:
 <x-form.select name="status" :label="__('common.status')">
     <option value="active">...</option>
 </x-form.select>
-<x-form.checkbox name="enabled" :label="__('features.enabled')" />
+<x-form.checkbox name="enabled" :label="__('common.enabled')" />
 ```
 
 Komponenty formularzy obsługują:

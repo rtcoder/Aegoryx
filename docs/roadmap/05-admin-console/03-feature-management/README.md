@@ -6,11 +6,11 @@ Done.
 
 ## Cel
 
-Zarządzać globalnymi features i przypisaniami feature access dla tenantów.
+Zarządzać dostępem tenantów do funkcji systemowych zdefiniowanych w enumie kodu.
 
 ## Zakres
 
-- Feature registry UI.
+- Lista funkcji pochodzi z enuma aplikacji.
 - Tenant feature overrides.
 - Reason dla zmian.
 
@@ -25,7 +25,7 @@ Zarządzać globalnymi features i przypisaniami feature access dla tenantów.
 
 ## Kroki
 
-- Wyświetlić global features.
+- Wyświetlić funkcje systemowe na ekranie tenanta.
 - Dodać akcje enable/disable override.
 - Zapisać audit.
 
@@ -35,7 +35,7 @@ Brak.
 
 ## Acceptance Criteria
 
-- Feature changes przechodzą przez Entitlements.
+- Zmiany dostępu przechodzą przez Entitlements.
 - Każda zmiana ma actor i reason.
 - CMS/CRM nie sprawdzają admin tables bezpośrednio.
 

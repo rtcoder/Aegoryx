@@ -3,11 +3,11 @@
 namespace App\Modules\Entitlements\Actions;
 
 use App\Models\Landlord\AuditLog;
-use App\Models\Landlord\Feature;
 use App\Models\Landlord\Identity;
 use App\Models\Landlord\Tenant;
 use App\Models\Landlord\TenantFeature;
 use App\Modules\Audit\Enums\AuditLogAction;
+use App\Modules\Entitlements\Enums\SystemFeature;
 use App\Modules\Entitlements\Enums\TenantFeatureSource;
 use Illuminate\Support\Facades\DB;
 
@@ -15,7 +15,7 @@ final readonly class SetTenantFeatureOverrideAction
 {
     public function handle(
         Tenant $tenant,
-        Feature $feature,
+        SystemFeature $feature,
         bool $enabled,
         string $reason,
         Identity $actor,
@@ -25,7 +25,7 @@ final readonly class SetTenantFeatureOverrideAction
         return DB::transaction(function () use ($tenant, $feature, $enabled, $reason, $actor, $ip, $userAgent): TenantFeature {
             $override = TenantFeature::query()->firstOrNew([
                 'tenant_id' => $tenant->id,
-                'feature_id' => $feature->id,
+                'feature' => $feature->value,
                 'source' => TenantFeatureSource::Manual->value,
             ]);
 
@@ -49,7 +49,7 @@ final readonly class SetTenantFeatureOverrideAction
                 'subject_id' => $override->id,
                 'action' => AuditLogAction::TenantFeatureOverrideSet,
                 'description' => __('audit.manual_feature_override_set', [
-                    'feature' => $feature->key,
+                    'feature' => $feature->value,
                     'tenant' => $tenant->slug,
                     'state' => $enabled ? __('audit.state_enabled') : __('audit.state_disabled'),
                 ]),
@@ -60,7 +60,7 @@ final readonly class SetTenantFeatureOverrideAction
                     'source' => TenantFeatureSource::Manual->value,
                 ],
                 'metadata_json' => [
-                    'feature_key' => $feature->key,
+                    'feature_key' => $feature->value,
                     'tenant_slug' => $tenant->slug,
                 ],
                 'ip' => $ip,

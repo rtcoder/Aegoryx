@@ -14,8 +14,6 @@ return [
     'sign_in' => 'Iniciar sesión',
     'sections' => [
         'tenants' => 'Gestiona cuentas de tenants, dominios, estado de despliegue y puntos de entrada de soporte.',
-        'features' => 'Gestiona funciones globales y sobrescrituras específicas por tenant.',
-        'feature_show' => 'Detalles del registro de funciones y sobrescrituras manuales por tenant.',
         'licenses' => 'Revisa el estado de licencias, verificación y acceso self-hosted.',
         'license_show' => 'Estado efectivo de la licencia y controles de verificación.',
         'billing' => 'Inspecciona planes, suscripciones, estado de facturación y sincronización con proveedores.',

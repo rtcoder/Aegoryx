@@ -37,6 +37,49 @@
             </dl>
         </section>
 
+        <section class="rounded border border-neutral-800 bg-neutral-900 p-5">
+            <h2 class="text-lg font-semibold">{{ __('features.tenant_access') }}</h2>
+            <p class="mt-2 text-sm leading-6 text-neutral-400">{{ __('features.tenant_access_description') }}</p>
+
+            <form wire:submit="saveFeatures" class="mt-5 space-y-4">
+                <div class="grid gap-3 md:grid-cols-3">
+                    @foreach ($systemFeatures as $feature)
+                        <label class="rounded border border-neutral-800 bg-neutral-950 p-4">
+                            <span class="flex items-start gap-3">
+                                <input
+                                    type="checkbox"
+                                    wire:model="features.{{ $feature->value }}"
+                                    class="mt-1 rounded border-neutral-700 bg-neutral-950 text-sky-500 focus:ring-sky-400"
+                                >
+                                <span>
+                                    <span class="block text-sm font-medium text-neutral-100">{{ $feature->label() }}</span>
+                                    <span class="mt-1 block text-xs leading-5 text-neutral-500">{{ $feature->description() }}</span>
+                                    <span class="mt-2 block font-mono text-xs text-neutral-500">{{ $feature->value }}</span>
+                                </span>
+                            </span>
+                        </label>
+                    @endforeach
+                </div>
+
+                <div>
+                    <label for="featureReason" class="block text-sm font-medium text-neutral-300">{{ __('common.reason') }}</label>
+                    <textarea
+                        id="featureReason"
+                        wire:model="featureReason"
+                        rows="3"
+                        class="mt-2 block w-full rounded border border-neutral-700 bg-neutral-950 px-3 py-2 text-neutral-100 outline-none focus:border-sky-400"
+                    ></textarea>
+                    @error('featureReason')
+                        <p class="mt-2 text-sm text-red-400">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <button type="submit" wire:loading.attr="disabled" class="rounded bg-sky-500 px-4 py-2 font-medium text-white hover:bg-sky-400 disabled:cursor-not-allowed disabled:opacity-70">
+                    {{ __('features.save_access') }}
+                </button>
+            </form>
+        </section>
+
         <aside class="space-y-5">
             <section class="rounded border border-neutral-800 bg-neutral-900 p-5">
                 <h2 class="text-lg font-semibold">{{ __('common.status') }}</h2>

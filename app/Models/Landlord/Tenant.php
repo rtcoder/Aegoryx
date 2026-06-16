@@ -8,7 +8,9 @@ use App\Modules\Tenancy\Enums\TenantLicenseType;
 use App\Modules\Tenancy\Enums\TenantStatus;
 use App\Support\Localization\Locale;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 
@@ -28,6 +30,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property Carbon|null $deleted_at
+ * @property-read Collection<int, TenantFeature> $features
  */
 #[Fillable([
     'name',
@@ -45,6 +48,14 @@ use Illuminate\Support\Carbon;
 final class Tenant extends Model
 {
     use SoftDeletes;
+
+    /**
+     * @return HasMany<TenantFeature, $this>
+     */
+    public function features(): HasMany
+    {
+        return $this->hasMany(TenantFeature::class);
+    }
 
     /**
      * @return array<string, string>

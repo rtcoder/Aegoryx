@@ -18,7 +18,6 @@ return [
     'email' => 'Email',
     'enabled' => 'Activé',
     'expires' => 'Expire',
-    'feature_status' => 'Statut de la fonctionnalité',
     'features' => 'Fonctionnalités',
     'key' => 'Clé',
     'last_verified' => 'Dernière vérification',

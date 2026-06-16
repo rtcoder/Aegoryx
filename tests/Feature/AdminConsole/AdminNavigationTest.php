@@ -53,7 +53,6 @@ final class AdminNavigationTest extends TestCase
         foreach ([
             'http://admin.aegoryx.test/',
             'http://admin.aegoryx.test/tenants',
-            'http://admin.aegoryx.test/features',
             'http://admin.aegoryx.test/licenses',
             'http://admin.aegoryx.test/billing',
             'http://admin.aegoryx.test/support',

@@ -4,7 +4,6 @@
     $navigation = [
         ['label' => __('common.dashboard'), 'route' => 'landlord.dashboard'],
         ['label' => __('common.tenants'), 'route' => 'landlord.tenants.index'],
-        ['label' => __('common.features'), 'route' => 'landlord.features.index'],
         ['label' => __('common.licenses'), 'route' => 'landlord.licenses.index'],
         ['label' => __('common.billing'), 'route' => 'landlord.billing.index'],
         ['label' => __('common.support'), 'route' => 'landlord.support.index'],

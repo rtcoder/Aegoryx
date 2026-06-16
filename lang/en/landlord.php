@@ -14,8 +14,6 @@ return [
     'sign_in' => 'Sign in',
     'sections' => [
         'tenants' => 'Manage tenant accounts, domains, deployment state, and support entry points.',
-        'features' => 'Manage global features and tenant-specific feature overrides.',
-        'feature_show' => 'Feature registry details and manual tenant overrides.',
         'licenses' => 'Review license state, verification status, and self-hosted access.',
         'license_show' => 'Effective license state and verification controls.',
         'billing' => 'Inspect plans, subscriptions, billing state, and provider sync status.',

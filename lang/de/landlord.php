@@ -14,8 +14,6 @@ return [
     'sign_in' => 'Anmelden',
     'sections' => [
         'tenants' => 'Mandantenkonten, Domains, Bereitstellungsstatus und Support-Einstiegspunkte verwalten.',
-        'features' => 'Globale Features und mandantenspezifische Feature-Überschreibungen verwalten.',
-        'feature_show' => 'Details des Feature-Registers und manuelle Mandanten-Überschreibungen.',
         'licenses' => 'Lizenzstatus, Verifizierungsstatus und Self-Hosted-Zugriff prüfen.',
         'license_show' => 'Effektiver Lizenzstatus und Verifizierungssteuerung.',
         'billing' => 'Pläne, Abonnements, Abrechnungsstatus und Provider-Synchronisierung prüfen.',

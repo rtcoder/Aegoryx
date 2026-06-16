@@ -2,7 +2,7 @@
 
 ## Cel
 
-Zbudować panel superadmina do zarządzania tenantami, features, licencjami, billingiem i support access.
+Zbudować panel superadmina do zarządzania tenantami, dostępem do funkcji systemowych, licencjami, billingiem i support access.
 
 ## Dlaczego Jest Ważny
 

@@ -2,10 +2,9 @@
 
 namespace App\Modules\Entitlements\Services;
 
-use App\Models\Landlord\Feature;
 use App\Models\Landlord\Tenant;
 use App\Models\Landlord\TenantFeature;
-use App\Modules\Entitlements\Enums\FeatureStatus;
+use App\Modules\Entitlements\Enums\SystemFeature;
 use App\Modules\Entitlements\Enums\TenantFeatureSource;
 
 final readonly class EffectiveEntitlements
@@ -15,24 +14,18 @@ final readonly class EffectiveEntitlements
      */
     public function forTenant(Tenant $tenant): array
     {
-        $features = Feature::query()
-            ->where('status', FeatureStatus::Active->value)
-            ->get()
-            ->keyBy('key');
-
         $manualOverrides = TenantFeature::query()
             ->where('tenant_id', $tenant->id)
             ->where('source', TenantFeatureSource::Manual->value)
-            ->with('feature')
             ->get()
-            ->keyBy(fn (TenantFeature $override): string => $override->feature?->key ?? '');
+            ->keyBy(fn (TenantFeature $override): string => $override->feature->value);
 
-        return $features
-            ->mapWithKeys(function (Feature $feature) use ($manualOverrides): array {
-                $override = $manualOverrides->get($feature->key);
+        return collect(SystemFeature::cases())
+            ->mapWithKeys(function (SystemFeature $feature) use ($manualOverrides): array {
+                $override = $manualOverrides->get($feature->value);
 
                 return [
-                    $feature->key => [
+                    $feature->value => [
                         'enabled' => $override?->enabled ?? false,
                         'source' => $override?->source->value,
                         'reason' => $override?->reason,
@@ -45,6 +38,7 @@ final readonly class EffectiveEntitlements
 
     public function allows(Tenant $tenant, string $featureKey): bool
     {
-        return ($this->forTenant($tenant)[$featureKey]['enabled'] ?? false) === true;
+        return SystemFeature::tryFrom($featureKey) !== null
+            && ($this->forTenant($tenant)[$featureKey]['enabled'] ?? false) === true;
     }
 }

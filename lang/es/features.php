@@ -1,16 +1,22 @@
 <?php
 
 return [
-    'create_title' => 'Crear función',
-    'create_button' => 'Crear función',
-    'index_note' => 'Los módulos de negocio deben resolver el acceso mediante Entitlements, no leyendo directamente las tablas de administración.',
-    'empty' => 'Aún no hay funciones.',
-    'information' => 'Información de la función',
-    'no_description' => 'Sin descripción.',
-    'no_overrides' => 'No hay sobrescrituras manuales para esta función.',
-    'global_status' => 'Estado global',
-    'update_status' => 'Actualizar estado',
-    'tenant_override' => 'Sobrescritura del tenant',
-    'override_value' => 'Valor de sobrescritura',
-    'save_override' => 'Guardar sobrescritura',
+    'default_override_reason' => 'Configuración manual de acceso del tenant.',
+    'save_access' => 'Guardar acceso',
+    'tenant_access' => 'Acceso a funciones',
+    'tenant_access_description' => 'Las funciones disponibles están fijadas en el código de la aplicación. La base de datos solo guarda lo que este tenant tiene habilitado.',
+    'registry' => [
+        'cms' => [
+            'label' => 'CMS',
+            'description' => 'Páginas, revisiones y snapshots de contenido publicado.',
+        ],
+        'crm' => [
+            'label' => 'CRM',
+            'description' => 'Contactos, empresas, deals e historial de actividad.',
+        ],
+        'files' => [
+            'label' => 'Archivos',
+            'description' => 'Archivos privados, metadatos y control de acceso.',
+        ],
+    ],
 ];

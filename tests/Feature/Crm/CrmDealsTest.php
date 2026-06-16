@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Crm;
 
-use App\Models\Landlord\Feature;
 use App\Models\Landlord\Tenant;
 use App\Models\Landlord\TenantDomain;
 use App\Models\Landlord\TenantFeature;
@@ -13,7 +12,6 @@ use App\Models\Tenant\CrmDeal;
 use App\Models\Tenant\User;
 use App\Modules\Audit\Enums\ActivityEntryAction;
 use App\Modules\Crm\Enums\CrmDealStatus;
-use App\Modules\Entitlements\Enums\FeatureStatus;
 use App\Modules\Entitlements\Enums\TenantFeatureSource;
 use App\Modules\Tenancy\Enums\TenantBillingModel;
 use App\Modules\Tenancy\Enums\TenantDeploymentType;
@@ -46,7 +44,6 @@ final class CrmDealsTest extends TestCase
 
         $this->tenant = $this->tenant();
         $this->domain($this->tenant);
-        $this->feature('crm');
         $this->manualOverride($this->tenant, 'crm', true);
 
         $this->user = User::query()->create([
@@ -169,22 +166,11 @@ final class CrmDealsTest extends TestCase
         ]);
     }
 
-    private function feature(string $key): Feature
-    {
-        return Feature::query()->create([
-            'key' => $key,
-            'name' => strtoupper($key),
-            'status' => FeatureStatus::Active,
-        ]);
-    }
-
     private function manualOverride(Tenant $tenant, string $featureKey, bool $enabled): TenantFeature
     {
-        $feature = Feature::query()->where('key', $featureKey)->firstOrFail();
-
         return TenantFeature::query()->create([
             'tenant_id' => $tenant->id,
-            'feature_id' => $feature->id,
+            'feature' => $featureKey,
             'enabled' => $enabled,
             'source' => TenantFeatureSource::Manual,
             'reason' => 'Test entitlement.',

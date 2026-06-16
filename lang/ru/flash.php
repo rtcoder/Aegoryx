@@ -10,8 +10,6 @@ return [
     'crm_deal_created' => 'Сделка создана.',
     'crm_deal_deleted' => 'Сделка удалена.',
     'crm_deal_updated' => 'Сделка обновлена.',
-    'feature_created' => 'Функция создана.',
-    'feature_status_updated' => 'Статус функции обновлен.',
     'license_verified' => 'Лицензия проверена.',
     'support_session_ended' => 'Сессия поддержки завершена.',
     'support_session_started' => 'Сессия поддержки начата.',

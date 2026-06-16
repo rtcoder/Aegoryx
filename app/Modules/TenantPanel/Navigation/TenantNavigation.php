@@ -3,6 +3,7 @@
 namespace App\Modules\TenantPanel\Navigation;
 
 use App\Models\Landlord\Tenant;
+use App\Modules\Entitlements\Enums\SystemFeature;
 use App\Modules\Entitlements\Services\EffectiveEntitlements;
 
 final readonly class TenantNavigation
@@ -27,19 +28,19 @@ final readonly class TenantNavigation
                 'label' => __('tenant_panel.nav.cms'),
                 'route' => 'tenant.cms.index',
                 'description' => __('tenant_panel.nav.cms_description'),
-                'feature_key' => 'cms',
+                'feature_key' => SystemFeature::Cms->value,
             ],
             [
                 'label' => __('tenant_panel.nav.crm'),
                 'route' => 'tenant.crm.index',
                 'description' => __('tenant_panel.nav.crm_description'),
-                'feature_key' => 'crm',
+                'feature_key' => SystemFeature::Crm->value,
             ],
             [
                 'label' => __('tenant_panel.nav.files'),
                 'route' => 'tenant.files.index',
                 'description' => __('tenant_panel.nav.files_description'),
-                'feature_key' => 'files',
+                'feature_key' => SystemFeature::Files->value,
             ],
             [
                 'label' => __('tenant_panel.nav.settings'),

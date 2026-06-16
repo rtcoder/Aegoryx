@@ -37,20 +37,6 @@ return new class extends Migration
             $table->softDeletes();
         });
 
-        Schema::create('features', function (Blueprint $table): void {
-            $table->id();
-            $table->string('key')->unique();
-            $table->string('name');
-            $table->text('description')->nullable();
-            $table->string('status')->default('active')->index();
-            $table->json('default_config')->nullable();
-            $table->foreignId('created_by')->nullable()->index();
-            $table->foreignId('updated_by')->nullable()->index();
-            $table->foreignId('deleted_by')->nullable()->index();
-            $table->timestamps();
-            $table->softDeletes();
-        });
-
         Schema::create('plans', function (Blueprint $table): void {
             $table->id();
             $table->string('key')->unique();
@@ -70,18 +56,18 @@ return new class extends Migration
         Schema::create('plan_features', function (Blueprint $table): void {
             $table->id();
             $table->foreignId('plan_id')->index();
-            $table->foreignId('feature_id')->index();
+            $table->string('feature')->index();
             $table->boolean('enabled')->default(true);
             $table->json('config')->nullable();
             $table->timestamps();
 
-            $table->unique(['plan_id', 'feature_id']);
+            $table->unique(['plan_id', 'feature']);
         });
 
         Schema::create('tenant_features', function (Blueprint $table): void {
             $table->id();
             $table->foreignId('tenant_id')->index();
-            $table->foreignId('feature_id')->index();
+            $table->string('feature')->index();
             $table->boolean('enabled')->default(true);
             $table->string('source')->default('manual')->index();
             $table->text('reason')->nullable();
@@ -90,7 +76,7 @@ return new class extends Migration
             $table->foreignId('updated_by')->nullable()->index();
             $table->timestamps();
 
-            $table->unique(['tenant_id', 'feature_id', 'source']);
+            $table->unique(['tenant_id', 'feature', 'source']);
         });
 
         Schema::create('subscriptions', function (Blueprint $table): void {
@@ -147,7 +133,6 @@ return new class extends Migration
         Schema::dropIfExists('tenant_features');
         Schema::dropIfExists('plan_features');
         Schema::dropIfExists('plans');
-        Schema::dropIfExists('features');
         Schema::dropIfExists('tenant_domains');
         Schema::dropIfExists('identities');
     }

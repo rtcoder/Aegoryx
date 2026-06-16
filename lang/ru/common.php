@@ -18,7 +18,6 @@ return [
     'email' => 'Email',
     'enabled' => 'Включено',
     'expires' => 'Истекает',
-    'feature_status' => 'Статус функции',
     'features' => 'Функции',
     'key' => 'Ключ',
     'last_verified' => 'Последняя проверка',

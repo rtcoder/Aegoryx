@@ -12,7 +12,7 @@ Zbudować osobną nawigację i shell dla superadmina.
 
 - Admin routes.
 - Layout Admin Console.
-- Widoczne sekcje tenants, features, licenses, billing, support.
+- Widoczne sekcje tenants, licenses, billing, support.
 
 ## Poza Zakresem
 

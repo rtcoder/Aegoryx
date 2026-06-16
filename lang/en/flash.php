@@ -10,8 +10,6 @@ return [
     'crm_deal_created' => 'Deal created.',
     'crm_deal_deleted' => 'Deal deleted.',
     'crm_deal_updated' => 'Deal updated.',
-    'feature_created' => 'Feature created.',
-    'feature_status_updated' => 'Feature status updated.',
     'license_verified' => 'License verified.',
     'support_session_ended' => 'Support session ended.',
     'support_session_started' => 'Support session started.',

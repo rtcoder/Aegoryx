@@ -2,7 +2,6 @@
 
 namespace Tests\Unit\Models\Landlord;
 
-use App\Models\Landlord\Feature;
 use App\Models\Landlord\License;
 use App\Models\Landlord\Plan;
 use App\Models\Landlord\Subscription;
@@ -12,7 +11,7 @@ use App\Models\Landlord\TenantDomain;
 use App\Models\Landlord\TenantFeature;
 use App\Modules\Billing\Enums\PlanStatus;
 use App\Modules\Billing\Enums\SubscriptionStatus;
-use App\Modules\Entitlements\Enums\FeatureStatus;
+use App\Modules\Entitlements\Enums\SystemFeature;
 use App\Modules\Entitlements\Enums\TenantFeatureSource;
 use App\Modules\Licensing\Enums\LicenseStatus;
 use App\Modules\Tenancy\Enums\SystemInstallationStatus;
@@ -26,13 +25,6 @@ use PHPUnit\Framework\TestCase;
 
 final class LandlordEnumCastsTest extends TestCase
 {
-    public function test_feature_status_is_cast_to_enum(): void
-    {
-        $model = new Feature(['status' => FeatureStatus::Active->value]);
-
-        $this->assertSame(FeatureStatus::Active, $model->status);
-    }
-
     public function test_license_status_is_cast_to_enum(): void
     {
         $model = new License(['status' => LicenseStatus::Inactive->value]);
@@ -94,9 +86,11 @@ final class LandlordEnumCastsTest extends TestCase
     public function test_tenant_feature_source_is_cast_to_enum(): void
     {
         $model = new TenantFeature([
+            'feature' => SystemFeature::Crm->value,
             'source' => TenantFeatureSource::Manual->value,
         ]);
 
+        $this->assertSame(SystemFeature::Crm, $model->feature);
         $this->assertSame(TenantFeatureSource::Manual, $model->source);
     }
 }

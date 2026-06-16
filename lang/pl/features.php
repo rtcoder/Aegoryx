@@ -1,16 +1,22 @@
 <?php
 
 return [
-    'create_title' => 'Utwórz funkcję',
-    'create_button' => 'Utwórz funkcję',
-    'index_note' => 'Moduły biznesowe powinny sprawdzać dostęp przez Entitlements, a nie przez bezpośredni odczyt tabel administracyjnych.',
-    'empty' => 'Nie ma jeszcze funkcji.',
-    'information' => 'Informacje o funkcji',
-    'no_description' => 'Brak opisu.',
-    'no_overrides' => 'Brak ręcznych nadpisań dla tej funkcji.',
-    'global_status' => 'Status globalny',
-    'update_status' => 'Zaktualizuj status',
-    'tenant_override' => 'Nadpisanie tenanta',
-    'override_value' => 'Wartość nadpisania',
-    'save_override' => 'Zapisz nadpisanie',
+    'default_override_reason' => 'Ręczna konfiguracja dostępu tenanta.',
+    'save_access' => 'Zapisz dostęp',
+    'tenant_access' => 'Dostęp do funkcji',
+    'tenant_access_description' => 'Dostępne funkcje są stałe w kodzie aplikacji. W bazie zapisujemy tylko to, co ten tenant ma włączone.',
+    'registry' => [
+        'cms' => [
+            'label' => 'CMS',
+            'description' => 'Strony, rewizje i publikowane snapshoty treści.',
+        ],
+        'crm' => [
+            'label' => 'CRM',
+            'description' => 'Kontakty, firmy, deale i historia aktywności.',
+        ],
+        'files' => [
+            'label' => 'Pliki',
+            'description' => 'Prywatne pliki, metadane i kontrola dostępu.',
+        ],
+    ],
 ];
