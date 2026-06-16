@@ -18,6 +18,6 @@ Zapewnić, że każda tenant schema ma własną tabelę `migrations`.
 
 ## Checklist
 
-- [ ] Test dla `tenant_1.migrations`.
-- [ ] Test dla `tenant_2.migrations`.
-- [ ] Test potwierdza brak tenant tables w `public`.
+- [x] Test dla `tenant_1.migrations`.
+- [x] Test dla `tenant_2.migrations`.
+- [x] Test potwierdza brak tenant tables w `public`.

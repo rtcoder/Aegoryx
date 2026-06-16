@@ -17,5 +17,5 @@ Dodać test wykrywający przypadkowe utworzenie tenant tables w public schema.
 
 ## Checklist
 
-- [ ] Test failuje, jeśli tenant migration idzie do `public`.
-- [ ] Test działa dla dwóch tenantów.
+- [x] Test failuje, jeśli tenant migration idzie do `public`.
+- [x] Test działa dla dwóch tenantów.

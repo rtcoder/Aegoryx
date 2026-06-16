@@ -5,7 +5,13 @@ return [
     'cms_page_published' => 'Strona CMS [:page] została opublikowana.',
     'cms_page_unpublished' => 'Publikacja strony CMS [:page] została cofnięta.',
     'cms_page_updated' => 'Strona CMS [:page] została zaktualizowana.',
+    'crm_company_created' => 'Firma CRM [:company] została utworzona.',
+    'crm_company_deleted' => 'Firma CRM [:company] została usunięta.',
+    'crm_company_updated' => 'Firma CRM [:company] została zaktualizowana.',
     'crm_contact_created' => 'Kontakt CRM [:contact] został utworzony.',
     'crm_contact_deleted' => 'Kontakt CRM [:contact] został usunięty.',
     'crm_contact_updated' => 'Kontakt CRM [:contact] został zaktualizowany.',
+    'crm_deal_created' => 'Deal CRM [:deal] został utworzony.',
+    'crm_deal_deleted' => 'Deal CRM [:deal] został usunięty.',
+    'crm_deal_updated' => 'Deal CRM [:deal] został zaktualizowany.',
 ];

@@ -5,6 +5,18 @@
 @section('subheading', __('crm.contacts_description'))
 
 @section('content')
+    <div class="mb-5 flex flex-wrap items-center gap-3">
+        <x-ui.button :href="route('tenant.crm.index')" wire:navigate size="sm">
+            {{ __('crm.contacts') }}
+        </x-ui.button>
+        <x-ui.button :href="route('tenant.crm.companies.index')" wire:navigate variant="secondary" size="sm">
+            {{ __('crm.companies') }}
+        </x-ui.button>
+        <x-ui.button :href="route('tenant.crm.deals.index')" wire:navigate variant="secondary" size="sm">
+            {{ __('crm.deals') }}
+        </x-ui.button>
+    </div>
+
     <div class="grid gap-5 xl:grid-cols-[360px_1fr]">
         <x-ui.card :title="__('crm.create_contact')">
 

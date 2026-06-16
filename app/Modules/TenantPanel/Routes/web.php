@@ -1,6 +1,8 @@
 <?php
 
+use App\Modules\Crm\Http\Controllers\CompanyController;
 use App\Modules\Crm\Http\Controllers\ContactController;
+use App\Modules\Crm\Http\Controllers\DealController;
 use App\Modules\TenantPanel\Http\Controllers\Auth\LoginController;
 use App\Modules\TenantPanel\Http\Controllers\DashboardController;
 use App\Modules\TenantPanel\Http\Controllers\Modules\ModulePageController;
@@ -22,6 +24,36 @@ Route::middleware(ResolveTenantFromDomain::class)
             Route::get('/panel/crm', [ContactController::class, 'index'])
                 ->middleware(EnsureTenantFeatureEnabled::class.':crm')
                 ->name('crm.index');
+            Route::get('/panel/crm/companies', [CompanyController::class, 'index'])
+                ->middleware(EnsureTenantFeatureEnabled::class.':crm')
+                ->name('crm.companies.index');
+            Route::post('/panel/crm/companies', [CompanyController::class, 'store'])
+                ->middleware(EnsureTenantFeatureEnabled::class.':crm')
+                ->name('crm.companies.store');
+            Route::get('/panel/crm/companies/{company}/edit', [CompanyController::class, 'edit'])
+                ->middleware(EnsureTenantFeatureEnabled::class.':crm')
+                ->name('crm.companies.edit');
+            Route::patch('/panel/crm/companies/{company}', [CompanyController::class, 'update'])
+                ->middleware(EnsureTenantFeatureEnabled::class.':crm')
+                ->name('crm.companies.update');
+            Route::delete('/panel/crm/companies/{company}', [CompanyController::class, 'destroy'])
+                ->middleware(EnsureTenantFeatureEnabled::class.':crm')
+                ->name('crm.companies.destroy');
+            Route::get('/panel/crm/deals', [DealController::class, 'index'])
+                ->middleware(EnsureTenantFeatureEnabled::class.':crm')
+                ->name('crm.deals.index');
+            Route::post('/panel/crm/deals', [DealController::class, 'store'])
+                ->middleware(EnsureTenantFeatureEnabled::class.':crm')
+                ->name('crm.deals.store');
+            Route::get('/panel/crm/deals/{deal}/edit', [DealController::class, 'edit'])
+                ->middleware(EnsureTenantFeatureEnabled::class.':crm')
+                ->name('crm.deals.edit');
+            Route::patch('/panel/crm/deals/{deal}', [DealController::class, 'update'])
+                ->middleware(EnsureTenantFeatureEnabled::class.':crm')
+                ->name('crm.deals.update');
+            Route::delete('/panel/crm/deals/{deal}', [DealController::class, 'destroy'])
+                ->middleware(EnsureTenantFeatureEnabled::class.':crm')
+                ->name('crm.deals.destroy');
             Route::post('/panel/crm/contacts', [ContactController::class, 'store'])
                 ->middleware(EnsureTenantFeatureEnabled::class.':crm')
                 ->name('crm.contacts.store');

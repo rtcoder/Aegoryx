@@ -5,6 +5,7 @@ namespace App\Models\Tenant;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Crypt;
@@ -46,6 +47,16 @@ use Illuminate\Support\Facades\Crypt;
 final class CrmContact extends Model
 {
     use SoftDeletes;
+
+    /**
+     * @return BelongsToMany<CrmCompany, $this>
+     */
+    public function companies(): BelongsToMany
+    {
+        return $this->belongsToMany(CrmCompany::class, 'crm_company_contact', 'contact_id', 'company_id')
+            ->withPivot('role')
+            ->withTimestamps();
+    }
 
     /**
      * @return Attribute<string|null, string|null>

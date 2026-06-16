@@ -1,5 +1,9 @@
 # Task: Companies
 
+## Status
+
+Done.
+
 ## Cel
 
 Zbudować firmy CRM i relacje z kontaktami.

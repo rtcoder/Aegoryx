@@ -1,5 +1,9 @@
 # Task: Deals
 
+## Status
+
+Done.
+
 ## Cel
 
 Zbudować deale CRM z lifecycle statusami.

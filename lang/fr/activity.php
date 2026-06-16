@@ -5,7 +5,13 @@ return [
     'cms_page_published' => 'Page CMS [:page] publiée.',
     'cms_page_unpublished' => 'Page CMS [:page] dépubliée.',
     'cms_page_updated' => 'Page CMS [:page] mise à jour.',
+    'crm_company_created' => 'Entreprise CRM [:company] créée.',
+    'crm_company_deleted' => 'Entreprise CRM [:company] supprimée.',
+    'crm_company_updated' => 'Entreprise CRM [:company] mise à jour.',
     'crm_contact_created' => 'Contact CRM [:contact] créé.',
     'crm_contact_deleted' => 'Contact CRM [:contact] supprimé.',
     'crm_contact_updated' => 'Contact CRM [:contact] mis à jour.',
+    'crm_deal_created' => 'Affaire CRM [:deal] créée.',
+    'crm_deal_deleted' => 'Affaire CRM [:deal] supprimée.',
+    'crm_deal_updated' => 'Affaire CRM [:deal] mise à jour.',
 ];

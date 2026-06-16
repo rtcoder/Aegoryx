@@ -1,5 +1,9 @@
 # Task: Migration Tests
 
+## Status
+
+Done.
+
 ## Cel
 
 Potwierdzić, że migracje landlord/tenant działają w schema-per-tenant i nie mieszają danych.
