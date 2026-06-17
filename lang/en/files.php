@@ -1,7 +1,9 @@
 <?php
 
 return [
+    'create_activity_export' => 'Export activity',
     'download' => 'Download',
+    'expires_at' => 'Expires at',
     'file_list' => 'File list',
     'files' => 'Files',
     'files_description' => 'Manage private tenant files and control authorized access.',

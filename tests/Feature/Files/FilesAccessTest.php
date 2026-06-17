@@ -150,6 +150,42 @@ final class FilesAccessTest extends TestCase
             ->assertSee('Owner');
     }
 
+    public function test_activity_export_creates_expiring_private_file_and_audit_entry(): void
+    {
+        $this->actingAs($this->owner, 'web');
+
+        ActivityEntry::query()->create([
+            'actor_type' => User::class,
+            'actor_id' => $this->owner->id,
+            'subject_type' => User::class,
+            'subject_id' => $this->owner->id,
+            'action' => ActivityEntryAction::CrmContactCreated,
+            'description' => 'Contact was created.',
+            'metadata_json' => ['scope' => 'crm'],
+        ]);
+
+        $this
+            ->post('http://acme.aegoryx.test/panel/files/exports/activity')
+            ->assertRedirect('http://acme.aegoryx.test/panel/files')
+            ->assertSessionHas('success', __('flash.activity_export_created'));
+
+        $file = TenantFile::query()
+            ->where('original_name', 'activity-export.json')
+            ->firstOrFail();
+
+        $payload = json_decode(Storage::disk('local')->get($file->path), true, 512, JSON_THROW_ON_ERROR);
+        $activity = ActivityEntry::query()->where('action', ActivityEntryAction::ActivityExportCreated)->firstOrFail();
+
+        $this->assertSame('application/json', $file->mime_type);
+        $this->assertSame(FileVisibility::Private, $file->visibility);
+        $this->assertSame($this->owner->id, $file->owner_id);
+        $this->assertNotNull($file->expires_at);
+        $this->assertTrue($file->expires_at->isFuture());
+        $this->assertSame(ActivityEntryAction::CrmContactCreated->value, $payload['entries'][0]['action']);
+        $this->assertSame($file->id, $activity->subject_id);
+        $this->assertSame($file->id, $activity->metadata_json['file_id']);
+    }
+
     private function file(string $path, User $owner): TenantFile
     {
         return TenantFile::query()->create([

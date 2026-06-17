@@ -6,9 +6,17 @@
 
 @section('content')
     <section class="ui-card">
-        <div class="ui-card-header">
-            <h2 class="ui-heading-2">{{ __('files.file_list') }}</h2>
-            <p class="ui-body mt-1">{{ __('files.private_access_note') }}</p>
+        <div class="ui-card-header flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+            <div>
+                <h2 class="ui-heading-2">{{ __('files.file_list') }}</h2>
+                <p class="ui-body mt-1">{{ __('files.private_access_note') }}</p>
+            </div>
+            <form method="POST" action="{{ route('tenant.files.exports.activity.store') }}">
+                @csrf
+                <x-ui.button type="submit" variant="secondary" size="sm">
+                    {{ __('files.create_activity_export') }}
+                </x-ui.button>
+            </form>
         </div>
 
         <div class="overflow-x-auto">
@@ -19,6 +27,7 @@
                         <th>{{ __('files.mime_type') }}</th>
                         <th>{{ __('files.size') }}</th>
                         <th>{{ __('files.owner') }}</th>
+                        <th>{{ __('files.expires_at') }}</th>
                         <th>{{ __('common.created_at') }}</th>
                         <th></th>
                     </tr>
@@ -30,6 +39,7 @@
                             <td class="text-[var(--ui-text-muted)]">{{ $file->mime_type ?? __('common.not_set') }}</td>
                             <td class="text-[var(--ui-text-muted)]">{{ number_format($file->size_bytes / 1024, 1) }} KB</td>
                             <td class="text-[var(--ui-text-muted)]">{{ $file->owner?->name ?? __('files.shared_file') }}</td>
+                            <td class="text-[var(--ui-text-muted)]">{{ $file->expires_at?->format('Y-m-d') ?? __('common.not_set') }}</td>
                             <td class="text-[var(--ui-text-muted)]">{{ $file->created_at?->format('Y-m-d') }}</td>
                             <td class="text-right">
                                 <div class="inline-flex items-center gap-3">
@@ -48,7 +58,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6" class="py-10 text-center text-[var(--ui-text-muted)]">{{ __('files.no_files') }}</td>
+                            <td colspan="7" class="py-10 text-center text-[var(--ui-text-muted)]">{{ __('files.no_files') }}</td>
                         </tr>
                     @endforelse
                 </tbody>

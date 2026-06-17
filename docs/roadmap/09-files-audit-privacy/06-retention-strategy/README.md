@@ -22,9 +22,10 @@ Opisać i przygotować politykę retention, anonimizacji, eksportu i trwałego u
 
 ## Kroki
 
-- Sklasyfikować dane.
-- Opisać różnicę soft delete vs permanent delete.
-- Zaplanować joby cleanup.
+- Sklasyfikować dane w `docs/privacy/retention-strategy.md`.
+- Dodać konfigurację `aegoryx.retention`.
+- Dodać `RetentionPolicy` jako typowany punkt użycia konfiguracji.
+- Zaplanować joby cleanup dla kolejnych etapów.
 
 ## Subtaski
 
@@ -32,10 +33,11 @@ Brak.
 
 ## Acceptance Criteria
 
-- Hard delete nie jest przypadkowy.
-- Dane prywatne mają kierunek anonimizacji/usuwania.
-- Audit zachowuje zgodność bez sekretów.
+- [x] Hard delete nie jest przypadkowy.
+- [x] Dane prywatne mają kierunek anonimizacji/usuwania.
+- [x] Audit zachowuje zgodność bez sekretów.
 
 ## Test Plan
 
-- Review dokumentu retention.
+- [x] Review dokumentu retention.
+- [x] Unit test konfiguracji `RetentionPolicy`.

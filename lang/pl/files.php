@@ -1,7 +1,9 @@
 <?php
 
 return [
+    'create_activity_export' => 'Eksport aktywności',
     'download' => 'Pobierz',
+    'expires_at' => 'Wygasa',
     'file_list' => 'Lista plików',
     'files' => 'Pliki',
     'files_description' => 'Zarządzaj prywatnymi plikami tenanta i kontroluj autoryzowany dostęp.',

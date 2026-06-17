@@ -6,6 +6,7 @@ use App\Modules\Crm\Http\Controllers\DealController;
 use App\Modules\Crm\Http\Controllers\NoteController;
 use App\Modules\Crm\Http\Controllers\TaskController;
 use App\Modules\Entitlements\Enums\SystemFeature;
+use App\Modules\Files\Http\Controllers\ActivityExportController;
 use App\Modules\Files\Http\Controllers\FileController;
 use App\Modules\TenantPanel\Http\Controllers\Auth\LoginController;
 use App\Modules\TenantPanel\Http\Controllers\DashboardController;
@@ -31,6 +32,7 @@ Route::middleware(ResolveTenantFromDomain::class)
                     ->middleware(EnsureTenantFeatureEnabled::class.':'.SystemFeature::Files->value)
                     ->group(function (): void {
                         Route::get('/', [FileController::class, 'index'])->name('index');
+                        Route::post('exports/activity', [ActivityExportController::class, 'store'])->name('exports.activity.store');
                         Route::get('{file}/download', [FileController::class, 'download'])->name('download');
                         Route::delete('{file}', [FileController::class, 'destroy'])->name('destroy');
                     });

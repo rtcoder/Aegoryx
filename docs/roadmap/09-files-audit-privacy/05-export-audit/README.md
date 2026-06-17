@@ -23,9 +23,11 @@ Audytować eksporty danych prywatnych i przygotować bezpieczny model większych
 
 ## Kroki
 
-- Dodać standard dla export actions.
-- Zapisywać actor/reason/scope.
-- Dla dużych eksportów użyć job z tenant_id.
+- Dodać `CreateActivityExportAction`.
+- Wymagać policy `ActivityEntryPolicy::export`.
+- Zapisywać eksport jako prywatny `TenantFile` z `expires_at`.
+- Rejestrować `ActivityEntryAction::ActivityExportCreated`.
+- Dla dużych eksportów docelowo przenieść akcję do joba z tenant context.
 
 ## Subtaski
 
@@ -33,11 +35,11 @@ Brak.
 
 ## Acceptance Criteria
 
-- Eksport prywatnych danych wymaga uprawnień.
-- Eksport jest audytowany.
-- Plik eksportu ma expiration.
+- [x] Eksport prywatnych danych wymaga uprawnień.
+- [x] Eksport jest audytowany.
+- [x] Plik eksportu ma expiration.
 
 ## Test Plan
 
-- Feature tests export allowed/forbidden.
-- Audit tests.
+- [x] Feature test eksportu przez panel.
+- [x] Audit test dla `activity_export_created`.

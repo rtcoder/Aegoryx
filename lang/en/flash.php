@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'activity_export_created' => 'Activity export created.',
     'crm_company_created' => 'Company created.',
     'crm_company_deleted' => 'Company deleted.',
     'crm_company_updated' => 'Company updated.',

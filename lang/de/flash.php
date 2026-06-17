@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'activity_export_created' => 'Aktivitätsexport wurde erstellt.',
     'crm_company_created' => 'Firma wurde erstellt.',
     'crm_company_deleted' => 'Firma wurde gelöscht.',
     'crm_company_updated' => 'Firma wurde aktualisiert.',

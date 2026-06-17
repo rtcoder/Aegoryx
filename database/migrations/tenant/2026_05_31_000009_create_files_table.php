@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('size_bytes');
             $table->string('checksum_sha256', 64)->nullable()->index();
             $table->string('visibility')->default(FileVisibility::Private->value)->index();
+            $table->timestamp('expires_at')->nullable()->index();
             $table->foreignId('owner_id')->nullable()->index();
             $table->foreignId('created_by')->nullable()->index();
             $table->foreignId('updated_by')->nullable()->index();

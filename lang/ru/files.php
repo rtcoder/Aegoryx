@@ -1,7 +1,9 @@
 <?php
 
 return [
+    'create_activity_export' => 'Экспорт активности',
     'download' => 'Скачать',
+    'expires_at' => 'Истекает',
     'file_list' => 'Список файлов',
     'files' => 'Файлы',
     'files_description' => 'Управляй приватными файлами tenant и контролируй авторизованный доступ.',

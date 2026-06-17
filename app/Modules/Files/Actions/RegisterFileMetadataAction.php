@@ -7,6 +7,7 @@ use App\Models\Tenant\User;
 use App\Modules\Audit\Enums\ActivityEntryAction;
 use App\Modules\Audit\Services\ActivityLogger;
 use App\Modules\Files\Enums\FileVisibility;
+use Carbon\CarbonInterface;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
@@ -24,10 +25,11 @@ final readonly class RegisterFileMetadataAction
         ?string $mimeType,
         ?int $ownerId,
         User $actor,
+        ?CarbonInterface $expiresAt = null,
     ): TenantFile {
         Gate::forUser($actor)->authorize('create', TenantFile::class);
 
-        return DB::transaction(function () use ($disk, $path, $originalName, $mimeType, $ownerId, $actor): TenantFile {
+        return DB::transaction(function () use ($disk, $path, $originalName, $mimeType, $ownerId, $actor, $expiresAt): TenantFile {
             $storage = Storage::disk($disk);
             $contents = $storage->get($path);
 
@@ -39,6 +41,7 @@ final readonly class RegisterFileMetadataAction
                 'size_bytes' => $storage->size($path),
                 'checksum_sha256' => hash('sha256', $contents),
                 'visibility' => FileVisibility::Private,
+                'expires_at' => $expiresAt,
                 'owner_id' => $ownerId,
                 'created_by' => $actor->id,
                 'updated_by' => $actor->id,
@@ -70,6 +73,7 @@ final readonly class RegisterFileMetadataAction
             'size_bytes' => $file->size_bytes,
             'checksum_sha256' => $file->checksum_sha256,
             'visibility' => $file->visibility->value,
+            'expires_at' => $file->expires_at?->toISOString(),
             'owner_id' => $file->owner_id,
         ];
     }

@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'activity_export_created' => 'Экспорт активности [:file] создан.',
     'cms_page_created' => 'Страница CMS [:page] создана.',
     'cms_page_published' => 'Страница CMS [:page] опубликована.',
     'cms_page_unpublished' => 'Страница CMS [:page] снята с публикации.',

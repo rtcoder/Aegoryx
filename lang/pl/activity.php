@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'activity_export_created' => 'Eksport aktywności [:file] został utworzony.',
     'cms_page_created' => 'Strona CMS [:page] została utworzona.',
     'cms_page_published' => 'Strona CMS [:page] została opublikowana.',
     'cms_page_unpublished' => 'Publikacja strony CMS [:page] została cofnięta.',

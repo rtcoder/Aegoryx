@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'activity_export_created' => 'Aktivitätsexport [:file] wurde erstellt.',
     'cms_page_created' => 'CMS-Seite [:page] wurde erstellt.',
     'cms_page_published' => 'CMS-Seite [:page] wurde veröffentlicht.',
     'cms_page_unpublished' => 'CMS-Seite [:page] wurde zurückgezogen.',

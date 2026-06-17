@@ -1,7 +1,9 @@
 <?php
 
 return [
+    'create_activity_export' => 'Exporter l’activité',
     'download' => 'Télécharger',
+    'expires_at' => 'Expire le',
     'file_list' => 'Liste des fichiers',
     'files' => 'Fichiers',
     'files_description' => 'Gérer les fichiers privés du tenant et contrôler les accès autorisés.',

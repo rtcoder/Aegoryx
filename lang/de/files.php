@@ -1,7 +1,9 @@
 <?php
 
 return [
+    'create_activity_export' => 'Aktivität exportieren',
     'download' => 'Herunterladen',
+    'expires_at' => 'Läuft ab',
     'file_list' => 'Dateiliste',
     'files' => 'Dateien',
     'files_description' => 'Private Mandantendateien verwalten und autorisierten Zugriff kontrollieren.',

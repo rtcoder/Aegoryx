@@ -41,6 +41,13 @@ return [
         ],
     ],
 
+    'retention' => [
+        'activity_entries_days' => (int) env('RETENTION_ACTIVITY_ENTRIES_DAYS', 365),
+        'audit_logs_days' => (int) env('RETENTION_AUDIT_LOGS_DAYS', 730),
+        'deleted_files_days' => (int) env('RETENTION_DELETED_FILES_DAYS', 30),
+        'export_files_expire_hours' => (int) env('RETENTION_EXPORT_FILES_EXPIRE_HOURS', 24),
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Aegoryx Modules

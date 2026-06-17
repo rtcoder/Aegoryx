@@ -18,6 +18,7 @@ use Illuminate\Support\Carbon;
  * @property int $size_bytes
  * @property string|null $checksum_sha256
  * @property FileVisibility $visibility
+ * @property Carbon|null $expires_at
  * @property int|null $owner_id
  * @property int|null $created_by
  * @property int|null $updated_by
@@ -35,6 +36,7 @@ use Illuminate\Support\Carbon;
     'size_bytes',
     'checksum_sha256',
     'visibility',
+    'expires_at',
     'owner_id',
     'created_by',
     'updated_by',
@@ -60,6 +62,7 @@ final class TenantFile extends Model
     protected function casts(): array
     {
         return [
+            'expires_at' => 'datetime',
             'visibility' => FileVisibility::class,
         ];
     }
