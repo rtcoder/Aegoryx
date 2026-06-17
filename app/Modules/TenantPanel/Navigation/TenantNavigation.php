@@ -60,6 +60,12 @@ final readonly class TenantNavigation
                 'description' => __('tenant_panel.nav.security_description'),
                 'feature_key' => null,
             ],
+            [
+                'label' => __('tenant_panel.nav.activity'),
+                'route' => 'tenant.activity.index',
+                'description' => __('tenant_panel.nav.activity_description'),
+                'feature_key' => null,
+            ],
         ];
     }
 

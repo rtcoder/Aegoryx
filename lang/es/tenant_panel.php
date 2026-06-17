@@ -56,5 +56,7 @@ return [
         'security_description' => '2FA y protección de cuenta',
         'users' => 'Usuarios',
         'users_description' => 'Roles y acceso',
+        'activity' => 'Actividad',
+        'activity_description' => 'Historial de eventos del tenant',
     ],
 ];

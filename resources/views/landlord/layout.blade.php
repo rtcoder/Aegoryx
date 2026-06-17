@@ -7,6 +7,7 @@
         ['label' => __('common.licenses'), 'route' => 'landlord.licenses.index'],
         ['label' => __('common.billing'), 'route' => 'landlord.billing.index'],
         ['label' => __('common.support'), 'route' => 'landlord.support.index'],
+        ['label' => __('audit_view.audit_log'), 'route' => 'landlord.audit.index'],
         ['label' => __('common.security'), 'route' => 'landlord.security.index'],
     ];
 

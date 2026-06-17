@@ -56,5 +56,7 @@ return [
         'security_description' => '2FA and account protection',
         'users' => 'Users',
         'users_description' => 'Roles and access',
+        'activity' => 'Activity',
+        'activity_description' => 'Tenant event history',
     ],
 ];

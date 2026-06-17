@@ -56,5 +56,7 @@ return [
         'security_description' => '2FA und Kontoschutz',
         'users' => 'Benutzer',
         'users_description' => 'Rollen und Zugriff',
+        'activity' => 'Aktivität',
+        'activity_description' => 'Mandanten-Ereignishistorie',
     ],
 ];

@@ -8,6 +8,7 @@ use App\Modules\Crm\Http\Controllers\TaskController;
 use App\Modules\Entitlements\Enums\SystemFeature;
 use App\Modules\Files\Http\Controllers\ActivityExportController;
 use App\Modules\Files\Http\Controllers\FileController;
+use App\Modules\TenantPanel\Http\Controllers\ActivityController;
 use App\Modules\TenantPanel\Http\Controllers\Auth\LoginController;
 use App\Modules\TenantPanel\Http\Controllers\CmsPageController;
 use App\Modules\TenantPanel\Http\Controllers\DashboardController;
@@ -43,6 +44,7 @@ Route::middleware(ResolveTenantFromDomain::class)
                 Route::get('settings', [ModulePageController::class, 'settings'])->name('settings.index');
                 Route::get('security', [SecurityController::class, 'index'])->name('security.index');
                 Route::get('users', [UserController::class, 'index'])->name('users.index');
+                Route::get('activity', [ActivityController::class, 'index'])->name('activity.index');
 
                 Route::prefix('crm')
                     ->name('crm.')

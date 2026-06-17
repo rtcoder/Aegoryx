@@ -56,5 +56,7 @@ return [
         'security_description' => '2FA и защита учетной записи',
         'users' => 'Пользователи',
         'users_description' => 'Роли и доступ',
+        'activity' => 'Активность',
+        'activity_description' => 'История событий tenant',
     ],
 ];

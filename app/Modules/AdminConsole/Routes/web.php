@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\UseAuthenticatedLocale;
+use App\Modules\AdminConsole\Http\Controllers\AuditLogController;
 use App\Modules\AdminConsole\Http\Controllers\Auth\LoginController;
 use App\Modules\AdminConsole\Http\Controllers\DashboardController;
 use App\Modules\AdminConsole\Http\Controllers\LicenseController;
@@ -30,6 +31,7 @@ Route::domain(config('aegoryx.landlord.domain'))
             Route::post('/licenses/{license}/verify', [LicenseController::class, 'verify'])->name('licenses.verify');
             Route::get('/billing', [SectionController::class, 'billing'])->name('billing.index');
             Route::get('/support', [SectionController::class, 'support'])->name('support.index');
+            Route::get('/audit', [AuditLogController::class, 'index'])->name('audit.index');
             Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
         });
     });

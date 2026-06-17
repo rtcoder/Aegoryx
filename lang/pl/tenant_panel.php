@@ -56,5 +56,7 @@ return [
         'security_description' => '2FA i zabezpieczenia konta',
         'users' => 'Użytkownicy',
         'users_description' => 'Role i dostęp',
+        'activity' => 'Aktywność',
+        'activity_description' => 'Historia zdarzeń tenanta',
     ],
 ];
