@@ -8,7 +8,7 @@ Dodać tenant-aware cache dla publicznych opublikowanych treści.
 
 - Cache keys z tenant id/schema.
 - Page response cache.
-- Invalidation po publish/unpublish.
+- Cache key oparty o tenant, slug i timestamp published snapshot.
 
 ## Poza Zakresem
 
@@ -23,7 +23,7 @@ Dodać tenant-aware cache dla publicznych opublikowanych treści.
 
 - Ustalić format cache key.
 - Cacheować tylko published data.
-- Czyścić cache po publikacji.
+- Używać timestampu published snapshot w cache key, żeby publish/update generował nowy cache key.
 
 ## Subtaski
 
@@ -33,7 +33,7 @@ Brak.
 
 - Cache key zawiera tenant context.
 - Drafty nie trafiają do cache public API.
-- Publish/unpublish invaliduje właściwy tenant cache.
+- Publish/update generuje nowy tenant-aware cache key.
 
 ## Test Plan
 

@@ -14,6 +14,8 @@ use App\Modules\Tenancy\Enums\TenantDomainType;
 use App\Modules\Tenancy\Enums\TenantLicenseType;
 use App\Modules\Tenancy\Enums\TenantStatus;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 
 final class PublicCmsApiTest extends TestCase
@@ -31,6 +33,15 @@ final class PublicCmsApiTest extends TestCase
             '--database' => 'sqlite',
             '--path' => 'database/migrations/tenant',
         ]);
+
+        config()->set('cache.default', 'array');
+        config()->set('cors.allowed_origins', ['https://example.test']);
+        config()->set('aegoryx.public_api.cache.ttl_seconds', 300);
+        config()->set('aegoryx.public_api.cors.allowed_origins', ['https://example.test']);
+        config()->set('aegoryx.public_api.rate_limit.decay_seconds', 60);
+        config()->set('aegoryx.public_api.rate_limit.max_attempts', 2);
+
+        Cache::flush();
     }
 
     public function test_public_api_returns_published_page_snapshot(): void
@@ -59,7 +70,9 @@ final class PublicCmsApiTest extends TestCase
 
     public function test_public_api_does_not_return_draft_page(): void
     {
-        $tenant = $this->tenant();
+        $tenant = $this->tenant([
+            'public_api_cors_allowed_origins' => ['https://example.test'],
+        ]);
         $this->domain($tenant);
         $this->page(['slug' => 'draft-only']);
 
@@ -90,6 +103,89 @@ final class PublicCmsApiTest extends TestCase
         $this
             ->postJson('http://acme.aegoryx.test/api/public/cms/pages/home')
             ->assertStatus(405);
+    }
+
+    public function test_public_api_rate_limits_requests_per_host_and_ip(): void
+    {
+        $tenant = $this->tenant();
+        $this->domain($tenant);
+        $page = $this->page(['slug' => 'home']);
+
+        PublishedPage::query()->create([
+            'cms_page_id' => $page->id,
+            'title' => 'Homepage',
+            'slug' => 'home',
+            'content' => ['blocks' => [['type' => 'text', 'body' => 'Hello']]],
+            'published_at' => now(),
+        ]);
+
+        $this->getJson('http://acme.aegoryx.test/api/public/cms/pages/home')
+            ->assertOk()
+            ->assertHeader('X-RateLimit-Limit', '2')
+            ->assertHeader('X-RateLimit-Remaining', '1');
+
+        $this->getJson('http://acme.aegoryx.test/api/public/cms/pages/home')
+            ->assertOk()
+            ->assertHeader('X-RateLimit-Remaining', '0');
+
+        $this->getJson('http://acme.aegoryx.test/api/public/cms/pages/home')
+            ->assertTooManyRequests()
+            ->assertHeader('X-RateLimit-Limit', '2');
+    }
+
+    public function test_public_api_caches_published_page_payload(): void
+    {
+        $tenant = $this->tenant();
+        $this->domain($tenant);
+        $page = $this->page(['slug' => 'home']);
+        $published = PublishedPage::query()->create([
+            'cms_page_id' => $page->id,
+            'title' => 'Homepage',
+            'slug' => 'home',
+            'content' => ['blocks' => [['type' => 'text', 'body' => 'Hello']]],
+            'published_at' => now(),
+        ]);
+
+        $this
+            ->getJson('http://acme.aegoryx.test/api/public/cms/pages/home')
+            ->assertOk()
+            ->assertJsonPath('data.title', 'Homepage');
+
+        DB::table('published_pages')
+            ->where('id', $published->id)
+            ->update(['title' => 'Changed without timestamp bump']);
+
+        $this
+            ->getJson('http://acme.aegoryx.test/api/public/cms/pages/home')
+            ->assertOk()
+            ->assertJsonPath('data.title', 'Homepage');
+    }
+
+    public function test_public_api_cors_allow_list(): void
+    {
+        $tenant = $this->tenant();
+        $this->domain($tenant);
+        $page = $this->page(['slug' => 'home']);
+
+        PublishedPage::query()->create([
+            'cms_page_id' => $page->id,
+            'title' => 'Homepage',
+            'slug' => 'home',
+            'content' => ['blocks' => [['type' => 'text', 'body' => 'Hello']]],
+            'published_at' => now(),
+        ]);
+
+        $this
+            ->withHeader('Origin', 'https://example.test')
+            ->getJson('http://acme.aegoryx.test/api/public/cms/pages/home')
+            ->assertOk()
+            ->assertHeader('Access-Control-Allow-Origin', 'https://example.test')
+            ->assertHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
+
+        $this
+            ->withHeader('Origin', 'https://blocked.test')
+            ->getJson('http://acme.aegoryx.test/api/public/cms/pages/home')
+            ->assertForbidden();
     }
 
     /**

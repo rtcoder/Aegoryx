@@ -16,15 +16,14 @@ CMS musi rozdzielać pracę redakcyjną od opublikowanych treści, żeby publicz
 
 ## Status
 
-- Done: Page Model, Page Revisions, Publish Flow, Published Snapshots, CMS Activity History.
-- Pending: Blocks Content Structure as full builder/validation layer.
+- Done: Page Model, Page Revisions, Publish Flow, Blocks Content Structure, Published Snapshots, CMS Activity History.
 
 ## Taski
 
 - [x] [Page Model](01-page-model/)
 - [x] [Page Revisions](02-page-revisions/)
 - [x] [Publish Flow](03-publish-flow/)
-- [ ] [Blocks Content Structure](04-blocks-content-structure/)
+- [x] [Blocks Content Structure](04-blocks-content-structure/)
 - [x] [Published Snapshots](05-published-snapshots/)
 - [x] [CMS Activity History](06-cms-activity-history/)
 

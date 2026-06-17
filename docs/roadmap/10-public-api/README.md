@@ -16,16 +16,15 @@ Publiczne strony klientów mają być odsprzęgnięte od panelu i konsumować ty
 
 ## Status
 
-- Done: Public Tenant Resolving, Published Page Endpoints, No Private Data Tests for CMS drafts/panel-only fields.
-- Pending: Rate Limits, Cache, CORS Allow List.
+- Done: Public Tenant Resolving, Published Page Endpoints, Rate Limits, Cache, CORS Allow List, No Private Data Tests.
 
 ## Taski
 
 - [x] [Public Tenant Resolving](01-public-tenant-resolving/)
 - [x] [Published Page Endpoints](02-published-page-endpoints/)
-- [ ] [Rate Limits](03-rate-limits/)
-- [ ] [Cache](04-cache/)
-- [ ] [CORS Allow List](05-cors-allow-list/)
+- [x] [Rate Limits](03-rate-limits/)
+- [x] [Cache](04-cache/)
+- [x] [CORS Allow List](05-cors-allow-list/)
 - [x] [No Private Data Tests](06-no-private-data-tests/)
 
 ## Definicja Ukończenia

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('deployment_type')->default('saas');
             $table->string('billing_model')->default('subscription');
             $table->string('license_type')->default('saas_subscription');
+            $table->json('public_api_cors_allowed_origins')->nullable();
             $table->foreignId('created_by')->nullable()->index();
             $table->foreignId('updated_by')->nullable()->index();
             $table->foreignId('deleted_by')->nullable()->index();

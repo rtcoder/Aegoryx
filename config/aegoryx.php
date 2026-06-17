@@ -25,6 +25,22 @@ return [
         'domain' => env('LANDLORD_DOMAIN', 'admin.aegoryx.test'),
     ],
 
+    'public_api' => [
+        'rate_limit' => [
+            'max_attempts' => (int) env('PUBLIC_API_RATE_LIMIT_MAX_ATTEMPTS', 60),
+            'decay_seconds' => (int) env('PUBLIC_API_RATE_LIMIT_DECAY_SECONDS', 60),
+        ],
+        'cache' => [
+            'ttl_seconds' => (int) env('PUBLIC_API_CACHE_TTL_SECONDS', 300),
+        ],
+        'cors' => [
+            'allowed_origins' => array_values(array_filter(array_map(
+                'trim',
+                explode(',', (string) env('PUBLIC_API_CORS_ALLOWED_ORIGINS', '*')),
+            ))),
+        ],
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Aegoryx Modules

@@ -18,6 +18,6 @@ Potwierdzić, że public API nie ma endpointów CRM ani danych CRM w payloadach.
 
 ## Checklist
 
-- [ ] Public API nie ma CRM route group.
-- [ ] Payload nie zawiera CRM data.
-- [ ] Brak private user fields.
+- [x] Public API nie ma CRM route group.
+- [x] Payload nie zawiera CRM data.
+- [x] Brak private user fields.

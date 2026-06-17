@@ -22,9 +22,9 @@ Chronić prywatne dane CRM przez szyfrowanie, maskowanie i hashe lookupowe.
 
 ## Kroki
 
-- Zdefiniować strategię encrypt/hash/mask.
-- Dodać service lub cast.
-- Testować brak plaintext w audit/logs.
+- Strategia encrypt/hash/mask jest wdrożona dla email/phone kontaktów.
+- Hash lookup działa przez normalizację i deterministyczny SHA-256.
+- Activity payload redaguje email, phone oraz treść sensitive notes.
 
 ## Subtaski
 
@@ -39,5 +39,5 @@ Chronić prywatne dane CRM przez szyfrowanie, maskowanie i hashe lookupowe.
 
 ## Test Plan
 
-- Unit tests encrypt/hash.
+- Unit/feature tests encrypt/hash.
 - Activity redaction tests.

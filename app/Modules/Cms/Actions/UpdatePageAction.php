@@ -6,12 +6,14 @@ use App\Models\Tenant\CmsPage;
 use App\Models\Tenant\User;
 use App\Modules\Audit\Enums\ActivityEntryAction;
 use App\Modules\Audit\Services\ActivityLogger;
+use App\Modules\Cms\Support\CmsContent;
 use Illuminate\Support\Facades\DB;
 
 final readonly class UpdatePageAction
 {
     public function __construct(
         private ActivityLogger $activity,
+        private CmsContent $cmsContent,
     ) {}
 
     /**
@@ -19,13 +21,15 @@ final readonly class UpdatePageAction
      */
     public function handle(CmsPage $page, string $title, string $slug, array $content, User $actor): CmsPage
     {
-        return DB::transaction(function () use ($page, $title, $slug, $content, $actor): CmsPage {
+        $normalizedContent = $this->cmsContent->normalize($content);
+
+        return DB::transaction(function () use ($page, $title, $slug, $normalizedContent, $actor): CmsPage {
             $before = $this->activityPayload($page);
 
             $page->forceFill([
                 'title' => $title,
                 'slug' => $slug,
-                'draft_content' => $content,
+                'draft_content' => $normalizedContent,
                 'updated_by' => $actor->id,
             ])->save();
 

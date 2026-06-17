@@ -12,9 +12,11 @@ use App\Modules\Cms\Actions\CreatePageAction;
 use App\Modules\Cms\Actions\PublishPageAction;
 use App\Modules\Cms\Actions\UnpublishPageAction;
 use App\Modules\Cms\Actions\UpdatePageAction;
+use App\Modules\Cms\Enums\CmsBlockType;
 use App\Modules\Cms\Enums\CmsPageStatus;
 use App\Support\Localization\Locale;
 use Illuminate\Support\Facades\Artisan;
+use InvalidArgumentException;
 use Tests\TestCase;
 
 final class CmsPageWorkflowTest extends TestCase
@@ -36,7 +38,19 @@ final class CmsPageWorkflowTest extends TestCase
         $page = app(CreatePageAction::class)->handle(
             title: 'About Us',
             slug: null,
-            content: ['blocks' => [['type' => 'hero', 'secret' => 'do-not-store-in-activity']]],
+            content: [
+                'blocks' => [
+                    [
+                        'id' => 'hero-main',
+                        'type' => CmsBlockType::Hero->value,
+                        'data' => [
+                            'title' => 'Welcome',
+                            'subtitle' => 'Aegoryx CMS',
+                            'secret' => 'do-not-store-in-activity',
+                        ],
+                    ],
+                ],
+            ],
             actor: $actor,
         );
 
@@ -49,7 +63,10 @@ final class CmsPageWorkflowTest extends TestCase
 
         $this->assertSame(ActivityEntryAction::CmsPageCreated, $activity->action);
         $this->assertSame(CmsPage::class, $activity->subject_type);
-        $this->assertSame('[redacted]', $activity->after_json['content']['blocks'][0]['secret']);
+        $this->assertSame(1, $page->draft_content['schema_version']);
+        $this->assertSame('hero-main', $page->draft_content['blocks'][0]['id']);
+        $this->assertSame(CmsBlockType::Hero->value, $page->draft_content['blocks'][0]['type']);
+        $this->assertArrayNotHasKey('secret', $activity->after_json['content']['blocks'][0]['data']);
     }
 
     public function test_update_page_creates_next_revision_and_activity(): void
@@ -61,20 +78,44 @@ final class CmsPageWorkflowTest extends TestCase
             page: $page,
             title: 'About Aegoryx',
             slug: 'about-aegoryx',
-            content: ['body' => 'Updated draft'],
+            content: [
+                'schema_version' => 1,
+                'blocks' => [
+                    [
+                        'id' => 'heading-main',
+                        'type' => CmsBlockType::Heading->value,
+                        'data' => [
+                            'text' => 'About Aegoryx',
+                            'level' => 1,
+                        ],
+                    ],
+                ],
+            ],
             actor: $actor,
         );
 
         $this->assertSame('About Aegoryx', $updated->title);
         $this->assertSame('about-aegoryx', $updated->slug);
         $this->assertSame(2, CmsPageRevision::query()->where('cms_page_id', $page->id)->count());
+        $this->assertSame(CmsBlockType::Heading->value, $updated->draft_content['blocks'][0]['type']);
         $this->assertSame(ActivityEntryAction::CmsPageUpdated, ActivityEntry::query()->latest('id')->firstOrFail()->action);
     }
 
     public function test_publish_creates_snapshot_and_activity(): void
     {
         $actor = $this->user();
-        $page = app(CreatePageAction::class)->handle('Homepage', 'home', ['body' => 'Public body'], $actor);
+        $page = app(CreatePageAction::class)->handle('Homepage', 'home', [
+            'schema_version' => 1,
+            'blocks' => [
+                [
+                    'id' => 'intro',
+                    'type' => CmsBlockType::Text->value,
+                    'data' => [
+                        'body' => 'Public body',
+                    ],
+                ],
+            ],
+        ], $actor);
 
         $published = app(PublishPageAction::class)->handle($page, $actor);
 
@@ -84,8 +125,28 @@ final class CmsPageWorkflowTest extends TestCase
         $snapshot = PublishedPage::query()->where('cms_page_id', $page->id)->firstOrFail();
 
         $this->assertSame('home', $snapshot->slug);
-        $this->assertSame(['body' => 'Public body'], $snapshot->content);
+        $this->assertSame($published->draft_content, $snapshot->content);
         $this->assertSame(ActivityEntryAction::CmsPagePublished, ActivityEntry::query()->latest('id')->firstOrFail()->action);
+    }
+
+    public function test_invalid_block_structure_is_rejected(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        app(CreatePageAction::class)->handle(
+            title: 'Broken Page',
+            slug: 'broken-page',
+            content: [
+                'schema_version' => 1,
+                'blocks' => [
+                    [
+                        'type' => 'unsupported',
+                        'data' => [],
+                    ],
+                ],
+            ],
+            actor: $this->user(),
+        );
     }
 
     public function test_unpublish_removes_snapshot_and_records_activity(): void

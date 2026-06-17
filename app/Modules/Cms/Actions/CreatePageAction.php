@@ -7,6 +7,7 @@ use App\Models\Tenant\User;
 use App\Modules\Audit\Enums\ActivityEntryAction;
 use App\Modules\Audit\Services\ActivityLogger;
 use App\Modules\Cms\Enums\CmsPageStatus;
+use App\Modules\Cms\Support\CmsContent;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -14,6 +15,7 @@ final readonly class CreatePageAction
 {
     public function __construct(
         private ActivityLogger $activity,
+        private CmsContent $cmsContent,
     ) {}
 
     /**
@@ -21,12 +23,14 @@ final readonly class CreatePageAction
      */
     public function handle(string $title, ?string $slug, array $content, User $actor): CmsPage
     {
-        return DB::transaction(function () use ($title, $slug, $content, $actor): CmsPage {
+        $normalizedContent = $this->cmsContent->normalize($content);
+
+        return DB::transaction(function () use ($title, $slug, $normalizedContent, $actor): CmsPage {
             $page = CmsPage::query()->create([
                 'title' => $title,
                 'slug' => $slug ?: Str::slug($title),
                 'status' => CmsPageStatus::Draft,
-                'draft_content' => $content,
+                'draft_content' => $normalizedContent,
                 'created_by' => $actor->id,
                 'updated_by' => $actor->id,
             ]);

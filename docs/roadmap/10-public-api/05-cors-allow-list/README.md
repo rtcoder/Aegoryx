@@ -21,8 +21,8 @@ Ograniczyć public API do zaufanych originów, jeśli tenant konfiguruje allow-l
 
 ## Kroki
 
-- Dodać config allow-list.
-- Sprawdzać origin per tenant.
+- Dodać config allow-list jako fallback.
+- Sprawdzać origin per tenant przez `public_api_cors_allowed_origins`.
 - Testować allowed/denied.
 
 ## Subtaski

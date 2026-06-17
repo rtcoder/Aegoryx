@@ -17,6 +17,6 @@ Zaimplementować `PublishPageAction` jako jedyne miejsce publikacji CMS page.
 
 ## Checklist
 
-- [ ] Controller jest cienki.
-- [ ] Publish działa tylko dla poprawnego tenant context.
-- [ ] Test success i unauthorized.
+- [x] Controller jest cienki.
+- [x] Publish działa tylko dla poprawnego tenant context.
+- [x] Test success i unauthorized.

@@ -13,11 +13,11 @@ Ustalić strategię dla pól sensitive w CRM.
 ## Obszary
 
 - `app/Modules/Crm`
-- `app/Modules/Security`
-- `AGENT_CODING_GUIDELINES.md`
+- `app/Modules/Audit`
+- `app/Models/Tenant`
 
 ## Checklist
 
-- [ ] Strategia opisana.
-- [ ] Hash lookup nie pozwala odtworzyć wartości.
-- [ ] Masking działa w Resource.
+- [x] Strategia opisana.
+- [x] Hash lookup nie pozwala odtworzyć wartości.
+- [x] Masking działa w activity payload.

@@ -22,8 +22,8 @@ Ustalić strukturę treści CMS dla bloków i pól strony.
 ## Kroki
 
 - Zdefiniować minimalny format content JSON.
-- Dodać walidację w FormRequest/DTO.
-- Zapisać content w revisions.
+- Dodać walidację i normalizację w warstwie support.
+- Zapisać znormalizowany content w revisions i published snapshots.
 
 ## Subtaski
 

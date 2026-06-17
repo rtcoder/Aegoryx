@@ -8,7 +8,7 @@ Dodać testy potwierdzające, że dane sensitive nie trafiają do activity/audit
 
 - Test update sensitive fields.
 - Test activity payload.
-- Test API Resource masking.
+- Test sensitive note masking.
 
 ## Obszary
 
@@ -17,6 +17,6 @@ Dodać testy potwierdzające, że dane sensitive nie trafiają do activity/audit
 
 ## Checklist
 
-- [ ] Plain email nie występuje w activity.
-- [ ] Plain phone nie występuje w activity.
-- [ ] Resource pokazuje wartość masked.
+- [x] Plain email nie występuje w activity.
+- [x] Plain phone nie występuje w activity.
+- [x] Sensitive note pokazuje wartość masked w activity.

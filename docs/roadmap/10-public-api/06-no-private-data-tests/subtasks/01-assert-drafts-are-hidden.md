@@ -17,6 +17,6 @@ Potwierdzić testem, że draft CMS page nie jest widoczny w public API.
 
 ## Checklist
 
-- [ ] Draft nie jest zwracany.
-- [ ] Published snapshot jest zwracany.
-- [ ] Test działa per tenant.
+- [x] Draft nie jest zwracany.
+- [x] Published snapshot jest zwracany.
+- [x] Test działa per tenant.

@@ -17,6 +17,6 @@ Zapisać activity entry dla publikacji i odpublikowania strony.
 
 ## Checklist
 
-- [ ] Action `published`.
-- [ ] Action `unpublished`.
-- [ ] Test actor i subject.
+- [x] Action `published`.
+- [x] Action `unpublished`.
+- [x] Test actor i subject.

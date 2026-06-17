@@ -16,9 +16,7 @@ CRM będzie przechowywać prywatne dane klientów końcowych, więc izolacja, sz
 
 ## Status
 
-- Done: Contacts, Companies, Deals.
-- Partial: encrypted sensitive fields and CRM activity entries are implemented for contacts.
-- Next: Companies, Deals, Notes, Tasks, generalized sensitive field strategy.
+- Done: Contacts, Companies, Deals, Notes, Tasks, Encrypted Sensitive Fields, CRM Activity Entries.
 
 ## Taski
 
@@ -27,8 +25,8 @@ CRM będzie przechowywać prywatne dane klientów końcowych, więc izolacja, sz
 - [x] [Deals](03-deals/)
 - [x] [Notes](04-notes/)
 - [x] [Tasks](05-tasks/)
-- [ ] [Encrypted Sensitive Fields](06-encrypted-sensitive-fields/)
-- [ ] [CRM Activity Entries](07-crm-activity-entries/)
+- [x] [Encrypted Sensitive Fields](06-encrypted-sensitive-fields/)
+- [x] [CRM Activity Entries](07-crm-activity-entries/)
 
 ## Definicja Ukończenia
 

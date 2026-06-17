@@ -6,9 +6,9 @@ Zapewnić historię zmian dla głównych obiektów CRM.
 
 ## Zakres
 
-- Create/update/delete/restore.
+- Create/update/delete.
 - Status changed.
-- Owner changed.
+- Assignment/status changed dla tasków.
 - Sensitive changed fields.
 
 ## Poza Zakresem
@@ -22,9 +22,9 @@ Zapewnić historię zmian dla głównych obiektów CRM.
 
 ## Kroki
 
-- Dodać activity logger calls w Actions.
-- Zapisywać before/after dla bezpiecznych pól.
-- Maskować dane sensitive.
+- Activity logger calls są w Actions dla contacts, companies, deals, notes i tasks.
+- Before/after są zapisywane dla update oraz bezpiecznych pól.
+- Sensitive values są maskowane przez centralny redaktor payloadów oraz flagę sensitive note.
 
 ## Subtaski
 
@@ -38,4 +38,4 @@ Brak.
 
 ## Test Plan
 
-- Activity tests dla CRM create/update/delete/restore.
+- Activity tests dla CRM create/update/delete oraz redakcji sensitive payloadów.

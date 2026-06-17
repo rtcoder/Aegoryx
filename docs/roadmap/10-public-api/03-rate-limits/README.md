@@ -20,9 +20,9 @@ Dodać rate limiting dla public API.
 
 ## Kroki
 
-- Zdefiniować limiter.
-- Uwzględnić tenant/domain/IP.
-- Testować limit exceeded.
+- Zdefiniować limiter public API.
+- Uwzględnić domain/IP w kluczu limitera.
+- Testować limit exceeded i response headers.
 
 ## Subtaski
 

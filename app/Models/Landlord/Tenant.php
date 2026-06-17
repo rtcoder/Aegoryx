@@ -24,6 +24,7 @@ use Illuminate\Support\Carbon;
  * @property TenantDeploymentType $deployment_type
  * @property TenantBillingModel $billing_model
  * @property TenantLicenseType $license_type
+ * @property array<int, string>|null $public_api_cors_allowed_origins
  * @property int|null $created_by
  * @property int|null $updated_by
  * @property int|null $deleted_by
@@ -41,6 +42,7 @@ use Illuminate\Support\Carbon;
     'deployment_type',
     'billing_model',
     'license_type',
+    'public_api_cors_allowed_origins',
     'created_by',
     'updated_by',
     'deleted_by',
@@ -67,6 +69,7 @@ final class Tenant extends Model
             'deployment_type' => TenantDeploymentType::class,
             'license_type' => TenantLicenseType::class,
             'locale' => Locale::class,
+            'public_api_cors_allowed_origins' => 'array',
             'status' => TenantStatus::class,
         ];
     }
