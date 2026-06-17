@@ -14,4 +14,10 @@ return [
     'crm_deal_created' => 'CRM-Deal [:deal] wurde erstellt.',
     'crm_deal_deleted' => 'CRM-Deal [:deal] wurde gelöscht.',
     'crm_deal_updated' => 'CRM-Deal [:deal] wurde aktualisiert.',
+    'crm_note_created' => 'CRM-Notiz für [:subject] wurde erstellt.',
+    'crm_note_deleted' => 'CRM-Notiz für [:subject] wurde gelöscht.',
+    'crm_note_updated' => 'CRM-Notiz für [:subject] wurde aktualisiert.',
+    'crm_task_created' => 'CRM-Aufgabe [:task] wurde erstellt.',
+    'crm_task_deleted' => 'CRM-Aufgabe [:task] wurde gelöscht.',
+    'crm_task_updated' => 'CRM-Aufgabe [:task] wurde aktualisiert.',
 ];

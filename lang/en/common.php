@@ -9,6 +9,7 @@ return [
     'billing_model' => 'Billing model',
     'cms' => 'CMS',
     'create' => 'Create',
+    'created_at' => 'Created at',
     'dashboard' => 'Dashboard',
     'deleted_tenant' => 'Deleted tenant',
     'delete' => 'Delete',
@@ -36,6 +37,7 @@ return [
     'perpetual' => 'perpetual',
     'reason' => 'Reason',
     'save' => 'Save',
+    'save_changes' => 'Save changes',
     'schema' => 'Schema',
     'slug' => 'Slug',
     'status' => 'Status',
@@ -48,4 +50,5 @@ return [
     'unassigned' => 'Unassigned',
     'updated' => 'Updated',
     'yes' => 'yes',
+    'cancel' => 'Cancel',
 ];

@@ -3,6 +3,8 @@
 use App\Modules\Crm\Http\Controllers\CompanyController;
 use App\Modules\Crm\Http\Controllers\ContactController;
 use App\Modules\Crm\Http\Controllers\DealController;
+use App\Modules\Crm\Http\Controllers\NoteController;
+use App\Modules\Crm\Http\Controllers\TaskController;
 use App\Modules\Entitlements\Enums\SystemFeature;
 use App\Modules\TenantPanel\Http\Controllers\Auth\LoginController;
 use App\Modules\TenantPanel\Http\Controllers\DashboardController;
@@ -55,6 +57,36 @@ Route::middleware(ResolveTenantFromDomain::class)
             Route::delete('/panel/crm/deals/{deal}', [DealController::class, 'destroy'])
                 ->middleware(EnsureTenantFeatureEnabled::class.':'.SystemFeature::Crm->value)
                 ->name('crm.deals.destroy');
+            Route::get('/panel/crm/notes', [NoteController::class, 'index'])
+                ->middleware(EnsureTenantFeatureEnabled::class.':'.SystemFeature::Crm->value)
+                ->name('crm.notes.index');
+            Route::post('/panel/crm/notes', [NoteController::class, 'store'])
+                ->middleware(EnsureTenantFeatureEnabled::class.':'.SystemFeature::Crm->value)
+                ->name('crm.notes.store');
+            Route::get('/panel/crm/notes/{note}/edit', [NoteController::class, 'edit'])
+                ->middleware(EnsureTenantFeatureEnabled::class.':'.SystemFeature::Crm->value)
+                ->name('crm.notes.edit');
+            Route::patch('/panel/crm/notes/{note}', [NoteController::class, 'update'])
+                ->middleware(EnsureTenantFeatureEnabled::class.':'.SystemFeature::Crm->value)
+                ->name('crm.notes.update');
+            Route::delete('/panel/crm/notes/{note}', [NoteController::class, 'destroy'])
+                ->middleware(EnsureTenantFeatureEnabled::class.':'.SystemFeature::Crm->value)
+                ->name('crm.notes.destroy');
+            Route::get('/panel/crm/tasks', [TaskController::class, 'index'])
+                ->middleware(EnsureTenantFeatureEnabled::class.':'.SystemFeature::Crm->value)
+                ->name('crm.tasks.index');
+            Route::post('/panel/crm/tasks', [TaskController::class, 'store'])
+                ->middleware(EnsureTenantFeatureEnabled::class.':'.SystemFeature::Crm->value)
+                ->name('crm.tasks.store');
+            Route::get('/panel/crm/tasks/{task}/edit', [TaskController::class, 'edit'])
+                ->middleware(EnsureTenantFeatureEnabled::class.':'.SystemFeature::Crm->value)
+                ->name('crm.tasks.edit');
+            Route::patch('/panel/crm/tasks/{task}', [TaskController::class, 'update'])
+                ->middleware(EnsureTenantFeatureEnabled::class.':'.SystemFeature::Crm->value)
+                ->name('crm.tasks.update');
+            Route::delete('/panel/crm/tasks/{task}', [TaskController::class, 'destroy'])
+                ->middleware(EnsureTenantFeatureEnabled::class.':'.SystemFeature::Crm->value)
+                ->name('crm.tasks.destroy');
             Route::post('/panel/crm/contacts', [ContactController::class, 'store'])
                 ->middleware(EnsureTenantFeatureEnabled::class.':'.SystemFeature::Crm->value)
                 ->name('crm.contacts.store');

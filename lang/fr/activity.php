@@ -14,4 +14,10 @@ return [
     'crm_deal_created' => 'Affaire CRM [:deal] créée.',
     'crm_deal_deleted' => 'Affaire CRM [:deal] supprimée.',
     'crm_deal_updated' => 'Affaire CRM [:deal] mise à jour.',
+    'crm_note_created' => 'Note CRM pour [:subject] créée.',
+    'crm_note_deleted' => 'Note CRM pour [:subject] supprimée.',
+    'crm_note_updated' => 'Note CRM pour [:subject] mise à jour.',
+    'crm_task_created' => 'Tâche CRM [:task] créée.',
+    'crm_task_deleted' => 'Tâche CRM [:task] supprimée.',
+    'crm_task_updated' => 'Tâche CRM [:task] mise à jour.',
 ];

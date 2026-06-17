@@ -9,6 +9,7 @@ return [
     'billing_model' => 'Abrechnungsmodell',
     'cms' => 'CMS',
     'create' => 'Erstellen',
+    'created_at' => 'Erstellt am',
     'dashboard' => 'Dashboard',
     'deleted_tenant' => 'Gelöschter Mandant',
     'delete' => 'Löschen',
@@ -36,6 +37,7 @@ return [
     'perpetual' => 'unbefristet',
     'reason' => 'Grund',
     'save' => 'Speichern',
+    'save_changes' => 'Änderungen speichern',
     'schema' => 'Schema',
     'slug' => 'Slug',
     'status' => 'Status',
@@ -48,4 +50,5 @@ return [
     'unassigned' => 'Nicht zugewiesen',
     'updated' => 'Aktualisiert',
     'yes' => 'ja',
+    'cancel' => 'Abbrechen',
 ];

@@ -14,4 +14,10 @@ return [
     'crm_deal_created' => 'CRM-сделка [:deal] создана.',
     'crm_deal_deleted' => 'CRM-сделка [:deal] удалена.',
     'crm_deal_updated' => 'CRM-сделка [:deal] обновлена.',
+    'crm_note_created' => 'CRM-заметка для [:subject] создана.',
+    'crm_note_deleted' => 'CRM-заметка для [:subject] удалена.',
+    'crm_note_updated' => 'CRM-заметка для [:subject] обновлена.',
+    'crm_task_created' => 'CRM-задача [:task] создана.',
+    'crm_task_deleted' => 'CRM-задача [:task] удалена.',
+    'crm_task_updated' => 'CRM-задача [:task] обновлена.',
 ];

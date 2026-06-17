@@ -9,6 +9,7 @@ return [
     'billing_model' => 'Modelo de facturación',
     'cms' => 'CMS',
     'create' => 'Crear',
+    'created_at' => 'Creado el',
     'dashboard' => 'Panel',
     'deleted_tenant' => 'Tenant eliminado',
     'delete' => 'Eliminar',
@@ -36,6 +37,7 @@ return [
     'perpetual' => 'perpetua',
     'reason' => 'Motivo',
     'save' => 'Guardar',
+    'save_changes' => 'Guardar cambios',
     'schema' => 'Esquema',
     'slug' => 'Slug',
     'status' => 'Estado',
@@ -48,4 +50,5 @@ return [
     'unassigned' => 'Sin asignar',
     'updated' => 'Actualizado',
     'yes' => 'sí',
+    'cancel' => 'Cancelar',
 ];

@@ -25,8 +25,8 @@ CRM będzie przechowywać prywatne dane klientów końcowych, więc izolacja, sz
 - [x] [Contacts](01-contacts/)
 - [x] [Companies](02-companies/)
 - [x] [Deals](03-deals/)
-- [ ] [Notes](04-notes/)
-- [ ] [Tasks](05-tasks/)
+- [x] [Notes](04-notes/)
+- [x] [Tasks](05-tasks/)
 - [ ] [Encrypted Sensitive Fields](06-encrypted-sensitive-fields/)
 - [ ] [CRM Activity Entries](07-crm-activity-entries/)
 

@@ -14,4 +14,10 @@ return [
     'crm_deal_created' => 'Deal CRM [:deal] został utworzony.',
     'crm_deal_deleted' => 'Deal CRM [:deal] został usunięty.',
     'crm_deal_updated' => 'Deal CRM [:deal] został zaktualizowany.',
+    'crm_note_created' => 'Notatka CRM dla [:subject] została utworzona.',
+    'crm_note_deleted' => 'Notatka CRM dla [:subject] została usunięta.',
+    'crm_note_updated' => 'Notatka CRM dla [:subject] została zaktualizowana.',
+    'crm_task_created' => 'Zadanie CRM [:task] zostało utworzone.',
+    'crm_task_deleted' => 'Zadanie CRM [:task] zostało usunięte.',
+    'crm_task_updated' => 'Zadanie CRM [:task] zostało zaktualizowane.',
 ];

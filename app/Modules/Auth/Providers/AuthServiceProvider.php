@@ -5,9 +5,13 @@ namespace App\Modules\Auth\Providers;
 use App\Models\Tenant\CrmCompany;
 use App\Models\Tenant\CrmContact;
 use App\Models\Tenant\CrmDeal;
+use App\Models\Tenant\CrmNote;
+use App\Models\Tenant\CrmTask;
 use App\Modules\Crm\Policies\CrmCompanyPolicy;
 use App\Modules\Crm\Policies\CrmContactPolicy;
 use App\Modules\Crm\Policies\CrmDealPolicy;
+use App\Modules\Crm\Policies\CrmNotePolicy;
+use App\Modules\Crm\Policies\CrmTaskPolicy;
 use App\Support\Modules\ModuleServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -18,6 +22,8 @@ final class AuthServiceProvider extends ModuleServiceProvider
         Gate::policy(CrmContact::class, CrmContactPolicy::class);
         Gate::policy(CrmCompany::class, CrmCompanyPolicy::class);
         Gate::policy(CrmDeal::class, CrmDealPolicy::class);
+        Gate::policy(CrmNote::class, CrmNotePolicy::class);
+        Gate::policy(CrmTask::class, CrmTaskPolicy::class);
 
         $this->loadModuleRoutes();
     }

@@ -14,4 +14,10 @@ return [
     'crm_deal_created' => 'CRM deal [:deal] created.',
     'crm_deal_deleted' => 'CRM deal [:deal] deleted.',
     'crm_deal_updated' => 'CRM deal [:deal] updated.',
+    'crm_note_created' => 'CRM note for [:subject] created.',
+    'crm_note_deleted' => 'CRM note for [:subject] deleted.',
+    'crm_note_updated' => 'CRM note for [:subject] updated.',
+    'crm_task_created' => 'CRM task [:task] created.',
+    'crm_task_deleted' => 'CRM task [:task] deleted.',
+    'crm_task_updated' => 'CRM task [:task] updated.',
 ];

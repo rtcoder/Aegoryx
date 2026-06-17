@@ -9,6 +9,7 @@ return [
     'billing_model' => 'Модель биллинга',
     'cms' => 'CMS',
     'create' => 'Создать',
+    'created_at' => 'Создано',
     'dashboard' => 'Панель',
     'deleted_tenant' => 'Удаленный tenant',
     'delete' => 'Удалить',
@@ -36,6 +37,7 @@ return [
     'perpetual' => 'бессрочно',
     'reason' => 'Причина',
     'save' => 'Сохранить',
+    'save_changes' => 'Сохранить изменения',
     'schema' => 'Схема',
     'slug' => 'Slug',
     'status' => 'Статус',
@@ -48,4 +50,5 @@ return [
     'unassigned' => 'Не назначено',
     'updated' => 'Обновлено',
     'yes' => 'да',
+    'cancel' => 'Отмена',
 ];

@@ -24,7 +24,7 @@ Zbudować notatki CRM przypinane do kontaktów, firm lub deali.
 
 - Dodać migration/model.
 - Dodać subject validation.
-- Maskować/szyfrować sensitive notes.
+- Maskować sensitive notes w activity payloadach.
 
 ## Subtaski
 

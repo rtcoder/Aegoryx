@@ -17,4 +17,10 @@ enum ActivityEntryAction: string
     case CrmDealCreated = 'crm_deal_created';
     case CrmDealDeleted = 'crm_deal_deleted';
     case CrmDealUpdated = 'crm_deal_updated';
+    case CrmNoteCreated = 'crm_note_created';
+    case CrmNoteDeleted = 'crm_note_deleted';
+    case CrmNoteUpdated = 'crm_note_updated';
+    case CrmTaskCreated = 'crm_task_created';
+    case CrmTaskDeleted = 'crm_task_deleted';
+    case CrmTaskUpdated = 'crm_task_updated';
 }
