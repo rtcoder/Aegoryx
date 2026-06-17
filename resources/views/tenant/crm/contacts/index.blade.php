@@ -42,10 +42,10 @@
                 <table class="min-w-full divide-y divide-neutral-800 text-left text-sm">
                     <thead class="bg-neutral-950 text-xs uppercase tracking-wide text-neutral-500">
                         <tr>
-                            <th class="px-5 py-3 font-medium">{{ __('common.name') }}</th>
+                            <th class="px-5 py-3 font-medium"><x-table.sort-link sort="name" :current-sort="$sort" :current-direction="$direction">{{ __('common.name') }}</x-table.sort-link></th>
                             <th class="px-5 py-3 font-medium">{{ __('common.email') }}</th>
                             <th class="px-5 py-3 font-medium">{{ __('crm.phone') }}</th>
-                            <th class="px-5 py-3 font-medium">{{ __('crm.position') }}</th>
+                            <th class="px-5 py-3 font-medium"><x-table.sort-link sort="position" :current-sort="$sort" :current-direction="$direction">{{ __('crm.position') }}</x-table.sort-link></th>
                             <th class="px-5 py-3 font-medium"></th>
                         </tr>
                     </thead>

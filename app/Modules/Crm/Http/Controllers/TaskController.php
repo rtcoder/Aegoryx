@@ -26,12 +26,32 @@ final class TaskController extends Controller
     {
         Gate::authorize('viewAny', CrmTask::class);
 
+        $search = trim($request->string('search')->toString());
+        $sort = $request->string('sort')->toString();
+        $direction = $request->string('direction')->toString() === 'asc' ? 'asc' : 'desc';
+        $sortColumns = [
+            'title' => 'title',
+            'status' => 'status',
+            'due_at' => 'due_at',
+            'created_at' => 'created_at',
+        ];
+        $sortColumn = $sortColumns[$sort] ?? 'created_at';
+
         return view('tenant.crm.tasks.index', [
+            'search' => $search,
+            'sort' => array_key_exists($sort, $sortColumns) ? $sort : 'created_at',
+            'direction' => $direction,
             'tenant' => $request->attributes->get('tenant'),
             'tasks' => CrmTask::query()
                 ->with('assignee')
-                ->latest()
-                ->paginate(20),
+                ->when($search !== '', fn ($query) => $query->where(function ($query) use ($search): void {
+                    $query
+                        ->where('title', 'like', "%{$search}%")
+                        ->orWhere('description', 'like', "%{$search}%");
+                }))
+                ->orderBy($sortColumn, $direction)
+                ->paginate(20)
+                ->withQueryString(),
             'subjectTypes' => $this->subjectTypes(),
             'subjects' => $this->subjectOptions(),
             'statuses' => $this->statusOptions(),

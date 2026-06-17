@@ -66,5 +66,90 @@
                 @endif
             </form>
         </x-ui.card>
+
+        <x-ui.card :title="__('tenant_settings.billing_title')" :subtitle="__('tenant_settings.billing_description')">
+            <dl class="grid gap-4 text-sm md:grid-cols-2">
+                <div>
+                    <dt class="ui-label">{{ __('tenant_settings.subscription_status') }}</dt>
+                    <dd class="mt-1"><x-ui.badge>{{ $latestSubscription?->status->value ?? __('common.not_set') }}</x-ui.badge></dd>
+                </div>
+                <div>
+                    <dt class="ui-label">{{ __('tenant_settings.plan') }}</dt>
+                    <dd class="mt-1 text-neutral-100">{{ $latestSubscription?->plan?->name ?? __('common.not_set') }}</dd>
+                </div>
+                <div>
+                    <dt class="ui-label">{{ __('tenant_settings.current_period_ends_at') }}</dt>
+                    <dd class="mt-1 text-neutral-100">{{ $latestSubscription?->current_period_ends_at?->format('Y-m-d') ?? __('common.not_set') }}</dd>
+                </div>
+                <div>
+                    <dt class="ui-label">{{ __('tenant_settings.license_status') }}</dt>
+                    <dd class="mt-1"><x-ui.badge>{{ $latestLicense?->status->value ?? __('common.not_set') }}</x-ui.badge></dd>
+                </div>
+                <div>
+                    <dt class="ui-label">{{ __('tenant_settings.license_expires_at') }}</dt>
+                    <dd class="mt-1 text-neutral-100">{{ $latestLicense?->expires_at?->format('Y-m-d') ?? __('common.not_set') }}</dd>
+                </div>
+                <div>
+                    <dt class="ui-label">{{ __('tenant_settings.license_last_verified_at') }}</dt>
+                    <dd class="mt-1 text-neutral-100">{{ $latestLicense?->last_verified_at?->format('Y-m-d H:i') ?? __('common.not_set') }}</dd>
+                </div>
+            </dl>
+        </x-ui.card>
+
+        <x-ui.card :title="__('tenant_settings.domains_title')" :subtitle="__('tenant_settings.domains_description')">
+            <div class="space-y-5">
+                <div class="overflow-x-auto rounded border border-[var(--ui-border)]">
+                    <table class="ui-table">
+                        <thead>
+                            <tr>
+                                <th>{{ __('tenant_settings.domain') }}</th>
+                                <th>{{ __('tenant_settings.domain_type') }}</th>
+                                <th>{{ __('tenant_settings.domain_status') }}</th>
+                                <th>{{ __('tenant_settings.verification_record') }}</th>
+                                <th>{{ __('tenant_settings.verified_at') }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($domains as $domain)
+                                <tr>
+                                    <td class="font-mono text-[var(--ui-text)]">{{ $domain->domain }}</td>
+                                    <td><x-ui.badge>{{ __("tenant_settings.domain_types.{$domain->type->value}") }}</x-ui.badge></td>
+                                    <td><x-ui.badge>{{ __("tenant_settings.domain_statuses.{$domain->status->value}") }}</x-ui.badge></td>
+                                    <td class="font-mono text-xs text-[var(--ui-text-muted)]">
+                                        @if ($domain->verification_token)
+                                            _aegoryx-domain.{{ $domain->domain }} TXT {{ $domain->verification_token }}
+                                        @else
+                                            {{ __('common.not_set') }}
+                                        @endif
+                                    </td>
+                                    <td class="text-[var(--ui-text-muted)]">{{ $domain->verified_at?->format('Y-m-d H:i') ?? __('common.not_set') }}</td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="5" class="py-10 text-center text-[var(--ui-text-muted)]">{{ __('tenant_settings.no_domains') }}</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+
+                @if ($canManageSettings)
+                    <form method="POST" action="{{ route('tenant.settings.domains.store') }}" class="max-w-xl space-y-4">
+                        @csrf
+
+                        <div>
+                            <label for="domain" class="ui-label">{{ __('tenant_settings.request_domain') }}</label>
+                            <input id="domain" name="domain" value="{{ old('domain') }}" class="ui-input mt-2" placeholder="portal.example.com">
+                            <p class="ui-help">{{ __('tenant_settings.request_domain_help') }}</p>
+                            @error('domain') <p class="ui-error">{{ $message }}</p> @enderror
+                        </div>
+
+                        <x-ui.button type="submit">{{ __('tenant_settings.request_domain_submit') }}</x-ui.button>
+                    </form>
+                @else
+                    <p class="text-sm text-neutral-500">{{ __('tenant_settings.domains_read_only') }}</p>
+                @endif
+            </div>
+        </x-ui.card>
     </section>
 @endsection

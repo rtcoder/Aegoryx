@@ -59,6 +59,38 @@ final class TenantActivityTest extends TestCase
             ->assertSee('Tenant 2FA enabled for owner.');
     }
 
+    public function test_owner_can_sort_tenant_activity_entries(): void
+    {
+        $owner = $this->user(TenantUserRole::Owner, 'owner@example.test');
+        $this->actingAs($owner, 'web');
+
+        ActivityEntry::query()->create([
+            'actor_type' => User::class,
+            'actor_id' => $owner->id,
+            'subject_type' => User::class,
+            'subject_id' => $owner->id,
+            'action' => ActivityEntryAction::TenantTwoFactorEnabled,
+            'description' => 'Second alphabetically.',
+        ]);
+
+        ActivityEntry::query()->create([
+            'actor_type' => User::class,
+            'actor_id' => $owner->id,
+            'subject_type' => User::class,
+            'subject_id' => $owner->id,
+            'action' => ActivityEntryAction::CrmContactCreated,
+            'description' => 'First alphabetically.',
+        ]);
+
+        $this
+            ->get('http://acme.aegoryx.test/panel/activity?sort=action&direction=asc')
+            ->assertOk()
+            ->assertSeeInOrder([
+                ActivityEntryAction::CrmContactCreated->value,
+                ActivityEntryAction::TenantTwoFactorEnabled->value,
+            ]);
+    }
+
     public function test_viewer_cannot_view_tenant_activity_entries(): void
     {
         $viewer = $this->user(TenantUserRole::Viewer, 'viewer@example.test');

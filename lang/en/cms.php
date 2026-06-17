@@ -14,6 +14,8 @@ return [
         'title' => 'Title',
     ],
     'new_page' => 'New page',
+    'close_preview' => 'Close preview',
+    'preview' => 'Preview',
     'publish' => 'Publish',
     'published' => 'Page published.',
     'save' => 'Save',

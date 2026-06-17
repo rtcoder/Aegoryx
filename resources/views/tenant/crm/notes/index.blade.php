@@ -22,8 +22,19 @@
 
         <section class="ui-card">
             <div class="ui-card-header">
-                <h2 class="ui-heading-2">{{ __('crm.note_list') }}</h2>
-                <p class="ui-body mt-1">{{ __('crm.notes_description') }}</p>
+                <div class="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+                    <div>
+                        <h2 class="ui-heading-2">{{ __('crm.note_list') }}</h2>
+                        <p class="ui-body mt-1">{{ __('crm.notes_description') }}</p>
+                    </div>
+                    <form method="GET" action="{{ route('tenant.crm.notes.index') }}" class="flex flex-col gap-2 sm:flex-row">
+                        <input name="search" value="{{ $search }}" class="ui-input min-w-64" placeholder="{{ __('common.search_placeholder') }}">
+                        <x-ui.button type="submit" variant="secondary">{{ __('common.search') }}</x-ui.button>
+                        @if ($search !== '')
+                            <x-ui.button :href="route('tenant.crm.notes.index')" variant="ghost">{{ __('common.clear_search') }}</x-ui.button>
+                        @endif
+                    </form>
+                </div>
             </div>
 
             <div class="overflow-x-auto">
@@ -31,8 +42,8 @@
                     <thead>
                         <tr>
                             <th>{{ __('crm.subject') }}</th>
-                            <th>{{ __('crm.note_body') }}</th>
-                            <th>{{ __('common.created_at') }}</th>
+                            <th><x-table.sort-link sort="body" :current-sort="$sort" :current-direction="$direction">{{ __('crm.note_body') }}</x-table.sort-link></th>
+                            <th><x-table.sort-link sort="created_at" :current-sort="$sort" :current-direction="$direction">{{ __('common.created_at') }}</x-table.sort-link></th>
                             <th></th>
                         </tr>
                     </thead>
@@ -62,7 +73,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="4" class="py-10 text-center text-[var(--ui-text-muted)]">{{ __('crm.no_notes') }}</td>
+                                <td colspan="4" class="py-10 text-center text-[var(--ui-text-muted)]">{{ $search === '' ? __('crm.no_notes') : __('common.no_results') }}</td>
                             </tr>
                         @endforelse
                     </tbody>

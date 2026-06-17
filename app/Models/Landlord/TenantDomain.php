@@ -16,6 +16,7 @@ use Illuminate\Support\Carbon;
  * @property string $domain
  * @property TenantDomainType $type
  * @property TenantDomainStatus $status
+ * @property string|null $verification_token
  * @property Carbon|null $verified_at
  * @property int|null $created_by
  * @property int|null $updated_by
@@ -30,6 +31,7 @@ use Illuminate\Support\Carbon;
     'domain',
     'type',
     'status',
+    'verification_token',
     'verified_at',
     'created_by',
     'updated_by',

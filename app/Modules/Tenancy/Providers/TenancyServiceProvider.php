@@ -8,6 +8,9 @@ use App\Console\Commands\MigrateTenantCommand;
 use App\Console\Commands\MigrateTenantsCommand;
 use App\Console\Commands\RollbackLandlordMigrationCommand;
 use App\Console\Commands\RollbackTenantsMigrationCommand;
+use App\Console\Commands\VerifyTenantDomainsCommand;
+use App\Modules\Tenancy\Services\DnsTxtResolver;
+use App\Modules\Tenancy\Services\NativeDnsTxtResolver;
 use App\Services\Tenancy\PostgresSchemaTenancyManager;
 use App\Services\Tenancy\TenancyManager;
 use App\Support\Modules\ModuleServiceProvider;
@@ -17,6 +20,7 @@ final class TenancyServiceProvider extends ModuleServiceProvider
     public function register(): void
     {
         $this->app->singleton(TenancyManager::class, PostgresSchemaTenancyManager::class);
+        $this->app->singleton(DnsTxtResolver::class, NativeDnsTxtResolver::class);
     }
 
     public function boot(): void
@@ -31,6 +35,7 @@ final class TenancyServiceProvider extends ModuleServiceProvider
                 MigrateTenantCommand::class,
                 RollbackLandlordMigrationCommand::class,
                 RollbackTenantsMigrationCommand::class,
+                VerifyTenantDomainsCommand::class,
             ]);
         }
     }

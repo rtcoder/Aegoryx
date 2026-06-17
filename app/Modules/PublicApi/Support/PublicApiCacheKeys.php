@@ -9,11 +9,15 @@ final readonly class PublicApiCacheKeys
 {
     public function publishedPage(Tenant $tenant, PublishedPage $page): string
     {
+        return $this->publishedPageSlug($tenant, $page->slug);
+    }
+
+    public function publishedPageSlug(Tenant $tenant, string $slug): string
+    {
         return sprintf(
-            'public-api:tenant:%s:published-page:%s:%s',
+            'public-api:tenant:%s:published-page:%s',
             $tenant->id,
-            $page->slug,
-            $page->updated_at?->timestamp ?? 0,
+            $slug,
         );
     }
 }

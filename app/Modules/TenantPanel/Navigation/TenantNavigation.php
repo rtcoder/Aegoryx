@@ -61,6 +61,12 @@ final readonly class TenantNavigation
                 'feature_key' => null,
             ],
             [
+                'label' => __('tenant_panel.nav.profile'),
+                'route' => 'tenant.profile.edit',
+                'description' => __('tenant_panel.nav.profile_description'),
+                'feature_key' => null,
+            ],
+            [
                 'label' => __('tenant_panel.nav.activity'),
                 'route' => 'tenant.activity.index',
                 'description' => __('tenant_panel.nav.activity_description'),

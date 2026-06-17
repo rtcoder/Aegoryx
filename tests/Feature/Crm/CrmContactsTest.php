@@ -163,6 +163,30 @@ final class CrmContactsTest extends TestCase
             ->assertDontSee('Grace Hopper');
     }
 
+    public function test_contacts_index_can_be_sorted(): void
+    {
+        $this->actingAs($this->user, 'web');
+
+        CrmContact::query()->create([
+            'first_name' => 'Grace',
+            'last_name' => 'Hopper',
+            'email' => 'grace@example.test',
+            'position' => 'Engineer',
+        ]);
+
+        CrmContact::query()->create([
+            'first_name' => 'Ada',
+            'last_name' => 'Lovelace',
+            'email' => 'ada@example.test',
+            'position' => 'Founder',
+        ]);
+
+        $this
+            ->get('http://acme.aegoryx.test/panel/crm?sort=position&direction=asc')
+            ->assertOk()
+            ->assertSeeInOrder(['Engineer', 'Founder']);
+    }
+
     private function tenant(): Tenant
     {
         return Tenant::query()->create([

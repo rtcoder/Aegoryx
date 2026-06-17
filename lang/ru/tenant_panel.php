@@ -54,6 +54,8 @@ return [
         'settings_description' => 'Конфигурация рабочей области',
         'security' => 'Безопасность',
         'security_description' => '2FA и защита учетной записи',
+        'profile' => 'Мой профиль',
+        'profile_description' => 'Язык и предпочтения пользователя',
         'users' => 'Пользователи',
         'users_description' => 'Роли и доступ',
         'activity' => 'Активность',

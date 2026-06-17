@@ -144,6 +144,33 @@ final class CrmCompaniesTest extends TestCase
             ->assertSee('https://example.test');
     }
 
+    public function test_companies_index_can_be_searched(): void
+    {
+        $this->actingAs($this->user, 'web');
+
+        CrmCompany::query()->create(['name' => 'Acme Corp']);
+        CrmCompany::query()->create(['name' => 'Globex']);
+
+        $this
+            ->get('http://acme.aegoryx.test/panel/crm/companies?search=Globex')
+            ->assertOk()
+            ->assertSee('Globex')
+            ->assertDontSee('Acme Corp');
+    }
+
+    public function test_companies_index_can_be_sorted(): void
+    {
+        $this->actingAs($this->user, 'web');
+
+        CrmCompany::query()->create(['name' => 'Globex']);
+        CrmCompany::query()->create(['name' => 'Acme Corp']);
+
+        $this
+            ->get('http://acme.aegoryx.test/panel/crm/companies?sort=name&direction=asc')
+            ->assertOk()
+            ->assertSeeInOrder(['Acme Corp', 'Globex']);
+    }
+
     private function tenant(): Tenant
     {
         return Tenant::query()->create([

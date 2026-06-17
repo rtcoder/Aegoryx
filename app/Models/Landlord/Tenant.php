@@ -34,6 +34,7 @@ use Illuminate\Support\Carbon;
  * @property-read Collection<int, TenantFeature> $features
  * @property-read Collection<int, License> $licenses
  * @property-read Collection<int, Subscription> $subscriptions
+ * @property-read Collection<int, TenantDomain> $domains
  */
 #[Fillable([
     'name',
@@ -75,6 +76,14 @@ final class Tenant extends Model
     public function subscriptions(): HasMany
     {
         return $this->hasMany(Subscription::class);
+    }
+
+    /**
+     * @return HasMany<TenantDomain, $this>
+     */
+    public function domains(): HasMany
+    {
+        return $this->hasMany(TenantDomain::class);
     }
 
     /**

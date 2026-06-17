@@ -6,13 +6,17 @@ use App\Models\Landlord\Tenant;
 use App\Models\Landlord\TenantDomain;
 use App\Models\Tenant\CmsPage;
 use App\Models\Tenant\PublishedPage;
+use App\Models\Tenant\User;
+use App\Modules\Cms\Actions\PublishPageAction;
 use App\Modules\Cms\Enums\CmsPageStatus;
+use App\Modules\Identity\Enums\TenantUserRole;
 use App\Modules\Tenancy\Enums\TenantBillingModel;
 use App\Modules\Tenancy\Enums\TenantDeploymentType;
 use App\Modules\Tenancy\Enums\TenantDomainStatus;
 use App\Modules\Tenancy\Enums\TenantDomainType;
 use App\Modules\Tenancy\Enums\TenantLicenseType;
 use App\Modules\Tenancy\Enums\TenantStatus;
+use App\Services\Tenancy\TenancyManager;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
@@ -154,6 +158,50 @@ final class PublicCmsApiTest extends TestCase
         DB::table('published_pages')
             ->where('id', $published->id)
             ->update(['title' => 'Changed without timestamp bump']);
+
+        $this
+            ->getJson('http://acme.aegoryx.test/api/public/cms/pages/home')
+            ->assertOk()
+            ->assertJsonPath('data.title', 'Homepage');
+    }
+
+    public function test_publish_invalidates_public_api_cache(): void
+    {
+        $tenant = $this->tenant();
+        $this->domain($tenant);
+        $page = $this->page([
+            'slug' => 'home',
+            'title' => 'Homepage',
+            'draft_content' => ['blocks' => [['type' => 'text', 'body' => 'Fresh']]],
+        ]);
+        $actor = User::query()->create([
+            'name' => 'Publisher',
+            'email' => 'publisher@example.test',
+            'password' => 'secret-password',
+            'role' => TenantUserRole::Admin,
+        ]);
+
+        PublishedPage::query()->create([
+            'cms_page_id' => $page->id,
+            'title' => 'Cached title',
+            'slug' => 'home',
+            'content' => ['blocks' => [['type' => 'text', 'body' => 'Old']]],
+            'published_at' => now(),
+        ]);
+
+        $this
+            ->getJson('http://acme.aegoryx.test/api/public/cms/pages/home')
+            ->assertOk()
+            ->assertJsonPath('data.title', 'Cached title');
+
+        $tenancy = app(TenancyManager::class);
+        $tenancy->initialize($tenant);
+
+        try {
+            app(PublishPageAction::class)->handle($page, $actor);
+        } finally {
+            $tenancy->end();
+        }
 
         $this
             ->getJson('http://acme.aegoryx.test/api/public/cms/pages/home')

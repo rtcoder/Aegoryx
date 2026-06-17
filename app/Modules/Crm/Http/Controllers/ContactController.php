@@ -21,9 +21,13 @@ final class ContactController extends Controller
         Gate::authorize('viewAny', CrmContact::class);
 
         $search = trim($request->string('search')->toString());
+        $sort = $request->string('sort')->toString();
+        $direction = $request->string('direction')->toString() === 'asc' ? 'asc' : 'desc';
 
         return view('tenant.crm.contacts.index', [
             'search' => $search,
+            'sort' => in_array($sort, ['name', 'position', 'created_at'], true) ? $sort : 'created_at',
+            'direction' => $direction,
             'tenant' => $request->attributes->get('tenant'),
             'contacts' => CrmContact::query()
                 ->when($search !== '', fn ($query) => $query->where(function ($query) use ($search): void {
@@ -32,7 +36,9 @@ final class ContactController extends Controller
                         ->orWhere('last_name', 'like', "%{$search}%")
                         ->orWhere('position', 'like', "%{$search}%");
                 }))
-                ->latest()
+                ->when($sort === 'name', fn ($query) => $query->orderBy('last_name', $direction)->orderBy('first_name', $direction))
+                ->when($sort === 'position', fn ($query) => $query->orderBy('position', $direction))
+                ->when(! in_array($sort, ['name', 'position'], true), fn ($query) => $query->orderBy('created_at', $direction))
                 ->paginate(20)
                 ->withQueryString(),
         ]);

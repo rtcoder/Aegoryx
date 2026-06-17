@@ -22,18 +22,29 @@
 
         <section class="ui-card">
             <div class="ui-card-header">
-                <h2 class="ui-heading-2">{{ __('crm.task_list') }}</h2>
-                <p class="ui-body mt-1">{{ __('crm.tasks_description') }}</p>
+                <div class="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+                    <div>
+                        <h2 class="ui-heading-2">{{ __('crm.task_list') }}</h2>
+                        <p class="ui-body mt-1">{{ __('crm.tasks_description') }}</p>
+                    </div>
+                    <form method="GET" action="{{ route('tenant.crm.tasks.index') }}" class="flex flex-col gap-2 sm:flex-row">
+                        <input name="search" value="{{ $search }}" class="ui-input min-w-64" placeholder="{{ __('common.search_placeholder') }}">
+                        <x-ui.button type="submit" variant="secondary">{{ __('common.search') }}</x-ui.button>
+                        @if ($search !== '')
+                            <x-ui.button :href="route('tenant.crm.tasks.index')" variant="ghost">{{ __('common.clear_search') }}</x-ui.button>
+                        @endif
+                    </form>
+                </div>
             </div>
 
             <div class="overflow-x-auto">
                 <table class="ui-table">
                     <thead>
                         <tr>
-                            <th>{{ __('crm.task_title') }}</th>
+                            <th><x-table.sort-link sort="title" :current-sort="$sort" :current-direction="$direction">{{ __('crm.task_title') }}</x-table.sort-link></th>
                             <th>{{ __('crm.subject') }}</th>
-                            <th>{{ __('common.status') }}</th>
-                            <th>{{ __('crm.due_date') }}</th>
+                            <th><x-table.sort-link sort="status" :current-sort="$sort" :current-direction="$direction">{{ __('common.status') }}</x-table.sort-link></th>
+                            <th><x-table.sort-link sort="due_at" :current-sort="$sort" :current-direction="$direction">{{ __('crm.due_date') }}</x-table.sort-link></th>
                             <th>{{ __('crm.assigned_to') }}</th>
                             <th></th>
                         </tr>
@@ -77,7 +88,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="6" class="py-10 text-center text-[var(--ui-text-muted)]">{{ __('crm.no_tasks') }}</td>
+                                <td colspan="6" class="py-10 text-center text-[var(--ui-text-muted)]">{{ $search === '' ? __('crm.no_tasks') : __('common.no_results') }}</td>
                             </tr>
                         @endforelse
                     </tbody>

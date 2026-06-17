@@ -106,6 +106,35 @@ final class TenantCmsPagesTest extends TestCase
             ->assertDontSee('Homepage');
     }
 
+    public function test_cms_page_list_can_be_sorted_and_previewed(): void
+    {
+        $tenant = $this->tenant();
+        $this->domain($tenant);
+        $this->manualOverride($tenant, 'cms', true);
+        $this->actingAs($this->user(), 'web');
+
+        $zebra = CmsPage::query()->create([
+            'title' => 'Zebra',
+            'slug' => 'zebra',
+            'status' => CmsPageStatus::Draft,
+            'draft_content' => ['blocks' => [['data' => ['body' => 'Zebra body']]]],
+        ]);
+
+        CmsPage::query()->create([
+            'title' => 'Alpha',
+            'slug' => 'alpha',
+            'status' => CmsPageStatus::Draft,
+            'draft_content' => ['blocks' => [['data' => ['body' => 'Alpha body']]]],
+        ]);
+
+        Livewire::test(Index::class)
+            ->call('sortBy', 'title')
+            ->assertSeeInOrder(['Alpha', 'Zebra'])
+            ->call('preview', $zebra->id)
+            ->assertSee(__('cms.preview'))
+            ->assertSee('Zebra body');
+    }
+
     private function tenant(): Tenant
     {
         return Tenant::query()->create([

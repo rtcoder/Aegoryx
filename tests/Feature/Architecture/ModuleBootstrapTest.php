@@ -41,6 +41,7 @@ final class ModuleBootstrapTest extends TestCase
         $this->assertContains('landlord:migrate', $commands);
         $this->assertContains('tenants:migrate', $commands);
         $this->assertContains('tenant:migrate', $commands);
+        $this->assertContains('tenant-domains:verify', $commands);
         $this->assertContains('aegoryx:preflight', $commands);
     }
 
@@ -51,5 +52,27 @@ final class ModuleBootstrapTest extends TestCase
         ]);
 
         $this->assertSame(0, $exitCode);
+    }
+
+    public function test_preflight_command_fails_when_storage_disk_is_missing(): void
+    {
+        config(['filesystems.default' => 'missing-disk']);
+
+        $exitCode = Artisan::call('aegoryx:preflight', [
+            '--skip-db' => true,
+        ]);
+
+        $this->assertSame(1, $exitCode);
+    }
+
+    public function test_preflight_command_fails_when_queue_connection_is_missing(): void
+    {
+        config(['queue.default' => 'missing-queue']);
+
+        $exitCode = Artisan::call('aegoryx:preflight', [
+            '--skip-db' => true,
+        ]);
+
+        $this->assertSame(1, $exitCode);
     }
 }

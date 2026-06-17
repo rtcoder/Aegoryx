@@ -22,11 +22,11 @@
             <table class="ui-table">
                 <thead>
                     <tr>
-                        <th>{{ __('audit_view.created_at') }}</th>
-                        <th>{{ __('audit_view.action') }}</th>
+                        <th><x-table.sort-link sort="created_at" :current-sort="$sort" :current-direction="$direction">{{ __('audit_view.created_at') }}</x-table.sort-link></th>
+                        <th><x-table.sort-link sort="action" :current-sort="$sort" :current-direction="$direction">{{ __('audit_view.action') }}</x-table.sort-link></th>
                         <th>{{ __('audit_view.description') }}</th>
-                        <th>{{ __('audit_view.actor') }}</th>
-                        <th>{{ __('audit_view.subject') }}</th>
+                        <th><x-table.sort-link sort="actor" :current-sort="$sort" :current-direction="$direction">{{ __('audit_view.actor') }}</x-table.sort-link></th>
+                        <th><x-table.sort-link sort="subject" :current-sort="$sort" :current-direction="$direction">{{ __('audit_view.subject') }}</x-table.sort-link></th>
                     </tr>
                 </thead>
                 <tbody>

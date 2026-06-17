@@ -54,6 +54,8 @@ return [
         'settings_description' => 'Configuration de l’espace de travail',
         'security' => 'Sécurité',
         'security_description' => '2FA et protection du compte',
+        'profile' => 'Mon profil',
+        'profile_description' => 'Langue et préférences utilisateur',
         'users' => 'Utilisateurs',
         'users_description' => 'Rôles et accès',
         'activity' => 'Activité',

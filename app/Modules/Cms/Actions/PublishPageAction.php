@@ -7,6 +7,9 @@ use App\Models\Tenant\User;
 use App\Modules\Audit\Enums\ActivityEntryAction;
 use App\Modules\Audit\Services\ActivityLogger;
 use App\Modules\Cms\Enums\CmsPageStatus;
+use App\Modules\PublicApi\Support\PublicApiCacheKeys;
+use App\Services\Tenancy\TenancyManager;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 
@@ -14,6 +17,8 @@ final readonly class PublishPageAction
 {
     public function __construct(
         private ActivityLogger $activity,
+        private PublicApiCacheKeys $cacheKeys,
+        private TenancyManager $tenancy,
     ) {}
 
     public function handle(CmsPage $page, User $actor): CmsPage
@@ -43,6 +48,10 @@ final readonly class PublishPageAction
                     'published_by' => $actor->id,
                 ],
             );
+
+            if ($tenant = $this->tenancy->current()) {
+                Cache::forget($this->cacheKeys->publishedPageSlug($tenant, $page->slug));
+            }
 
             $this->activity->record(
                 actorType: User::class,

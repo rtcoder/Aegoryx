@@ -23,12 +23,32 @@ final class DealController extends Controller
     {
         Gate::authorize('viewAny', CrmDeal::class);
 
+        $search = trim($request->string('search')->toString());
+        $sort = $request->string('sort')->toString();
+        $direction = $request->string('direction')->toString() === 'asc' ? 'asc' : 'desc';
+        $sortColumns = [
+            'title' => 'title',
+            'status' => 'status',
+            'value' => 'value',
+            'created_at' => 'created_at',
+        ];
+        $sortColumn = $sortColumns[$sort] ?? 'created_at';
+
         return view('tenant.crm.deals.index', [
+            'search' => $search,
+            'sort' => array_key_exists($sort, $sortColumns) ? $sort : 'created_at',
+            'direction' => $direction,
             'tenant' => $request->attributes->get('tenant'),
             'deals' => CrmDeal::query()
                 ->with(['company', 'contact'])
-                ->latest()
-                ->paginate(20),
+                ->when($search !== '', fn ($query) => $query->where(function ($query) use ($search): void {
+                    $query
+                        ->where('title', 'like', "%{$search}%")
+                        ->orWhere('currency', 'like', "%{$search}%");
+                }))
+                ->orderBy($sortColumn, $direction)
+                ->paginate(20)
+                ->withQueryString(),
             'companies' => $this->companyOptions(),
             'contacts' => $this->contactOptions(),
             'statuses' => $this->statusOptions(),

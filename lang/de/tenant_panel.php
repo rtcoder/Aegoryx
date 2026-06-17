@@ -54,6 +54,8 @@ return [
         'settings_description' => 'Arbeitsbereichskonfiguration',
         'security' => 'Sicherheit',
         'security_description' => '2FA und Kontoschutz',
+        'profile' => 'Mein Profil',
+        'profile_description' => 'Sprache und Benutzereinstellungen',
         'users' => 'Benutzer',
         'users_description' => 'Rollen und Zugriff',
         'activity' => 'Aktivität',

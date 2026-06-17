@@ -139,6 +139,29 @@ final class CrmNotesTest extends TestCase
             ->assertSee('Acme Corp');
     }
 
+    public function test_notes_index_can_be_searched(): void
+    {
+        $this->actingAs($this->user, 'web');
+        $company = CrmCompany::query()->create(['name' => 'Acme Corp']);
+
+        CrmNote::query()->create([
+            'subject_type' => CrmSubjectType::Company,
+            'subject_id' => $company->id,
+            'body' => 'Important decision.',
+        ]);
+        CrmNote::query()->create([
+            'subject_type' => CrmSubjectType::Company,
+            'subject_id' => $company->id,
+            'body' => 'Casual note.',
+        ]);
+
+        $this
+            ->get('http://acme.aegoryx.test/panel/crm/notes?search=Casual')
+            ->assertOk()
+            ->assertSee('Casual note.')
+            ->assertDontSee('Important decision.');
+    }
+
     private function tenant(): Tenant
     {
         return Tenant::query()->create([

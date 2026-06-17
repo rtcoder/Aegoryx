@@ -55,12 +55,12 @@
             <table class="ui-table">
                 <thead>
                     <tr>
-                        <th>{{ __('files.original_name') }}</th>
-                        <th>{{ __('files.mime_type') }}</th>
-                        <th>{{ __('files.size') }}</th>
+                        <th><x-table.sort-link sort="name" :current-sort="$sort" :current-direction="$direction">{{ __('files.original_name') }}</x-table.sort-link></th>
+                        <th><x-table.sort-link sort="mime_type" :current-sort="$sort" :current-direction="$direction">{{ __('files.mime_type') }}</x-table.sort-link></th>
+                        <th><x-table.sort-link sort="size" :current-sort="$sort" :current-direction="$direction">{{ __('files.size') }}</x-table.sort-link></th>
                         <th>{{ __('files.owner') }}</th>
                         <th>{{ __('files.expires_at') }}</th>
-                        <th>{{ __('common.created_at') }}</th>
+                        <th><x-table.sort-link sort="created_at" :current-sort="$sort" :current-direction="$direction">{{ __('common.created_at') }}</x-table.sort-link></th>
                         <th></th>
                     </tr>
                 </thead>

@@ -21,9 +21,20 @@ final class FileController extends Controller
         Gate::authorize('viewAny', TenantFile::class);
 
         $search = trim($request->string('search')->toString());
+        $sort = $request->string('sort')->toString();
+        $direction = $request->string('direction')->toString() === 'asc' ? 'asc' : 'desc';
+        $sortColumns = [
+            'name' => 'original_name',
+            'mime_type' => 'mime_type',
+            'size' => 'size_bytes',
+            'created_at' => 'created_at',
+        ];
+        $sortColumn = $sortColumns[$sort] ?? 'created_at';
 
         return view('tenant.files.index', [
             'search' => $search,
+            'sort' => array_key_exists($sort, $sortColumns) ? $sort : 'created_at',
+            'direction' => $direction,
             'tenant' => $request->attributes->get('tenant'),
             'files' => TenantFile::query()
                 ->with('owner')
@@ -32,7 +43,7 @@ final class FileController extends Controller
                         ->where('original_name', 'like', "%{$search}%")
                         ->orWhere('mime_type', 'like', "%{$search}%");
                 }))
-                ->latest()
+                ->orderBy($sortColumn, $direction)
                 ->paginate(20)
                 ->withQueryString(),
         ]);

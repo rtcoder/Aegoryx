@@ -148,6 +148,31 @@ final class CrmTasksTest extends TestCase
             ->assertSee('Acme Corp');
     }
 
+    public function test_tasks_index_can_be_searched(): void
+    {
+        $this->actingAs($this->user, 'web');
+        $company = CrmCompany::query()->create(['name' => 'Acme Corp']);
+
+        CrmTask::query()->create([
+            'subject_type' => CrmSubjectType::Company,
+            'subject_id' => $company->id,
+            'title' => 'Call buyer',
+            'status' => CrmTaskStatus::Pending,
+        ]);
+        CrmTask::query()->create([
+            'subject_type' => CrmSubjectType::Company,
+            'subject_id' => $company->id,
+            'title' => 'Prepare quote',
+            'status' => CrmTaskStatus::Pending,
+        ]);
+
+        $this
+            ->get('http://acme.aegoryx.test/panel/crm/tasks?search=quote')
+            ->assertOk()
+            ->assertSee('Prepare quote')
+            ->assertDontSee('Call buyer');
+    }
+
     private function tenant(): Tenant
     {
         return Tenant::query()->create([

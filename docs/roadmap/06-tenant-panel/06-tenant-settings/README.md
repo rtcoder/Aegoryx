@@ -12,12 +12,13 @@ Dodać realny ekran ustawień tenanta zamiast placeholdera modułu.
 
 - Podstawowe dane tenanta jako read-only.
 - Edycja domyślnego języka tenanta.
+- Lista domen tenanta i zgłaszanie aliasów do weryfikacji.
 - Autoryzacja edycji dla owner/admin.
 - Tłumaczenia PL/EN/DE/ES/RU/FR.
 
 ## Poza Zakresem
 
-- Samodzielna edycja domen.
+- Automatyczna weryfikacja DNS domen.
 - Billing self-service.
 - Zmiana statusu, deployment type albo license type przez tenant panel.
 
@@ -30,6 +31,7 @@ Dodać realny ekran ustawień tenanta zamiast placeholdera modułu.
 ## Kroki
 
 - Dodać routing `tenant.settings.index` i `tenant.settings.update`.
+- Dodać routing zgłaszania domen.
 - Dodać kontroler ustawień tenanta.
 - Dodać widok Blade zgodny z design systemem.
 - Dodać testy dostępu owner/viewer.
@@ -41,6 +43,7 @@ Brak.
 ## Acceptance Criteria
 
 - Owner/admin może zmienić domyślny język tenanta.
+- Owner/admin może zgłosić alias domeny jako `pending`.
 - Viewer widzi ustawienia jako read-only.
 - Nowe teksty mają tłumaczenia we wszystkich obsługiwanych językach.
 
@@ -48,4 +51,5 @@ Brak.
 
 - Feature test renderowania ustawień.
 - Feature test zmiany locale przez ownera.
+- Feature test zgłoszenia domeny przez ownera.
 - Feature test blokady zapisu dla viewera.

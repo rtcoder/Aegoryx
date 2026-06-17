@@ -29,3 +29,17 @@ php artisan horizon:terminate
 ```
 
 Horizon uruchomi nowe workery z aktualnym kodem.
+
+## Domain Verification
+
+Zgłoszone domeny tenantów mają status `pending`, dopóki DNS nie zawiera rekordu:
+
+```text
+_aegoryx-domain.example.com TXT aegoryx-...
+```
+
+Weryfikację można uruchomić ręcznie albo z harmonogramu:
+
+```bash
+php artisan tenant-domains:verify
+```

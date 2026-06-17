@@ -12,6 +12,7 @@ use App\Modules\TenantPanel\Http\Controllers\ActivityController;
 use App\Modules\TenantPanel\Http\Controllers\Auth\LoginController;
 use App\Modules\TenantPanel\Http\Controllers\CmsPageController;
 use App\Modules\TenantPanel\Http\Controllers\DashboardController;
+use App\Modules\TenantPanel\Http\Controllers\ProfileController;
 use App\Modules\TenantPanel\Http\Controllers\SecurityController;
 use App\Modules\TenantPanel\Http\Controllers\SettingsController;
 use App\Modules\TenantPanel\Http\Controllers\UserController;
@@ -43,9 +44,12 @@ Route::middleware(ResolveTenantFromDomain::class)
                     });
                 Route::get('settings', [SettingsController::class, 'index'])->name('settings.index');
                 Route::patch('settings', [SettingsController::class, 'update'])->name('settings.update');
+                Route::post('settings/domains', [SettingsController::class, 'storeDomain'])->name('settings.domains.store');
                 Route::get('security', [SecurityController::class, 'index'])->name('security.index');
                 Route::get('users', [UserController::class, 'index'])->name('users.index');
                 Route::get('activity', [ActivityController::class, 'index'])->name('activity.index');
+                Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');
+                Route::patch('profile', [ProfileController::class, 'update'])->name('profile.update');
 
                 Route::prefix('crm')
                     ->name('crm.')

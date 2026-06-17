@@ -23,6 +23,8 @@ final class PreflightCommand extends Command
             'Supported locales match Locale enum' => $this->localesMatchEnum(),
             'All configured modules are enabled and loadable' => $this->modulesAreLoadable(),
             'Required operational commands are registered' => $this->commandsAreRegistered(),
+            'Default storage disk is configured' => $this->storageDiskIsConfigured(),
+            'Default queue connection is configured' => $this->queueConnectionIsConfigured(),
         ];
 
         if (! $this->option('skip-db')) {
@@ -98,13 +100,33 @@ final class PreflightCommand extends Command
     {
         $commands = array_keys(Artisan::all());
 
-        foreach (['landlord:create', 'landlord:migrate', 'tenants:create', 'tenants:migrate', 'tenant:migrate'] as $command) {
+        foreach (['landlord:create', 'landlord:migrate', 'tenants:create', 'tenants:migrate', 'tenant:migrate', 'tenant-domains:verify'] as $command) {
             if (! in_array($command, $commands, true)) {
                 return false;
             }
         }
 
         return true;
+    }
+
+    private function storageDiskIsConfigured(): bool
+    {
+        $defaultDisk = config('filesystems.default');
+
+        return is_string($defaultDisk)
+            && $defaultDisk !== ''
+            && is_array(config("filesystems.disks.{$defaultDisk}"))
+            && is_string(config("filesystems.disks.{$defaultDisk}.driver"));
+    }
+
+    private function queueConnectionIsConfigured(): bool
+    {
+        $defaultConnection = config('queue.default');
+
+        return is_string($defaultConnection)
+            && $defaultConnection !== ''
+            && is_array(config("queue.connections.{$defaultConnection}"))
+            && is_string(config("queue.connections.{$defaultConnection}.driver"));
     }
 
     private function databaseIsReachable(): bool

@@ -22,16 +22,27 @@
 
         <section class="ui-card">
             <div class="ui-card-header">
-                <h2 class="ui-heading-2">{{ __('crm.company_list') }}</h2>
-                <p class="ui-body mt-1">{{ __('crm.companies_description') }}</p>
+                <div class="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+                    <div>
+                        <h2 class="ui-heading-2">{{ __('crm.company_list') }}</h2>
+                        <p class="ui-body mt-1">{{ __('crm.companies_description') }}</p>
+                    </div>
+                    <form method="GET" action="{{ route('tenant.crm.companies.index') }}" class="flex flex-col gap-2 sm:flex-row">
+                        <input name="search" value="{{ $search }}" class="ui-input min-w-64" placeholder="{{ __('common.search_placeholder') }}">
+                        <x-ui.button type="submit" variant="secondary">{{ __('common.search') }}</x-ui.button>
+                        @if ($search !== '')
+                            <x-ui.button :href="route('tenant.crm.companies.index')" variant="ghost">{{ __('common.clear_search') }}</x-ui.button>
+                        @endif
+                    </form>
+                </div>
             </div>
 
             <div class="overflow-x-auto">
                 <table class="ui-table">
                     <thead>
                         <tr>
-                            <th>{{ __('common.name') }}</th>
-                            <th>{{ __('crm.website') }}</th>
+                            <th><x-table.sort-link sort="name" :current-sort="$sort" :current-direction="$direction">{{ __('common.name') }}</x-table.sort-link></th>
+                            <th><x-table.sort-link sort="website" :current-sort="$sort" :current-direction="$direction">{{ __('crm.website') }}</x-table.sort-link></th>
                             <th>{{ __('crm.linked_contacts') }}</th>
                             <th></th>
                         </tr>
@@ -61,7 +72,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="4" class="py-10 text-center text-[var(--ui-text-muted)]">{{ __('crm.no_companies') }}</td>
+                                <td colspan="4" class="py-10 text-center text-[var(--ui-text-muted)]">{{ $search === '' ? __('crm.no_companies') : __('common.no_results') }}</td>
                             </tr>
                         @endforelse
                     </tbody>

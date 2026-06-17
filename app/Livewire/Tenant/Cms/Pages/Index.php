@@ -28,7 +28,19 @@ final class Index extends Component
     #[Url(as: 'search')]
     public string $search = '';
 
+    #[Url(as: 'sort')]
+    public string $sort = 'updated_at';
+
+    #[Url(as: 'direction')]
+    public string $direction = 'desc';
+
     public ?int $editingPageId = null;
+
+    public ?int $previewingPageId = null;
+
+    public string $previewTitle = '';
+
+    public string $previewBody = '';
 
     public function save(CreatePageAction $createPage, UpdatePageAction $updatePage): void
     {
@@ -76,6 +88,36 @@ final class Index extends Component
         $this->resetForm();
     }
 
+    public function preview(int $pageId): void
+    {
+        $page = CmsPage::query()->findOrFail($pageId);
+
+        $this->previewingPageId = $page->id;
+        $this->previewTitle = $page->title;
+        $this->previewBody = (string) ($page->draft_content['blocks'][0]['data']['body'] ?? '');
+    }
+
+    public function closePreview(): void
+    {
+        $this->reset(['previewingPageId', 'previewTitle', 'previewBody']);
+    }
+
+    public function sortBy(string $sort): void
+    {
+        if (! in_array($sort, ['title', 'slug', 'status', 'updated_at'], true)) {
+            return;
+        }
+
+        if ($this->sort === $sort) {
+            $this->direction = $this->direction === 'asc' ? 'desc' : 'asc';
+
+            return;
+        }
+
+        $this->sort = $sort;
+        $this->direction = 'asc';
+    }
+
     public function render(): View
     {
         $search = trim($this->search);
@@ -87,7 +129,10 @@ final class Index extends Component
                         ->where('title', 'like', "%{$search}%")
                         ->orWhere('slug', 'like', "%{$search}%");
                 }))
-                ->latest('updated_at')
+                ->orderBy(
+                    in_array($this->sort, ['title', 'slug', 'status', 'updated_at'], true) ? $this->sort : 'updated_at',
+                    $this->direction === 'asc' ? 'asc' : 'desc',
+                )
                 ->get(),
         ]);
     }

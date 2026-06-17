@@ -186,6 +186,38 @@ final class FilesAccessTest extends TestCase
             ->assertDontSee('report.txt');
     }
 
+    public function test_files_index_can_be_sorted(): void
+    {
+        $this->actingAs($this->owner, 'web');
+
+        TenantFile::query()->create([
+            'disk' => 'local',
+            'path' => 'tenant/acme/big.pdf',
+            'original_name' => 'big.pdf',
+            'mime_type' => 'application/pdf',
+            'size_bytes' => 900,
+            'checksum_sha256' => hash('sha256', 'big'),
+            'visibility' => FileVisibility::Private,
+            'owner_id' => $this->owner->id,
+        ]);
+
+        TenantFile::query()->create([
+            'disk' => 'local',
+            'path' => 'tenant/acme/small.txt',
+            'original_name' => 'small.txt',
+            'mime_type' => 'text/plain',
+            'size_bytes' => 100,
+            'checksum_sha256' => hash('sha256', 'small'),
+            'visibility' => FileVisibility::Private,
+            'owner_id' => $this->owner->id,
+        ]);
+
+        $this
+            ->get('http://acme.aegoryx.test/panel/files?sort=size&direction=asc')
+            ->assertOk()
+            ->assertSeeInOrder(['small.txt', 'big.pdf']);
+    }
+
     public function test_user_can_upload_private_file_and_metadata_is_registered(): void
     {
         $this->actingAs($this->owner, 'web');

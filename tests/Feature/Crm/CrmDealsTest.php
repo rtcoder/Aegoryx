@@ -143,6 +143,26 @@ final class CrmDealsTest extends TestCase
             ->assertSee('Otwarty');
     }
 
+    public function test_deals_index_can_be_searched(): void
+    {
+        $this->actingAs($this->user, 'web');
+
+        CrmDeal::query()->create([
+            'title' => 'Enterprise license',
+            'status' => CrmDealStatus::Open,
+        ]);
+        CrmDeal::query()->create([
+            'title' => 'Small renewal',
+            'status' => CrmDealStatus::Open,
+        ]);
+
+        $this
+            ->get('http://acme.aegoryx.test/panel/crm/deals?search=renewal')
+            ->assertOk()
+            ->assertSee('Small renewal')
+            ->assertDontSee('Enterprise license');
+    }
+
     private function tenant(): Tenant
     {
         return Tenant::query()->create([

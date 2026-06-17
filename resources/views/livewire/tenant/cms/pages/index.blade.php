@@ -37,48 +37,82 @@
         </div>
     </form>
 
-    <div class="overflow-hidden rounded border border-neutral-800">
-        <div class="border-b border-neutral-800 bg-neutral-900 px-4 py-4">
-            <div class="flex flex-col gap-2 sm:flex-row">
-                <input wire:model.live.debounce.400ms="search" class="ui-input min-w-64" placeholder="{{ __('common.search_placeholder') }}">
-                @if (trim($search) !== '')
-                    <x-ui.button type="button" wire:click="$set('search', '')" variant="ghost">{{ __('common.clear_search') }}</x-ui.button>
-                @endif
-            </div>
-        </div>
+    <div class="space-y-6">
+        @if ($previewingPageId)
+            <section class="ui-card">
+                <div class="ui-card-header flex items-start justify-between gap-4">
+                    <div>
+                        <h2 class="ui-heading-2">{{ __('cms.preview') }}</h2>
+                        <p class="ui-body mt-1">{{ $previewTitle }}</p>
+                    </div>
+                    <x-ui.button type="button" wire:click="closePreview" variant="ghost" size="sm">{{ __('cms.close_preview') }}</x-ui.button>
+                </div>
+                <article class="ui-card-body prose prose-invert max-w-none">
+                    <h1>{{ $previewTitle }}</h1>
+                    <div class="whitespace-pre-line text-neutral-300">{{ $previewBody }}</div>
+                </article>
+            </section>
+        @endif
 
-        <table class="min-w-full divide-y divide-neutral-800 text-sm">
-            <thead class="bg-neutral-900 text-left text-xs uppercase tracking-wide text-neutral-500">
-                <tr>
-                    <th class="px-4 py-3">{{ __('cms.fields.title') }}</th>
-                    <th class="px-4 py-3">{{ __('cms.fields.slug') }}</th>
-                    <th class="px-4 py-3">{{ __('cms.fields.status') }}</th>
-                    <th class="px-4 py-3 text-right">{{ __('cms.actions') }}</th>
-                </tr>
-            </thead>
-            <tbody class="divide-y divide-neutral-800 bg-neutral-950">
-                @forelse ($pages as $page)
+        <div class="overflow-hidden rounded border border-neutral-800">
+            <div class="border-b border-neutral-800 bg-neutral-900 px-4 py-4">
+                <div class="flex flex-col gap-2 sm:flex-row">
+                    <input wire:model.live.debounce.400ms="search" class="ui-input min-w-64" placeholder="{{ __('common.search_placeholder') }}">
+                    @if (trim($search) !== '')
+                        <x-ui.button type="button" wire:click="$set('search', '')" variant="ghost">{{ __('common.clear_search') }}</x-ui.button>
+                    @endif
+                </div>
+            </div>
+
+            <table class="min-w-full divide-y divide-neutral-800 text-sm">
+                <thead class="bg-neutral-900 text-left text-xs uppercase tracking-wide text-neutral-500">
                     <tr>
-                        <td class="px-4 py-3 font-medium text-neutral-100">{{ $page->title }}</td>
-                        <td class="px-4 py-3 font-mono text-xs text-neutral-500">{{ $page->slug }}</td>
-                        <td class="px-4 py-3"><x-ui.badge>{{ $page->status->value }}</x-ui.badge></td>
-                        <td class="px-4 py-3">
-                            <div class="flex justify-end gap-2">
-                                <x-ui.button type="button" wire:click="edit({{ $page->id }})" size="sm" variant="secondary">{{ __('cms.edit') }}</x-ui.button>
-                                @if ($page->published_at)
-                                    <x-ui.button type="button" wire:click="unpublish({{ $page->id }})" size="sm" variant="danger">{{ __('cms.unpublish') }}</x-ui.button>
-                                @else
-                                    <x-ui.button type="button" wire:click="publish({{ $page->id }})" size="sm">{{ __('cms.publish') }}</x-ui.button>
-                                @endif
-                            </div>
-                        </td>
+                        <th class="px-4 py-3">
+                            <button type="button" wire:click="sortBy('title')" class="inline-flex items-center gap-2 hover:text-neutral-100">
+                                {{ __('cms.fields.title') }}
+                                @if ($sort === 'title')<span class="font-mono text-[10px] uppercase">{{ $direction }}</span>@endif
+                            </button>
+                        </th>
+                        <th class="px-4 py-3">
+                            <button type="button" wire:click="sortBy('slug')" class="inline-flex items-center gap-2 hover:text-neutral-100">
+                                {{ __('cms.fields.slug') }}
+                                @if ($sort === 'slug')<span class="font-mono text-[10px] uppercase">{{ $direction }}</span>@endif
+                            </button>
+                        </th>
+                        <th class="px-4 py-3">
+                            <button type="button" wire:click="sortBy('status')" class="inline-flex items-center gap-2 hover:text-neutral-100">
+                                {{ __('cms.fields.status') }}
+                                @if ($sort === 'status')<span class="font-mono text-[10px] uppercase">{{ $direction }}</span>@endif
+                            </button>
+                        </th>
+                        <th class="px-4 py-3 text-right">{{ __('cms.actions') }}</th>
                     </tr>
-                @empty
-                    <tr>
-                        <td colspan="4" class="px-4 py-8 text-center text-neutral-500">{{ trim($search) === '' ? __('cms.empty') : __('common.no_results') }}</td>
-                    </tr>
-                @endforelse
-            </tbody>
-        </table>
+                </thead>
+                <tbody class="divide-y divide-neutral-800 bg-neutral-950">
+                    @forelse ($pages as $page)
+                        <tr>
+                            <td class="px-4 py-3 font-medium text-neutral-100">{{ $page->title }}</td>
+                            <td class="px-4 py-3 font-mono text-xs text-neutral-500">{{ $page->slug }}</td>
+                            <td class="px-4 py-3"><x-ui.badge>{{ $page->status->value }}</x-ui.badge></td>
+                            <td class="px-4 py-3">
+                                <div class="flex justify-end gap-2">
+                                    <x-ui.button type="button" wire:click="edit({{ $page->id }})" size="sm" variant="secondary">{{ __('cms.edit') }}</x-ui.button>
+                                    <x-ui.button type="button" wire:click="preview({{ $page->id }})" size="sm" variant="secondary">{{ __('cms.preview') }}</x-ui.button>
+                                    @if ($page->published_at)
+                                        <x-ui.button type="button" wire:click="unpublish({{ $page->id }})" size="sm" variant="danger">{{ __('cms.unpublish') }}</x-ui.button>
+                                    @else
+                                        <x-ui.button type="button" wire:click="publish({{ $page->id }})" size="sm">{{ __('cms.publish') }}</x-ui.button>
+                                    @endif
+                                </div>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="4" class="px-4 py-8 text-center text-neutral-500">{{ trim($search) === '' ? __('cms.empty') : __('common.no_results') }}</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
     </div>
 </section>

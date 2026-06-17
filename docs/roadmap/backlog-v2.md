@@ -4,26 +4,27 @@ Ten plik zbiera prace po domknięciu pierwszej roadmapy wykonawczej. Nie zastęp
 
 ## UX I Produktywność
 
-- Rozszerzyć filtrowanie CRM o firmy, deale, notatki i zadania.
-- Dodać sortowanie tabel tam, gdzie użytkownik porównuje wiele rekordów.
+- Done: rozszerzyć filtrowanie CRM o firmy, deale, notatki i zadania.
+- Done: dodać sortowanie tabel tam, gdzie użytkownik porównuje wiele rekordów.
 - Dodać puste stany z akcją główną dla CRM/CMS/Files.
 - Dodać widoki detail dla plików i aktywności, jeśli lista zacznie być zbyt gęsta.
 
 ## Tenant Self-Service
 
-- Dodać zarządzanie domenami tenanta w trybie request/verification.
-- Pokazać billing/license summary jako read-only dla owner/admin.
-- Dodać edycję preferencji użytkownika, w tym własnego locale.
+- Done: dodać zgłaszanie domen tenanta w trybie request/pending verification.
+- Done: dodać automatyczną weryfikację DNS TXT dla zgłoszonych domen.
+- Done: pokazać billing/license summary jako read-only dla owner/admin.
+- Done: dodać edycję preferencji użytkownika, w tym własnego locale.
 
 ## CMS I Public API
 
-- Dodać preview opublikowanego contentu przed publikacją.
-- Dodać cache invalidation po publish/unpublish.
+- Done: dodać preview opublikowanego contentu przed publikacją.
+- Done: dodać cache invalidation po publish/unpublish.
 - Rozważyć wersjonowany public API payload.
 
 ## Operations
 
-- Rozszerzyć `aegoryx:preflight` o sprawdzenie storage i queue driverów.
+- Done: rozszerzyć `aegoryx:preflight` o sprawdzenie storage i queue driverów.
 - Dodać staging smoke test po deployu.
 - Dodać okresowy restore rehearsal dla backupów.
 

@@ -24,11 +24,25 @@ final class NoteController extends Controller
     {
         Gate::authorize('viewAny', CrmNote::class);
 
+        $search = trim($request->string('search')->toString());
+        $sort = $request->string('sort')->toString();
+        $direction = $request->string('direction')->toString() === 'asc' ? 'asc' : 'desc';
+        $sortColumns = [
+            'body' => 'body',
+            'created_at' => 'created_at',
+        ];
+        $sortColumn = $sortColumns[$sort] ?? 'created_at';
+
         return view('tenant.crm.notes.index', [
+            'search' => $search,
+            'sort' => array_key_exists($sort, $sortColumns) ? $sort : 'created_at',
+            'direction' => $direction,
             'tenant' => $request->attributes->get('tenant'),
             'notes' => CrmNote::query()
-                ->latest()
-                ->paginate(20),
+                ->when($search !== '', fn ($query) => $query->where('body', 'like', "%{$search}%"))
+                ->orderBy($sortColumn, $direction)
+                ->paginate(20)
+                ->withQueryString(),
             'subjectTypes' => $this->subjectTypes(),
             'subjects' => $this->subjectOptions(),
         ]);
