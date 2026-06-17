@@ -38,6 +38,15 @@
     </form>
 
     <div class="overflow-hidden rounded border border-neutral-800">
+        <div class="border-b border-neutral-800 bg-neutral-900 px-4 py-4">
+            <div class="flex flex-col gap-2 sm:flex-row">
+                <input wire:model.live.debounce.400ms="search" class="ui-input min-w-64" placeholder="{{ __('common.search_placeholder') }}">
+                @if (trim($search) !== '')
+                    <x-ui.button type="button" wire:click="$set('search', '')" variant="ghost">{{ __('common.clear_search') }}</x-ui.button>
+                @endif
+            </div>
+        </div>
+
         <table class="min-w-full divide-y divide-neutral-800 text-sm">
             <thead class="bg-neutral-900 text-left text-xs uppercase tracking-wide text-neutral-500">
                 <tr>
@@ -66,7 +75,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="4" class="px-4 py-8 text-center text-neutral-500">{{ __('cms.empty') }}</td>
+                        <td colspan="4" class="px-4 py-8 text-center text-neutral-500">{{ trim($search) === '' ? __('cms.empty') : __('common.no_results') }}</td>
                     </tr>
                 @endforelse
             </tbody>

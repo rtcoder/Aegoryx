@@ -38,7 +38,9 @@ Przygotować checklistę decyzji i warunków do pierwszego komercyjnego wydania.
 - [x] Checklist ma jednoznaczne gates.
 - [x] Nie miesza MVP blockerów z backlogiem późniejszym.
 - [x] Zawiera privacy/security/deploy readiness.
+- [x] Deploy preflight ma komendę uruchamianą przed maintenance mode.
 
 ## Test Plan
 
 - [x] Review checklist z perspektywy release.
+- [x] Feature test rejestracji i działania komendy preflight.

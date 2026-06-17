@@ -10,6 +10,7 @@ use App\Modules\Cms\Actions\UnpublishPageAction;
 use App\Modules\Cms\Actions\UpdatePageAction;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\Url;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
@@ -23,6 +24,9 @@ final class Index extends Component
 
     #[Validate('required|string')]
     public string $body = '';
+
+    #[Url(as: 'search')]
+    public string $search = '';
 
     public ?int $editingPageId = null;
 
@@ -74,8 +78,15 @@ final class Index extends Component
 
     public function render(): View
     {
+        $search = trim($this->search);
+
         return view('livewire.tenant.cms.pages.index', [
             'pages' => CmsPage::query()
+                ->when($search !== '', fn ($query) => $query->where(function ($query) use ($search): void {
+                    $query
+                        ->where('title', 'like', "%{$search}%")
+                        ->orWhere('slug', 'like', "%{$search}%");
+                }))
                 ->latest('updated_at')
                 ->get(),
         ]);

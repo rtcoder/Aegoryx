@@ -16,7 +16,7 @@ To główna powierzchnia pracy użytkownika tenanta. Musi być ergonomiczna, mod
 
 ## Status
 
-- Done: Livewire Setup, Panel Shell, Tenant Navigation, Authorization UX, Entitlement Aware UI, Tenant Users, Tenant User Lifecycle, Tenant Security.
+- Done: Livewire Setup, Panel Shell, Tenant Navigation, Authorization UX, Entitlement Aware UI, Tenant Users, Tenant User Lifecycle, Tenant Security, Tenant Settings.
 - In progress: none.
 - Pending: none.
 
@@ -27,9 +27,11 @@ To główna powierzchnia pracy użytkownika tenanta. Musi być ergonomiczna, mod
 - [x] [Tenant Navigation](03-tenant-navigation/)
 - [x] [Authorization UX](04-authorization-ux/)
 - [x] [Entitlement Aware UI](05-entitlement-aware-ui/)
+- [x] [Tenant Settings](06-tenant-settings/)
 
 ## Definicja Ukończenia
 
 - Panel działa przez Livewire.
 - Routing tenantowy wymaga tenant context.
 - UI pokazuje dostęp według Entitlements, a backend nadal wymusza autoryzację.
+- Tenant może zarządzać podstawowymi ustawieniami zgodnie z rolami użytkowników.

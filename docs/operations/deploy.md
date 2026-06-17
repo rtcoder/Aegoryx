@@ -11,13 +11,14 @@ Skrypt wykonuje:
 1. `composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader`
 2. `npm ci`
 3. `npm run build`
-4. `php artisan down`
-5. `php artisan optimize:clear`
-6. `php artisan landlord:migrate --force`
-7. `php artisan tenants:migrate --force`
-8. `php artisan optimize`
-9. `php artisan horizon:terminate`
-10. `php artisan up`
+4. `php artisan aegoryx:preflight`
+5. `php artisan down`
+6. `php artisan optimize:clear`
+7. `php artisan landlord:migrate --force`
+8. `php artisan tenants:migrate --force`
+9. `php artisan optimize`
+10. `php artisan horizon:terminate`
+11. `php artisan up`
 
 Jeżeli migracje padną po częściowym sukcesie, skrypt zbiera migracje zakończone statusem `DONE` z bieżącego deployu i cofa tylko je, od końca. W produkcji preferowana strategia naprawy to forward-only corrective migration; rollback jest awaryjny i wymaga przeglądu operatora.
 

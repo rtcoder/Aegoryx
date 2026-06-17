@@ -7,6 +7,7 @@
 - privacy audit bez blockerów
 - backup/restore procedure opisana
 - deploy script sprawdzony na staging
+- `php artisan aegoryx:preflight` przechodzi na środowisku docelowym
 - Horizon albo queue failure monitoring działa
 - landlord superadmin utworzony przez `landlord:create`
 - public API nie zwraca draftów ani danych prywatnych

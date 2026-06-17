@@ -12,7 +12,7 @@ Aegoryx operuje na prywatnych danych CRM/CMS. Dostęp musi być kontrolowany po 
 
 - Tenancy context.
 - Podstawowe modele landlord/tenant.
-- Decyzja panelowa dla Inertia/Fortify/Jetstream.
+- Decyzja panelowa dla Livewire/Fortify/Jetstream.
 
 ## Status
 

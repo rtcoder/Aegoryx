@@ -41,5 +41,15 @@ final class ModuleBootstrapTest extends TestCase
         $this->assertContains('landlord:migrate', $commands);
         $this->assertContains('tenants:migrate', $commands);
         $this->assertContains('tenant:migrate', $commands);
+        $this->assertContains('aegoryx:preflight', $commands);
+    }
+
+    public function test_preflight_command_passes_for_configured_application(): void
+    {
+        $exitCode = Artisan::call('aegoryx:preflight', [
+            '--skip-db' => true,
+        ]);
+
+        $this->assertSame(0, $exitCode);
     }
 }

@@ -153,6 +153,39 @@ final class FilesAccessTest extends TestCase
             ->assertSee('Owner');
     }
 
+    public function test_files_index_can_be_searched(): void
+    {
+        $this->actingAs($this->owner, 'web');
+
+        TenantFile::query()->create([
+            'disk' => 'local',
+            'path' => 'tenant/acme/report.txt',
+            'original_name' => 'report.txt',
+            'mime_type' => 'text/plain',
+            'size_bytes' => 100,
+            'checksum_sha256' => hash('sha256', 'report'),
+            'visibility' => FileVisibility::Private,
+            'owner_id' => $this->owner->id,
+        ]);
+
+        TenantFile::query()->create([
+            'disk' => 'local',
+            'path' => 'tenant/acme/invoice.pdf',
+            'original_name' => 'invoice.pdf',
+            'mime_type' => 'application/pdf',
+            'size_bytes' => 200,
+            'checksum_sha256' => hash('sha256', 'invoice'),
+            'visibility' => FileVisibility::Private,
+            'owner_id' => $this->owner->id,
+        ]);
+
+        $this
+            ->get('http://acme.aegoryx.test/panel/files?search=invoice')
+            ->assertOk()
+            ->assertSee('invoice.pdf')
+            ->assertDontSee('report.txt');
+    }
+
     public function test_user_can_upload_private_file_and_metadata_is_registered(): void
     {
         $this->actingAs($this->owner, 'web');

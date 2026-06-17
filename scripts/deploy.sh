@@ -160,6 +160,9 @@ log "Installing Node dependencies."
 log "Building frontend assets."
 "$NPM_BIN" run build
 
+log "Running deployment preflight checks."
+artisan aegoryx:preflight
+
 log "Putting application into maintenance mode."
 artisan down
 MAINTENANCE_STARTED="true"

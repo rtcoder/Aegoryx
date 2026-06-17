@@ -79,6 +79,33 @@ final class TenantCmsPagesTest extends TestCase
         $this->assertSame(0, PublishedPage::query()->where('cms_page_id', $page->id)->count());
     }
 
+    public function test_cms_page_list_can_be_searched(): void
+    {
+        $tenant = $this->tenant();
+        $this->domain($tenant);
+        $this->manualOverride($tenant, 'cms', true);
+        $this->actingAs($this->user(), 'web');
+
+        CmsPage::query()->create([
+            'title' => 'Homepage',
+            'slug' => 'home',
+            'status' => CmsPageStatus::Draft,
+            'draft_content' => ['blocks' => []],
+        ]);
+
+        CmsPage::query()->create([
+            'title' => 'Pricing',
+            'slug' => 'pricing',
+            'status' => CmsPageStatus::Draft,
+            'draft_content' => ['blocks' => []],
+        ]);
+
+        Livewire::test(Index::class)
+            ->set('search', 'Pricing')
+            ->assertSee('Pricing')
+            ->assertDontSee('Homepage');
+    }
+
     private function tenant(): Tenant
     {
         return Tenant::query()->create([

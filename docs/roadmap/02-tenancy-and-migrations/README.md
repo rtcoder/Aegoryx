@@ -17,7 +17,7 @@ Izolacja tenantów jest rdzeniem Aegoryx. Błędy w `search_path`, migracjach al
 ## Status
 
 - Done: Landlord Migrations, Tenant Migrations, Tenancy Manager, Schema Manager, Tenant Creation Flow, Migration Tests.
-- Next: Migration Tests dla izolacji minimum dwóch tenant schema na PostgreSQL.
+- Next: Brak.
 
 ## Taski
 

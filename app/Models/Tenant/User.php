@@ -112,4 +112,9 @@ final class User extends Authenticatable
     {
         return $this->role->canExportActivity();
     }
+
+    public function canManageTenantSettings(): bool
+    {
+        return $this->role->canManageSettings();
+    }
 }

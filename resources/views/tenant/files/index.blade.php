@@ -29,17 +29,26 @@
     </section>
 
     <section class="ui-card">
-        <div class="ui-card-header flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+        <div class="ui-card-header flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
             <div>
                 <h2 class="ui-heading-2">{{ __('files.file_list') }}</h2>
                 <p class="ui-body mt-1">{{ __('files.private_access_note') }}</p>
             </div>
-            <form method="POST" action="{{ route('tenant.files.exports.activity.store') }}">
-                @csrf
-                <x-ui.button type="submit" variant="secondary" size="sm">
-                    {{ __('files.create_activity_export') }}
-                </x-ui.button>
-            </form>
+            <div class="flex flex-col gap-2 lg:flex-row">
+                <form method="GET" action="{{ route('tenant.files.index') }}" class="flex flex-col gap-2 sm:flex-row">
+                    <input name="search" value="{{ $search }}" class="ui-input min-w-64" placeholder="{{ __('common.search_placeholder') }}">
+                    <x-ui.button type="submit" variant="secondary">{{ __('common.search') }}</x-ui.button>
+                    @if ($search !== '')
+                        <x-ui.button :href="route('tenant.files.index')" variant="ghost">{{ __('common.clear_search') }}</x-ui.button>
+                    @endif
+                </form>
+                <form method="POST" action="{{ route('tenant.files.exports.activity.store') }}">
+                    @csrf
+                    <x-ui.button type="submit" variant="secondary">
+                        {{ __('files.create_activity_export') }}
+                    </x-ui.button>
+                </form>
+            </div>
         </div>
 
         <div class="overflow-x-auto">
@@ -81,7 +90,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="7" class="py-10 text-center text-[var(--ui-text-muted)]">{{ __('files.no_files') }}</td>
+                            <td colspan="7" class="py-10 text-center text-[var(--ui-text-muted)]">{{ $search === '' ? __('files.no_files') : __('common.no_results') }}</td>
                         </tr>
                     @endforelse
                 </tbody>

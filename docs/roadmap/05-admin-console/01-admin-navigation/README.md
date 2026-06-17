@@ -22,7 +22,7 @@ Zbudować osobną nawigację i shell dla superadmina.
 ## Zależności
 
 - Auth/security.
-- Inertia setup.
+- Livewire/Blade shell.
 
 ## Kroki
 

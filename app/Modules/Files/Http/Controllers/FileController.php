@@ -20,12 +20,21 @@ final class FileController extends Controller
     {
         Gate::authorize('viewAny', TenantFile::class);
 
+        $search = trim($request->string('search')->toString());
+
         return view('tenant.files.index', [
+            'search' => $search,
             'tenant' => $request->attributes->get('tenant'),
             'files' => TenantFile::query()
                 ->with('owner')
+                ->when($search !== '', fn ($query) => $query->where(function ($query) use ($search): void {
+                    $query
+                        ->where('original_name', 'like', "%{$search}%")
+                        ->orWhere('mime_type', 'like', "%{$search}%");
+                }))
                 ->latest()
-                ->paginate(20),
+                ->paginate(20)
+                ->withQueryString(),
         ]);
     }
 

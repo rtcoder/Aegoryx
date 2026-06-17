@@ -20,11 +20,21 @@ final class ContactController extends Controller
     {
         Gate::authorize('viewAny', CrmContact::class);
 
+        $search = trim($request->string('search')->toString());
+
         return view('tenant.crm.contacts.index', [
+            'search' => $search,
             'tenant' => $request->attributes->get('tenant'),
             'contacts' => CrmContact::query()
+                ->when($search !== '', fn ($query) => $query->where(function ($query) use ($search): void {
+                    $query
+                        ->where('first_name', 'like', "%{$search}%")
+                        ->orWhere('last_name', 'like', "%{$search}%")
+                        ->orWhere('position', 'like', "%{$search}%");
+                }))
                 ->latest()
-                ->paginate(20),
+                ->paginate(20)
+                ->withQueryString(),
         ]);
     }
 

@@ -23,8 +23,19 @@
 
         <section class="rounded border border-neutral-800 bg-neutral-900">
             <div class="border-b border-neutral-800 px-5 py-4">
-                <h2 class="text-lg font-semibold">{{ __('crm.contact_list') }}</h2>
-                <p class="mt-1 text-sm text-neutral-400">{{ __('crm.contact_sensitive_note') }}</p>
+                <div class="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+                    <div>
+                        <h2 class="text-lg font-semibold">{{ __('crm.contact_list') }}</h2>
+                        <p class="mt-1 text-sm text-neutral-400">{{ __('crm.contact_sensitive_note') }}</p>
+                    </div>
+                    <form method="GET" action="{{ route('tenant.crm.index') }}" class="flex flex-col gap-2 sm:flex-row">
+                        <input name="search" value="{{ $search }}" class="ui-input min-w-64" placeholder="{{ __('common.search_placeholder') }}">
+                        <x-ui.button type="submit" variant="secondary">{{ __('common.search') }}</x-ui.button>
+                        @if ($search !== '')
+                            <x-ui.button :href="route('tenant.crm.index')" variant="ghost">{{ __('common.clear_search') }}</x-ui.button>
+                        @endif
+                    </form>
+                </div>
             </div>
 
             <div class="overflow-x-auto">
@@ -62,7 +73,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="5" class="px-5 py-10 text-center text-neutral-400">{{ __('crm.no_contacts') }}</td>
+                                <td colspan="5" class="px-5 py-10 text-center text-neutral-400">{{ $search === '' ? __('crm.no_contacts') : __('common.no_results') }}</td>
                             </tr>
                         @endforelse
                     </tbody>

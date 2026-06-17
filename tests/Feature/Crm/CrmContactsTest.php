@@ -140,6 +140,29 @@ final class CrmContactsTest extends TestCase
             ->assertSee('ada@example.test');
     }
 
+    public function test_contacts_index_can_be_searched(): void
+    {
+        $this->actingAs($this->user, 'web');
+
+        CrmContact::query()->create([
+            'first_name' => 'Ada',
+            'last_name' => 'Lovelace',
+            'position' => 'Founder',
+        ]);
+
+        CrmContact::query()->create([
+            'first_name' => 'Grace',
+            'last_name' => 'Hopper',
+            'position' => 'Engineer',
+        ]);
+
+        $this
+            ->get('http://acme.aegoryx.test/panel/crm?search=Founder')
+            ->assertOk()
+            ->assertSee('Ada Lovelace')
+            ->assertDontSee('Grace Hopper');
+    }
+
     private function tenant(): Tenant
     {
         return Tenant::query()->create([
