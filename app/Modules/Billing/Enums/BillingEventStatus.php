@@ -6,4 +6,5 @@ enum BillingEventStatus: string
 {
     case Processed = 'processed';
     case Duplicate = 'duplicate';
+    case Failed = 'failed';
 }

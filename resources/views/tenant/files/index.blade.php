@@ -78,6 +78,9 @@
                                     <a href="{{ route('tenant.files.download', $file) }}" class="ui-link">
                                         {{ __('files.download') }}
                                     </a>
+                                    <a href="{{ route('tenant.files.show', $file) }}" class="ui-link">
+                                        {{ __('files.details') }}
+                                    </a>
                                     <form method="POST" action="{{ route('tenant.files.destroy', $file) }}">
                                         @csrf
                                         @method('DELETE')

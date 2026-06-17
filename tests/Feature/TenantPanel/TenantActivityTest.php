@@ -91,6 +91,33 @@ final class TenantActivityTest extends TestCase
             ]);
     }
 
+    public function test_owner_can_view_tenant_activity_entry_details(): void
+    {
+        $owner = $this->user(TenantUserRole::Owner, 'owner@example.test');
+        $this->actingAs($owner, 'web');
+
+        $entry = ActivityEntry::query()->create([
+            'actor_type' => User::class,
+            'actor_id' => $owner->id,
+            'subject_type' => User::class,
+            'subject_id' => $owner->id,
+            'action' => ActivityEntryAction::TenantTwoFactorEnabled,
+            'description' => 'Tenant 2FA enabled for owner.',
+            'metadata_json' => ['scope' => 'security'],
+            'ip' => '127.0.0.1',
+            'user_agent' => 'Feature test',
+        ]);
+
+        $this
+            ->get("http://acme.aegoryx.test/panel/activity/{$entry->id}")
+            ->assertOk()
+            ->assertSee(__('audit_view.activity_entry_title'))
+            ->assertSee(ActivityEntryAction::TenantTwoFactorEnabled->value)
+            ->assertSee('Tenant 2FA enabled for owner.')
+            ->assertSee('security')
+            ->assertSee('Feature test');
+    }
+
     public function test_viewer_cannot_view_tenant_activity_entries(): void
     {
         $viewer = $this->user(TenantUserRole::Viewer, 'viewer@example.test');
@@ -98,6 +125,25 @@ final class TenantActivityTest extends TestCase
 
         $this
             ->get('http://acme.aegoryx.test/panel/activity')
+            ->assertForbidden();
+    }
+
+    public function test_viewer_cannot_view_tenant_activity_entry_details(): void
+    {
+        $viewer = $this->user(TenantUserRole::Viewer, 'viewer@example.test');
+        $this->actingAs($viewer, 'web');
+
+        $entry = ActivityEntry::query()->create([
+            'actor_type' => User::class,
+            'actor_id' => $viewer->id,
+            'subject_type' => User::class,
+            'subject_id' => $viewer->id,
+            'action' => ActivityEntryAction::TenantTwoFactorEnabled,
+            'description' => 'Tenant 2FA enabled for viewer.',
+        ]);
+
+        $this
+            ->get("http://acme.aegoryx.test/panel/activity/{$entry->id}")
             ->assertForbidden();
     }
 

@@ -27,6 +27,7 @@
                         <th>{{ __('audit_view.description') }}</th>
                         <th><x-table.sort-link sort="actor" :current-sort="$sort" :current-direction="$direction">{{ __('audit_view.actor') }}</x-table.sort-link></th>
                         <th><x-table.sort-link sort="subject" :current-sort="$sort" :current-direction="$direction">{{ __('audit_view.subject') }}</x-table.sort-link></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -37,10 +38,15 @@
                             <td class="text-[var(--ui-text)]">{{ $entry->description ?? __('common.not_set') }}</td>
                             <td class="font-mono text-xs text-[var(--ui-text-muted)]">{{ class_basename($entry->actor_type) }} #{{ $entry->actor_id ?? '-' }}</td>
                             <td class="font-mono text-xs text-[var(--ui-text-muted)]">{{ class_basename($entry->subject_type) }} #{{ $entry->subject_id ?? '-' }}</td>
+                            <td class="text-right">
+                                <a href="{{ route('tenant.activity.show', $entry) }}" class="ui-link">
+                                    {{ __('audit_view.details') }}
+                                </a>
+                            </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="5" class="py-10 text-center text-[var(--ui-text-muted)]">{{ __('audit_view.no_entries') }}</td>
+                            <td colspan="6" class="py-10 text-center text-[var(--ui-text-muted)]">{{ __('audit_view.no_entries') }}</td>
                         </tr>
                     @endforelse
                 </tbody>

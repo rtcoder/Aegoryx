@@ -2,6 +2,8 @@
 
 return [
     'action' => 'Действие',
+    'activity_entry_description' => 'Полный контекст отдельного события активности.',
+    'activity_entry_title' => 'Детали активности',
     'activity_description' => 'Просмотр событий активного tenant.',
     'activity_entries' => 'История активности',
     'activity_help' => 'События модулей tenant с описанием, актором и объектом.',
@@ -12,10 +14,16 @@ return [
     'audit_log' => 'Audit log',
     'audit_title' => 'Аудит',
     'created_at' => 'Создано',
+    'after' => 'После изменения',
+    'before' => 'До изменения',
     'description' => 'Описание',
+    'details' => 'Детали',
+    'event' => 'Событие',
     'filter' => 'Фильтр',
     'filter_action' => 'Фильтр по действию',
     'ip' => 'IP',
+    'metadata' => 'Метаданные',
     'no_entries' => 'Записей нет.',
     'subject' => 'Объект',
+    'user_agent' => 'User agent',
 ];

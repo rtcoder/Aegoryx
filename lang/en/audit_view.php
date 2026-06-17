@@ -2,6 +2,8 @@
 
 return [
     'action' => 'Action',
+    'activity_entry_description' => 'Full context for a single activity event.',
+    'activity_entry_title' => 'Activity details',
     'activity_description' => 'Review events in the active tenant.',
     'activity_entries' => 'Activity history',
     'activity_help' => 'Tenant module events with description, actor, and subject.',
@@ -12,10 +14,16 @@ return [
     'audit_log' => 'Audit log',
     'audit_title' => 'Audit',
     'created_at' => 'Created at',
+    'after' => 'After change',
+    'before' => 'Before change',
     'description' => 'Description',
+    'details' => 'Details',
+    'event' => 'Event',
     'filter' => 'Filter',
     'filter_action' => 'Filter by action',
     'ip' => 'IP',
+    'metadata' => 'Metadata',
     'no_entries' => 'No entries.',
     'subject' => 'Subject',
+    'user_agent' => 'User agent',
 ];

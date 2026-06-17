@@ -2,6 +2,8 @@
 
 return [
     'action' => 'Aktion',
+    'activity_entry_description' => 'Vollständiger Kontext eines einzelnen Aktivitätsereignisses.',
+    'activity_entry_title' => 'Aktivitätsdetails',
     'activity_description' => 'Ereignisse im aktiven Mandanten prüfen.',
     'activity_entries' => 'Aktivitätshistorie',
     'activity_help' => 'Mandantenmodul-Ereignisse mit Beschreibung, Akteur und Objekt.',
@@ -12,10 +14,16 @@ return [
     'audit_log' => 'Audit log',
     'audit_title' => 'Audit',
     'created_at' => 'Erstellt am',
+    'after' => 'Nach der Änderung',
+    'before' => 'Vor der Änderung',
     'description' => 'Beschreibung',
+    'details' => 'Details',
+    'event' => 'Ereignis',
     'filter' => 'Filtern',
     'filter_action' => 'Nach Aktion filtern',
     'ip' => 'IP',
+    'metadata' => 'Metadaten',
     'no_entries' => 'Keine Einträge.',
     'subject' => 'Objekt',
+    'user_agent' => 'User agent',
 ];

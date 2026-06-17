@@ -36,4 +36,13 @@ final class ActivityController extends Controller
                 ->withQueryString(),
         ]);
     }
+
+    public function show(ActivityEntry $entry): View
+    {
+        Gate::authorize('view', $entry);
+
+        return view('tenant.activity.show', [
+            'entry' => $entry,
+        ]);
+    }
 }

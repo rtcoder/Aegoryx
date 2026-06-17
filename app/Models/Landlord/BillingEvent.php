@@ -17,7 +17,9 @@ use Illuminate\Support\Carbon;
  * @property int|null $subscription_id
  * @property BillingEventStatus $status
  * @property array<string, mixed>|null $payload
+ * @property string|null $failure_reason
  * @property Carbon|null $processed_at
+ * @property Carbon|null $failed_at
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property-read Subscription|null $subscription
@@ -31,7 +33,9 @@ use Illuminate\Support\Carbon;
     'subscription_id',
     'status',
     'payload',
+    'failure_reason',
     'processed_at',
+    'failed_at',
 ])]
 final class BillingEvent extends Model
 {
@@ -57,6 +61,7 @@ final class BillingEvent extends Model
     protected function casts(): array
     {
         return [
+            'failed_at' => 'datetime',
             'payload' => 'array',
             'processed_at' => 'datetime',
             'status' => BillingEventStatus::class,

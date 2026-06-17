@@ -217,6 +217,38 @@ final class SubscriptionMappingTest extends TestCase
         $this->assertSame(1, AuditLog::query()->where('action', AuditLogAction::BillingSubscriptionSynced)->count());
     }
 
+    public function test_failed_billing_event_can_be_retried_from_stored_payload(): void
+    {
+        $tenant = $this->tenant();
+
+        $event = BillingEvent::query()->create([
+            'provider' => BillingProvider::Paddle,
+            'provider_event_id' => 'evt_retry_action_001',
+            'event_type' => 'subscription.updated',
+            'tenant_id' => $tenant->id,
+            'status' => BillingEventStatus::Failed,
+            'payload' => [
+                'tenant_id' => $tenant->id,
+                'provider_subscription_id' => 'sub_retry_action_001',
+                'provider_status' => 'active',
+            ],
+            'failure_reason' => 'Provider timeout.',
+            'failed_at' => now(),
+        ]);
+
+        $subscription = app(SyncSubscriptionFromProviderEventAction::class)->retry($event);
+
+        $event->refresh();
+
+        $this->assertSame(SubscriptionStatus::Active, $subscription->status);
+        $this->assertSame(BillingEventStatus::Processed, $event->status);
+        $this->assertSame($subscription->id, $event->subscription_id);
+        $this->assertNull($event->failure_reason);
+        $this->assertNull($event->failed_at);
+        $this->assertNotNull($event->processed_at);
+        $this->assertSame(1, AuditLog::query()->where('action', AuditLogAction::BillingSubscriptionSynced)->count());
+    }
+
     private function tenant(): Tenant
     {
         return Tenant::query()->create([

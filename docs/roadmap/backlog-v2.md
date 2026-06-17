@@ -7,7 +7,7 @@ Ten plik zbiera prace po domknięciu pierwszej roadmapy wykonawczej. Nie zastęp
 - Done: rozszerzyć filtrowanie CRM o firmy, deale, notatki i zadania.
 - Done: dodać sortowanie tabel tam, gdzie użytkownik porównuje wiele rekordów.
 - Done: dodać puste stany z akcją główną dla CRM/CMS/Files.
-- Dodać widoki detail dla plików i aktywności, jeśli lista zacznie być zbyt gęsta.
+- Done: dodać widoki detail dla plików i aktywności.
 
 ## Tenant Self-Service
 
@@ -32,6 +32,7 @@ Ten plik zbiera prace po domknięciu pierwszej roadmapy wykonawczej. Nie zastęp
 
 - Done: doprecyzować macierz planów i limitów dla ofert SaaS.
 - Done: dodać dashboard zdarzeń billing/licensing dla superadmina.
+- Done: dodać detail i retry dla failed billing eventów.
 - Done: ustalić proces akceptacji ryzyk launchowych z datą review.
 - Done: egzekwować limity planów w CMS, CRM i Files.
 - Done: dodać seedery planów i feature defaults.

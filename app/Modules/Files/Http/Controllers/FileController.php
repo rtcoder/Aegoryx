@@ -54,6 +54,16 @@ final class FileController extends Controller
         return $download->handle($file, $request->user());
     }
 
+    public function show(Request $request, TenantFile $file): View
+    {
+        Gate::authorize('view', $file);
+
+        return view('tenant.files.show', [
+            'file' => $file->load('owner'),
+            'tenant' => $request->attributes->get('tenant'),
+        ]);
+    }
+
     public function store(Request $request, RegisterFileMetadataAction $registerFile): RedirectResponse
     {
         Gate::authorize('create', TenantFile::class);

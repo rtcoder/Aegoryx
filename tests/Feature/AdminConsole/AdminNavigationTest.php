@@ -10,6 +10,7 @@ use App\Models\Landlord\Subscription;
 use App\Models\Landlord\Tenant;
 use App\Modules\Audit\Enums\AuditLogAction;
 use App\Modules\Billing\Enums\BillingEventStatus;
+use App\Modules\Billing\Enums\BillingProvider;
 use App\Modules\Billing\Enums\SubscriptionStatus;
 use App\Modules\Identity\Enums\IdentityStatus;
 use App\Modules\Licensing\Enums\LicenseStatus;
@@ -134,6 +135,72 @@ final class AdminNavigationTest extends TestCase
             ->assertSee(__('landlord.billing.license_statuses'))
             ->assertSee('Billing Tenant')
             ->assertSee('subscription.updated');
+    }
+
+    public function test_superadmin_can_view_billing_event_details(): void
+    {
+        $this->actingAs($this->superadmin(), 'landlord');
+
+        $tenant = $this->tenant(['name' => 'Billing Tenant']);
+        $event = BillingEvent::query()->create([
+            'provider' => BillingProvider::Paddle,
+            'provider_event_id' => 'evt_failed_123',
+            'event_type' => 'subscription.updated',
+            'tenant_id' => $tenant->id,
+            'status' => BillingEventStatus::Failed,
+            'payload' => [
+                'tenant_id' => $tenant->id,
+                'provider_subscription_id' => 'sub_failed_123',
+                'provider_status' => 'active',
+            ],
+            'failure_reason' => 'Temporary provider sync failure.',
+            'failed_at' => now(),
+        ]);
+
+        $this
+            ->get("http://admin.aegoryx.test/billing/events/{$event->id}")
+            ->assertOk()
+            ->assertSee(__('landlord.billing.event_details'))
+            ->assertSee('evt_failed_123')
+            ->assertSee('Temporary provider sync failure.')
+            ->assertSee('sub_failed_123');
+    }
+
+    public function test_superadmin_can_retry_failed_billing_event(): void
+    {
+        $superadmin = $this->superadmin();
+        $this->actingAs($superadmin, 'landlord');
+
+        $tenant = $this->tenant(['name' => 'Billing Tenant']);
+        $event = BillingEvent::query()->create([
+            'provider' => BillingProvider::Paddle,
+            'provider_event_id' => 'evt_retry_123',
+            'event_type' => 'subscription.updated',
+            'tenant_id' => $tenant->id,
+            'status' => BillingEventStatus::Failed,
+            'payload' => [
+                'tenant_id' => $tenant->id,
+                'provider_subscription_id' => 'sub_retry_123',
+                'provider_status' => 'active',
+            ],
+            'failure_reason' => 'Temporary provider sync failure.',
+            'failed_at' => now(),
+        ]);
+
+        $this
+            ->post("http://admin.aegoryx.test/billing/events/{$event->id}/retry")
+            ->assertRedirect("http://admin.aegoryx.test/billing/events/{$event->id}")
+            ->assertSessionHas('success', __('landlord.billing.retry_succeeded'));
+
+        $event->refresh();
+        $subscription = Subscription::query()->firstOrFail();
+
+        $this->assertSame(BillingEventStatus::Processed, $event->status);
+        $this->assertSame($subscription->id, $event->subscription_id);
+        $this->assertNull($event->failure_reason);
+        $this->assertNull($event->failed_at);
+        $this->assertSame(SubscriptionStatus::Active, $subscription->status);
+        $this->assertSame($superadmin->id, $subscription->created_by);
     }
 
     public function test_superadmin_can_update_tenant_status_and_audit_it(): void

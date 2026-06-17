@@ -39,6 +39,7 @@ Route::middleware(ResolveTenantFromDomain::class)
                         Route::get('/', [FileController::class, 'index'])->name('index');
                         Route::post('/', [FileController::class, 'store'])->name('store');
                         Route::post('exports/activity', [ActivityExportController::class, 'store'])->name('exports.activity.store');
+                        Route::get('{file}', [FileController::class, 'show'])->name('show');
                         Route::get('{file}/download', [FileController::class, 'download'])->name('download');
                         Route::delete('{file}', [FileController::class, 'destroy'])->name('destroy');
                     });
@@ -47,7 +48,10 @@ Route::middleware(ResolveTenantFromDomain::class)
                 Route::post('settings/domains', [SettingsController::class, 'storeDomain'])->name('settings.domains.store');
                 Route::get('security', [SecurityController::class, 'index'])->name('security.index');
                 Route::get('users', [UserController::class, 'index'])->name('users.index');
-                Route::get('activity', [ActivityController::class, 'index'])->name('activity.index');
+                Route::prefix('activity')->name('activity.')->group(function (): void {
+                    Route::get('/', [ActivityController::class, 'index'])->name('index');
+                    Route::get('{entry}', [ActivityController::class, 'show'])->name('show');
+                });
                 Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');
                 Route::patch('profile', [ProfileController::class, 'update'])->name('profile.update');
 

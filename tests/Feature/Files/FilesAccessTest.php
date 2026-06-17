@@ -124,6 +124,32 @@ final class FilesAccessTest extends TestCase
         $this->assertSame(0, ActivityEntry::query()->where('action', ActivityEntryAction::FileDownloaded)->count());
     }
 
+    public function test_owner_can_view_file_details(): void
+    {
+        $this->actingAs($this->owner, 'web');
+        Storage::disk('local')->put('tenant/acme/report.txt', 'Quarterly report');
+        $file = $this->file('tenant/acme/report.txt', $this->owner);
+
+        $this
+            ->get("http://acme.aegoryx.test/panel/files/{$file->id}")
+            ->assertOk()
+            ->assertSee(__('files.metadata'))
+            ->assertSee('report.txt')
+            ->assertSee('tenant/acme/report.txt')
+            ->assertSee($file->checksum_sha256);
+    }
+
+    public function test_non_owner_cannot_view_file_details(): void
+    {
+        $this->actingAs($this->otherUser, 'web');
+        Storage::disk('local')->put('tenant/acme/report.txt', 'Quarterly report');
+        $file = $this->file('tenant/acme/report.txt', $this->owner);
+
+        $this
+            ->get("http://acme.aegoryx.test/panel/files/{$file->id}")
+            ->assertForbidden();
+    }
+
     public function test_file_metadata_delete_is_soft_delete_and_audited(): void
     {
         Storage::disk('local')->put('tenant/acme/report.txt', 'Quarterly report');

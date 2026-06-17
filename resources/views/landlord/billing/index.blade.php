@@ -54,6 +54,7 @@
                         <th>{{ __('landlord.billing.provider') }}</th>
                         <th>{{ __('landlord.billing.event_type') }}</th>
                         <th>{{ __('common.status') }}</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -64,10 +65,15 @@
                             <td class="font-mono text-xs text-[var(--ui-text-muted)]">{{ $event->provider }}</td>
                             <td class="font-mono text-xs text-[var(--ui-text-muted)]">{{ $event->event_type }}</td>
                             <td><x-ui.badge>{{ $event->status->value }}</x-ui.badge></td>
+                            <td class="text-right">
+                                <a href="{{ route('landlord.billing.events.show', $event) }}" class="ui-link">
+                                    {{ __('landlord.billing.details') }}
+                                </a>
+                            </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="5">
+                            <td colspan="6">
                                 <x-ui.empty-state :title="__('landlord.billing.no_events')" />
                             </td>
                         </tr>

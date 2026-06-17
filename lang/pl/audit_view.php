@@ -2,6 +2,8 @@
 
 return [
     'action' => 'Akcja',
+    'activity_entry_description' => 'Pełny kontekst pojedynczego zdarzenia aktywności.',
+    'activity_entry_title' => 'Szczegóły aktywności',
     'activity_description' => 'Przegląd zdarzeń w aktywnym tenancie.',
     'activity_entries' => 'Historia aktywności',
     'activity_help' => 'Zdarzenia modułów tenantowych z opisem, aktorem i obiektem.',
@@ -12,10 +14,16 @@ return [
     'audit_log' => 'Audit log',
     'audit_title' => 'Audyt',
     'created_at' => 'Utworzono',
+    'after' => 'Po zmianie',
+    'before' => 'Przed zmianą',
     'description' => 'Opis',
+    'details' => 'Szczegóły',
+    'event' => 'Zdarzenie',
     'filter' => 'Filtruj',
     'filter_action' => 'Filtruj po akcji',
     'ip' => 'IP',
+    'metadata' => 'Metadane',
     'no_entries' => 'Brak wpisów.',
     'subject' => 'Obiekt',
+    'user_agent' => 'User agent',
 ];

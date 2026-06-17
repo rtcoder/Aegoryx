@@ -2,6 +2,8 @@
 
 return [
     'action' => 'Action',
+    'activity_entry_description' => 'Contexte complet d’un événement d’activité individuel.',
+    'activity_entry_title' => 'Détails de l’activité',
     'activity_description' => 'Consulter les événements du tenant actif.',
     'activity_entries' => 'Historique d’activité',
     'activity_help' => 'Événements des modules tenant avec description, acteur et sujet.',
@@ -12,10 +14,16 @@ return [
     'audit_log' => 'Audit log',
     'audit_title' => 'Audit',
     'created_at' => 'Créé le',
+    'after' => 'Après modification',
+    'before' => 'Avant modification',
     'description' => 'Description',
+    'details' => 'Détails',
+    'event' => 'Événement',
     'filter' => 'Filtrer',
     'filter_action' => 'Filtrer par action',
     'ip' => 'IP',
+    'metadata' => 'Métadonnées',
     'no_entries' => 'Aucune entrée.',
     'subject' => 'Sujet',
+    'user_agent' => 'User agent',
 ];
