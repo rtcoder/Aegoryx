@@ -1,5 +1,15 @@
 # Task: License Verification
 
+## Status
+
+Done for local license state and entitlement mapping.
+
+## Implemented Notes
+
+- Aktywne/grace licencje mogą zasilać feature access, limity i konfigurację z payloadu.
+- Expired/suspended licenses nie grantują feature access przez `EffectiveEntitlements`.
+- Weryfikacja licencji i audit są obsługiwane w module Licensing/Admin Console.
+
 ## Cel
 
 Obsłużyć self-hosted license verification dla subscription i perpetual licenses.

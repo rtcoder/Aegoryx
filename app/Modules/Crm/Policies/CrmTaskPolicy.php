@@ -19,16 +19,16 @@ final class CrmTaskPolicy
 
     public function create(User $user): bool
     {
-        return $user->exists;
+        return $user->exists && $user->canManageTenantCrm();
     }
 
     public function update(User $user, CrmTask $task): bool
     {
-        return $user->exists && $task->exists;
+        return $user->exists && $task->exists && $user->canManageTenantCrm();
     }
 
     public function delete(User $user, CrmTask $task): bool
     {
-        return $user->exists && $task->exists;
+        return $user->exists && $task->exists && $user->canManageTenantCrm();
     }
 }

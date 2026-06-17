@@ -24,4 +24,6 @@ return [
     'file_deleted' => 'Datei [:file] wurde gelöscht.',
     'file_downloaded' => 'Datei [:file] wurde heruntergeladen.',
     'file_registered' => 'Datei [:file] wurde registriert.',
+    'tenant_two_factor_disabled' => '2FA für Benutzer [:user] wurde deaktiviert.',
+    'tenant_two_factor_enabled' => '2FA für Benutzer [:user] wurde aktiviert.',
 ];

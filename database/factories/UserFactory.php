@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Tenant\User;
+use App\Modules\Identity\Enums\TenantUserRole;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -29,6 +30,7 @@ class UserFactory extends Factory
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
+            'role' => TenantUserRole::Member,
             'remember_token' => Str::random(10),
         ];
     }

@@ -8,6 +8,7 @@ use App\Modules\Audit\Enums\ActivityEntryAction;
 use App\Modules\Audit\Services\ActivityLogger;
 use App\Modules\Cms\Support\CmsContent;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 final readonly class UpdatePageAction
 {
@@ -21,6 +22,8 @@ final readonly class UpdatePageAction
      */
     public function handle(CmsPage $page, string $title, string $slug, array $content, User $actor): CmsPage
     {
+        Gate::forUser($actor)->authorize('update', $page);
+
         $normalizedContent = $this->cmsContent->normalize($content);
 
         return DB::transaction(function () use ($page, $title, $slug, $normalizedContent, $actor): CmsPage {

@@ -19,16 +19,16 @@ final class CrmContactPolicy
 
     public function create(User $user): bool
     {
-        return $user->exists;
+        return $user->exists && $user->canManageTenantCrm();
     }
 
     public function update(User $user, CrmContact $contact): bool
     {
-        return $user->exists && $contact->exists;
+        return $user->exists && $contact->exists && $user->canManageTenantCrm();
     }
 
     public function delete(User $user, CrmContact $contact): bool
     {
-        return $user->exists && $contact->exists;
+        return $user->exists && $contact->exists && $user->canManageTenantCrm();
     }
 }

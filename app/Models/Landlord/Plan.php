@@ -4,7 +4,9 @@ namespace App\Models\Landlord;
 
 use App\Modules\Billing\Enums\PlanStatus;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 
@@ -23,6 +25,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property Carbon|null $deleted_at
+ * @property-read Collection<int, PlanFeature> $features
  */
 #[Fillable([
     'key',
@@ -39,6 +42,14 @@ use Illuminate\Support\Carbon;
 final class Plan extends Model
 {
     use SoftDeletes;
+
+    /**
+     * @return HasMany<PlanFeature, $this>
+     */
+    public function features(): HasMany
+    {
+        return $this->hasMany(PlanFeature::class);
+    }
 
     /**
      * @return array<string, string>

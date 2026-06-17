@@ -1,5 +1,14 @@
 # Task: Subscription Mapping
 
+## Status
+
+Partial.
+
+## Implemented Notes
+
+- `active` i `trialing` subscription status z aktywnym planem zasilają entitlements.
+- Webhook idempotency i pełna integracja Paddle nadal są poza obecnym zakresem implementacji.
+
 ## Cel
 
 Mapować stan subskrypcji SaaS na wewnętrzne entitlementy.

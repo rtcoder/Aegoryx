@@ -2,6 +2,7 @@
 
 namespace App\Models\Tenant;
 
+use App\Modules\Identity\Enums\TenantUserRole;
 use App\Support\Localization\Locale;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
@@ -19,6 +20,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $email_verified_at
  * @property string $password
  * @property Locale $locale
+ * @property TenantUserRole $role
  * @property string|null $remember_token
  * @property string|null $two_factor_secret
  * @property array<int, string>|null $two_factor_recovery_codes
@@ -30,7 +32,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $updated_at
  * @property Carbon|null $deleted_at
  */
-#[Fillable(['name', 'email', 'password', 'locale'])]
+#[Fillable(['name', 'email', 'password', 'locale', 'role'])]
 #[Hidden(['password', 'remember_token', 'two_factor_secret', 'two_factor_recovery_codes'])]
 final class User extends Authenticatable
 {
@@ -53,6 +55,10 @@ final class User extends Authenticatable
 
             $user->locale = $tenant?->locale ?? Locale::from(config('aegoryx.localization.default_locale', 'pl'));
         });
+
+        self::creating(function (User $user): void {
+            $user->role ??= TenantUserRole::Member;
+        });
     }
 
     /**
@@ -63,6 +69,7 @@ final class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'locale' => Locale::class,
+            'role' => TenantUserRole::class,
             'password' => 'hashed',
             'two_factor_confirmed_at' => 'datetime',
             'two_factor_recovery_codes' => 'encrypted:array',
@@ -74,5 +81,35 @@ final class User extends Authenticatable
     {
         return $this->two_factor_secret !== null
             && $this->two_factor_confirmed_at !== null;
+    }
+
+    public function hasTenantRole(TenantUserRole ...$roles): bool
+    {
+        return in_array($this->role, $roles, true);
+    }
+
+    public function canManageTenantUsers(): bool
+    {
+        return $this->role->canManageUsers();
+    }
+
+    public function canManageTenantContent(): bool
+    {
+        return $this->role->canManageContent();
+    }
+
+    public function canManageTenantCrm(): bool
+    {
+        return $this->role->canManageCrm();
+    }
+
+    public function canManageTenantFiles(): bool
+    {
+        return $this->role->canManageFiles();
+    }
+
+    public function canExportTenantActivity(): bool
+    {
+        return $this->role->canExportActivity();
     }
 }

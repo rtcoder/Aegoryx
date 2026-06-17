@@ -32,6 +32,8 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $updated_at
  * @property Carbon|null $deleted_at
  * @property-read Collection<int, TenantFeature> $features
+ * @property-read Collection<int, License> $licenses
+ * @property-read Collection<int, Subscription> $subscriptions
  */
 #[Fillable([
     'name',
@@ -57,6 +59,22 @@ final class Tenant extends Model
     public function features(): HasMany
     {
         return $this->hasMany(TenantFeature::class);
+    }
+
+    /**
+     * @return HasMany<License, $this>
+     */
+    public function licenses(): HasMany
+    {
+        return $this->hasMany(License::class);
+    }
+
+    /**
+     * @return HasMany<Subscription, $this>
+     */
+    public function subscriptions(): HasMany
+    {
+        return $this->hasMany(Subscription::class);
     }
 
     /**

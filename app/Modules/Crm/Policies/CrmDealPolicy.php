@@ -19,16 +19,16 @@ final class CrmDealPolicy
 
     public function create(User $user): bool
     {
-        return $user->exists;
+        return $user->exists && $user->canManageTenantCrm();
     }
 
     public function update(User $user, CrmDeal $deal): bool
     {
-        return $user->exists && $deal->exists;
+        return $user->exists && $deal->exists && $user->canManageTenantCrm();
     }
 
     public function delete(User $user, CrmDeal $deal): bool
     {
-        return $user->exists && $deal->exists;
+        return $user->exists && $deal->exists && $user->canManageTenantCrm();
     }
 }

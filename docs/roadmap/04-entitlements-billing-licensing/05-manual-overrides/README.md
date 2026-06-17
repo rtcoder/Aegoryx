@@ -1,5 +1,15 @@
 # Task: Manual Overrides
 
+## Status
+
+Done.
+
+## Implemented Notes
+
+- Manual override ma najwyższy priorytet nad planem i licencją.
+- Override może zmienić feature access i limity.
+- Zmiany override są audytowane przez `SetTenantFeatureOverrideAction`.
+
 ## Cel
 
 Pozwolić superadminowi jawnie nadpisać feature access lub limity tenanta.

@@ -1,5 +1,15 @@
 # Task: Entitlement Keys
 
+## Status
+
+Done.
+
+## Implemented Notes
+
+- `SystemFeature` jest centralnym registry funkcji produktu.
+- Business modules używają `EffectiveEntitlements`, a nie bezpośrednio billing/licensing.
+- API obejmuje `allows`, `limit` i `config`.
+
 ## Cel
 
 Zdefiniować spójne klucze features, limitów i konfiguracji, których używają moduły.

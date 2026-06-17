@@ -19,16 +19,16 @@ final class CrmNotePolicy
 
     public function create(User $user): bool
     {
-        return $user->exists;
+        return $user->exists && $user->canManageTenantCrm();
     }
 
     public function update(User $user, CrmNote $note): bool
     {
-        return $user->exists && $note->exists;
+        return $user->exists && $note->exists && $user->canManageTenantCrm();
     }
 
     public function delete(User $user, CrmNote $note): bool
     {
-        return $user->exists && $note->exists;
+        return $user->exists && $note->exists && $user->canManageTenantCrm();
     }
 }

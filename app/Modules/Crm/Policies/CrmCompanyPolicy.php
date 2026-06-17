@@ -19,16 +19,16 @@ final class CrmCompanyPolicy
 
     public function create(User $user): bool
     {
-        return $user->exists;
+        return $user->exists && $user->canManageTenantCrm();
     }
 
     public function update(User $user, CrmCompany $company): bool
     {
-        return $user->exists && $company->exists;
+        return $user->exists && $company->exists && $user->canManageTenantCrm();
     }
 
     public function delete(User $user, CrmCompany $company): bool
     {
-        return $user->exists && $company->exists;
+        return $user->exists && $company->exists && $user->canManageTenantCrm();
     }
 }

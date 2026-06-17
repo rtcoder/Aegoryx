@@ -27,4 +27,6 @@ enum ActivityEntryAction: string
     case FileDeleted = 'file_deleted';
     case FileDownloaded = 'file_downloaded';
     case FileRegistered = 'file_registered';
+    case TenantTwoFactorDisabled = 'tenant_two_factor_disabled';
+    case TenantTwoFactorEnabled = 'tenant_two_factor_enabled';
 }

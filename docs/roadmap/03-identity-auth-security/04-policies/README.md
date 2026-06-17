@@ -4,6 +4,12 @@
 
 Done.
 
+## Implemented Notes
+
+- Tenant user ma enumową rolę `TenantUserRole`.
+- Policies CRM/CMS/plików/audytu bazują na helperach modelu tenant usera.
+- Rola `viewer` ma odczyt bez operacji zapisu, a eksport audytu jest ograniczony do `owner/admin`.
+
 ## Cel
 
 Wprowadzić backend authorization dla modyfikujących akcji w modułach.

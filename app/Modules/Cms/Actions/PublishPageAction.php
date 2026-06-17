@@ -8,6 +8,7 @@ use App\Modules\Audit\Enums\ActivityEntryAction;
 use App\Modules\Audit\Services\ActivityLogger;
 use App\Modules\Cms\Enums\CmsPageStatus;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 final readonly class PublishPageAction
 {
@@ -17,6 +18,8 @@ final readonly class PublishPageAction
 
     public function handle(CmsPage $page, User $actor): CmsPage
     {
+        Gate::forUser($actor)->authorize('publish', $page);
+
         return DB::transaction(function () use ($page, $actor): CmsPage {
             $before = [
                 'status' => $page->status->value,

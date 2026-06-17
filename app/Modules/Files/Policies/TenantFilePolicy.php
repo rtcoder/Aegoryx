@@ -19,12 +19,15 @@ final class TenantFilePolicy
 
     public function create(User $user): bool
     {
-        return $user->exists;
+        return $user->exists && $user->canManageTenantFiles();
     }
 
     public function delete(User $user, TenantFile $file): bool
     {
-        return $user->exists && $file->exists && $this->ownedByUser($user, $file);
+        return $user->exists
+            && $file->exists
+            && $user->canManageTenantFiles()
+            && $this->ownedByUser($user, $file);
     }
 
     public function download(User $user, TenantFile $file): bool

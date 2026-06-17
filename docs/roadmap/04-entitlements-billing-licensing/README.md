@@ -1,5 +1,9 @@
 # Epic 04: Entitlements Billing Licensing
 
+## Status
+
+In Progress.
+
 ## Cel
 
 Zbudować jedną warstwę decyzyjną dla feature access, limitów, SaaS billing i self-hosted licensing.
@@ -16,11 +20,11 @@ Moduły biznesowe nie mogą znać Paddle, planów ani payloadów licencji. Mają
 
 ## Taski
 
-- [Entitlement Keys](01-entitlement-keys/)
-- [Plan Limits](02-plan-limits/)
-- [Subscription Mapping](03-subscription-mapping/)
-- [License Verification](04-license-verification/)
-- [Manual Overrides](05-manual-overrides/)
+- [x] [Entitlement Keys](01-entitlement-keys/)
+- [x] [Plan Limits](02-plan-limits/)
+- [ ] [Subscription Mapping](03-subscription-mapping/)
+- [x] [License Verification](04-license-verification/)
+- [x] [Manual Overrides](05-manual-overrides/)
 
 ## Definicja Ukończenia
 

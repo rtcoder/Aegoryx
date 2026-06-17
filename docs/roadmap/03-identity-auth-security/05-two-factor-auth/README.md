@@ -1,5 +1,15 @@
 # Task: Two Factor Auth
 
+## Status
+
+Done.
+
+## Implemented Notes
+
+- Landlord identities mają pełny flow 2FA z challenge i ustawieniami security.
+- Tenant users mają akcje domenowe enable/disable 2FA z tenantowym activity audit.
+- Zmiana cudzego tenant 2FA wymaga roli `owner/admin`; user może zarządzać własnym 2FA.
+
 ## Cel
 
 Dodać 2FA dla kont wymagających podwyższonego bezpieczeństwa, szczególnie superadminów.

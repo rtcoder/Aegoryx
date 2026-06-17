@@ -24,4 +24,6 @@ return [
     'file_deleted' => 'Fichier [:file] supprimé.',
     'file_downloaded' => 'Fichier [:file] téléchargé.',
     'file_registered' => 'Fichier [:file] enregistré.',
+    'tenant_two_factor_disabled' => '2FA désactivée pour l’utilisateur [:user].',
+    'tenant_two_factor_enabled' => '2FA activée pour l’utilisateur [:user].',
 ];

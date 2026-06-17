@@ -3,6 +3,7 @@
 namespace App\Modules\Auth\Providers;
 
 use App\Models\Tenant\ActivityEntry;
+use App\Models\Tenant\CmsPage;
 use App\Models\Tenant\CrmCompany;
 use App\Models\Tenant\CrmContact;
 use App\Models\Tenant\CrmDeal;
@@ -10,6 +11,7 @@ use App\Models\Tenant\CrmNote;
 use App\Models\Tenant\CrmTask;
 use App\Models\Tenant\TenantFile;
 use App\Modules\Audit\Policies\ActivityEntryPolicy;
+use App\Modules\Cms\Policies\CmsPagePolicy;
 use App\Modules\Crm\Policies\CrmCompanyPolicy;
 use App\Modules\Crm\Policies\CrmContactPolicy;
 use App\Modules\Crm\Policies\CrmDealPolicy;
@@ -24,6 +26,7 @@ final class AuthServiceProvider extends ModuleServiceProvider
     public function boot(): void
     {
         Gate::policy(CrmContact::class, CrmContactPolicy::class);
+        Gate::policy(CmsPage::class, CmsPagePolicy::class);
         Gate::policy(CrmCompany::class, CrmCompanyPolicy::class);
         Gate::policy(CrmDeal::class, CrmDealPolicy::class);
         Gate::policy(CrmNote::class, CrmNotePolicy::class);

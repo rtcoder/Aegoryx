@@ -13,6 +13,7 @@ use App\Modules\Entitlements\Enums\TenantFeatureSource;
 use App\Modules\Files\Actions\DeleteFileMetadataAction;
 use App\Modules\Files\Actions\RegisterFileMetadataAction;
 use App\Modules\Files\Enums\FileVisibility;
+use App\Modules\Identity\Enums\TenantUserRole;
 use App\Modules\Tenancy\Enums\TenantBillingModel;
 use App\Modules\Tenancy\Enums\TenantDeploymentType;
 use App\Modules\Tenancy\Enums\TenantDomainStatus;
@@ -55,6 +56,7 @@ final class FilesAccessTest extends TestCase
             'name' => 'Owner',
             'email' => 'owner@example.test',
             'password' => 'secret-password',
+            'role' => TenantUserRole::Owner,
         ]);
 
         $this->otherUser = User::query()->create([
