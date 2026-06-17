@@ -22,7 +22,7 @@ Moduły biznesowe nie mogą znać Paddle, planów ani payloadów licencji. Mają
 
 - [x] [Entitlement Keys](01-entitlement-keys/)
 - [x] [Plan Limits](02-plan-limits/)
-- [ ] [Subscription Mapping](03-subscription-mapping/)
+- [x] [Subscription Mapping](03-subscription-mapping/)
 - [x] [License Verification](04-license-verification/)
 - [x] [Manual Overrides](05-manual-overrides/)
 

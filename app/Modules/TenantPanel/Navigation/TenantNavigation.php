@@ -48,6 +48,18 @@ final readonly class TenantNavigation
                 'description' => __('tenant_panel.nav.settings_description'),
                 'feature_key' => null,
             ],
+            [
+                'label' => __('tenant_panel.nav.users'),
+                'route' => 'tenant.users.index',
+                'description' => __('tenant_panel.nav.users_description'),
+                'feature_key' => null,
+            ],
+            [
+                'label' => __('tenant_panel.nav.security'),
+                'route' => 'tenant.security.index',
+                'description' => __('tenant_panel.nav.security_description'),
+                'feature_key' => null,
+            ],
         ];
     }
 

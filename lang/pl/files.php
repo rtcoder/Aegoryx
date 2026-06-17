@@ -2,6 +2,7 @@
 
 return [
     'create_activity_export' => 'Eksport aktywności',
+    'choose_file' => 'Wybierz plik',
     'download' => 'Pobierz',
     'expires_at' => 'Wygasa',
     'file_list' => 'Lista plików',
@@ -14,4 +15,8 @@ return [
     'private_access_note' => 'Pobrania prywatnych plików są autoryzowane i zapisywane w historii aktywności.',
     'shared_file' => 'Współdzielony',
     'size' => 'Rozmiar',
+    'upload' => 'Wyślij plik',
+    'upload_description' => 'Plik zostanie zapisany jako prywatny i przypisany do aktualnego użytkownika.',
+    'upload_file' => 'Upload pliku',
+    'uploaded' => 'Plik został wysłany.',
 ];

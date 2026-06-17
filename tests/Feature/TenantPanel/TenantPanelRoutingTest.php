@@ -99,7 +99,7 @@ final class TenantPanelRoutingTest extends TestCase
             ->get('http://acme.aegoryx.test/panel/cms')
             ->assertOk()
             ->assertSee('CMS')
-            ->assertSee('Miejsce na implementację modułu.');
+            ->assertSee(__('cms.new_page'));
     }
 
     public function test_disabled_module_route_returns_403(): void

@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'billing_subscription_synced' => 'Подписка [:subscription] синхронизирована как [:status].',
     'license_verified' => 'Лицензия [:license] проверена как [:status].',
     'manual_feature_override_set' => 'Ручное переопределение функции [:feature] для tenant [:tenant] установлено в [:state].',
     'support_session_marked' => 'Сессия поддержки [:session] помечена как [:status].',

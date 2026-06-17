@@ -27,5 +27,9 @@ return [
     'setup_secret' => 'TOTP secret',
     'setup_secret_help' => 'Добавьте этот secret вручную в приложении аутентификации.',
     'start_setup' => 'Начать настройку',
+    'tenant_2fa' => '2FA пользователя',
+    'tenant_2fa_description' => 'Управляйте защитой входа в панель tenant.',
+    'tenant_disabled_notice' => 'Включите 2FA, чтобы лучше защитить свою учетную запись в этом tenant.',
+    'tenant_security_description' => 'Управляйте настройками безопасности своей учетной записи tenant.',
     'verify' => 'Проверить',
 ];

@@ -20,6 +20,7 @@ use App\Modules\Tenancy\Enums\TenantDomainStatus;
 use App\Modules\Tenancy\Enums\TenantDomainType;
 use App\Modules\Tenancy\Enums\TenantLicenseType;
 use App\Modules\Tenancy\Enums\TenantStatus;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
@@ -150,6 +151,27 @@ final class FilesAccessTest extends TestCase
             ->assertSee('Pliki')
             ->assertSee('report.txt')
             ->assertSee('Owner');
+    }
+
+    public function test_user_can_upload_private_file_and_metadata_is_registered(): void
+    {
+        $this->actingAs($this->owner, 'web');
+
+        $this
+            ->post('http://acme.aegoryx.test/panel/files', [
+                'file' => UploadedFile::fake()->createWithContent('contract.txt', 'Signed contract'),
+            ])
+            ->assertRedirect('http://acme.aegoryx.test/panel/files')
+            ->assertSessionHas('success', __('files.uploaded'));
+
+        $file = TenantFile::query()->firstOrFail();
+        $activity = ActivityEntry::query()->where('action', ActivityEntryAction::FileRegistered)->firstOrFail();
+
+        Storage::disk('local')->assertExists($file->path);
+        $this->assertSame('contract.txt', $file->original_name);
+        $this->assertSame($this->owner->id, $file->owner_id);
+        $this->assertSame(FileVisibility::Private, $file->visibility);
+        $this->assertSame($file->id, $activity->subject_id);
     }
 
     public function test_activity_export_creates_expiring_private_file_and_audit_entry(): void

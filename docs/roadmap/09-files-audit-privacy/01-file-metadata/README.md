@@ -1,5 +1,15 @@
 # Task: File Metadata
 
+## Status
+
+Done.
+
+## Implemented Notes
+
+- Panel plików pozwala wysłać prywatny plik.
+- Upload zapisuje plik w storage i rejestruje metadane przez `RegisterFileMetadataAction`.
+- Upload tworzy activity entry `file_registered`.
+
 ## Cel
 
 Zbudować tenantowy model metadanych plików niezależny od fizycznego storage.
@@ -13,7 +23,6 @@ Zbudować tenantowy model metadanych plików niezależny od fizycznego storage.
 
 ## Poza Zakresem
 
-- Pełny upload UI.
 - Virus scanning.
 
 ## Zależności

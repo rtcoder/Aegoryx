@@ -5,6 +5,29 @@
 @section('subheading', __('files.files_description'))
 
 @section('content')
+    <section class="ui-card mb-6">
+        <div class="ui-card-header">
+            <h2 class="ui-heading-2">{{ __('files.upload_file') }}</h2>
+            <p class="ui-body mt-1">{{ __('files.upload_description') }}</p>
+        </div>
+        <form method="POST" action="{{ route('tenant.files.store') }}" enctype="multipart/form-data" class="ui-card-body space-y-4">
+            @csrf
+            @if (session('success'))
+                <div class="rounded border border-emerald-700 bg-emerald-950 px-4 py-3 text-sm text-emerald-100">
+                    {{ session('success') }}
+                </div>
+            @endif
+
+            <div>
+                <label for="file" class="ui-label">{{ __('files.choose_file') }}</label>
+                <input id="file" name="file" type="file" class="ui-input mt-2">
+                @error('file') <p class="ui-error">{{ $message }}</p> @enderror
+            </div>
+
+            <x-ui.button type="submit">{{ __('files.upload') }}</x-ui.button>
+        </form>
+    </section>
+
     <section class="ui-card">
         <div class="ui-card-header flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
             <div>

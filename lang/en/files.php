@@ -2,6 +2,7 @@
 
 return [
     'create_activity_export' => 'Export activity',
+    'choose_file' => 'Choose file',
     'download' => 'Download',
     'expires_at' => 'Expires at',
     'file_list' => 'File list',
@@ -14,4 +15,8 @@ return [
     'private_access_note' => 'Private file downloads are authorized and recorded in activity history.',
     'shared_file' => 'Shared',
     'size' => 'Size',
+    'upload' => 'Upload file',
+    'upload_description' => 'The file will be stored as private and assigned to the current user.',
+    'upload_file' => 'File upload',
+    'uploaded' => 'File uploaded.',
 ];

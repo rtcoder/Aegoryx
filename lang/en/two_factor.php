@@ -27,5 +27,9 @@ return [
     'setup_secret' => 'TOTP secret',
     'setup_secret_help' => 'Add this secret manually in your authenticator app.',
     'start_setup' => 'Start setup',
+    'tenant_2fa' => 'User 2FA',
+    'tenant_2fa_description' => 'Manage sign-in protection for the tenant panel.',
+    'tenant_disabled_notice' => 'Enable 2FA to better protect your account in this tenant.',
+    'tenant_security_description' => 'Control security settings for your tenant account.',
     'verify' => 'Verify',
 ];

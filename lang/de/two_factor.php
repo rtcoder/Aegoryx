@@ -27,5 +27,9 @@ return [
     'setup_secret' => 'TOTP-Secret',
     'setup_secret_help' => 'Fügen Sie dieses Secret manuell in Ihrer Authenticator-App hinzu.',
     'start_setup' => 'Einrichtung starten',
+    'tenant_2fa' => 'Benutzer-2FA',
+    'tenant_2fa_description' => 'Verwalten Sie den Anmeldeschutz für das Mandantenpanel.',
+    'tenant_disabled_notice' => 'Aktivieren Sie 2FA, um Ihr Konto in diesem Mandanten besser zu schützen.',
+    'tenant_security_description' => 'Sicherheitseinstellungen Ihres Mandantenkontos steuern.',
     'verify' => 'Verifizieren',
 ];

@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'billing_subscription_synced' => 'Abonnement [:subscription] wurde als [:status] synchronisiert.',
     'license_verified' => 'Lizenz [:license] wurde als [:status] verifiziert.',
     'manual_feature_override_set' => 'Manuelle Feature-Überschreibung [:feature] für Mandant [:tenant] wurde auf [:state] gesetzt.',
     'support_session_marked' => 'Support-Sitzung [:session] wurde als [:status] markiert.',

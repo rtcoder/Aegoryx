@@ -16,7 +16,7 @@ CMS musi rozdzielać pracę redakcyjną od opublikowanych treści, żeby publicz
 
 ## Status
 
-- Done: Page Model, Page Revisions, Publish Flow, Blocks Content Structure, Published Snapshots, CMS Activity History.
+- Done: Page Model, Page Revisions, Publish Flow, Blocks Content Structure, Published Snapshots, CMS Activity History, Tenant CMS UI.
 
 ## Taski
 

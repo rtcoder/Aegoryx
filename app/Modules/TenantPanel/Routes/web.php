@@ -9,8 +9,11 @@ use App\Modules\Entitlements\Enums\SystemFeature;
 use App\Modules\Files\Http\Controllers\ActivityExportController;
 use App\Modules\Files\Http\Controllers\FileController;
 use App\Modules\TenantPanel\Http\Controllers\Auth\LoginController;
+use App\Modules\TenantPanel\Http\Controllers\CmsPageController;
 use App\Modules\TenantPanel\Http\Controllers\DashboardController;
 use App\Modules\TenantPanel\Http\Controllers\Modules\ModulePageController;
+use App\Modules\TenantPanel\Http\Controllers\SecurityController;
+use App\Modules\TenantPanel\Http\Controllers\UserController;
 use App\Modules\TenantPanel\Http\Middleware\EnsureTenantAuthenticated;
 use App\Modules\TenantPanel\Http\Middleware\EnsureTenantFeatureEnabled;
 use App\Modules\TenantPanel\Http\Middleware\ResolveTenantFromDomain;
@@ -24,7 +27,7 @@ Route::middleware(ResolveTenantFromDomain::class)
         Route::middleware(EnsureTenantAuthenticated::class)->group(function (): void {
             Route::prefix('panel')->group(function (): void {
                 Route::get('/', DashboardController::class)->name('dashboard');
-                Route::get('cms', [ModulePageController::class, 'cms'])
+                Route::get('cms', [CmsPageController::class, 'index'])
                     ->middleware(EnsureTenantFeatureEnabled::class.':'.SystemFeature::Cms->value)
                     ->name('cms.index');
                 Route::prefix('files')
@@ -32,11 +35,14 @@ Route::middleware(ResolveTenantFromDomain::class)
                     ->middleware(EnsureTenantFeatureEnabled::class.':'.SystemFeature::Files->value)
                     ->group(function (): void {
                         Route::get('/', [FileController::class, 'index'])->name('index');
+                        Route::post('/', [FileController::class, 'store'])->name('store');
                         Route::post('exports/activity', [ActivityExportController::class, 'store'])->name('exports.activity.store');
                         Route::get('{file}/download', [FileController::class, 'download'])->name('download');
                         Route::delete('{file}', [FileController::class, 'destroy'])->name('destroy');
                     });
                 Route::get('settings', [ModulePageController::class, 'settings'])->name('settings.index');
+                Route::get('security', [SecurityController::class, 'index'])->name('security.index');
+                Route::get('users', [UserController::class, 'index'])->name('users.index');
 
                 Route::prefix('crm')
                     ->name('crm.')

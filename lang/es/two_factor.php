@@ -27,5 +27,9 @@ return [
     'setup_secret' => 'Secreto TOTP',
     'setup_secret_help' => 'Añade este secreto manualmente en tu app autenticadora.',
     'start_setup' => 'Iniciar configuración',
+    'tenant_2fa' => '2FA de usuario',
+    'tenant_2fa_description' => 'Gestiona la protección de inicio de sesión del panel tenant.',
+    'tenant_disabled_notice' => 'Activa 2FA para proteger mejor tu cuenta en este tenant.',
+    'tenant_security_description' => 'Controla la configuración de seguridad de tu cuenta tenant.',
     'verify' => 'Verificar',
 ];
