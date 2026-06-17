@@ -6,6 +6,7 @@ use App\Modules\Crm\Http\Controllers\DealController;
 use App\Modules\Crm\Http\Controllers\NoteController;
 use App\Modules\Crm\Http\Controllers\TaskController;
 use App\Modules\Entitlements\Enums\SystemFeature;
+use App\Modules\Files\Http\Controllers\FileController;
 use App\Modules\TenantPanel\Http\Controllers\Auth\LoginController;
 use App\Modules\TenantPanel\Http\Controllers\DashboardController;
 use App\Modules\TenantPanel\Http\Controllers\Modules\ModulePageController;
@@ -25,9 +26,14 @@ Route::middleware(ResolveTenantFromDomain::class)
                 Route::get('cms', [ModulePageController::class, 'cms'])
                     ->middleware(EnsureTenantFeatureEnabled::class.':'.SystemFeature::Cms->value)
                     ->name('cms.index');
-                Route::get('files', [ModulePageController::class, 'files'])
+                Route::prefix('files')
+                    ->name('files.')
                     ->middleware(EnsureTenantFeatureEnabled::class.':'.SystemFeature::Files->value)
-                    ->name('files.index');
+                    ->group(function (): void {
+                        Route::get('/', [FileController::class, 'index'])->name('index');
+                        Route::get('{file}/download', [FileController::class, 'download'])->name('download');
+                        Route::delete('{file}', [FileController::class, 'destroy'])->name('destroy');
+                    });
                 Route::get('settings', [ModulePageController::class, 'settings'])->name('settings.index');
 
                 Route::prefix('crm')

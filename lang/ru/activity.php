@@ -20,4 +20,7 @@ return [
     'crm_task_created' => 'CRM-задача [:task] создана.',
     'crm_task_deleted' => 'CRM-задача [:task] удалена.',
     'crm_task_updated' => 'CRM-задача [:task] обновлена.',
+    'file_deleted' => 'Файл [:file] удален.',
+    'file_downloaded' => 'Файл [:file] скачан.',
+    'file_registered' => 'Файл [:file] зарегистрирован.',
 ];

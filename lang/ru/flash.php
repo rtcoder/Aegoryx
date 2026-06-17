@@ -16,6 +16,7 @@ return [
     'crm_task_created' => 'Задача создана.',
     'crm_task_deleted' => 'Задача удалена.',
     'crm_task_updated' => 'Задача обновлена.',
+    'file_deleted' => 'Файл удален.',
     'license_verified' => 'Лицензия проверена.',
     'support_session_ended' => 'Сессия поддержки завершена.',
     'support_session_started' => 'Сессия поддержки начата.',

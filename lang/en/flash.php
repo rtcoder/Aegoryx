@@ -16,6 +16,7 @@ return [
     'crm_task_created' => 'Task created.',
     'crm_task_deleted' => 'Task deleted.',
     'crm_task_updated' => 'Task updated.',
+    'file_deleted' => 'File deleted.',
     'license_verified' => 'License verified.',
     'support_session_ended' => 'Support session ended.',
     'support_session_started' => 'Support session started.',

@@ -16,6 +16,7 @@ return [
     'crm_task_created' => 'Zadanie zostało utworzone.',
     'crm_task_deleted' => 'Zadanie zostało usunięte.',
     'crm_task_updated' => 'Zadanie zostało zaktualizowane.',
+    'file_deleted' => 'Plik został usunięty.',
     'license_verified' => 'Licencja została zweryfikowana.',
     'support_session_ended' => 'Sesja wsparcia została zakończona.',
     'support_session_started' => 'Sesja wsparcia została rozpoczęta.',

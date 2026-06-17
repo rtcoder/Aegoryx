@@ -24,7 +24,7 @@ Zapewnić autoryzowany i audytowany dostęp do prywatnych plików.
 
 - Dodać download controller/action.
 - Sprawdzać policy przed storage access.
-- Zapisywać audit dla download.
+- Zapisywać activity dla download.
 
 ## Subtaski
 
@@ -33,7 +33,7 @@ Brak.
 ## Acceptance Criteria
 
 - Nieautoryzowany download zwraca 403.
-- Każdy private download jest audytowany.
+- Każdy private download jest zapisywany w activity history.
 - Response nie ujawnia internal storage path bez potrzeby.
 
 ## Test Plan

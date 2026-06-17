@@ -20,4 +20,7 @@ return [
     'crm_task_created' => 'Tâche CRM [:task] créée.',
     'crm_task_deleted' => 'Tâche CRM [:task] supprimée.',
     'crm_task_updated' => 'Tâche CRM [:task] mise à jour.',
+    'file_deleted' => 'Fichier [:file] supprimé.',
+    'file_downloaded' => 'Fichier [:file] téléchargé.',
+    'file_registered' => 'Fichier [:file] enregistré.',
 ];

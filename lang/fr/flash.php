@@ -16,6 +16,7 @@ return [
     'crm_task_created' => 'Tâche créée.',
     'crm_task_deleted' => 'Tâche supprimée.',
     'crm_task_updated' => 'Tâche mise à jour.',
+    'file_deleted' => 'Fichier supprimé.',
     'license_verified' => 'Licence vérifiée.',
     'support_session_ended' => 'Session de support terminée.',
     'support_session_started' => 'Session de support démarrée.',

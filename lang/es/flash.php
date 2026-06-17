@@ -16,6 +16,7 @@ return [
     'crm_task_created' => 'Tarea creada.',
     'crm_task_deleted' => 'Tarea eliminada.',
     'crm_task_updated' => 'Tarea actualizada.',
+    'file_deleted' => 'Archivo eliminado.',
     'license_verified' => 'Licencia verificada.',
     'support_session_ended' => 'Sesión de soporte finalizada.',
     'support_session_started' => 'Sesión de soporte iniciada.',

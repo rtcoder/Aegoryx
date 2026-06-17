@@ -18,11 +18,6 @@ final class ModulePageController extends Controller
         return $this->module($request, __('tenant_panel.nav.crm'), __('tenant_panel.nav.crm_description'));
     }
 
-    public function files(Request $request): View
-    {
-        return $this->module($request, __('tenant_panel.nav.files'), __('tenant_panel.nav.files_description'));
-    }
-
     public function settings(Request $request): View
     {
         return $this->module($request, __('tenant_panel.nav.settings'), __('tenant_panel.nav.settings_description'));

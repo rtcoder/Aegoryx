@@ -20,4 +20,7 @@ return [
     'crm_task_created' => 'CRM task [:task] created.',
     'crm_task_deleted' => 'CRM task [:task] deleted.',
     'crm_task_updated' => 'CRM task [:task] updated.',
+    'file_deleted' => 'File [:file] deleted.',
+    'file_downloaded' => 'File [:file] downloaded.',
+    'file_registered' => 'File [:file] registered.',
 ];

@@ -25,7 +25,7 @@ Zbudować tenantowy model metadanych plików niezależny od fizycznego storage.
 
 - Dodać migration/model.
 - Oddzielić metadata od binary storage.
-- Dodać activity dla upload/delete.
+- Dodać activity dla register/delete.
 
 ## Subtaski
 
@@ -41,3 +41,4 @@ Brak.
 
 - Migration/model tests.
 - Storage fake tests.
+- Soft delete activity tests.
