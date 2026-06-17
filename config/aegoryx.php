@@ -18,7 +18,7 @@ use App\Modules\TenantPanel\Providers\TenantPanelServiceProvider;
 return [
     'localization' => [
         'default_locale' => env('AEGORYX_DEFAULT_LOCALE', 'pl'),
-        'supported_locales' => ['pl', 'en', 'de', 'es', 'ru', 'fr'],
+        'supported_locales' => ['pl', 'en', 'de', 'es', 'ru', 'fr', 'it', 'cs', 'sk'],
     ],
 
     'landlord' => [

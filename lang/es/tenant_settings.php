@@ -55,5 +55,8 @@ return [
         'es' => 'Español',
         'ru' => 'Ruso',
         'fr' => 'Francés',
+        'it' => 'Italiano',
+        'cs' => 'Checo',
+        'sk' => 'Eslovaco',
     ],
 ];

@@ -15,6 +15,7 @@ use App\Modules\Tenancy\Enums\TenantLicenseType;
 use App\Modules\Tenancy\Enums\TenantStatus;
 use App\Support\Localization\Locale;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\File;
 use Tests\TestCase;
 
 final class LocalePersistenceTest extends TestCase
@@ -36,8 +37,49 @@ final class LocalePersistenceTest extends TestCase
 
     public function test_supported_locales_are_explicit_and_extendable(): void
     {
-        $this->assertSame(['pl', 'en', 'de', 'es', 'ru', 'fr'], Locale::values());
+        $this->assertSame(['pl', 'en', 'de', 'es', 'ru', 'fr', 'it', 'cs', 'sk'], Locale::values());
         $this->assertSame(Locale::values(), config('aegoryx.localization.supported_locales'));
+    }
+
+    public function test_supported_locales_have_complete_language_files(): void
+    {
+        $referenceFiles = collect(File::files(lang_path('en')))
+            ->map(fn ($file) => $file->getFilename())
+            ->sort()
+            ->values()
+            ->all();
+
+        foreach (Locale::values() as $locale) {
+            $this->assertDirectoryExists(lang_path($locale));
+
+            $localeFiles = collect(File::files(lang_path($locale)))
+                ->map(fn ($file) => $file->getFilename())
+                ->sort()
+                ->values()
+                ->all();
+
+            $this->assertSame($referenceFiles, $localeFiles, "Locale [{$locale}] has incomplete language files.");
+        }
+    }
+
+    public function test_non_english_locales_are_not_plain_english_copies(): void
+    {
+        foreach (Locale::values() as $locale) {
+            if ($locale === Locale::English->value) {
+                continue;
+            }
+
+            foreach (File::files(lang_path('en')) as $referenceFile) {
+                $localizedPath = lang_path($locale.'/'.$referenceFile->getFilename());
+
+                $this->assertFileExists($localizedPath);
+                $this->assertNotSame(
+                    File::get($referenceFile->getPathname()),
+                    File::get($localizedPath),
+                    "Locale [{$locale}] file [{$referenceFile->getFilename()}] is still an English copy.",
+                );
+            }
+        }
     }
 
     public function test_identity_and_tenant_have_locale(): void

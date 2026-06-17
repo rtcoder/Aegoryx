@@ -10,6 +10,9 @@ enum Locale: string
     case Spanish = 'es';
     case Russian = 'ru';
     case French = 'fr';
+    case Italian = 'it';
+    case Czech = 'cs';
+    case Slovak = 'sk';
 
     /**
      * @return array<int, string>

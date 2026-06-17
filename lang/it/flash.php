@@ -1,0 +1,26 @@
+<?php
+
+return [
+    'activity_export_created' => 'Esportazione attività creata.',
+    'crm_company_created' => 'Azienda creata.',
+    'crm_company_deleted' => 'Azienda eliminata.',
+    'crm_company_updated' => 'Azienda aggiornata.',
+    'crm_contact_created' => 'Contatto creato.',
+    'crm_contact_deleted' => 'Contatto eliminato.',
+    'crm_contact_updated' => 'Contatto aggiornato.',
+    'crm_deal_created' => 'Deal creato.',
+    'crm_deal_deleted' => 'Deal eliminato.',
+    'crm_deal_updated' => 'Deal aggiornato.',
+    'crm_note_created' => 'Nota creata.',
+    'crm_note_deleted' => 'Nota eliminata.',
+    'crm_note_updated' => 'Nota aggiornata.',
+    'crm_task_created' => 'Task creato.',
+    'crm_task_deleted' => 'Task eliminato.',
+    'crm_task_updated' => 'Task aggiornato.',
+    'file_deleted' => 'File eliminato.',
+    'license_verified' => 'Licenza verificata.',
+    'support_session_ended' => 'Sessione supporto terminata.',
+    'support_session_started' => 'Sessione supporto avviata.',
+    'tenant_feature_override_saved' => 'Override funzionalità tenant salvato.',
+    'tenant_status_updated' => 'Stato tenant aggiornato.',
+];

@@ -1,0 +1,26 @@
+<?php
+
+return [
+    'activity_export_created' => 'Export aktivity vytvorený.',
+    'crm_company_created' => 'Firma vytvorená.',
+    'crm_company_deleted' => 'Firma odstránená.',
+    'crm_company_updated' => 'Firma aktualizovaná.',
+    'crm_contact_created' => 'Kontakt vytvorený.',
+    'crm_contact_deleted' => 'Kontakt odstránený.',
+    'crm_contact_updated' => 'Kontakt aktualizovaný.',
+    'crm_deal_created' => 'Deal vytvorený.',
+    'crm_deal_deleted' => 'Deal odstránený.',
+    'crm_deal_updated' => 'Deal aktualizovaný.',
+    'crm_note_created' => 'Poznámka vytvorená.',
+    'crm_note_deleted' => 'Poznámka odstránená.',
+    'crm_note_updated' => 'Poznámka aktualizovaná.',
+    'crm_task_created' => 'Úloha vytvorená.',
+    'crm_task_deleted' => 'Úloha odstránená.',
+    'crm_task_updated' => 'Úloha aktualizovaná.',
+    'file_deleted' => 'Súbor odstránený.',
+    'license_verified' => 'Licencia overená.',
+    'support_session_ended' => 'Support session ukončená.',
+    'support_session_started' => 'Support session spustená.',
+    'tenant_feature_override_saved' => 'Prepísanie funkcie tenanta uložené.',
+    'tenant_status_updated' => 'Stav tenanta aktualizovaný.',
+];
