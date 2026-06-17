@@ -45,6 +45,8 @@ final class ModuleBootstrapTest extends TestCase
         $this->assertContains('tenant-domains:verify', $commands);
         $this->assertContains('aegoryx:preflight', $commands);
         $this->assertContains('aegoryx:smoke', $commands);
+        $this->assertContains('aegoryx:launch-check', $commands);
+        $this->assertContains('aegoryx:retention:purge', $commands);
     }
 
     public function test_preflight_command_passes_for_configured_application(): void

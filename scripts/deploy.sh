@@ -199,4 +199,7 @@ APPLIED_MIGRATIONS=()
 log "Running post-deploy smoke checks."
 artisan aegoryx:smoke
 
+log "Running launch readiness checks."
+artisan aegoryx:launch-check
+
 log "Aegoryx deploy finished successfully."
