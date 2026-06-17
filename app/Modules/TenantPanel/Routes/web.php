@@ -20,89 +20,63 @@ Route::middleware(ResolveTenantFromDomain::class)
         Route::get('/login', [LoginController::class, 'create'])->name('login');
 
         Route::middleware(EnsureTenantAuthenticated::class)->group(function (): void {
-            Route::get('/panel', DashboardController::class)->name('dashboard');
-            Route::get('/panel/cms', [ModulePageController::class, 'cms'])
-                ->middleware(EnsureTenantFeatureEnabled::class.':'.SystemFeature::Cms->value)
-                ->name('cms.index');
-            Route::get('/panel/crm', [ContactController::class, 'index'])
-                ->middleware(EnsureTenantFeatureEnabled::class.':'.SystemFeature::Crm->value)
-                ->name('crm.index');
-            Route::get('/panel/crm/companies', [CompanyController::class, 'index'])
-                ->middleware(EnsureTenantFeatureEnabled::class.':'.SystemFeature::Crm->value)
-                ->name('crm.companies.index');
-            Route::post('/panel/crm/companies', [CompanyController::class, 'store'])
-                ->middleware(EnsureTenantFeatureEnabled::class.':'.SystemFeature::Crm->value)
-                ->name('crm.companies.store');
-            Route::get('/panel/crm/companies/{company}/edit', [CompanyController::class, 'edit'])
-                ->middleware(EnsureTenantFeatureEnabled::class.':'.SystemFeature::Crm->value)
-                ->name('crm.companies.edit');
-            Route::patch('/panel/crm/companies/{company}', [CompanyController::class, 'update'])
-                ->middleware(EnsureTenantFeatureEnabled::class.':'.SystemFeature::Crm->value)
-                ->name('crm.companies.update');
-            Route::delete('/panel/crm/companies/{company}', [CompanyController::class, 'destroy'])
-                ->middleware(EnsureTenantFeatureEnabled::class.':'.SystemFeature::Crm->value)
-                ->name('crm.companies.destroy');
-            Route::get('/panel/crm/deals', [DealController::class, 'index'])
-                ->middleware(EnsureTenantFeatureEnabled::class.':'.SystemFeature::Crm->value)
-                ->name('crm.deals.index');
-            Route::post('/panel/crm/deals', [DealController::class, 'store'])
-                ->middleware(EnsureTenantFeatureEnabled::class.':'.SystemFeature::Crm->value)
-                ->name('crm.deals.store');
-            Route::get('/panel/crm/deals/{deal}/edit', [DealController::class, 'edit'])
-                ->middleware(EnsureTenantFeatureEnabled::class.':'.SystemFeature::Crm->value)
-                ->name('crm.deals.edit');
-            Route::patch('/panel/crm/deals/{deal}', [DealController::class, 'update'])
-                ->middleware(EnsureTenantFeatureEnabled::class.':'.SystemFeature::Crm->value)
-                ->name('crm.deals.update');
-            Route::delete('/panel/crm/deals/{deal}', [DealController::class, 'destroy'])
-                ->middleware(EnsureTenantFeatureEnabled::class.':'.SystemFeature::Crm->value)
-                ->name('crm.deals.destroy');
-            Route::get('/panel/crm/notes', [NoteController::class, 'index'])
-                ->middleware(EnsureTenantFeatureEnabled::class.':'.SystemFeature::Crm->value)
-                ->name('crm.notes.index');
-            Route::post('/panel/crm/notes', [NoteController::class, 'store'])
-                ->middleware(EnsureTenantFeatureEnabled::class.':'.SystemFeature::Crm->value)
-                ->name('crm.notes.store');
-            Route::get('/panel/crm/notes/{note}/edit', [NoteController::class, 'edit'])
-                ->middleware(EnsureTenantFeatureEnabled::class.':'.SystemFeature::Crm->value)
-                ->name('crm.notes.edit');
-            Route::patch('/panel/crm/notes/{note}', [NoteController::class, 'update'])
-                ->middleware(EnsureTenantFeatureEnabled::class.':'.SystemFeature::Crm->value)
-                ->name('crm.notes.update');
-            Route::delete('/panel/crm/notes/{note}', [NoteController::class, 'destroy'])
-                ->middleware(EnsureTenantFeatureEnabled::class.':'.SystemFeature::Crm->value)
-                ->name('crm.notes.destroy');
-            Route::get('/panel/crm/tasks', [TaskController::class, 'index'])
-                ->middleware(EnsureTenantFeatureEnabled::class.':'.SystemFeature::Crm->value)
-                ->name('crm.tasks.index');
-            Route::post('/panel/crm/tasks', [TaskController::class, 'store'])
-                ->middleware(EnsureTenantFeatureEnabled::class.':'.SystemFeature::Crm->value)
-                ->name('crm.tasks.store');
-            Route::get('/panel/crm/tasks/{task}/edit', [TaskController::class, 'edit'])
-                ->middleware(EnsureTenantFeatureEnabled::class.':'.SystemFeature::Crm->value)
-                ->name('crm.tasks.edit');
-            Route::patch('/panel/crm/tasks/{task}', [TaskController::class, 'update'])
-                ->middleware(EnsureTenantFeatureEnabled::class.':'.SystemFeature::Crm->value)
-                ->name('crm.tasks.update');
-            Route::delete('/panel/crm/tasks/{task}', [TaskController::class, 'destroy'])
-                ->middleware(EnsureTenantFeatureEnabled::class.':'.SystemFeature::Crm->value)
-                ->name('crm.tasks.destroy');
-            Route::post('/panel/crm/contacts', [ContactController::class, 'store'])
-                ->middleware(EnsureTenantFeatureEnabled::class.':'.SystemFeature::Crm->value)
-                ->name('crm.contacts.store');
-            Route::get('/panel/crm/contacts/{contact}/edit', [ContactController::class, 'edit'])
-                ->middleware(EnsureTenantFeatureEnabled::class.':'.SystemFeature::Crm->value)
-                ->name('crm.contacts.edit');
-            Route::patch('/panel/crm/contacts/{contact}', [ContactController::class, 'update'])
-                ->middleware(EnsureTenantFeatureEnabled::class.':'.SystemFeature::Crm->value)
-                ->name('crm.contacts.update');
-            Route::delete('/panel/crm/contacts/{contact}', [ContactController::class, 'destroy'])
-                ->middleware(EnsureTenantFeatureEnabled::class.':'.SystemFeature::Crm->value)
-                ->name('crm.contacts.destroy');
-            Route::get('/panel/files', [ModulePageController::class, 'files'])
-                ->middleware(EnsureTenantFeatureEnabled::class.':'.SystemFeature::Files->value)
-                ->name('files.index');
-            Route::get('/panel/settings', [ModulePageController::class, 'settings'])->name('settings.index');
+            Route::prefix('panel')->group(function (): void {
+                Route::get('/', DashboardController::class)->name('dashboard');
+                Route::get('cms', [ModulePageController::class, 'cms'])
+                    ->middleware(EnsureTenantFeatureEnabled::class.':'.SystemFeature::Cms->value)
+                    ->name('cms.index');
+                Route::get('files', [ModulePageController::class, 'files'])
+                    ->middleware(EnsureTenantFeatureEnabled::class.':'.SystemFeature::Files->value)
+                    ->name('files.index');
+                Route::get('settings', [ModulePageController::class, 'settings'])->name('settings.index');
+
+                Route::prefix('crm')
+                    ->name('crm.')
+                    ->middleware(EnsureTenantFeatureEnabled::class.':'.SystemFeature::Crm->value)
+                    ->group(function (): void {
+                        Route::get('/', [ContactController::class, 'index'])->name('index');
+
+                        Route::prefix('contacts')->name('contacts.')->group(function (): void {
+                            Route::post('/', [ContactController::class, 'store'])->name('store');
+                            Route::get('{contact}/edit', [ContactController::class, 'edit'])->name('edit');
+                            Route::patch('{contact}', [ContactController::class, 'update'])->name('update');
+                            Route::delete('{contact}', [ContactController::class, 'destroy'])->name('destroy');
+                        });
+
+                        Route::prefix('companies')->name('companies.')->group(function (): void {
+                            Route::get('/', [CompanyController::class, 'index'])->name('index');
+                            Route::post('/', [CompanyController::class, 'store'])->name('store');
+                            Route::get('{company}/edit', [CompanyController::class, 'edit'])->name('edit');
+                            Route::patch('{company}', [CompanyController::class, 'update'])->name('update');
+                            Route::delete('{company}', [CompanyController::class, 'destroy'])->name('destroy');
+                        });
+
+                        Route::prefix('deals')->name('deals.')->group(function (): void {
+                            Route::get('/', [DealController::class, 'index'])->name('index');
+                            Route::post('/', [DealController::class, 'store'])->name('store');
+                            Route::get('{deal}/edit', [DealController::class, 'edit'])->name('edit');
+                            Route::patch('{deal}', [DealController::class, 'update'])->name('update');
+                            Route::delete('{deal}', [DealController::class, 'destroy'])->name('destroy');
+                        });
+
+                        Route::prefix('notes')->name('notes.')->group(function (): void {
+                            Route::get('/', [NoteController::class, 'index'])->name('index');
+                            Route::post('/', [NoteController::class, 'store'])->name('store');
+                            Route::get('{note}/edit', [NoteController::class, 'edit'])->name('edit');
+                            Route::patch('{note}', [NoteController::class, 'update'])->name('update');
+                            Route::delete('{note}', [NoteController::class, 'destroy'])->name('destroy');
+                        });
+
+                        Route::prefix('tasks')->name('tasks.')->group(function (): void {
+                            Route::get('/', [TaskController::class, 'index'])->name('index');
+                            Route::post('/', [TaskController::class, 'store'])->name('store');
+                            Route::get('{task}/edit', [TaskController::class, 'edit'])->name('edit');
+                            Route::patch('{task}', [TaskController::class, 'update'])->name('update');
+                            Route::delete('{task}', [TaskController::class, 'destroy'])->name('destroy');
+                        });
+                    });
+            });
+
             Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
         });
     });
