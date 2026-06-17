@@ -16,7 +16,7 @@ To główna powierzchnia pracy użytkownika tenanta. Musi być ergonomiczna, mod
 
 ## Status
 
-- Done: Livewire Setup, Panel Shell, Tenant Navigation, Authorization UX, Entitlement Aware UI, Tenant Users, Tenant Security.
+- Done: Livewire Setup, Panel Shell, Tenant Navigation, Authorization UX, Entitlement Aware UI, Tenant Users, Tenant User Lifecycle, Tenant Security.
 - In progress: none.
 - Pending: none.
 

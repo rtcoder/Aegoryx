@@ -133,6 +133,90 @@ final class SubscriptionMappingTest extends TestCase
         $this->assertSame($expected, $subscription->status);
     }
 
+    public function test_signed_billing_webhook_syncs_subscription(): void
+    {
+        config()->set('aegoryx.billing.webhooks.paddle_secret', 'test-secret');
+
+        $tenant = $this->tenant();
+        $plan = Plan::query()->create([
+            'key' => 'growth',
+            'name' => 'Growth',
+            'status' => PlanStatus::Active,
+        ]);
+        $payload = [
+            'event_id' => 'evt_http_001',
+            'event_type' => 'subscription.updated',
+            'tenant_id' => $tenant->id,
+            'plan_id' => $plan->id,
+            'provider_subscription_id' => 'sub_http_001',
+            'provider_status' => 'active',
+        ];
+
+        $this
+            ->postJson(
+                '/api/billing/webhooks/paddle',
+                $payload,
+                ['X-Aegoryx-Signature' => $this->signature($payload)],
+            )
+            ->assertOk()
+            ->assertJson([
+                'status' => 'processed',
+                'subscription_status' => SubscriptionStatus::Active->value,
+            ]);
+
+        $this->assertSame(1, Subscription::query()->count());
+        $this->assertSame(1, BillingEvent::query()->count());
+        $this->assertSame(1, AuditLog::query()->where('action', AuditLogAction::BillingSubscriptionSynced)->count());
+    }
+
+    public function test_billing_webhook_rejects_invalid_signature(): void
+    {
+        config()->set('aegoryx.billing.webhooks.paddle_secret', 'test-secret');
+
+        $tenant = $this->tenant();
+
+        $this
+            ->postJson('/api/billing/webhooks/paddle', [
+                'event_id' => 'evt_http_002',
+                'event_type' => 'subscription.updated',
+                'tenant_id' => $tenant->id,
+                'provider_subscription_id' => 'sub_http_002',
+                'provider_status' => 'active',
+            ], ['X-Aegoryx-Signature' => 'invalid'])
+            ->assertUnauthorized();
+
+        $this->assertSame(0, Subscription::query()->count());
+        $this->assertSame(0, BillingEvent::query()->count());
+    }
+
+    public function test_billing_webhook_retry_is_idempotent(): void
+    {
+        config()->set('aegoryx.billing.webhooks.paddle_secret', 'test-secret');
+
+        $tenant = $this->tenant();
+        $payload = [
+            'event_id' => 'evt_http_003',
+            'event_type' => 'subscription.updated',
+            'tenant_id' => $tenant->id,
+            'provider_subscription_id' => 'sub_http_003',
+            'provider_status' => 'trialing',
+        ];
+        $signature = $this->signature($payload);
+
+        $this
+            ->postJson('/api/billing/webhooks/paddle', $payload, ['X-Aegoryx-Signature' => $signature])
+            ->assertOk();
+
+        $this
+            ->postJson('/api/billing/webhooks/paddle', $payload, ['X-Aegoryx-Signature' => $signature])
+            ->assertOk();
+
+        $this->assertSame(1, Subscription::query()->count());
+        $this->assertSame(1, BillingEvent::query()->count());
+        $this->assertSame(BillingEventStatus::Duplicate, BillingEvent::query()->firstOrFail()->status);
+        $this->assertSame(1, AuditLog::query()->where('action', AuditLogAction::BillingSubscriptionSynced)->count());
+    }
+
     private function tenant(): Tenant
     {
         return Tenant::query()->create([
@@ -144,5 +228,13 @@ final class SubscriptionMappingTest extends TestCase
             'billing_model' => TenantBillingModel::Subscription,
             'license_type' => TenantLicenseType::SaasSubscription,
         ]);
+    }
+
+    /**
+     * @param  array<string, mixed>  $payload
+     */
+    private function signature(array $payload): string
+    {
+        return hash_hmac('sha256', json_encode($payload, JSON_THROW_ON_ERROR), 'test-secret');
     }
 }

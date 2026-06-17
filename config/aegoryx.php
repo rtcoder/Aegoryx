@@ -55,6 +55,12 @@ return [
         'default' => env('AEGORYX_QUEUE_DEFAULT', 'default'),
     ],
 
+    'billing' => [
+        'webhooks' => [
+            'paddle_secret' => env('AEGORYX_BILLING_PADDLE_WEBHOOK_SECRET'),
+        ],
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Aegoryx Modules

@@ -8,6 +8,7 @@ Done for internal subscription mapping and webhook idempotency foundation.
 
 - `active` i `trialing` subscription status z aktywnym planem zasilają entitlements.
 - `SyncSubscriptionFromProviderEventAction` mapuje status providera na `SubscriptionStatus`.
+- `/api/billing/webhooks/{provider}` przyjmuje podpisane eventy billingowe.
 - `BillingEvent` zapewnia idempotency po `provider + provider_event_id`.
 - Zmiany subskrypcji są audytowane jako `billing_subscription_synced`.
 - Pełny Paddle checkout nadal jest poza obecnym zakresem implementacji.

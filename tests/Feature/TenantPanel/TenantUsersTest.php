@@ -14,6 +14,7 @@ use App\Modules\Tenancy\Enums\TenantDomainType;
 use App\Modules\Tenancy\Enums\TenantLicenseType;
 use App\Modules\Tenancy\Enums\TenantStatus;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Hash;
 use Livewire\Livewire;
 use Tests\TestCase;
 
@@ -54,6 +55,43 @@ final class TenantUsersTest extends TestCase
             ->assertHasNoErrors();
 
         $this->assertSame(TenantUserRole::Viewer, $member->refresh()->role);
+    }
+
+    public function test_owner_can_create_user_with_generated_password(): void
+    {
+        $owner = $this->user(TenantUserRole::Owner, 'owner@example.test');
+        $this->actingAs($owner, 'web');
+
+        $component = Livewire::test(Index::class)
+            ->set('name', 'New Member')
+            ->set('email', 'new-member@example.test')
+            ->set('newRole', TenantUserRole::Member->value)
+            ->call('createUser')
+            ->assertHasNoErrors();
+
+        $created = User::query()->where('email', 'new-member@example.test')->firstOrFail();
+        $generatedPassword = $component->get('generatedPassword');
+
+        $this->assertSame(TenantUserRole::Member, $created->role);
+        $this->assertIsString($generatedPassword);
+        $this->assertTrue(Hash::check($generatedPassword, $created->password));
+        $this->assertSame($owner->id, $created->created_by);
+    }
+
+    public function test_member_cannot_create_user(): void
+    {
+        $member = $this->user(TenantUserRole::Member, 'member@example.test');
+        $this->actingAs($member, 'web');
+
+        Livewire::test(Index::class)
+            ->set('name', 'Blocked User')
+            ->set('email', 'blocked@example.test')
+            ->set('newRole', TenantUserRole::Viewer->value)
+            ->set('password', 'very-secret-password')
+            ->call('createUser')
+            ->assertForbidden();
+
+        $this->assertFalse(User::query()->where('email', 'blocked@example.test')->exists());
     }
 
     public function test_member_cannot_update_roles(): void
