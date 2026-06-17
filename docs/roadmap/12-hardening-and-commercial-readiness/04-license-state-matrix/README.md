@@ -24,8 +24,9 @@ Przetestować i udokumentować zachowanie produktu dla stanów licencji i subskr
 
 ## Kroki
 
-- Spisać macierz stanów.
-- Dodać tests dla effective entitlements.
+- Spisać macierz stanów w `docs/product/license-state-matrix.md`.
+- Dodać `LicenseStateMatrix`.
+- Dodać tests dla stanów blokujących i perpetual.
 - Sprawdzić UI states.
 
 ## Subtaski
@@ -34,11 +35,11 @@ Brak.
 
 ## Acceptance Criteria
 
-- Każdy state ma oczekiwane feature access.
-- Expired/suspended nie kasuje danych.
-- Perpetual działa bez SaaS subscription.
+- [x] Każdy state ma oczekiwane feature access.
+- [x] Expired/suspended nie kasuje danych.
+- [x] Perpetual działa bez SaaS subscription.
 
 ## Test Plan
 
-- Unit tests entitlement matrix.
-- Feature tests gated routes.
+- [x] Unit tests license matrix.
+- [x] Feature tests gated routes.

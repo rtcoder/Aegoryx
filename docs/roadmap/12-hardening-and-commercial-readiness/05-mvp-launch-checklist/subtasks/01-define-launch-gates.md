@@ -16,6 +16,6 @@ Zdefiniować bramki, które muszą być spełnione przed komercyjnym MVP.
 
 ## Checklist
 
-- [ ] Tenant isolation tests przechodzą.
-- [ ] Authorization audit bez blockerów.
-- [ ] Backup/restore procedure opisana.
+- [x] Tenant isolation tests przechodzą.
+- [x] Authorization audit bez blockerów.
+- [x] Backup/restore procedure opisana.

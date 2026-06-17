@@ -21,8 +21,8 @@ Przygotować kolejki dla jobów tenantowych i systemowych.
 
 ## Kroki
 
-- Opisać wymaganie `tenant_id` w tenant jobs.
-- Dodać base trait/helper, jeśli potrzebny.
+- Opisać wymaganie `tenant_id` w tenant jobs w `docs/operations/queues.md`.
+- Dodać `App\Support\Queue\InteractsWithTenantContext`.
 - Testować reset context po jobie.
 
 ## Subtaski
@@ -31,11 +31,10 @@ Brak.
 
 ## Acceptance Criteria
 
-- Tenant job nie działa bez tenant id.
-- Retry nie tworzy duplikatów tam, gdzie da się tego uniknąć.
-- Context jest resetowany po jobie.
+- [x] Tenant job nie działa bez tenant id.
+- [x] Retry nie tworzy duplikatów tam, gdzie da się tego uniknąć.
+- [x] Context jest resetowany po jobie.
 
 ## Test Plan
 
-- Queue fake tests.
-- Integration test tenant job context.
+- [x] Unit test tenant job context.

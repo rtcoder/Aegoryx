@@ -18,6 +18,6 @@ Opisać checks wymagane przed migracją produkcyjną.
 
 ## Checklist
 
-- [ ] Backup jest obowiązkowy.
-- [ ] Rollback strategy preferuje forward-only fix.
-- [ ] Operator wie, co zrobić przy failed tenant migration.
+- [x] Backup jest obowiązkowy.
+- [x] Rollback strategy preferuje forward-only fix.
+- [x] Operator wie, co zrobić przy failed tenant migration.

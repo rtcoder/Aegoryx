@@ -48,6 +48,13 @@ return [
         'export_files_expire_hours' => (int) env('RETENTION_EXPORT_FILES_EXPIRE_HOURS', 24),
     ],
 
+    'queues' => [
+        'system' => env('AEGORYX_QUEUE_SYSTEM', 'system'),
+        'tenant' => env('AEGORYX_QUEUE_TENANT', 'tenant'),
+        'exports' => env('AEGORYX_QUEUE_EXPORTS', 'exports'),
+        'default' => env('AEGORYX_QUEUE_DEFAULT', 'default'),
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Aegoryx Modules

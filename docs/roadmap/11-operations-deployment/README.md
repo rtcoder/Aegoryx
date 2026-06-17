@@ -16,12 +16,12 @@ Produkt ma działać jako SaaS i self-hosted bez osobnego dużego zespołu DevOp
 
 ## Taski
 
-- [Env Strategy](01-env-strategy/)
-- [Queue Setup](02-queue-setup/)
-- [Horizon](03-horizon/)
-- [Deploy Commands](04-deploy-commands/)
-- [Backup Notes](05-backup-notes/)
-- [Production Migration Checklist](06-production-migration-checklist/)
+- [x] [Env Strategy](01-env-strategy/)
+- [x] [Queue Setup](02-queue-setup/)
+- [x] [Horizon](03-horizon/)
+- [x] [Deploy Commands](04-deploy-commands/)
+- [x] [Backup Notes](05-backup-notes/)
+- [x] [Production Migration Checklist](06-production-migration-checklist/)
 
 ## Definicja Ukończenia
 

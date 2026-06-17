@@ -16,11 +16,11 @@ Przed sprzedażą trzeba potwierdzić, że produkt jest bezpieczny, audytowalny 
 
 ## Taski
 
-- [Tenant Isolation Test Suite](01-tenant-isolation-test-suite/)
-- [Authorization Audit](02-authorization-audit/)
-- [Privacy Audit](03-privacy-audit/)
-- [License State Matrix](04-license-state-matrix/)
-- [MVP Launch Checklist](05-mvp-launch-checklist/)
+- [x] [Tenant Isolation Test Suite](01-tenant-isolation-test-suite/)
+- [x] [Authorization Audit](02-authorization-audit/)
+- [x] [Privacy Audit](03-privacy-audit/)
+- [x] [License State Matrix](04-license-state-matrix/)
+- [x] [MVP Launch Checklist](05-mvp-launch-checklist/)
 
 ## Definicja Ukończenia
 

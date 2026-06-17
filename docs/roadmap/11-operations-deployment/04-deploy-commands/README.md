@@ -51,10 +51,10 @@ Brak.
 
 ## Acceptance Criteria
 
-- Dokument nie używa plain `php artisan migrate` jako pełnego deployu.
-- Deploy zawiera landlord i tenant migrations.
-- Production commands używają `--force`.
+- [x] Dokument nie używa plain `php artisan migrate` jako pełnego deployu.
+- [x] Deploy zawiera landlord i tenant migrations.
+- [x] Production commands używają `--force`.
 
 ## Test Plan
 
-- Review deployment docs.
+- [x] Review deployment docs.

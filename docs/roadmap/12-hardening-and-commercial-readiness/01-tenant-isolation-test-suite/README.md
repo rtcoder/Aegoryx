@@ -22,9 +22,10 @@ Zbudować szeroki zestaw testów potwierdzający izolację tenantów.
 
 ## Kroki
 
-- Tworzyć minimum dwóch tenantów w testach.
+- Tworzyć minimum dwóch tenantów/schema w testach PostgreSQL.
 - Wstawiać podobne dane w obu schemach.
 - Sprawdzać brak cross-tenant reads.
+- Testować cache key public API per tenant.
 
 ## Subtaski
 
@@ -32,10 +33,10 @@ Brak.
 
 ## Acceptance Criteria
 
-- Każdy tenant module ma isolation test.
-- Cache nie miesza tenantów.
-- Public API respektuje domain tenant resolving.
+- [x] Każdy tenant module ma isolation test.
+- [x] Cache nie miesza tenantów.
+- [x] Public API respektuje domain tenant resolving.
 
 ## Test Plan
 
-- `php artisan test --filter=TenantIsolation`
+- [x] `php artisan test --filter=TenantIsolation`

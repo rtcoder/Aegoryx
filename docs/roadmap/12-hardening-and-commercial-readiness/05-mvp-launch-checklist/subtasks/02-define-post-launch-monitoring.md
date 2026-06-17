@@ -19,6 +19,6 @@ Opisać minimalny monitoring po starcie MVP.
 
 ## Checklist
 
-- [ ] Krytyczne błędy mają kanał obserwacji.
-- [ ] Queue failures są widoczne.
-- [ ] Security events nie logują sekretów.
+- [x] Krytyczne błędy mają kanał obserwacji.
+- [x] Queue failures są widoczne.
+- [x] Security events nie logują sekretów.

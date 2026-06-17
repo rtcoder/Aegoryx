@@ -31,7 +31,7 @@ final class AdminSupportSessionsTest extends TestCase
 
     public function test_superadmin_can_start_support_session_with_reason(): void
     {
-        $superadmin = $this->superadmin();
+        $superadmin = $this->superadmin(twoFactor: true);
         $this->actingAs($superadmin, 'landlord');
         $tenant = $this->tenant();
 
@@ -61,7 +61,7 @@ final class AdminSupportSessionsTest extends TestCase
 
     public function test_support_session_requires_reason(): void
     {
-        $this->actingAs($this->superadmin(), 'landlord');
+        $this->actingAs($this->superadmin(twoFactor: true), 'landlord');
 
         Livewire::test(Index::class)
             ->set('tenantId', $this->tenant()->id)
@@ -75,7 +75,7 @@ final class AdminSupportSessionsTest extends TestCase
 
     public function test_superadmin_can_end_support_session(): void
     {
-        $superadmin = $this->superadmin();
+        $superadmin = $this->superadmin(twoFactor: true);
         $this->actingAs($superadmin, 'landlord');
         $supportSession = $this->supportSession($this->tenant(), $superadmin);
 
@@ -104,7 +104,7 @@ final class AdminSupportSessionsTest extends TestCase
 
     public function test_expired_support_session_is_closed_and_removed_from_context(): void
     {
-        $superadmin = $this->superadmin();
+        $superadmin = $this->superadmin(twoFactor: true);
         $this->actingAs($superadmin, 'landlord');
         $supportSession = $this->supportSession($this->tenant(), $superadmin, [
             'expires_at' => now()->subMinute(),
@@ -131,13 +131,37 @@ final class AdminSupportSessionsTest extends TestCase
         ]);
     }
 
-    private function superadmin(): Identity
+    public function test_support_session_requires_enabled_two_factor_auth(): void
     {
-        return Identity::query()->create([
+        $this->actingAs($this->superadmin(), 'landlord');
+
+        Livewire::test(Index::class)
+            ->set('tenantId', $this->tenant()->id)
+            ->set('reason', 'Debugging reported billing access issue.')
+            ->set('durationMinutes', 30)
+            ->call('start')
+            ->assertHasErrors(['two_factor']);
+
+        $this->assertSame(0, SupportSession::query()->count());
+    }
+
+    private function superadmin(bool $twoFactor = false): Identity
+    {
+        $identity = Identity::query()->create([
             'email' => 'admin@example.test',
             'is_super_admin' => true,
             'status' => IdentityStatus::Active,
         ]);
+
+        if ($twoFactor) {
+            $identity->forceFill([
+                'two_factor_secret' => 'test-secret',
+                'two_factor_recovery_codes' => ['hashed-code'],
+                'two_factor_confirmed_at' => now(),
+            ])->save();
+        }
+
+        return $identity->refresh();
     }
 
     private function tenant(): Tenant

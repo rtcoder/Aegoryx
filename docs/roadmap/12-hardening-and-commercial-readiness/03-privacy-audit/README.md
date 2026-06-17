@@ -23,7 +23,7 @@ Sprawdzić, czy dane wrażliwe są szyfrowane, maskowane i nie trafiają do log�
 
 ## Kroki
 
-- Zidentyfikować sensitive fields.
+- Zidentyfikować sensitive fields w `docs/security/privacy-audit.md`.
 - Sprawdzić storage/logging/activity.
 - Dodać redaction tests.
 
@@ -33,11 +33,11 @@ Brak.
 
 ## Acceptance Criteria
 
-- Brak plaintext sekretów w logach.
-- Sensitive activity payload jest maskowany.
-- Public API nie zwraca private fields.
+- [x] Brak plaintext sekretów w logach.
+- [x] Sensitive activity payload jest maskowany.
+- [x] Public API nie zwraca private fields.
 
 ## Test Plan
 
-- Redaction tests.
-- Public API payload assertions.
+- [x] Redaction tests.
+- [x] Public API payload assertions.

@@ -22,8 +22,8 @@ Wdrożyć Laravel Horizon dla monitoringu kolejek w SaaS/self-hosted.
 ## Kroki
 
 - Dodać Horizon dependency i config.
-- Ograniczyć dostęp do superadminów.
-- Udokumentować uruchamianie.
+- Ograniczyć dostęp do landlord superadminów.
+- Udokumentować uruchamianie w `docs/operations/queues.md`.
 
 ## Subtaski
 
@@ -31,11 +31,11 @@ Brak.
 
 ## Acceptance Criteria
 
-- Horizon nie jest publicznie dostępny.
-- Kolejki krytyczne są nazwane.
-- Dokumentacja opisuje worker command.
+- [x] Horizon nie jest publicznie dostępny.
+- [x] Kolejki krytyczne są nazwane.
+- [x] Dokumentacja opisuje worker command.
 
 ## Test Plan
 
-- Access tests.
-- Manual smoke local.
+- [x] Gate access test.
+- [x] Config review.

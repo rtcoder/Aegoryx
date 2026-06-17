@@ -22,7 +22,7 @@ Przejrzeć wszystkie akcje modyfikujące pod kątem authorization checks.
 
 ## Kroki
 
-- Spisać wszystkie write endpoints/actions.
+- Spisać wszystkie write endpoints/actions w `docs/security/authorization-audit.md`.
 - Potwierdzić policy/gate/middleware.
 - Dodać brakujące tests.
 
@@ -32,10 +32,11 @@ Brak.
 
 ## Acceptance Criteria
 
-- Każda akcja zapisu ma backend check.
-- Testy 403 istnieją dla krytycznych akcji.
-- UI-only security nie występuje.
+- [x] Każda akcja zapisu ma backend check.
+- [x] Testy 403 istnieją dla krytycznych akcji.
+- [x] UI-only security nie występuje.
 
 ## Test Plan
 
-- Feature tests unauthorized cases.
+- [x] Feature tests unauthorized cases.
+- [x] Audit docs review.

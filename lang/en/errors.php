@@ -5,4 +5,5 @@ return [
     '403_default' => 'You do not have access to this area.',
     'invalid_tenant_credentials' => 'Invalid tenant credentials.',
     'module_unavailable' => 'This module is not available for the active tenant.',
+    'two_factor_required_for_support' => 'Support mode requires enabled 2FA.',
 ];

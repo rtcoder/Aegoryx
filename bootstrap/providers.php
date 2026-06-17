@@ -2,8 +2,10 @@
 
 use App\Providers\AegoryxModuleServiceProvider;
 use App\Providers\AppServiceProvider;
+use App\Providers\HorizonServiceProvider;
 
 return [
-    AppServiceProvider::class,
     AegoryxModuleServiceProvider::class,
+    AppServiceProvider::class,
+    HorizonServiceProvider::class,
 ];

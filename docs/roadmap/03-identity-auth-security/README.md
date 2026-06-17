@@ -16,8 +16,8 @@ Aegoryx operuje na prywatnych danych CRM/CMS. Dostęp musi być kontrolowany po 
 
 ## Status
 
-- Done: Identity Model, Tenant User Auth, Fortify Jetstream Decision, Policies.
-- Next: Two Factor Auth, Support Impersonation Audit hardening pod 2FA.
+- Done: Identity Model, Tenant User Auth, Fortify Jetstream Decision, Policies, Two Factor Auth, Support Impersonation Audit.
+- Next: Brak.
 
 ## Taski
 
@@ -25,8 +25,8 @@ Aegoryx operuje na prywatnych danych CRM/CMS. Dostęp musi być kontrolowany po 
 - [x] [Tenant User Auth](02-tenant-user-auth/)
 - [x] [Fortify Jetstream Decision](03-fortify-jetstream-decision/)
 - [x] [Policies](04-policies/)
-- [ ] [Two Factor Auth](05-two-factor-auth/)
-- [ ] [Support Impersonation Audit](06-support-impersonation-audit/)
+- [x] [Two Factor Auth](05-two-factor-auth/)
+- [x] [Support Impersonation Audit](06-support-impersonation-audit/)
 
 ## Definicja Ukończenia
 

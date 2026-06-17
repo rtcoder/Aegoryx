@@ -9,6 +9,7 @@ use App\Models\Landlord\Tenant;
 use App\Modules\AdminConsole\Enums\SupportSessionStatus;
 use App\Modules\Audit\Enums\AuditLogAction;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\ValidationException;
 
 final readonly class StartSupportSessionAction
 {
@@ -20,6 +21,12 @@ final readonly class StartSupportSessionAction
         ?string $ip,
         ?string $userAgent,
     ): SupportSession {
+        if (! $actor->hasTwoFactorEnabled()) {
+            throw ValidationException::withMessages([
+                'two_factor' => __('errors.two_factor_required_for_support'),
+            ]);
+        }
+
         return DB::transaction(function () use ($tenant, $actor, $reason, $durationMinutes, $ip, $userAgent): SupportSession {
             SupportSession::query()
                 ->where('actor_id', $actor->id)

@@ -21,7 +21,7 @@ Opisać minimalną strategię backup/restore dla PostgreSQL schema-per-tenant i 
 
 ## Kroki
 
-- Opisać backup całej bazy.
+- Opisać backup całej bazy w `docs/operations/backup-restore.md`.
 - Opisać konsekwencje schema-per-tenant.
 - Wskazać restore rehearsal jako wymóg.
 
@@ -31,10 +31,10 @@ Brak.
 
 ## Acceptance Criteria
 
-- Restore tenant data nie zakłada cross-schema FK.
-- Backup obejmuje storage i DB.
-- Dokument wskazuje test restore.
+- [x] Restore tenant data nie zakłada cross-schema FK.
+- [x] Backup obejmuje storage i DB.
+- [x] Dokument wskazuje test restore.
 
 ## Test Plan
 
-- Review ops docs.
+- [x] Review ops docs.

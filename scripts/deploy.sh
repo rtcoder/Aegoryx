@@ -182,6 +182,9 @@ run_migration_command \
 log "Caching optimized framework files."
 artisan optimize
 
+log "Restarting Horizon workers."
+artisan horizon:terminate || true
+
 log "Bringing application back up."
 artisan up
 MAINTENANCE_STARTED="false"

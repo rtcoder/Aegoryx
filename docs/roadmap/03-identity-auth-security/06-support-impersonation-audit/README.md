@@ -28,6 +28,7 @@ Zbudować bezpieczny support access dla superadmina z powodem, expiration i peł
 - Zaprojektować support session lifecycle.
 - Wymusić reason i 2FA.
 - Zapisywać actor jako superadmin/support.
+- Dokumentować zasady w `docs/security/two-factor-and-support-access.md`.
 
 ## Subtaski
 
@@ -35,11 +36,12 @@ Brak.
 
 ## Acceptance Criteria
 
-- Każde wejście support jest audytowane.
-- Sesja support wygasa.
-- UI wyraźnie pokazuje tryb support.
+- [x] Każde wejście support jest audytowane.
+- [x] Sesja support wygasa.
+- [x] UI wyraźnie pokazuje tryb support.
 
 ## Test Plan
 
-- Feature tests dla start/end support session.
-- Audit tests dla akcji w trybie support.
+- [x] Feature tests dla start/end support session.
+- [x] Audit tests dla akcji w trybie support.
+- [x] Test wymogu 2FA dla support mode.

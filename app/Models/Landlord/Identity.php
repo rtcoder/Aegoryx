@@ -21,6 +21,9 @@ use Illuminate\Support\Carbon;
  * @property Locale $locale
  * @property bool $is_super_admin
  * @property string|null $remember_token
+ * @property string|null $two_factor_secret
+ * @property array<int, string>|null $two_factor_recovery_codes
+ * @property Carbon|null $two_factor_confirmed_at
  * @property Carbon|null $last_login_at
  * @property int|null $created_by
  * @property int|null $updated_by
@@ -42,7 +45,7 @@ use Illuminate\Support\Carbon;
     'updated_by',
     'deleted_by',
 ])]
-#[Hidden(['password'])]
+#[Hidden(['password', 'remember_token', 'two_factor_secret', 'two_factor_recovery_codes'])]
 final class Identity extends Authenticatable
 {
     use Notifiable, SoftDeletes;
@@ -59,6 +62,15 @@ final class Identity extends Authenticatable
             'locale' => Locale::class,
             'password' => 'hashed',
             'status' => IdentityStatus::class,
+            'two_factor_confirmed_at' => 'datetime',
+            'two_factor_recovery_codes' => 'encrypted:array',
+            'two_factor_secret' => 'encrypted',
         ];
+    }
+
+    public function hasTwoFactorEnabled(): bool
+    {
+        return $this->two_factor_secret !== null
+            && $this->two_factor_confirmed_at !== null;
     }
 }

@@ -24,7 +24,7 @@ Przygotować checklistę decyzji i warunków do pierwszego komercyjnego wydania.
 
 ## Kroki
 
-- Zebrać blokery launch.
+- Zebrać blokery launch w `docs/product/mvp-launch-checklist.md`.
 - Oznaczyć required vs nice-to-have.
 - Wskazać ownerów/procedury.
 
@@ -35,10 +35,10 @@ Przygotować checklistę decyzji i warunków do pierwszego komercyjnego wydania.
 
 ## Acceptance Criteria
 
-- Checklist ma jednoznaczne gates.
-- Nie miesza MVP blockerów z backlogiem późniejszym.
-- Zawiera privacy/security/deploy readiness.
+- [x] Checklist ma jednoznaczne gates.
+- [x] Nie miesza MVP blockerów z backlogiem późniejszym.
+- [x] Zawiera privacy/security/deploy readiness.
 
 ## Test Plan
 
-- Review checklist z perspektywy release.
+- [x] Review checklist z perspektywy release.

@@ -22,7 +22,7 @@ Opisać konfigurację środowisk dla local, testing, SaaS production i self-host
 ## Kroki
 
 - Uporządkować `.env.example`.
-- Opisać minimalny self-hosted env.
+- Opisać minimalny self-hosted env w `docs/operations/env.md`.
 - Dodać ostrzeżenia dla sekretów.
 
 ## Subtaski
@@ -31,11 +31,11 @@ Brak.
 
 ## Acceptance Criteria
 
-- Env docs nie sugerują SQLite jako domyślnego runtime.
-- Self-hosted ma jasne minimalne wymagania.
-- Sekrety nie są commitowane.
+- [x] Env docs nie sugerują SQLite jako domyślnego runtime.
+- [x] Self-hosted ma jasne minimalne wymagania.
+- [x] Sekrety nie są commitowane.
 
 ## Test Plan
 
-- Review `.env.example`.
-- `php artisan about`.
+- [x] Review `.env.example`.
+- [x] `php artisan about`.

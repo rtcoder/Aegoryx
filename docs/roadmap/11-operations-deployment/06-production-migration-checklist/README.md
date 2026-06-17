@@ -21,7 +21,7 @@ Przygotować checklistę bezpiecznego uruchamiania migracji produkcyjnych.
 
 ## Kroki
 
-- Spisać checks przed migracją.
+- Spisać checks przed migracją w `docs/operations/production-migrations.md`.
 - Uwzględnić `--continue-on-error` policy.
 - Opisać monitoring po migracji.
 
@@ -31,10 +31,10 @@ Przygotować checklistę bezpiecznego uruchamiania migracji produkcyjnych.
 
 ## Acceptance Criteria
 
-- Checklist wymaga backupu.
-- Rollback w produkcji jest ostrożny i wyjątkowy.
-- Tenant migration failure ma jasną procedurę.
+- [x] Checklist wymaga backupu.
+- [x] Rollback w produkcji jest ostrożny i wyjątkowy.
+- [x] Tenant migration failure ma jasną procedurę.
 
 ## Test Plan
 
-- Review checklist.
+- [x] Review checklist.

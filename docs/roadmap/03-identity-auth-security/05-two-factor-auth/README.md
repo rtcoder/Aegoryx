@@ -25,6 +25,7 @@ Dodać 2FA dla kont wymagających podwyższonego bezpieczeństwa, szczególnie s
 - Wybrać mechanizm 2FA.
 - Szyfrować sekrety i recovery codes.
 - Dodać audit dla zmian 2FA.
+- Opisać ograniczenia i dalszy UI w `docs/security/two-factor-and-support-access.md`.
 
 ## Subtaski
 
@@ -32,11 +33,11 @@ Brak.
 
 ## Acceptance Criteria
 
-- Sekrety 2FA nie są logowane plaintextem.
-- Recovery codes są zabezpieczone.
-- Support mode wymaga 2FA.
+- [x] Sekrety 2FA nie są logowane plaintextem.
+- [x] Recovery codes są zabezpieczone.
+- [x] Support mode wymaga 2FA.
 
 ## Test Plan
 
-- Test enable/disable 2FA.
-- Test audit event.
+- [x] Test enable/disable 2FA.
+- [x] Test audit event.
