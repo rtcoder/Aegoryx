@@ -28,6 +28,9 @@ final readonly class PublishedPageController
 
         return response()->json([
             'data' => $payload,
+            'meta' => [
+                'api_version' => 'v1',
+            ],
         ]);
     }
 }

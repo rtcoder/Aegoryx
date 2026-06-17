@@ -20,4 +20,15 @@ return [
         'support' => 'Auditierte Support-Sitzungen starten und Support-Zugriffshistorie prüfen.',
         'tenant_show' => 'Mandantendetails und operative Steuerung.',
     ],
+    'billing' => [
+        'event_type' => 'Ereignistyp',
+        'license_statuses' => 'Lizenzstatus',
+        'no_events' => 'Noch keine Abrechnungsereignisse.',
+        'no_licenses' => 'Noch keine Lizenzen für die Zusammenfassung.',
+        'no_subscriptions' => 'Noch keine Abonnements für die Zusammenfassung.',
+        'provider' => 'Provider',
+        'recent_events' => 'Aktuelle Abrechnungsereignisse',
+        'recent_events_description' => 'Letzte Webhooks und Abrechnungssynchronisationen ohne Secrets in Payloads.',
+        'subscription_statuses' => 'Abonnementstatus',
+    ],
 ];

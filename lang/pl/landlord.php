@@ -20,4 +20,15 @@ return [
         'support' => 'Rozpoczynaj audytowane sesje wsparcia i przeglądaj historię dostępu.',
         'tenant_show' => 'Szczegóły tenanta i kontrolki operacyjne.',
     ],
+    'billing' => [
+        'event_type' => 'Typ zdarzenia',
+        'license_statuses' => 'Statusy licencji',
+        'no_events' => 'Nie ma jeszcze zdarzeń billingowych.',
+        'no_licenses' => 'Nie ma jeszcze licencji do podsumowania.',
+        'no_subscriptions' => 'Nie ma jeszcze subskrypcji do podsumowania.',
+        'provider' => 'Dostawca',
+        'recent_events' => 'Ostatnie zdarzenia billingowe',
+        'recent_events_description' => 'Ostatnie webhooki i synchronizacje rozliczeń bez sekretów w payloadach.',
+        'subscription_statuses' => 'Statusy subskrypcji',
+    ],
 ];

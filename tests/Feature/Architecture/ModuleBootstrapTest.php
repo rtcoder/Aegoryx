@@ -5,6 +5,7 @@ namespace Tests\Feature\Architecture;
 use App\Services\Tenancy\PostgresSchemaTenancyManager;
 use App\Services\Tenancy\TenancyManager;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Http;
 use Tests\TestCase;
 
 final class ModuleBootstrapTest extends TestCase
@@ -43,6 +44,7 @@ final class ModuleBootstrapTest extends TestCase
         $this->assertContains('tenant:migrate', $commands);
         $this->assertContains('tenant-domains:verify', $commands);
         $this->assertContains('aegoryx:preflight', $commands);
+        $this->assertContains('aegoryx:smoke', $commands);
     }
 
     public function test_preflight_command_passes_for_configured_application(): void
@@ -74,5 +76,25 @@ final class ModuleBootstrapTest extends TestCase
         ]);
 
         $this->assertSame(1, $exitCode);
+    }
+
+    public function test_smoke_command_runs_configured_http_checks(): void
+    {
+        Http::fake([
+            'http://aegoryx.test/up' => Http::response('OK'),
+            'http://admin.aegoryx.test/login' => Http::response('<html></html>'),
+            'http://acme.aegoryx.test/panel' => Http::response('<html></html>'),
+            'http://acme.aegoryx.test/api/public/v1/cms/pages/home' => Http::response(['data' => []]),
+        ]);
+        config([
+            'app.url' => 'http://aegoryx.test',
+            'aegoryx.smoke.tenant_url' => 'http://acme.aegoryx.test/panel',
+            'aegoryx.smoke.public_api_url' => 'http://acme.aegoryx.test/api/public/v1/cms/pages/home',
+        ]);
+
+        $exitCode = Artisan::call('aegoryx:smoke');
+
+        $this->assertSame(0, $exitCode);
+        Http::assertSentCount(4);
     }
 }

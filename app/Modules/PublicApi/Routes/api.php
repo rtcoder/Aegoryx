@@ -17,6 +17,12 @@ Route::middleware([
         Route::options('{any}', fn () => response()->noContent())
             ->where('any', '.*')
             ->name('options');
+        Route::prefix('v1')
+            ->name('v1.')
+            ->group(function (): void {
+                Route::get('cms/pages/{slug}', [PublishedPageController::class, 'show'])
+                    ->name('cms.pages.show');
+            });
         Route::get('cms/pages/{slug}', [PublishedPageController::class, 'show'])
             ->name('cms.pages.show');
     });

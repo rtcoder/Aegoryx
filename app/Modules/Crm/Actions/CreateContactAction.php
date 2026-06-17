@@ -6,6 +6,7 @@ use App\Models\Tenant\CrmContact;
 use App\Models\Tenant\User;
 use App\Modules\Audit\Enums\ActivityEntryAction;
 use App\Modules\Audit\Services\ActivityLogger;
+use App\Modules\Entitlements\Services\EntitlementLimitEnforcer;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 
@@ -13,6 +14,7 @@ final readonly class CreateContactAction
 {
     public function __construct(
         private ActivityLogger $activity,
+        private EntitlementLimitEnforcer $limits,
     ) {}
 
     /**
@@ -21,6 +23,7 @@ final readonly class CreateContactAction
     public function handle(array $data, User $actor): CrmContact
     {
         Gate::forUser($actor)->authorize('create', CrmContact::class);
+        $this->limits->assertCanCreateCrmContact();
 
         return DB::transaction(function () use ($data, $actor): CrmContact {
             $contact = CrmContact::query()->create([

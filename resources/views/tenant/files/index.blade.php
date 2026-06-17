@@ -10,7 +10,7 @@
             <h2 class="ui-heading-2">{{ __('files.upload_file') }}</h2>
             <p class="ui-body mt-1">{{ __('files.upload_description') }}</p>
         </div>
-        <form method="POST" action="{{ route('tenant.files.store') }}" enctype="multipart/form-data" class="ui-card-body space-y-4">
+        <form id="upload-file" method="POST" action="{{ route('tenant.files.store') }}" enctype="multipart/form-data" class="ui-card-body space-y-4">
             @csrf
             @if (session('success'))
                 <div class="rounded border border-emerald-700 bg-emerald-950 px-4 py-3 text-sm text-emerald-100">
@@ -90,7 +90,13 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="7" class="py-10 text-center text-[var(--ui-text-muted)]">{{ $search === '' ? __('files.no_files') : __('common.no_results') }}</td>
+                            <td colspan="7" class="py-10 text-center text-[var(--ui-text-muted)]">
+                                @if ($search === '')
+                                    <x-ui.empty-state :title="__('files.no_files')" :action-label="__('files.upload')" action-href="#upload-file" />
+                                @else
+                                    {{ __('common.no_results') }}
+                                @endif
+                            </td>
                         </tr>
                     @endforelse
                 </tbody>

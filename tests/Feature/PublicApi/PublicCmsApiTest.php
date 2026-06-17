@@ -67,9 +67,31 @@ final class PublicCmsApiTest extends TestCase
             ->assertOk()
             ->assertJsonPath('data.slug', 'home')
             ->assertJsonPath('data.title', 'Homepage')
+            ->assertJsonPath('meta.api_version', 'v1')
             ->assertJsonMissingPath('data.cms_page_id')
             ->assertJsonMissingPath('data.created_by')
             ->assertJsonMissingPath('data.updated_by');
+    }
+
+    public function test_public_api_v1_returns_published_page_snapshot(): void
+    {
+        $tenant = $this->tenant();
+        $this->domain($tenant);
+        $page = $this->page(['slug' => 'home']);
+
+        PublishedPage::query()->create([
+            'cms_page_id' => $page->id,
+            'title' => 'Homepage',
+            'slug' => 'home',
+            'content' => ['blocks' => [['type' => 'text', 'body' => 'Hello']]],
+            'published_at' => now(),
+        ]);
+
+        $this
+            ->getJson('http://acme.aegoryx.test/api/public/v1/cms/pages/home')
+            ->assertOk()
+            ->assertJsonPath('data.slug', 'home')
+            ->assertJsonPath('meta.api_version', 'v1');
     }
 
     public function test_public_api_does_not_return_draft_page(): void

@@ -182,6 +182,9 @@ run_migration_command \
     tenant \
     "$PHP_BIN" artisan tenants:migrate --force
 
+log "Seeding commercial plan defaults."
+artisan db:seed --class=Database\\Seeders\\CommercialPlansSeeder --force
+
 log "Caching optimized framework files."
 artisan optimize
 
@@ -191,5 +194,9 @@ artisan horizon:terminate || true
 log "Bringing application back up."
 artisan up
 MAINTENANCE_STARTED="false"
+APPLIED_MIGRATIONS=()
+
+log "Running post-deploy smoke checks."
+artisan aegoryx:smoke
 
 log "Aegoryx deploy finished successfully."

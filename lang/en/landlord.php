@@ -20,4 +20,15 @@ return [
         'support' => 'Start audited support sessions and review support access history.',
         'tenant_show' => 'Tenant details and operational controls.',
     ],
+    'billing' => [
+        'event_type' => 'Event type',
+        'license_statuses' => 'License statuses',
+        'no_events' => 'No billing events yet.',
+        'no_licenses' => 'No licenses to summarize yet.',
+        'no_subscriptions' => 'No subscriptions to summarize yet.',
+        'provider' => 'Provider',
+        'recent_events' => 'Recent billing events',
+        'recent_events_description' => 'Latest webhooks and billing syncs without secrets in payloads.',
+        'subscription_statuses' => 'Subscription statuses',
+    ],
 ];

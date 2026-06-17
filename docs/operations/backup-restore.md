@@ -19,6 +19,14 @@ Co najmniej przed większym releasem operator powinien wykonać próbny restore 
 4. uruchomić `php artisan tenants:migrate --force`
 5. zweryfikować logowanie landlord i przykładowego tenanta
 6. zweryfikować prywatny download pliku
+7. uruchomić `php artisan aegoryx:smoke`
+8. zapisać datę próby, wersję aplikacji, źródło backupu, wynik i właściciela follow-upów
+
+## Okresowy harmonogram
+
+- SaaS: minimum raz w miesiącu i przed większym releasem.
+- Self-hosted: minimum raz na kwartał albo po zmianie infrastruktury backupu.
+- Każdy failed rehearsal tworzy blocker release, dopóki nie ma właściciela i daty ponownej próby.
 
 ## Tenant-specific restore
 

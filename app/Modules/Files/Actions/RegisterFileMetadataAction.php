@@ -6,6 +6,7 @@ use App\Models\Tenant\TenantFile;
 use App\Models\Tenant\User;
 use App\Modules\Audit\Enums\ActivityEntryAction;
 use App\Modules\Audit\Services\ActivityLogger;
+use App\Modules\Entitlements\Services\EntitlementLimitEnforcer;
 use App\Modules\Files\Enums\FileVisibility;
 use Carbon\CarbonInterface;
 use Illuminate\Support\Facades\DB;
@@ -16,6 +17,7 @@ final readonly class RegisterFileMetadataAction
 {
     public function __construct(
         private ActivityLogger $activity,
+        private EntitlementLimitEnforcer $limits,
     ) {}
 
     public function handle(
@@ -32,13 +34,16 @@ final readonly class RegisterFileMetadataAction
         return DB::transaction(function () use ($disk, $path, $originalName, $mimeType, $ownerId, $actor, $expiresAt): TenantFile {
             $storage = Storage::disk($disk);
             $contents = $storage->get($path);
+            $sizeBytes = $storage->size($path);
+
+            $this->limits->assertCanStoreFileBytes($sizeBytes);
 
             $file = TenantFile::query()->create([
                 'disk' => $disk,
                 'path' => $path,
                 'original_name' => $originalName,
                 'mime_type' => $mimeType,
-                'size_bytes' => $storage->size($path),
+                'size_bytes' => $sizeBytes,
                 'checksum_sha256' => hash('sha256', $contents),
                 'visibility' => FileVisibility::Private,
                 'expires_at' => $expiresAt,

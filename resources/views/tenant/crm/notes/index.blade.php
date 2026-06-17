@@ -9,7 +9,7 @@
 
     <div class="grid gap-5 xl:grid-cols-[360px_1fr]">
         <x-ui.card :title="__('crm.create_note')">
-            <form method="POST" action="{{ route('tenant.crm.notes.store') }}" class="mt-5 space-y-4">
+            <form id="create-note" method="POST" action="{{ route('tenant.crm.notes.store') }}" class="mt-5 space-y-4">
                 @csrf
 
                 @include('tenant.crm.notes.partials.fields')
@@ -73,7 +73,13 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="4" class="py-10 text-center text-[var(--ui-text-muted)]">{{ $search === '' ? __('crm.no_notes') : __('common.no_results') }}</td>
+                                <td colspan="4" class="py-10 text-center text-[var(--ui-text-muted)]">
+                                    @if ($search === '')
+                                        <x-ui.empty-state :title="__('crm.no_notes')" :action-label="__('crm.create_note')" action-href="#create-note" />
+                                    @else
+                                        {{ __('common.no_results') }}
+                                    @endif
+                                </td>
                             </tr>
                         @endforelse
                     </tbody>

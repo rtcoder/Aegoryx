@@ -3,10 +3,16 @@
 namespace Tests\Feature\AdminConsole;
 
 use App\Models\Landlord\AuditLog;
+use App\Models\Landlord\BillingEvent;
 use App\Models\Landlord\Identity;
+use App\Models\Landlord\License;
+use App\Models\Landlord\Subscription;
 use App\Models\Landlord\Tenant;
 use App\Modules\Audit\Enums\AuditLogAction;
+use App\Modules\Billing\Enums\BillingEventStatus;
+use App\Modules\Billing\Enums\SubscriptionStatus;
 use App\Modules\Identity\Enums\IdentityStatus;
+use App\Modules\Licensing\Enums\LicenseStatus;
 use App\Modules\Tenancy\Enums\TenantBillingModel;
 use App\Modules\Tenancy\Enums\TenantDeploymentType;
 use App\Modules\Tenancy\Enums\TenantLicenseType;
@@ -91,6 +97,43 @@ final class AdminNavigationTest extends TestCase
             ->assertSee($tenant->name)
             ->assertSee($tenant->slug)
             ->assertSee($tenant->schema_name);
+    }
+
+    public function test_superadmin_can_view_billing_dashboard(): void
+    {
+        $this->actingAs($this->superadmin(), 'landlord');
+
+        $tenant = $this->tenant(['name' => 'Billing Tenant']);
+
+        Subscription::query()->create([
+            'tenant_id' => $tenant->id,
+            'provider' => 'paddle',
+            'status' => SubscriptionStatus::Active,
+        ]);
+
+        License::query()->create([
+            'tenant_id' => $tenant->id,
+            'license_key_hash' => hash('sha256', 'license'),
+            'type' => 'self_hosted_subscription',
+            'status' => LicenseStatus::Active,
+        ]);
+
+        BillingEvent::query()->create([
+            'provider' => 'paddle',
+            'provider_event_id' => 'evt_123',
+            'event_type' => 'subscription.updated',
+            'tenant_id' => $tenant->id,
+            'status' => BillingEventStatus::Processed,
+            'processed_at' => now(),
+        ]);
+
+        $this
+            ->get('http://admin.aegoryx.test/billing')
+            ->assertOk()
+            ->assertSee(__('landlord.billing.subscription_statuses'))
+            ->assertSee(__('landlord.billing.license_statuses'))
+            ->assertSee('Billing Tenant')
+            ->assertSee('subscription.updated');
     }
 
     public function test_superadmin_can_update_tenant_status_and_audit_it(): void

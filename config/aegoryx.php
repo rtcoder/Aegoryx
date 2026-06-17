@@ -41,6 +41,11 @@ return [
         ],
     ],
 
+    'smoke' => [
+        'tenant_url' => env('AEGORYX_SMOKE_TENANT_URL'),
+        'public_api_url' => env('AEGORYX_SMOKE_PUBLIC_API_URL'),
+    ],
+
     'retention' => [
         'activity_entries_days' => (int) env('RETENTION_ACTIVITY_ENTRIES_DAYS', 365),
         'audit_logs_days' => (int) env('RETENTION_AUDIT_LOGS_DAYS', 730),

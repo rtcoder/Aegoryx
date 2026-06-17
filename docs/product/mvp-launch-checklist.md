@@ -8,6 +8,7 @@
 - backup/restore procedure opisana
 - deploy script sprawdzony na staging
 - `php artisan aegoryx:preflight` przechodzi na środowisku docelowym
+- `php artisan aegoryx:smoke` przechodzi albo ma jawnie opisane skipy tenant/public API
 - Horizon albo queue failure monitoring działa
 - landlord superadmin utworzony przez `landlord:create`
 - public API nie zwraca draftów ani danych prywatnych
@@ -16,7 +17,6 @@
 
 - granularne role tenantowe
 - automatyczny purge retention
-- automatyczny restore rehearsal
 - bardziej szczegółowy billing dashboard
 
 ## Post Launch Monitoring
@@ -31,3 +31,5 @@
 ## Decyzja Release
 
 MVP może wystartować tylko wtedy, gdy wszystkie required gates mają właściciela i status `done` albo jawnie zaakceptowane ryzyko z datą ponownego przeglądu.
+
+Akceptacje ryzyk prowadzić według `docs/product/risk-acceptance.md`.

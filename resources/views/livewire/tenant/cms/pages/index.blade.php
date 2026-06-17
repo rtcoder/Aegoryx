@@ -1,5 +1,5 @@
 <section class="grid gap-6 xl:grid-cols-[minmax(0,420px)_1fr]">
-    <form wire:submit="save" class="ui-card space-y-4">
+    <form id="cms-page-form" wire:submit="save" class="ui-card space-y-4">
         <div class="ui-card-header">
             <h2 class="ui-heading-2">{{ $editingPageId ? __('cms.edit_page') : __('cms.new_page') }}</h2>
         </div>
@@ -108,7 +108,13 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="4" class="px-4 py-8 text-center text-neutral-500">{{ trim($search) === '' ? __('cms.empty') : __('common.no_results') }}</td>
+                            <td colspan="4" class="px-4 py-8 text-center text-neutral-500">
+                                @if (trim($search) === '')
+                                    <x-ui.empty-state :title="__('cms.empty')" :action-label="__('cms.new_page')" action-href="#cms-page-form" />
+                                @else
+                                    {{ __('common.no_results') }}
+                                @endif
+                            </td>
                         </tr>
                     @endforelse
                 </tbody>

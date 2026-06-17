@@ -6,7 +6,7 @@ Ten plik zbiera prace po domknięciu pierwszej roadmapy wykonawczej. Nie zastęp
 
 - Done: rozszerzyć filtrowanie CRM o firmy, deale, notatki i zadania.
 - Done: dodać sortowanie tabel tam, gdzie użytkownik porównuje wiele rekordów.
-- Dodać puste stany z akcją główną dla CRM/CMS/Files.
+- Done: dodać puste stany z akcją główną dla CRM/CMS/Files.
 - Dodać widoki detail dla plików i aktywności, jeśli lista zacznie być zbyt gęsta.
 
 ## Tenant Self-Service
@@ -20,16 +20,19 @@ Ten plik zbiera prace po domknięciu pierwszej roadmapy wykonawczej. Nie zastęp
 
 - Done: dodać preview opublikowanego contentu przed publikacją.
 - Done: dodać cache invalidation po publish/unpublish.
-- Rozważyć wersjonowany public API payload.
+- Done: rozważyć i dodać wersjonowany public API payload.
 
 ## Operations
 
 - Done: rozszerzyć `aegoryx:preflight` o sprawdzenie storage i queue driverów.
-- Dodać staging smoke test po deployu.
-- Dodać okresowy restore rehearsal dla backupów.
+- Done: dodać staging smoke test po deployu.
+- Done: dodać okresowy restore rehearsal dla backupów.
 
 ## Commercial Readiness
 
-- Doprecyzować macierz planów i limitów dla ofert SaaS.
-- Dodać dashboard zdarzeń billing/licensing dla superadmina.
-- Ustalić proces akceptacji ryzyk launchowych z datą review.
+- Done: doprecyzować macierz planów i limitów dla ofert SaaS.
+- Done: dodać dashboard zdarzeń billing/licensing dla superadmina.
+- Done: ustalić proces akceptacji ryzyk launchowych z datą review.
+- Done: egzekwować limity planów w CMS, CRM i Files.
+- Done: dodać seedery planów i feature defaults.
+- Done: dodać komendę purge dla retencji.

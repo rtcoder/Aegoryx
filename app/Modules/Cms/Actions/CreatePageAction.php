@@ -8,6 +8,7 @@ use App\Modules\Audit\Enums\ActivityEntryAction;
 use App\Modules\Audit\Services\ActivityLogger;
 use App\Modules\Cms\Enums\CmsPageStatus;
 use App\Modules\Cms\Support\CmsContent;
+use App\Modules\Entitlements\Services\EntitlementLimitEnforcer;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
@@ -17,6 +18,7 @@ final readonly class CreatePageAction
     public function __construct(
         private ActivityLogger $activity,
         private CmsContent $cmsContent,
+        private EntitlementLimitEnforcer $limits,
     ) {}
 
     /**
@@ -25,6 +27,7 @@ final readonly class CreatePageAction
     public function handle(string $title, ?string $slug, array $content, User $actor): CmsPage
     {
         Gate::forUser($actor)->authorize('create', CmsPage::class);
+        $this->limits->assertCanCreateCmsPage();
 
         $normalizedContent = $this->cmsContent->normalize($content);
 

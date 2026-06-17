@@ -30,3 +30,19 @@ Ten dokument opisuje domyślne zasady retencji dla danych tenantów i warstwy la
 - usuwać trwale soft-deleted pliki po `deleted_files_days`
 - anonimizować lub usuwać stare `activity_entries` po `activity_entries_days`
 - zachować landlord `audit_logs` do `audit_logs_days`
+
+## Komenda wykonawcza
+
+Retencję uruchamia:
+
+```bash
+php artisan aegoryx:retention:purge
+```
+
+Przed automatyzacją harmonogramu można sprawdzić zakres czyszczenia:
+
+```bash
+php artisan aegoryx:retention:purge --dry-run
+```
+
+Komenda iteruje po aktywnych tenantach, używa aktualnego tenant contextu i raportuje liczbę usuniętych rekordów dla audit logs, activity entries, wygasłych plików oraz soft-deleted plików po okresie retencji.

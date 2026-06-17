@@ -3,6 +3,9 @@
 namespace App\Modules\AdminConsole\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Landlord\BillingEvent;
+use App\Models\Landlord\License;
+use App\Models\Landlord\Subscription;
 use Illuminate\View\View;
 
 final class SectionController extends Controller
@@ -19,7 +22,23 @@ final class SectionController extends Controller
 
     public function billing(): View
     {
-        return $this->section(__('common.billing'), __('landlord.sections.billing'));
+        return view('landlord.billing.index', [
+            'billingEvents' => BillingEvent::query()
+                ->with('tenant')
+                ->latest()
+                ->limit(10)
+                ->get(),
+            'subscriptionStatusCounts' => Subscription::query()
+                ->selectRaw('status, count(*) as aggregate')
+                ->groupBy('status')
+                ->pluck('aggregate', 'status')
+                ->all(),
+            'licenseStatusCounts' => License::query()
+                ->selectRaw('status, count(*) as aggregate')
+                ->groupBy('status')
+                ->pluck('aggregate', 'status')
+                ->all(),
+        ]);
     }
 
     public function support(): View

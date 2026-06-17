@@ -100,7 +100,7 @@ final class PreflightCommand extends Command
     {
         $commands = array_keys(Artisan::all());
 
-        foreach (['landlord:create', 'landlord:migrate', 'tenants:create', 'tenants:migrate', 'tenant:migrate', 'tenant-domains:verify'] as $command) {
+        foreach (['landlord:create', 'landlord:migrate', 'tenants:create', 'tenants:migrate', 'tenant:migrate', 'tenant-domains:verify', 'aegoryx:smoke', 'aegoryx:retention:purge'] as $command) {
             if (! in_array($command, $commands, true)) {
                 return false;
             }
