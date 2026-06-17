@@ -39,6 +39,7 @@ return [
     'save' => 'Zapisz',
     'save_changes' => 'Zapisz zmiany',
     'schema' => 'Schemat',
+    'security' => 'Bezpieczeństwo',
     'slug' => 'Slug',
     'status' => 'Status',
     'support' => 'Wsparcie',

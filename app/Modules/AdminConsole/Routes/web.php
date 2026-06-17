@@ -5,6 +5,7 @@ use App\Modules\AdminConsole\Http\Controllers\Auth\LoginController;
 use App\Modules\AdminConsole\Http\Controllers\DashboardController;
 use App\Modules\AdminConsole\Http\Controllers\LicenseController;
 use App\Modules\AdminConsole\Http\Controllers\SectionController;
+use App\Modules\AdminConsole\Http\Controllers\Security\SecurityController;
 use App\Modules\AdminConsole\Http\Controllers\TenantController;
 use App\Modules\AdminConsole\Http\Middleware\EnsureLandlordAuthenticated;
 use App\Modules\AdminConsole\Http\Middleware\UseLandlordSchema;
@@ -16,9 +17,11 @@ Route::domain(config('aegoryx.landlord.domain'))
     ->group(function (): void {
         Route::get('/login', [LoginController::class, 'create'])->name('login');
         Route::post('/login', [LoginController::class, 'store'])->name('login.store');
+        Route::get('/two-factor-challenge', fn () => view('landlord.auth.two-factor-challenge'))->name('two-factor.challenge');
 
         Route::middleware([EnsureLandlordAuthenticated::class, UseAuthenticatedLocale::class])->group(function (): void {
             Route::get('/', DashboardController::class)->name('dashboard');
+            Route::get('/security', [SecurityController::class, 'index'])->name('security.index');
             Route::get('/tenants', [TenantController::class, 'index'])->name('tenants.index');
             Route::get('/tenants/{tenant}', [TenantController::class, 'show'])->name('tenants.show');
             Route::patch('/tenants/{tenant}/status', [TenantController::class, 'updateStatus'])->name('tenants.status.update');

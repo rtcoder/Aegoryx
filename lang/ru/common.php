@@ -39,6 +39,7 @@ return [
     'save' => 'Сохранить',
     'save_changes' => 'Сохранить изменения',
     'schema' => 'Схема',
+    'security' => 'Безопасность',
     'slug' => 'Slug',
     'status' => 'Статус',
     'support' => 'Поддержка',
