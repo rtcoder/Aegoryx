@@ -2,6 +2,8 @@
 
 namespace App\Modules\Identity\Enums;
 
+use App\Modules\Identity\Support\TenantRolePermissions;
+
 enum TenantUserRole: string
 {
     case Owner = 'owner';
@@ -11,31 +13,41 @@ enum TenantUserRole: string
 
     public function canManageUsers(): bool
     {
-        return in_array($this, [self::Owner, self::Admin], true);
+        return $this->hasPermission(TenantPermission::ManageUsers);
     }
 
     public function canManageContent(): bool
     {
-        return in_array($this, [self::Owner, self::Admin, self::Member], true);
+        return $this->hasPermission(TenantPermission::ManageContent);
+    }
+
+    public function canPublishContent(): bool
+    {
+        return $this->hasPermission(TenantPermission::PublishContent);
     }
 
     public function canManageCrm(): bool
     {
-        return in_array($this, [self::Owner, self::Admin, self::Member], true);
+        return $this->hasPermission(TenantPermission::ManageCrm);
     }
 
     public function canManageFiles(): bool
     {
-        return in_array($this, [self::Owner, self::Admin, self::Member], true);
+        return $this->hasPermission(TenantPermission::ManageFiles);
     }
 
     public function canExportActivity(): bool
     {
-        return in_array($this, [self::Owner, self::Admin], true);
+        return $this->hasPermission(TenantPermission::ExportActivity);
     }
 
     public function canManageSettings(): bool
     {
-        return in_array($this, [self::Owner, self::Admin], true);
+        return $this->hasPermission(TenantPermission::ManageSettings);
+    }
+
+    public function hasPermission(TenantPermission $permission): bool
+    {
+        return (new TenantRolePermissions)->roleHas($this, $permission);
     }
 }

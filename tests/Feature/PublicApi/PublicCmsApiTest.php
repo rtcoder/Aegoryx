@@ -94,6 +94,40 @@ final class PublicCmsApiTest extends TestCase
             ->assertJsonPath('meta.api_version', 'v1');
     }
 
+    public function test_public_api_lists_only_published_page_snapshots(): void
+    {
+        $tenant = $this->tenant();
+        $this->domain($tenant);
+        $home = $this->page(['slug' => 'home']);
+        $about = $this->page(['slug' => 'about']);
+        $this->page(['slug' => 'draft-only']);
+
+        PublishedPage::query()->create([
+            'cms_page_id' => $home->id,
+            'title' => 'Homepage',
+            'slug' => 'home',
+            'content' => ['blocks' => [['type' => 'text', 'body' => 'Hello']]],
+            'published_at' => now()->subDay(),
+        ]);
+        PublishedPage::query()->create([
+            'cms_page_id' => $about->id,
+            'title' => 'About',
+            'slug' => 'about',
+            'content' => ['blocks' => [['type' => 'text', 'body' => 'About us']]],
+            'published_at' => now(),
+        ]);
+
+        $this
+            ->getJson('http://acme.aegoryx.test/api/public/v1/cms/pages')
+            ->assertOk()
+            ->assertJsonPath('meta.api_version', 'v1')
+            ->assertJsonPath('meta.count', 2)
+            ->assertJsonPath('data.0.slug', 'about')
+            ->assertJsonPath('data.1.slug', 'home')
+            ->assertJsonMissingPath('data.0.cms_page_id')
+            ->assertJsonMissing(['slug' => 'draft-only']);
+    }
+
     public function test_public_api_does_not_return_draft_page(): void
     {
         $tenant = $this->tenant([

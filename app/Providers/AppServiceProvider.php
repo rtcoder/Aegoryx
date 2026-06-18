@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Console\Commands\LaunchCheckCommand;
+use App\Console\Commands\OpsReportCommand;
 use App\Console\Commands\PreflightCommand;
 use App\Console\Commands\PurgeRetentionCommand;
 use App\Console\Commands\SmokeCommand;
@@ -26,6 +27,7 @@ class AppServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([
                 LaunchCheckCommand::class,
+                OpsReportCommand::class,
                 PreflightCommand::class,
                 PurgeRetentionCommand::class,
                 SmokeCommand::class,

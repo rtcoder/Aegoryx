@@ -35,3 +35,14 @@ php artisan horizon
 ```
 
 Dashboard jest pod `/horizon` i wymaga logowania jako landlord superadmin.
+
+## Operational Snapshot
+
+Szybki raport landlordowego stanu systemu:
+
+```bash
+php artisan aegoryx:ops-report
+php artisan aegoryx:ops-report --json
+```
+
+Raport pokazuje liczbę tenantów, pending/verified domen, aktywnych superadminów i failed billing events.

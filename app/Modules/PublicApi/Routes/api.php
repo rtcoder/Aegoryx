@@ -20,9 +20,13 @@ Route::middleware([
         Route::prefix('v1')
             ->name('v1.')
             ->group(function (): void {
+                Route::get('cms/pages', [PublishedPageController::class, 'index'])
+                    ->name('cms.pages.index');
                 Route::get('cms/pages/{slug}', [PublishedPageController::class, 'show'])
                     ->name('cms.pages.show');
             });
+        Route::get('cms/pages', [PublishedPageController::class, 'index'])
+            ->name('cms.pages.index');
         Route::get('cms/pages/{slug}', [PublishedPageController::class, 'show'])
             ->name('cms.pages.show');
     });

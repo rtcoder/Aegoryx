@@ -7,6 +7,14 @@ use App\Models\Tenant\PublishedPage;
 
 final readonly class PublicApiCacheKeys
 {
+    public function publishedPageIndex(Tenant $tenant): string
+    {
+        return sprintf(
+            'public-api:tenant:%s:published-pages',
+            $tenant->id,
+        );
+    }
+
     public function publishedPage(Tenant $tenant, PublishedPage $page): string
     {
         return $this->publishedPageSlug($tenant, $page->slug);

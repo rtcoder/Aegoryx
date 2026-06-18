@@ -10,6 +10,7 @@ use App\Models\Tenant\User;
 use App\Modules\Audit\Enums\ActivityEntryAction;
 use App\Modules\Cms\Enums\CmsPageStatus;
 use App\Modules\Files\Enums\FileVisibility;
+use App\Modules\Identity\Enums\TenantPermission;
 use App\Modules\Identity\Enums\TenantUserRole;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Gate;
@@ -80,6 +81,25 @@ final class TenantUserRolesTest extends TestCase
         $this->assertTrue(Gate::forUser($member)->allows('create', CmsPage::class));
         $this->assertTrue(Gate::forUser($member)->allows('publish', $page));
         $this->assertFalse(Gate::forUser($member)->allows('export', ActivityEntry::class));
+    }
+
+    public function test_role_permission_matrix_is_explicit(): void
+    {
+        $owner = $this->user(TenantUserRole::Owner);
+        $admin = $this->user(TenantUserRole::Admin, 'admin@example.test');
+        $member = $this->user(TenantUserRole::Member, 'member@example.test');
+        $viewer = $this->user(TenantUserRole::Viewer, 'viewer@example.test');
+
+        foreach (TenantPermission::cases() as $permission) {
+            $this->assertTrue($owner->hasTenantPermission($permission));
+        }
+
+        $this->assertTrue($admin->hasTenantPermission(TenantPermission::ManageUsers));
+        $this->assertTrue($admin->hasTenantPermission(TenantPermission::ExportActivity));
+        $this->assertFalse($member->hasTenantPermission(TenantPermission::ManageUsers));
+        $this->assertTrue($member->hasTenantPermission(TenantPermission::PublishContent));
+        $this->assertFalse($member->hasTenantPermission(TenantPermission::ExportActivity));
+        $this->assertFalse($viewer->hasTenantPermission(TenantPermission::ManageCrm));
     }
 
     public function test_file_management_and_activity_export_respect_roles(): void

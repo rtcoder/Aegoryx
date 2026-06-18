@@ -29,11 +29,11 @@ final class CmsPagePolicy
 
     public function publish(User $user, CmsPage $page): bool
     {
-        return $this->update($user, $page);
+        return $user->exists && $page->exists && $user->canPublishTenantContent();
     }
 
     public function unpublish(User $user, CmsPage $page): bool
     {
-        return $this->update($user, $page);
+        return $this->publish($user, $page);
     }
 }

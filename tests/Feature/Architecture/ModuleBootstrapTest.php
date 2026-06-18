@@ -46,6 +46,7 @@ final class ModuleBootstrapTest extends TestCase
         $this->assertContains('aegoryx:preflight', $commands);
         $this->assertContains('aegoryx:smoke', $commands);
         $this->assertContains('aegoryx:launch-check', $commands);
+        $this->assertContains('aegoryx:ops-report', $commands);
         $this->assertContains('aegoryx:retention:purge', $commands);
     }
 

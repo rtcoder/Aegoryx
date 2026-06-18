@@ -100,13 +100,19 @@ final class PreflightCommand extends Command
     {
         $commands = array_keys(Artisan::all());
 
-        foreach (['landlord:create', 'landlord:migrate', 'tenants:create', 'tenants:migrate', 'tenant:migrate', 'tenant-domains:verify', 'aegoryx:smoke', 'aegoryx:launch-check', 'aegoryx:retention:purge'] as $command) {
-            if (! in_array($command, $commands, true)) {
-                return false;
-            }
-        }
+        return array_all([
+            'landlord:create',
+            'landlord:migrate',
+            'tenants:create',
+            'tenants:migrate',
+            'tenant:migrate',
+            'tenant-domains:verify',
+            'aegoryx:smoke',
+            'aegoryx:launch-check',
+            'aegoryx:ops-report',
+            'aegoryx:retention:purge'
+        ], fn($command) => in_array($command, $commands, true));
 
-        return true;
     }
 
     private function storageDiskIsConfigured(): bool

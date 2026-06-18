@@ -15,6 +15,28 @@ final readonly class PublishedPageController
         private PublicApiCacheKeys $cacheKeys,
     ) {}
 
+    public function index(Request $request): JsonResponse
+    {
+        $tenant = $request->attributes->get('tenant');
+        $ttl = (int) config('aegoryx.public_api.cache.ttl_seconds', 300);
+        $cacheKey = $this->cacheKeys->publishedPageIndex($tenant);
+
+        $payload = Cache::remember($cacheKey, $ttl, fn (): array => PublishedPageResource::collection(
+            PublishedPage::query()
+                ->orderByDesc('published_at')
+                ->orderBy('slug')
+                ->get(),
+        )->resolve($request));
+
+        return response()->json([
+            'data' => $payload,
+            'meta' => [
+                'api_version' => 'v1',
+                'count' => count($payload),
+            ],
+        ]);
+    }
+
     public function show(Request $request, string $slug): JsonResponse
     {
         $tenant = $request->attributes->get('tenant');

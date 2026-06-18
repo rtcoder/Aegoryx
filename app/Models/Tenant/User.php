@@ -2,6 +2,7 @@
 
 namespace App\Models\Tenant;
 
+use App\Modules\Identity\Enums\TenantPermission;
 use App\Modules\Identity\Enums\TenantUserRole;
 use App\Support\Localization\Locale;
 use Database\Factories\UserFactory;
@@ -98,6 +99,11 @@ final class User extends Authenticatable
         return $this->role->canManageContent();
     }
 
+    public function canPublishTenantContent(): bool
+    {
+        return $this->role->canPublishContent();
+    }
+
     public function canManageTenantCrm(): bool
     {
         return $this->role->canManageCrm();
@@ -116,5 +122,10 @@ final class User extends Authenticatable
     public function canManageTenantSettings(): bool
     {
         return $this->role->canManageSettings();
+    }
+
+    public function hasTenantPermission(TenantPermission $permission): bool
+    {
+        return $this->role->hasPermission($permission);
     }
 }
