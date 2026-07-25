@@ -4,6 +4,16 @@
 
 Done.
 
+## Implemented Notes
+
+- Panel tenanta pokazuje effective entitlement state per feature: enabled/disabled, source i reason.
+- Formularz startuje od `EffectiveEntitlements`, więc plan/licencja nie są przypadkowo prezentowane jako wyłączone.
+- Zapis funkcji tworzy manual override tylko dla wartości zmienionych względem effective state.
+- Manual override można wyczyścić, żeby wrócić do decyzji planu/licencji/systemu.
+- Funkcje systemowe są definiowane w `SystemFeature`, nie w tabeli `features`.
+- Tenant access jest zapisywany jako manual override w `tenant_features`.
+- Zmiany manual override są audytowane.
+
 ## Cel
 
 Zarządzać dostępem tenantów do funkcji systemowych zdefiniowanych w enumie kodu.
@@ -37,6 +47,8 @@ Brak.
 
 - Zmiany dostępu przechodzą przez Entitlements.
 - Każda zmiana ma actor i reason.
+- Panel pokazuje źródło efektywnej decyzji przed zapisem override.
+- Clear manual override usuwa wpis i zapisuje audit.
 - CMS/CRM nie sprawdzają admin tables bezpośrednio.
 
 ## Test Plan

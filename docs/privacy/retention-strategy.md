@@ -1,18 +1,18 @@
 # Strategia retencji danych
 
-Ten dokument opisuje domyślne zasady retencji dla danych tenantów i warstwy landlord. Konkretne wartości są konfigurowane w `config/aegoryx.php` w sekcji `retention`.
+Ten dokument opisuje domyślne zasady retencji dla danych tenantów i warstwy system. Konkretne wartości są konfigurowane w `config/aegoryx.php` w sekcji `retention`.
 
 ## Kategorie danych
 
 - `activity_entries` - historia aktywności tenantów, bez sekretów i z redakcją pól wrażliwych.
-- `audit_logs` - logi audytowe landlord, zachowywane dłużej niż historia tenantów.
+- `audit_logs` - logi audytowe system, zachowywane dłużej niż historia tenantów.
 - `files` - metadane plików tenantów, z soft delete przed trwałym usunięciem.
 - `exports` - prywatne pliki eksportów, zawsze z datą wygaśnięcia.
 
 ## Domyślne wartości
 
 - historia aktywności tenantów: 365 dni
-- logi audytowe landlord: 730 dni
+- logi audytowe system: 730 dni
 - usunięte pliki prywatne: 30 dni
 - pliki eksportów: 24 godziny
 
@@ -29,7 +29,7 @@ Ten dokument opisuje domyślne zasady retencji dla danych tenantów i warstwy la
 - czyścić wygasłe eksporty po `files.expires_at`
 - usuwać trwale soft-deleted pliki po `deleted_files_days`
 - anonimizować lub usuwać stare `activity_entries` po `activity_entries_days`
-- zachować landlord `audit_logs` do `audit_logs_days`
+- zachować system `audit_logs` do `audit_logs_days`
 
 ## Komenda wykonawcza
 

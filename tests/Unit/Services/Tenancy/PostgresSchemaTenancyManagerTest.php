@@ -2,7 +2,7 @@
 
 namespace Tests\Unit\Services\Tenancy;
 
-use App\Models\Landlord\Tenant;
+use App\Models\System\Tenant;
 use App\Modules\Tenancy\Enums\TenantBillingModel;
 use App\Modules\Tenancy\Enums\TenantDeploymentType;
 use App\Modules\Tenancy\Enums\TenantLicenseType;

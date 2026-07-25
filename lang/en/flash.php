@@ -21,6 +21,7 @@ return [
     'license_verified' => 'License verified.',
     'support_session_ended' => 'Support session ended.',
     'support_session_started' => 'Support session started.',
+    'tenant_feature_override_cleared' => 'Tenant feature manual override cleared.',
     'tenant_feature_override_saved' => 'Tenant feature override saved.',
     'tenant_status_updated' => 'Tenant status updated.',
 ];

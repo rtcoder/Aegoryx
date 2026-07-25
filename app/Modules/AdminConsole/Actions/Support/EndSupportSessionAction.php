@@ -2,9 +2,9 @@
 
 namespace App\Modules\AdminConsole\Actions\Support;
 
-use App\Models\Landlord\AuditLog;
-use App\Models\Landlord\Identity;
-use App\Models\Landlord\SupportSession;
+use App\Models\System\AuditLog;
+use App\Models\System\Identity;
+use App\Models\System\SupportSession;
 use App\Modules\AdminConsole\Enums\SupportSessionStatus;
 use App\Modules\Audit\Enums\AuditLogAction;
 use Illuminate\Support\Facades\DB;

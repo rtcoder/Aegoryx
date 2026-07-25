@@ -2,7 +2,7 @@
 
 namespace App\Modules\TenantPanel\Navigation;
 
-use App\Models\Landlord\Tenant;
+use App\Models\System\Tenant;
 use App\Modules\Entitlements\Enums\SystemFeature;
 use App\Modules\Entitlements\Services\EffectiveEntitlements;
 

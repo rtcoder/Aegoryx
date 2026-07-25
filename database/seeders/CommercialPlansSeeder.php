@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\Landlord\Plan;
-use App\Models\Landlord\PlanFeature;
+use App\Models\System\Plan;
+use App\Models\System\PlanFeature;
 use App\Modules\Billing\Enums\PlanStatus;
 use App\Modules\Entitlements\Enums\SystemFeature;
 use Illuminate\Database\Seeder;

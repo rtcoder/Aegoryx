@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Models\Landlord\Identity;
+use App\Models\System\Identity;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Horizon\Horizon;
 use Laravel\Horizon\HorizonApplicationServiceProvider;

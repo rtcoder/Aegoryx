@@ -2,7 +2,7 @@
 
 namespace Tests\Unit\Modules\PublicApi;
 
-use App\Models\Landlord\Tenant;
+use App\Models\System\Tenant;
 use App\Models\Tenant\PublishedPage;
 use App\Modules\PublicApi\Support\PublicApiCacheKeys;
 use Tests\TestCase;

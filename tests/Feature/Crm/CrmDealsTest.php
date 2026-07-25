@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\Crm;
 
-use App\Models\Landlord\Tenant;
-use App\Models\Landlord\TenantDomain;
-use App\Models\Landlord\TenantFeature;
+use App\Models\System\Tenant;
+use App\Models\System\TenantDomain;
+use App\Models\System\TenantFeature;
 use App\Models\Tenant\ActivityEntry;
 use App\Models\Tenant\CrmCompany;
 use App\Models\Tenant\CrmContact;
@@ -34,7 +34,7 @@ final class CrmDealsTest extends TestCase
 
         Artisan::call('migrate:fresh', [
             '--database' => 'sqlite',
-            '--path' => 'database/migrations/landlord',
+            '--path' => 'database/migrations/system',
         ]);
 
         Artisan::call('migrate', [

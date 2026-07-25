@@ -4,8 +4,11 @@ namespace Tests\Feature\Architecture;
 
 use App\Services\Tenancy\PostgresSchemaTenancyManager;
 use App\Services\Tenancy\TenancyManager;
+use FilesystemIterator;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Http;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
 use Tests\TestCase;
 
 final class ModuleBootstrapTest extends TestCase
@@ -39,7 +42,7 @@ final class ModuleBootstrapTest extends TestCase
         $commands = array_keys(Artisan::all());
 
         $this->assertContains('tenants:create', $commands);
-        $this->assertContains('landlord:migrate', $commands);
+        $this->assertContains('system:migrate', $commands);
         $this->assertContains('tenants:migrate', $commands);
         $this->assertContains('tenant:migrate', $commands);
         $this->assertContains('tenant-domains:verify', $commands);
@@ -99,5 +102,47 @@ final class ModuleBootstrapTest extends TestCase
 
         $this->assertSame(0, $exitCode);
         Http::assertSentCount(4);
+    }
+
+    public function test_runtime_code_no_longer_uses_deprecated_admin_naming(): void
+    {
+        $paths = [
+            app_path(),
+            base_path('config'),
+            database_path('migrations'),
+            lang_path(),
+            resource_path('views'),
+            base_path('routes'),
+            base_path('scripts'),
+        ];
+
+        $matches = [];
+
+        $deprecatedTerm = 'land'.'lord';
+
+        foreach ($paths as $path) {
+            $files = new RecursiveIteratorIterator(
+                new RecursiveDirectoryIterator($path, FilesystemIterator::SKIP_DOTS),
+            );
+
+            foreach ($files as $file) {
+                if (! $file->isFile()) {
+                    continue;
+                }
+
+                $relativePath = str_replace(base_path().DIRECTORY_SEPARATOR, '', $file->getPathname());
+
+                if (stripos($relativePath, $deprecatedTerm) !== false) {
+                    $matches[] = $relativePath;
+                    continue;
+                }
+
+                if (stripos((string) file_get_contents($file->getPathname()), $deprecatedTerm) !== false) {
+                    $matches[] = $relativePath;
+                }
+            }
+        }
+
+        $this->assertSame([], $matches);
     }
 }

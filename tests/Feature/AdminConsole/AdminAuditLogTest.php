@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\AdminConsole;
 
-use App\Models\Landlord\AuditLog;
-use App\Models\Landlord\Identity;
-use App\Models\Landlord\Tenant;
+use App\Models\System\AuditLog;
+use App\Models\System\Identity;
+use App\Models\System\Tenant;
 use App\Modules\Audit\Enums\AuditLogAction;
 use App\Modules\Identity\Enums\IdentityStatus;
 use Illuminate\Support\Facades\Artisan;
@@ -18,14 +18,14 @@ final class AdminAuditLogTest extends TestCase
 
         Artisan::call('migrate:fresh', [
             '--database' => 'sqlite',
-            '--path' => 'database/migrations/landlord',
+            '--path' => 'database/migrations/system',
         ]);
     }
 
     public function test_superadmin_can_view_audit_log_entries(): void
     {
         $superadmin = $this->superadmin();
-        $this->actingAs($superadmin, 'landlord');
+        $this->actingAs($superadmin, 'admin');
 
         AuditLog::query()->create([
             'actor_type' => 'superadmin',

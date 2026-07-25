@@ -84,8 +84,8 @@ rollback_migration() {
 
     log "Rolling back ${schema}.${migration}."
 
-    if [[ "$scope" == "landlord" ]]; then
-        artisan landlord:migrate:rollback --migration="$migration" --force
+    if [[ "$scope" == "system" ]]; then
+        artisan system:migrate:rollback --migration="$migration" --force
     else
         artisan tenants:migrate:rollback --schema="$schema" --migration="$migration" --force
     fi
@@ -170,11 +170,11 @@ MAINTENANCE_STARTED="true"
 log "Clearing stale optimized files."
 artisan optimize:clear
 
-log "Running landlord migrations."
+log "Running system migrations."
 run_migration_command \
-    landlord \
-    landlord \
-    "$PHP_BIN" artisan landlord:migrate --force
+    system \
+    system \
+    "$PHP_BIN" artisan system:migrate --force
 
 log "Running tenant migrations."
 run_migration_command \

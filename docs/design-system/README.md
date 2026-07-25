@@ -1,6 +1,6 @@
 # Design System Aegoryx
 
-Ten dokument opisuje wspólny system UI dla panelu landlorda i panelu tenantowego. Nowe widoki Blade/Livewire powinny korzystać z tych tokenów i komponentów zamiast kopiować długie klasy Tailwinda.
+Ten dokument opisuje wspólny system UI dla panelu superadmina i panelu tenantowego. Nowe widoki Blade/Livewire powinny korzystać z tych tokenów i komponentów zamiast kopiować długie klasy Tailwinda.
 
 ## Zasada główna
 

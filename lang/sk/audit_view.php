@@ -10,7 +10,7 @@ return [
     'activity_title' => 'Aktivita',
     'actor' => 'Aktér',
     'audit_description' => 'Globálny audit systémových a administratívnych operácií.',
-    'audit_help' => 'Landlord, fakturácia, licencie, support a bezpečnostné udalosti.',
+    'audit_help' => 'System, fakturácia, licencie, support a bezpečnostné udalosti.',
     'audit_log' => 'Audit log',
     'audit_title' => 'Audit',
     'created_at' => 'Vytvorené',

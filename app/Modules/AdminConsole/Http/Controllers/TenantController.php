@@ -3,7 +3,7 @@
 namespace App\Modules\AdminConsole\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\Landlord\Tenant;
+use App\Models\System\Tenant;
 use App\Modules\AdminConsole\Actions\UpdateTenantStatusAction;
 use App\Modules\AdminConsole\Http\Requests\Tenants\UpdateTenantStatusRequest;
 use Illuminate\Http\RedirectResponse;
@@ -13,12 +13,12 @@ final class TenantController extends Controller
 {
     public function index(): View
     {
-        return view('landlord.tenants.index');
+        return view('admin.tenants.index');
     }
 
     public function show(Tenant $tenant): View
     {
-        return view('landlord.tenants.show', [
+        return view('admin.tenants.show', [
             'tenant' => $tenant,
         ]);
     }
@@ -31,13 +31,13 @@ final class TenantController extends Controller
         $action->handle(
             tenant: $tenant,
             status: $request->status(),
-            actor: $request->user('landlord'),
+            actor: $request->user('admin'),
             ip: $request->ip(),
             userAgent: $request->userAgent(),
         );
 
         return redirect()
-            ->route('landlord.tenants.show', $tenant)
+            ->route('admin.tenants.show', $tenant)
             ->with('success', __('flash.tenant_status_updated'));
     }
 }

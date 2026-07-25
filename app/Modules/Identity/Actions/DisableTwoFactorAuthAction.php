@@ -2,8 +2,8 @@
 
 namespace App\Modules\Identity\Actions;
 
-use App\Models\Landlord\AuditLog;
-use App\Models\Landlord\Identity;
+use App\Models\System\AuditLog;
+use App\Models\System\Identity;
 use App\Modules\Audit\Enums\AuditLogAction;
 use Illuminate\Support\Facades\DB;
 

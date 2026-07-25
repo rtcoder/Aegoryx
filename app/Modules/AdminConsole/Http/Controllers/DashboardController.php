@@ -9,6 +9,6 @@ final class DashboardController extends Controller
 {
     public function __invoke(): View
     {
-        return view('landlord.dashboard');
+        return view('admin.dashboard');
     }
 }

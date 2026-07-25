@@ -3,6 +3,7 @@
 return [
     'billing_subscription_synced' => 'Předplatné [:subscription] synchronizováno jako [:status].',
     'license_verified' => 'Licence [:license] ověřena jako [:status].',
+    'manual_feature_override_cleared' => 'Ruční přepsání funkce [:feature] pro tenant [:tenant] vymazáno.',
     'manual_feature_override_set' => 'Ruční přepsání funkce [:feature] pro tenant [:tenant] nastaveno na [:state].',
     'support_session_marked' => 'Support session [:session] označena jako [:status].',
     'support_session_started' => 'Support session [:session] spuštěna pro tenant [:tenant].',

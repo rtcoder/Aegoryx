@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\TenantPanel;
 
-use App\Models\Landlord\Tenant;
-use App\Models\Landlord\TenantDomain;
-use App\Models\Landlord\TenantFeature;
+use App\Models\System\Tenant;
+use App\Models\System\TenantDomain;
+use App\Models\System\TenantFeature;
 use App\Models\Tenant\User;
 use App\Modules\Entitlements\Enums\TenantFeatureSource;
 use App\Modules\Tenancy\Enums\TenantBillingModel;
@@ -24,7 +24,7 @@ final class TenantPanelRoutingTest extends TestCase
 
         Artisan::call('migrate:fresh', [
             '--database' => 'sqlite',
-            '--path' => 'database/migrations/landlord',
+            '--path' => 'database/migrations/system',
         ]);
 
         Artisan::call('migrate', [

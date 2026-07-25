@@ -19,7 +19,7 @@ final class PreflightCommand extends Command
     {
         $checks = [
             'Application key configured' => $this->hasAppKey(),
-            'Landlord domain configured' => $this->hasLandlordDomain(),
+            'System domain configured' => $this->hasAdminDomain(),
             'Supported locales match Locale enum' => $this->localesMatchEnum(),
             'All configured modules are enabled and loadable' => $this->modulesAreLoadable(),
             'Required operational commands are registered' => $this->commandsAreRegistered(),
@@ -52,9 +52,9 @@ final class PreflightCommand extends Command
         return is_string(config('app.key')) && config('app.key') !== '';
     }
 
-    private function hasLandlordDomain(): bool
+    private function hasAdminDomain(): bool
     {
-        return is_string(config('aegoryx.landlord.domain')) && config('aegoryx.landlord.domain') !== '';
+        return is_string(config('aegoryx.admin.domain')) && config('aegoryx.admin.domain') !== '';
     }
 
     private function localesMatchEnum(): bool
@@ -101,8 +101,8 @@ final class PreflightCommand extends Command
         $commands = array_keys(Artisan::all());
 
         return array_all([
-            'landlord:create',
-            'landlord:migrate',
+            'superadmin:create',
+            'system:migrate',
             'tenants:create',
             'tenants:migrate',
             'tenant:migrate',

@@ -13,7 +13,7 @@ final class CreateTenantCommand extends Command
         {name : Tenant display name}
         {--slug= : Optional URL-safe slug}
         {--locale=pl : Tenant default locale}
-        {--skip-migrations : Create only the landlord row and schema}';
+        {--skip-migrations : Create only the system row and schema}';
 
     protected $description = 'Create a tenant with a safe schema name and optional tenant migrations.';
 

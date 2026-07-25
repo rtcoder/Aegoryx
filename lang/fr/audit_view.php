@@ -10,7 +10,7 @@ return [
     'activity_title' => 'Activité',
     'actor' => 'Acteur',
     'audit_description' => 'Audit global des opérations système et administratives.',
-    'audit_help' => 'Événements landlord, billing, licences, support et sécurité.',
+    'audit_help' => 'Événements system, billing, licences, support et sécurité.',
     'audit_log' => 'Audit log',
     'audit_title' => 'Audit',
     'created_at' => 'Créé le',

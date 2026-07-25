@@ -7,7 +7,7 @@ return [
     'workspace_for' => 'Espace de travail pour :tenant.',
     'workspace_overview_for' => 'Vue d’ensemble de l’espace de travail pour :tenant.',
     'dashboard_heading' => 'Panel tenant',
-    'dashboard_description' => 'Cette structure est prête pour les modules tenant tout en gardant les détails landlord hors de l’espace.',
+    'dashboard_description' => 'Cette structure est prête pour les modules tenant tout en gardant les détails system hors de l’espace.',
     'context' => 'Contexte tenant',
     'not_enabled' => 'Non activé pour ce tenant.',
     'enabled_features' => ':count fonctionnalités activées',

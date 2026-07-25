@@ -2,7 +2,7 @@
 
 namespace App\Services\Tenancy;
 
-use App\Models\Landlord\Tenant;
+use App\Models\System\Tenant;
 use Illuminate\Support\Facades\DB;
 
 final class PostgresSchemaTenancyManager implements TenancyManager

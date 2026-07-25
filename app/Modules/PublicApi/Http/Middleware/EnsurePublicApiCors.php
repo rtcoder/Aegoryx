@@ -2,7 +2,7 @@
 
 namespace App\Modules\PublicApi\Http\Middleware;
 
-use App\Models\Landlord\Tenant;
+use App\Models\System\Tenant;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;

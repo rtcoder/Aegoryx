@@ -20,7 +20,7 @@ Rozwiązywać tenanta dla publicznego API na podstawie domeny lub publicznego id
 
 ## Zależności
 
-- Tenant domains landlord table.
+- Tenant domains system table.
 - Tenancy manager.
 
 ## Kroki

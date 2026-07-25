@@ -2,7 +2,7 @@
 
 namespace App\Modules\TenantPanel\Http\Middleware;
 
-use App\Models\Landlord\Tenant;
+use App\Models\System\Tenant;
 use App\Modules\Entitlements\Services\EffectiveEntitlements;
 use Closure;
 use Illuminate\Http\Request;

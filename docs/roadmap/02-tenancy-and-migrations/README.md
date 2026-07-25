@@ -2,7 +2,7 @@
 
 ## Cel
 
-Zbudować schema-per-tenant multi-tenancy dla PostgreSQL z osobnymi migracjami landlord i tenant.
+Zbudować schema-per-tenant multi-tenancy dla PostgreSQL z osobnymi migracjami system i tenant.
 
 ## Dlaczego Jest Ważny
 
@@ -16,12 +16,12 @@ Izolacja tenantów jest rdzeniem Aegoryx. Błędy w `search_path`, migracjach al
 
 ## Status
 
-- Done: Landlord Migrations, Tenant Migrations, Tenancy Manager, Schema Manager, Tenant Creation Flow, Migration Tests.
+- Done: System Migrations, Tenant Migrations, Tenancy Manager, Schema Manager, Tenant Creation Flow, Migration Tests.
 - Next: Brak.
 
 ## Taski
 
-- [x] [Landlord Migrations](01-landlord-migrations/)
+- [x] [System Migrations](01-system-migrations/)
 - [x] [Tenant Migrations](02-tenant-migrations/)
 - [x] [Tenancy Manager](03-tenancy-manager/)
 - [x] [Schema Manager](04-schema-manager/)
@@ -30,7 +30,7 @@ Izolacja tenantów jest rdzeniem Aegoryx. Błędy w `search_path`, migracjach al
 
 ## Definicja Ukończenia
 
-- Landlord i tenant migrations są jawnie rozdzielone.
+- System i tenant migrations są jawnie rozdzielone.
 - Każda tenant schema ma własną tabelę `migrations`.
 - Tenant context jest ustawiany centralnie i resetowany po pracy.
 - Testy potwierdzają izolację minimum dwóch tenantów.

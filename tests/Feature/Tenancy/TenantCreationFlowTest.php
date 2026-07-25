@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Tenancy;
 
-use App\Models\Landlord\Tenant;
+use App\Models\System\Tenant;
 use App\Modules\Tenancy\Actions\CreateTenantAction;
 use App\Modules\Tenancy\Enums\TenantBillingModel;
 use App\Modules\Tenancy\Enums\TenantDeploymentType;
@@ -20,7 +20,7 @@ final class TenantCreationFlowTest extends TestCase
 
         Artisan::call('migrate:fresh', [
             '--database' => 'sqlite',
-            '--path' => 'database/migrations/landlord',
+            '--path' => 'database/migrations/system',
         ]);
     }
 

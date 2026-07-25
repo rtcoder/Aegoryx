@@ -28,7 +28,7 @@ Module providers are registered in `config/aegoryx.php` and loaded by `App\Provi
 Keep these boundaries:
 
 - Tenant business data belongs in tenant schemas.
-- Landlord/system data belongs in the public schema.
+- System/system data belongs in the public schema.
 - Controllers stay thin.
 - Business changes go through Actions or Services.
 - Important changes must record activity/audit history.

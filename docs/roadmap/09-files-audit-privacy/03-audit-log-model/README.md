@@ -11,7 +11,7 @@ Zbudować techniczny audit log dla zdarzeń bezpieczeństwa i operacji krytyczny
 ## Zakres
 
 - Audit log schema.
-- Landlord audit log browser dla superadmina.
+- System audit log browser dla superadmina.
 - Actor fields.
 - IP/user agent.
 - Metadata bez sekretów.
@@ -26,7 +26,7 @@ Zbudować techniczny audit log dla zdarzeń bezpieczeństwa i operacji krytyczny
 
 ## Kroki
 
-- Dodać landlord/tenant audit strategy.
+- Dodać system/tenant audit strategy.
 - Zdefiniować event types.
 - Dodać redaction policy.
 
@@ -39,7 +39,7 @@ Brak.
 - Audit log nie zapisuje sekretów.
 - Security events mają actor i context.
 - Log odróżnia system/job/user/superadmin.
-- Superadmin może przeglądać audit log w panelu landlorda.
+- Superadmin może przeglądać audit log w panelu superadmina.
 
 ## Test Plan
 

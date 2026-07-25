@@ -2,10 +2,10 @@
 
 namespace App\Modules\Entitlements\Actions;
 
-use App\Models\Landlord\AuditLog;
-use App\Models\Landlord\Identity;
-use App\Models\Landlord\Tenant;
-use App\Models\Landlord\TenantFeature;
+use App\Models\System\AuditLog;
+use App\Models\System\Identity;
+use App\Models\System\Tenant;
+use App\Models\System\TenantFeature;
 use App\Modules\Audit\Enums\AuditLogAction;
 use App\Modules\Entitlements\Enums\SystemFeature;
 use App\Modules\Entitlements\Enums\TenantFeatureSource;

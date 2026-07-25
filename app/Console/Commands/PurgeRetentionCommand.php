@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Landlord\AuditLog;
-use App\Models\Landlord\Tenant;
+use App\Models\System\AuditLog;
+use App\Models\System\Tenant;
 use App\Models\Tenant\ActivityEntry;
 use App\Models\Tenant\TenantFile;
 use App\Modules\Audit\Support\RetentionPolicy;
@@ -16,7 +16,7 @@ final class PurgeRetentionCommand extends Command
     protected $signature = 'aegoryx:retention:purge
         {--dry-run : Report records that would be purged without deleting them}';
 
-    protected $description = 'Purge tenant and landlord data that exceeded configured retention windows.';
+    protected $description = 'Purge tenant and system data that exceeded configured retention windows.';
 
     public function __construct(
         private readonly RetentionPolicy $retention,
@@ -28,7 +28,7 @@ final class PurgeRetentionCommand extends Command
     public function handle(): int
     {
         $dryRun = (bool) $this->option('dry-run');
-        $auditLogs = $this->purgeLandlordAuditLogs($dryRun);
+        $auditLogs = $this->purgeSystemAuditLogs($dryRun);
         $activityEntries = 0;
         $expiredFiles = 0;
         $deletedFiles = 0;
@@ -60,7 +60,7 @@ final class PurgeRetentionCommand extends Command
         return self::SUCCESS;
     }
 
-    private function purgeLandlordAuditLogs(bool $dryRun): int
+    private function purgeSystemAuditLogs(bool $dryRun): int
     {
         $query = AuditLog::query()
             ->where('created_at', '<', $this->retention->cutoffForDays($this->retention->auditLogsDays()));

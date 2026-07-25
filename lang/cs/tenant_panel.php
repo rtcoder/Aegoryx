@@ -7,7 +7,7 @@ return [
     'workspace_for' => 'Workspace pro :tenant.',
     'workspace_overview_for' => 'Přehled workspace pro :tenant.',
     'dashboard_heading' => 'Tenant panel',
-    'dashboard_description' => 'Tato shell je připravena pro tenant moduly a drží landlord-only detaily mimo workspace.',
+    'dashboard_description' => 'Tato shell je připravena pro tenant moduly a drží system-only detaily mimo workspace.',
     'context' => 'Kontext tenanta',
     'not_enabled' => 'Není povoleno pro tohoto tenanta.',
     'enabled_features' => ':count povolených funkcí',

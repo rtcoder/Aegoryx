@@ -2,10 +2,10 @@
 
 namespace Tests\Feature\AdminConsole;
 
-use App\Models\Landlord\AuditLog;
-use App\Models\Landlord\Identity;
-use App\Models\Landlord\License;
-use App\Models\Landlord\Tenant;
+use App\Models\System\AuditLog;
+use App\Models\System\Identity;
+use App\Models\System\License;
+use App\Models\System\Tenant;
 use App\Modules\Audit\Enums\AuditLogAction;
 use App\Modules\Identity\Enums\IdentityStatus;
 use App\Modules\Licensing\Enums\LicenseStatus;
@@ -24,13 +24,13 @@ final class AdminLicenseManagementTest extends TestCase
 
         Artisan::call('migrate:fresh', [
             '--database' => 'sqlite',
-            '--path' => 'database/migrations/landlord',
+            '--path' => 'database/migrations/system',
         ]);
     }
 
     public function test_superadmin_can_view_licenses(): void
     {
-        $this->actingAs($this->superadmin(), 'landlord');
+        $this->actingAs($this->superadmin(), 'admin');
 
         $tenant = $this->tenant();
         $license = $this->license([
@@ -49,7 +49,7 @@ final class AdminLicenseManagementTest extends TestCase
     public function test_superadmin_can_verify_expired_license_without_logging_secret(): void
     {
         $superadmin = $this->superadmin();
-        $this->actingAs($superadmin, 'landlord');
+        $this->actingAs($superadmin, 'admin');
 
         $license = $this->license([
             'status' => LicenseStatus::Active,
@@ -82,7 +82,7 @@ final class AdminLicenseManagementTest extends TestCase
 
     public function test_verify_maps_expired_license_to_grace_when_grace_until_is_future(): void
     {
-        $this->actingAs($this->superadmin(), 'landlord');
+        $this->actingAs($this->superadmin(), 'admin');
 
         $license = $this->license([
             'status' => LicenseStatus::Active,

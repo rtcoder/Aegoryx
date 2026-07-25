@@ -2,12 +2,12 @@
 
 namespace Tests\Feature\Entitlements;
 
-use App\Models\Landlord\License;
-use App\Models\Landlord\Plan;
-use App\Models\Landlord\PlanFeature;
-use App\Models\Landlord\Subscription;
-use App\Models\Landlord\Tenant;
-use App\Models\Landlord\TenantFeature;
+use App\Models\System\License;
+use App\Models\System\Plan;
+use App\Models\System\PlanFeature;
+use App\Models\System\Subscription;
+use App\Models\System\Tenant;
+use App\Models\System\TenantFeature;
 use App\Modules\Billing\Enums\PlanStatus;
 use App\Modules\Billing\Enums\SubscriptionStatus;
 use App\Modules\Entitlements\Enums\SystemFeature;
@@ -29,7 +29,7 @@ final class EffectiveEntitlementsTest extends TestCase
 
         Artisan::call('migrate:fresh', [
             '--database' => 'sqlite',
-            '--path' => 'database/migrations/landlord',
+            '--path' => 'database/migrations/system',
         ]);
     }
 

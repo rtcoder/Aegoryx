@@ -2,10 +2,10 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Landlord\BillingEvent;
-use App\Models\Landlord\Identity;
-use App\Models\Landlord\Tenant;
-use App\Models\Landlord\TenantDomain;
+use App\Models\System\BillingEvent;
+use App\Models\System\Identity;
+use App\Models\System\Tenant;
+use App\Models\System\TenantDomain;
 use App\Modules\Billing\Enums\BillingEventStatus;
 use App\Modules\Identity\Enums\IdentityStatus;
 use App\Modules\Tenancy\Enums\TenantDomainStatus;
@@ -17,7 +17,7 @@ final class OpsReportCommand extends Command
     protected $signature = 'aegoryx:ops-report
         {--json : Output the report as JSON}';
 
-    protected $description = 'Show an operational snapshot for the Aegoryx landlord system.';
+    protected $description = 'Show an operational snapshot for the Aegoryx system.';
 
     public function handle(): int
     {

@@ -21,6 +21,7 @@ return [
     'license_verified' => 'Licenza verificata.',
     'support_session_ended' => 'Sessione supporto terminata.',
     'support_session_started' => 'Sessione supporto avviata.',
+    'tenant_feature_override_cleared' => 'Override manuale funzionalità tenant cancellato.',
     'tenant_feature_override_saved' => 'Override funzionalità tenant salvato.',
     'tenant_status_updated' => 'Stato tenant aggiornato.',
 ];

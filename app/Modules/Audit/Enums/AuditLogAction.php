@@ -9,6 +9,7 @@ enum AuditLogAction: string
     case SupportSessionEnded = 'support_session_ended';
     case SupportSessionExpired = 'support_session_expired';
     case SupportSessionStarted = 'support_session_started';
+    case TenantFeatureOverrideCleared = 'tenant_feature_override_cleared';
     case TenantFeatureOverrideSet = 'tenant_feature_override_set';
     case TenantStatusChanged = 'tenant_status_changed';
     case TwoFactorDisabled = 'two_factor_disabled';

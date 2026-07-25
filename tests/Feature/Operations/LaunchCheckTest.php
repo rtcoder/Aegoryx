@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Operations;
 
-use App\Models\Landlord\BillingEvent;
-use App\Models\Landlord\Identity;
+use App\Models\System\BillingEvent;
+use App\Models\System\Identity;
 use App\Modules\Billing\Enums\BillingEventStatus;
 use App\Modules\Identity\Enums\IdentityStatus;
 use Illuminate\Support\Facades\Artisan;
@@ -17,7 +17,7 @@ final class LaunchCheckTest extends TestCase
 
         Artisan::call('migrate:fresh', [
             '--database' => 'sqlite',
-            '--path' => 'database/migrations/landlord',
+            '--path' => 'database/migrations/system',
         ]);
     }
 

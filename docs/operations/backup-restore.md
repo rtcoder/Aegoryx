@@ -1,6 +1,6 @@
 # Backup And Restore
 
-Backup musi obejmować całą bazę PostgreSQL oraz storage aplikacji. Model schema-per-tenant nie zakłada cross-schema FK, więc restore pojedynczego tenanta jest możliwy operacyjnie, ale wymaga ostrożnego odtworzenia jego schema i spójnych metadanych landlord.
+Backup musi obejmować całą bazę PostgreSQL oraz storage aplikacji. Model schema-per-tenant nie zakłada cross-schema FK, więc restore pojedynczego tenanta jest możliwy operacyjnie, ale wymaga ostrożnego odtworzenia jego schema i spójnych metadanych system.
 
 ## Minimalny backup
 
@@ -15,9 +15,9 @@ Co najmniej przed większym releasem operator powinien wykonać próbny restore 
 
 1. odtworzyć bazę
 2. odtworzyć storage
-3. uruchomić `php artisan landlord:migrate --force`
+3. uruchomić `php artisan system:migrate --force`
 4. uruchomić `php artisan tenants:migrate --force`
-5. zweryfikować logowanie landlord i przykładowego tenanta
+5. zweryfikować logowanie system i przykładowego tenanta
 6. zweryfikować prywatny download pliku
 7. uruchomić `php artisan aegoryx:smoke`
 8. zapisać datę próby, wersję aplikacji, źródło backupu, wynik i właściciela follow-upów
@@ -30,4 +30,4 @@ Co najmniej przed większym releasem operator powinien wykonać próbny restore 
 
 ## Tenant-specific restore
 
-Restore pojedynczego tenanta wymaga zgodności `tenants.schema_name` w landlord z odtwarzaną schema. Nie należy kopiować danych między schema ręcznie bez planu mapowania ID i audytu.
+Restore pojedynczego tenanta wymaga zgodności `tenants.schema_name` w system z odtwarzaną schema. Nie należy kopiować danych między schema ręcznie bez planu mapowania ID i audytu.

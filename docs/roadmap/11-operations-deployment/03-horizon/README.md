@@ -22,7 +22,7 @@ Wdrożyć Laravel Horizon dla monitoringu kolejek w SaaS/self-hosted.
 ## Kroki
 
 - Dodać Horizon dependency i config.
-- Ograniczyć dostęp do landlord superadminów.
+- Ograniczyć dostęp do system superadminów.
 - Udokumentować uruchamianie w `docs/operations/queues.md`.
 
 ## Subtaski

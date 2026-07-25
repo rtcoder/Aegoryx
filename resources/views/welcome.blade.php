@@ -15,7 +15,7 @@
                 {{ __('welcome.description') }}
             </p>
             <a
-                href="http://{{ config('aegoryx.landlord.domain') }}"
+                href="http://{{ config('aegoryx.admin.domain') }}"
                 class="mt-6 inline-flex rounded bg-sky-500 px-4 py-2 text-sm font-medium text-white hover:bg-sky-400"
             >
                 {{ __('welcome.admin_link') }}

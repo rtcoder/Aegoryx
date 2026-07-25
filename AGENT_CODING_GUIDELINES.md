@@ -1021,11 +1021,11 @@ migrations.md
 
 Najważniejsze zasady:
 
-- landlord migrations osobno,
+- system migrations osobno,
 - tenant migrations osobno,
 - każda schema tenantowa ma własną tabelę `migrations`,
 - `search_path` ustawiany centralnie,
-- nie mieszać tenant i landlord migrations,
+- nie mieszać tenant i system migrations,
 - nie robić cross-schema FK,
 - nie dodawać `tenant_id` bez potrzeby do tabel tenantowych.
 
@@ -1217,7 +1217,7 @@ Przed zakończeniem zadania agent musi sprawdzić:
 [ ] Czy są testy dla istotnej logiki?
 [ ] Czy joby tenantowe mają tenant_id?
 [ ] Czy cache key zawiera tenant context?
-[ ] Czy migracje są w poprawnym katalogu landlord/tenant?
+[ ] Czy migracje są w poprawnym katalogu system/tenant?
 ```
 
 ---

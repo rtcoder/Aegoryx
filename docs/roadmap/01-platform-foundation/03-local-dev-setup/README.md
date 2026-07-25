@@ -23,7 +23,7 @@ Opisać i ustabilizować lokalne uruchamianie aplikacji z PostgreSQL, Redis, kol
 ## Kroki
 
 - Uzupełnić README projektu o local setup.
-- Dodać sekcję migracji landlord/tenant.
+- Dodać sekcję migracji system/tenant.
 - Opisać najczęstsze problemy.
 
 ## Subtaski

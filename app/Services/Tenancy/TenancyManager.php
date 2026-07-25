@@ -2,7 +2,7 @@
 
 namespace App\Services\Tenancy;
 
-use App\Models\Landlord\Tenant;
+use App\Models\System\Tenant;
 
 interface TenancyManager
 {

@@ -21,8 +21,8 @@ return [
         'supported_locales' => ['pl', 'en', 'de', 'es', 'ru', 'fr', 'it', 'cs', 'sk'],
     ],
 
-    'landlord' => [
-        'domain' => env('LANDLORD_DOMAIN', 'admin.aegoryx.test'),
+    'admin' => [
+        'domain' => env('ADMIN_DOMAIN', 'admin.aegoryx.test'),
     ],
 
     'public_api' => [

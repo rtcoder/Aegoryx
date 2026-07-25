@@ -2,12 +2,12 @@
 
 namespace Tests\Feature\AdminConsole;
 
-use App\Models\Landlord\AuditLog;
-use App\Models\Landlord\BillingEvent;
-use App\Models\Landlord\Identity;
-use App\Models\Landlord\License;
-use App\Models\Landlord\Subscription;
-use App\Models\Landlord\Tenant;
+use App\Models\System\AuditLog;
+use App\Models\System\BillingEvent;
+use App\Models\System\Identity;
+use App\Models\System\License;
+use App\Models\System\Subscription;
+use App\Models\System\Tenant;
 use App\Modules\Audit\Enums\AuditLogAction;
 use App\Modules\Billing\Enums\BillingEventStatus;
 use App\Modules\Billing\Enums\BillingProvider;
@@ -29,24 +29,24 @@ final class AdminNavigationTest extends TestCase
 
         Artisan::call('migrate:fresh', [
             '--database' => 'sqlite',
-            '--path' => 'database/migrations/landlord',
+            '--path' => 'database/migrations/system',
         ]);
     }
 
-    public function test_guest_is_redirected_to_landlord_login(): void
+    public function test_guest_is_redirected_to_admin_login(): void
     {
         $this
             ->get('http://admin.aegoryx.test/')
             ->assertRedirect('http://admin.aegoryx.test/login');
     }
 
-    public function test_non_superadmin_identity_cannot_access_landlord_console(): void
+    public function test_non_superadmin_identity_cannot_access_admin_console(): void
     {
         $this->actingAs(Identity::query()->create([
             'email' => 'user@example.test',
             'is_super_admin' => false,
             'status' => IdentityStatus::Active,
-        ]), 'landlord');
+        ]), 'admin');
 
         $this
             ->get('http://admin.aegoryx.test/')
@@ -55,7 +55,7 @@ final class AdminNavigationTest extends TestCase
 
     public function test_superadmin_can_see_admin_navigation_pages(): void
     {
-        $this->actingAs($this->superadmin(), 'landlord');
+        $this->actingAs($this->superadmin(), 'admin');
 
         foreach ([
             'http://admin.aegoryx.test/',
@@ -70,7 +70,7 @@ final class AdminNavigationTest extends TestCase
 
     public function test_superadmin_can_list_tenants(): void
     {
-        $this->actingAs($this->superadmin(), 'landlord');
+        $this->actingAs($this->superadmin(), 'admin');
 
         $tenant = $this->tenant([
             'name' => 'Acme Labs',
@@ -88,7 +88,7 @@ final class AdminNavigationTest extends TestCase
 
     public function test_superadmin_can_view_tenant_details(): void
     {
-        $this->actingAs($this->superadmin(), 'landlord');
+        $this->actingAs($this->superadmin(), 'admin');
 
         $tenant = $this->tenant();
 
@@ -102,7 +102,7 @@ final class AdminNavigationTest extends TestCase
 
     public function test_superadmin_can_view_billing_dashboard(): void
     {
-        $this->actingAs($this->superadmin(), 'landlord');
+        $this->actingAs($this->superadmin(), 'admin');
 
         $tenant = $this->tenant(['name' => 'Billing Tenant']);
 
@@ -131,15 +131,15 @@ final class AdminNavigationTest extends TestCase
         $this
             ->get('http://admin.aegoryx.test/billing')
             ->assertOk()
-            ->assertSee(__('landlord.billing.subscription_statuses'))
-            ->assertSee(__('landlord.billing.license_statuses'))
+            ->assertSee(__('admin.billing.subscription_statuses'))
+            ->assertSee(__('admin.billing.license_statuses'))
             ->assertSee('Billing Tenant')
             ->assertSee('subscription.updated');
     }
 
     public function test_superadmin_can_view_billing_event_details(): void
     {
-        $this->actingAs($this->superadmin(), 'landlord');
+        $this->actingAs($this->superadmin(), 'admin');
 
         $tenant = $this->tenant(['name' => 'Billing Tenant']);
         $event = BillingEvent::query()->create([
@@ -160,7 +160,7 @@ final class AdminNavigationTest extends TestCase
         $this
             ->get("http://admin.aegoryx.test/billing/events/{$event->id}")
             ->assertOk()
-            ->assertSee(__('landlord.billing.event_details'))
+            ->assertSee(__('admin.billing.event_details'))
             ->assertSee('evt_failed_123')
             ->assertSee('Temporary provider sync failure.')
             ->assertSee('sub_failed_123');
@@ -169,7 +169,7 @@ final class AdminNavigationTest extends TestCase
     public function test_superadmin_can_retry_failed_billing_event(): void
     {
         $superadmin = $this->superadmin();
-        $this->actingAs($superadmin, 'landlord');
+        $this->actingAs($superadmin, 'admin');
 
         $tenant = $this->tenant(['name' => 'Billing Tenant']);
         $event = BillingEvent::query()->create([
@@ -190,7 +190,7 @@ final class AdminNavigationTest extends TestCase
         $this
             ->post("http://admin.aegoryx.test/billing/events/{$event->id}/retry")
             ->assertRedirect("http://admin.aegoryx.test/billing/events/{$event->id}")
-            ->assertSessionHas('success', __('landlord.billing.retry_succeeded'));
+            ->assertSessionHas('success', __('admin.billing.retry_succeeded'));
 
         $event->refresh();
         $subscription = Subscription::query()->firstOrFail();
@@ -206,7 +206,7 @@ final class AdminNavigationTest extends TestCase
     public function test_superadmin_can_update_tenant_status_and_audit_it(): void
     {
         $superadmin = $this->superadmin();
-        $this->actingAs($superadmin, 'landlord');
+        $this->actingAs($superadmin, 'admin');
 
         $tenant = $this->tenant();
 

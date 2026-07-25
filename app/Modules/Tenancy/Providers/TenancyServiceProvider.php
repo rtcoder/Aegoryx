@@ -3,10 +3,10 @@
 namespace App\Modules\Tenancy\Providers;
 
 use App\Console\Commands\CreateTenantCommand;
-use App\Console\Commands\MigrateLandlordCommand;
+use App\Console\Commands\MigrateSystemCommand;
 use App\Console\Commands\MigrateTenantCommand;
 use App\Console\Commands\MigrateTenantsCommand;
-use App\Console\Commands\RollbackLandlordMigrationCommand;
+use App\Console\Commands\RollbackSystemMigrationCommand;
 use App\Console\Commands\RollbackTenantsMigrationCommand;
 use App\Console\Commands\VerifyTenantDomainsCommand;
 use App\Modules\Tenancy\Services\DnsTxtResolver;
@@ -30,10 +30,10 @@ final class TenancyServiceProvider extends ModuleServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([
                 CreateTenantCommand::class,
-                MigrateLandlordCommand::class,
+                MigrateSystemCommand::class,
                 MigrateTenantsCommand::class,
                 MigrateTenantCommand::class,
-                RollbackLandlordMigrationCommand::class,
+                RollbackSystemMigrationCommand::class,
                 RollbackTenantsMigrationCommand::class,
                 VerifyTenantDomainsCommand::class,
             ]);

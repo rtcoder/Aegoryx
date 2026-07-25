@@ -2,10 +2,10 @@
 
 namespace Tests\Feature\AdminConsole;
 
-use App\Livewire\Landlord\Support\Index;
-use App\Models\Landlord\Identity;
-use App\Models\Landlord\SupportSession;
-use App\Models\Landlord\Tenant;
+use App\Livewire\Admin\Support\Index;
+use App\Models\System\Identity;
+use App\Models\System\SupportSession;
+use App\Models\System\Tenant;
 use App\Modules\AdminConsole\Enums\SupportSessionStatus;
 use App\Modules\Audit\Enums\AuditLogAction;
 use App\Modules\Identity\Enums\IdentityStatus;
@@ -25,14 +25,14 @@ final class AdminSupportSessionsTest extends TestCase
 
         Artisan::call('migrate:fresh', [
             '--database' => 'sqlite',
-            '--path' => 'database/migrations/landlord',
+            '--path' => 'database/migrations/system',
         ]);
     }
 
     public function test_superadmin_can_start_support_session_with_reason(): void
     {
         $superadmin = $this->superadmin(twoFactor: true);
-        $this->actingAs($superadmin, 'landlord');
+        $this->actingAs($superadmin, 'admin');
         $tenant = $this->tenant();
 
         Livewire::test(Index::class)
@@ -50,7 +50,7 @@ final class AdminSupportSessionsTest extends TestCase
         $this->assertSame('Debugging reported billing access issue.', $supportSession->reason);
         $this->assertTrue($supportSession->expires_at->isFuture());
 
-        $this->assertSame($supportSession->id, session('landlord_support_session_id'));
+        $this->assertSame($supportSession->id, session('admin_support_session_id'));
         $this->assertDatabaseHas('audit_logs', [
             'actor_id' => $superadmin->id,
             'subject_type' => SupportSession::class,
@@ -61,7 +61,7 @@ final class AdminSupportSessionsTest extends TestCase
 
     public function test_support_session_requires_reason(): void
     {
-        $this->actingAs($this->superadmin(twoFactor: true), 'landlord');
+        $this->actingAs($this->superadmin(twoFactor: true), 'admin');
 
         Livewire::test(Index::class)
             ->set('tenantId', $this->tenant()->id)
@@ -76,13 +76,13 @@ final class AdminSupportSessionsTest extends TestCase
     public function test_superadmin_can_end_support_session(): void
     {
         $superadmin = $this->superadmin(twoFactor: true);
-        $this->actingAs($superadmin, 'landlord');
+        $this->actingAs($superadmin, 'admin');
         $supportSession = $this->supportSession($this->tenant(), $superadmin);
 
         $this->withSession([
-            'landlord_support_session_id' => $supportSession->id,
-            'landlord_support_tenant_id' => $supportSession->tenant_id,
-            'landlord_support_expires_at' => $supportSession->expires_at->toISOString(),
+            'admin_support_session_id' => $supportSession->id,
+            'admin_support_tenant_id' => $supportSession->tenant_id,
+            'admin_support_expires_at' => $supportSession->expires_at->toISOString(),
         ]);
 
         Livewire::test(Index::class)
@@ -93,7 +93,7 @@ final class AdminSupportSessionsTest extends TestCase
 
         $this->assertSame(SupportSessionStatus::Ended, $supportSession->status);
         $this->assertNotNull($supportSession->ended_at);
-        $this->assertNull(session('landlord_support_session_id'));
+        $this->assertNull(session('admin_support_session_id'));
         $this->assertDatabaseHas('audit_logs', [
             'actor_id' => $superadmin->id,
             'subject_type' => SupportSession::class,
@@ -105,15 +105,15 @@ final class AdminSupportSessionsTest extends TestCase
     public function test_expired_support_session_is_closed_and_removed_from_context(): void
     {
         $superadmin = $this->superadmin(twoFactor: true);
-        $this->actingAs($superadmin, 'landlord');
+        $this->actingAs($superadmin, 'admin');
         $supportSession = $this->supportSession($this->tenant(), $superadmin, [
             'expires_at' => now()->subMinute(),
         ]);
 
         $this->withSession([
-            'landlord_support_session_id' => $supportSession->id,
-            'landlord_support_tenant_id' => $supportSession->tenant_id,
-            'landlord_support_expires_at' => $supportSession->expires_at->toISOString(),
+            'admin_support_session_id' => $supportSession->id,
+            'admin_support_tenant_id' => $supportSession->tenant_id,
+            'admin_support_expires_at' => $supportSession->expires_at->toISOString(),
         ]);
 
         Livewire::test(Index::class)
@@ -122,7 +122,7 @@ final class AdminSupportSessionsTest extends TestCase
         $supportSession->refresh();
 
         $this->assertSame(SupportSessionStatus::Expired, $supportSession->status);
-        $this->assertNull(session('landlord_support_session_id'));
+        $this->assertNull(session('admin_support_session_id'));
         $this->assertDatabaseHas('audit_logs', [
             'actor_id' => $superadmin->id,
             'subject_type' => SupportSession::class,
@@ -133,7 +133,7 @@ final class AdminSupportSessionsTest extends TestCase
 
     public function test_support_session_requires_enabled_two_factor_auth(): void
     {
-        $this->actingAs($this->superadmin(), 'landlord');
+        $this->actingAs($this->superadmin(), 'admin');
 
         Livewire::test(Index::class)
             ->set('tenantId', $this->tenant()->id)

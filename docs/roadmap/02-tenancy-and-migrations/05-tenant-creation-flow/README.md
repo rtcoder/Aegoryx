@@ -6,7 +6,7 @@ Done.
 
 ## Cel
 
-Zbudować spójny proces tworzenia tenanta: wpis landlord, schema, migracje, seedery i owner membership.
+Zbudować spójny proces tworzenia tenanta: wpis system, schema, migracje, seedery i owner membership.
 
 ## Zakres
 
@@ -22,7 +22,7 @@ Zbudować spójny proces tworzenia tenanta: wpis landlord, schema, migracje, see
 
 ## Zależności
 
-- Landlord migrations.
+- System migrations.
 - Tenant migrations.
 - Schema manager.
 

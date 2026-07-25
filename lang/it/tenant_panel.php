@@ -7,7 +7,7 @@ return [
     'workspace_for' => 'Workspace per :tenant.',
     'workspace_overview_for' => 'Panoramica workspace per :tenant.',
     'dashboard_heading' => 'Pannello tenant',
-    'dashboard_description' => 'Questa shell è pronta per i moduli tenant e mantiene fuori dal workspace i dettagli riservati al landlord.',
+    'dashboard_description' => 'Questa shell è pronta per i moduli tenant e mantiene fuori dal workspace i dettagli riservati al system.',
     'context' => 'Contesto tenant',
     'not_enabled' => 'Non abilitato per questo tenant.',
     'enabled_features' => ':count funzionalità abilitate',

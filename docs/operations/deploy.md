@@ -14,7 +14,7 @@ Skrypt wykonuje:
 4. `php artisan aegoryx:preflight`
 5. `php artisan down`
 6. `php artisan optimize:clear`
-7. `php artisan landlord:migrate --force`
+7. `php artisan system:migrate --force`
 8. `php artisan tenants:migrate --force`
 9. `php artisan db:seed --class=Database\\Seeders\\CommercialPlansSeeder --force`
 10. `php artisan optimize`
@@ -42,7 +42,7 @@ php artisan aegoryx:smoke
 php artisan aegoryx:launch-check --with-smoke
 ```
 
-`aegoryx:smoke` wykonuje `aegoryx:preflight`, sprawdza `/up`, landlord login i opcjonalne URL-e:
+`aegoryx:smoke` wykonuje `aegoryx:preflight`, sprawdza `/up`, system login i opcjonalne URL-e:
 
 - `AEGORYX_SMOKE_TENANT_URL`
 - `AEGORYX_SMOKE_PUBLIC_API_URL`

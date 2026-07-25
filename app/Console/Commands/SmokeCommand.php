@@ -11,7 +11,7 @@ final class SmokeCommand extends Command
 {
     protected $signature = 'aegoryx:smoke
         {--app-url= : Base application URL to check}
-        {--landlord-url= : Landlord login URL to check}
+        {--system-url= : System login URL to check}
         {--tenant-url= : Optional tenant panel URL to check}
         {--public-api-url= : Optional public API URL to check}
         {--timeout=5 : HTTP timeout in seconds}';
@@ -55,11 +55,11 @@ final class SmokeCommand extends Command
     private function checks(): array
     {
         $appUrl = rtrim($this->optionString('app-url') ?: (string) config('app.url'), '/');
-        $landlordDomain = (string) config('aegoryx.landlord.domain');
+        $adminDomain = (string) config('aegoryx.admin.domain');
 
         return [
             'Application health' => $appUrl.'/up',
-            'Landlord login' => $this->optionString('landlord-url') ?: "http://{$landlordDomain}/login",
+            'System login' => $this->optionString('system-url') ?: "http://{$adminDomain}/login",
             'Tenant route' => $this->optionString('tenant-url') ?: config('aegoryx.smoke.tenant_url'),
             'Public API' => $this->optionString('public-api-url') ?: config('aegoryx.smoke.public_api_url'),
         ];

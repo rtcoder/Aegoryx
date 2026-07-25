@@ -2,7 +2,7 @@
 
 namespace App\Modules\PublicApi\Http\Middleware;
 
-use App\Models\Landlord\TenantDomain;
+use App\Models\System\TenantDomain;
 use App\Modules\Tenancy\Enums\TenantDomainStatus;
 use App\Modules\Tenancy\Enums\TenantStatus;
 use App\Services\Tenancy\TenancyManager;
@@ -21,7 +21,7 @@ final readonly class ResolvePublicTenantFromDomain
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->getHost() === config('aegoryx.landlord.domain')) {
+        if ($request->getHost() === config('aegoryx.admin.domain')) {
             abort(404);
         }
 

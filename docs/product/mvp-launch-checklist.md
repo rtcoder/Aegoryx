@@ -11,7 +11,7 @@
 - `php artisan aegoryx:launch-check --with-smoke` przechodzi na środowisku docelowym
 - `php artisan aegoryx:smoke` przechodzi albo ma jawnie opisane skipy tenant/public API
 - Horizon albo queue failure monitoring działa
-- landlord superadmin utworzony przez `landlord:create`
+- system superadmin utworzony przez `superadmin:create`
 - public API nie zwraca draftów ani danych prywatnych
 
 ## Nice To Have Po MVP

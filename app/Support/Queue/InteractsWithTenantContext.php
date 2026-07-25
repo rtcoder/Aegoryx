@@ -2,7 +2,7 @@
 
 namespace App\Support\Queue;
 
-use App\Models\Landlord\Tenant;
+use App\Models\System\Tenant;
 use App\Services\Tenancy\TenancyManager;
 use Closure;
 use LogicException;

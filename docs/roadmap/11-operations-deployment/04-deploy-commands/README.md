@@ -7,7 +7,7 @@ Ustalić bezpieczną kolejność deployu dla SaaS i self-hosted.
 ## Zakres
 
 - Maintenance mode.
-- `landlord:migrate`.
+- `system:migrate`.
 - `tenants:migrate`.
 - Optimize clear/cache.
 
@@ -34,12 +34,12 @@ Domyślna komenda:
 scripts/deploy.sh
 ```
 
-Skrypt zawsze wykonuje `composer install`, `npm ci`, `npm run build`, `landlord:migrate` i `tenants:migrate`.
+Skrypt zawsze wykonuje `composer install`, `npm ci`, `npm run build`, `system:migrate` i `tenants:migrate`.
 
 Jeżeli deploy padnie po tym, jak część migracji zakończy się statusem `DONE`, skrypt zbiera ich nazwy z outputu migracji i wywołuje rollback tylko dla tych migracji, w odwrotnej kolejności:
 
 ```bash
-php artisan landlord:migrate:rollback --migration=...
+php artisan system:migrate:rollback --migration=...
 php artisan tenants:migrate:rollback --schema=... --migration=...
 ```
 
@@ -52,7 +52,7 @@ Brak.
 ## Acceptance Criteria
 
 - [x] Dokument nie używa plain `php artisan migrate` jako pełnego deployu.
-- [x] Deploy zawiera landlord i tenant migrations.
+- [x] Deploy zawiera system i tenant migrations.
 - [x] Production commands używają `--force`.
 
 ## Test Plan

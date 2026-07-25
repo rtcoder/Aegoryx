@@ -2,9 +2,9 @@
 
 namespace App\Modules\Licensing\Actions;
 
-use App\Models\Landlord\AuditLog;
-use App\Models\Landlord\Identity;
-use App\Models\Landlord\License;
+use App\Models\System\AuditLog;
+use App\Models\System\Identity;
+use App\Models\System\License;
 use App\Modules\Audit\Enums\AuditLogAction;
 use App\Modules\Licensing\Enums\LicenseStatus;
 use Illuminate\Support\Carbon;

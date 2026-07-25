@@ -24,7 +24,7 @@ To jest plan produktowo-techniczny, nie tracker statusów. Każdy epic ma własn
 | Epic | Cel |
 | --- | --- |
 | [01 Platform Foundation](01-platform-foundation/) | Ustabilizować fundament aplikacji, moduły, standardy i test baseline. |
-| [02 Tenancy And Migrations](02-tenancy-and-migrations/) | Zbudować bezpieczny model schema-per-tenant i jawne migracje landlord/tenant. |
+| [02 Tenancy And Migrations](02-tenancy-and-migrations/) | Zbudować bezpieczny model schema-per-tenant i jawne migracje system/tenant. |
 | [03 Identity Auth Security](03-identity-auth-security/) | Przygotować identity, tenant users, auth, 2FA, policies i support access. |
 | [04 Entitlements Billing Licensing](04-entitlements-billing-licensing/) | Oddzielić decyzje feature access od billing/licensing providerów. |
 | [05 Admin Console](05-admin-console/) | Zbudować superadmin console dla tenantów, dostępu do funkcji, licencji i support mode. |

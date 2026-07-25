@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Landlord\BillingEvent;
-use App\Models\Landlord\Identity;
+use App\Models\System\BillingEvent;
+use App\Models\System\Identity;
 use App\Modules\Billing\Enums\BillingEventStatus;
 use App\Modules\Identity\Enums\IdentityStatus;
 use Illuminate\Console\Command;
@@ -28,11 +28,11 @@ final class LaunchCheckCommand extends Command
             'Security and privacy audits have no blockers' => $this->auditsHaveNoBlockers(),
             'Required operational commands are registered' => $this->requiredCommandsAreRegistered(),
             'Public API routes are registered' => $this->publicApiRoutesAreRegistered(),
-            'Horizon access is protected by landlord auth and superadmin gate' => $this->horizonAccessIsProtected(),
+            'Horizon access is protected by system auth and superadmin gate' => $this->horizonAccessIsProtected(),
         ];
 
         if (! $this->option('skip-db')) {
-            $checks['Active landlord superadmin exists'] = $this->activeSuperadminExists();
+            $checks['Active system superadmin exists'] = $this->activeSuperadminExists();
             $checks['No failed billing events are waiting for retry'] = $this->hasNoFailedBillingEvents();
         }
 
@@ -97,7 +97,7 @@ final class LaunchCheckCommand extends Command
         $commands = array_keys(Artisan::all());
 
         foreach ([
-            'landlord:create',
+            'superadmin:create',
             'aegoryx:preflight',
             'aegoryx:smoke',
             'aegoryx:launch-check',
@@ -126,7 +126,7 @@ final class LaunchCheckCommand extends Command
             'status' => IdentityStatus::Active,
         ]);
 
-        return in_array('auth:landlord', (array) config('horizon.middleware'), true)
+        return in_array('auth:admin', (array) config('horizon.middleware'), true)
             && Gate::forUser($superadmin)->allows('viewHorizon');
     }
 

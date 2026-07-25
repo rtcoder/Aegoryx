@@ -3,6 +3,7 @@
 return [
     'billing_subscription_synced' => 'Subscription [:subscription] synced as [:status].',
     'license_verified' => 'License [:license] verified as [:status].',
+    'manual_feature_override_cleared' => 'Manual feature override [:feature] for tenant [:tenant] cleared.',
     'manual_feature_override_set' => 'Manual feature override [:feature] for tenant [:tenant] set to [:state].',
     'support_session_marked' => 'Support session [:session] marked as [:status].',
     'support_session_started' => 'Support session [:session] started for tenant [:tenant].',

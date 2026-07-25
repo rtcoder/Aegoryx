@@ -3,8 +3,8 @@
 namespace App\Modules\AdminConsole\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\Landlord\Identity;
-use App\Modules\AdminConsole\Http\Requests\LandlordLoginRequest;
+use App\Models\System\Identity;
+use App\Modules\AdminConsole\Http\Requests\SuperadminLoginRequest;
 use App\Modules\Identity\Enums\IdentityStatus;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -16,14 +16,14 @@ final class LoginController extends Controller
 {
     public function create(): View|RedirectResponse
     {
-        if (Auth::guard('landlord')->check()) {
-            return redirect()->route('landlord.dashboard');
+        if (Auth::guard('admin')->check()) {
+            return redirect()->route('admin.dashboard');
         }
 
-        return view('landlord.auth.login');
+        return view('admin.auth.login');
     }
 
-    public function store(LandlordLoginRequest $request): RedirectResponse
+    public function store(SuperadminLoginRequest $request): RedirectResponse
     {
         $credentials = [
             'email' => $request->string('email')->lower()->toString(),
@@ -40,29 +40,29 @@ final class LoginController extends Controller
 
         if (! $identity || ! Hash::check($credentials['password'], $identity->password)) {
             return back()
-                ->withErrors(['email' => 'Invalid landlord credentials.'])
+                ->withErrors(['email' => 'Invalid system credentials.'])
                 ->onlyInput('email');
         }
 
         if ($identity->hasTwoFactorEnabled()) {
-            session(['landlord_login_2fa_identity_id' => $identity->id]);
+            session(['admin_login_2fa_identity_id' => $identity->id]);
 
-            return redirect()->route('landlord.two-factor.challenge');
+            return redirect()->route('admin.two-factor.challenge');
         }
 
-        Auth::guard('landlord')->login($identity);
+        Auth::guard('admin')->login($identity);
         $request->session()->regenerate();
 
-        return redirect()->intended(route('landlord.dashboard'));
+        return redirect()->intended(route('admin.dashboard'));
     }
 
     public function destroy(Request $request): RedirectResponse
     {
-        Auth::guard('landlord')->logout();
+        Auth::guard('admin')->logout();
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('landlord.login');
+        return redirect()->route('admin.login');
     }
 }

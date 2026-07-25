@@ -3,6 +3,7 @@
 return [
     'billing_subscription_synced' => 'Abbonamento [:subscription] sincronizzato come [:status].',
     'license_verified' => 'Licenza [:license] verificata come [:status].',
+    'manual_feature_override_cleared' => 'Override manuale funzionalità [:feature] per tenant [:tenant] cancellato.',
     'manual_feature_override_set' => 'Override manuale funzionalità [:feature] per tenant [:tenant] impostato su [:state].',
     'support_session_marked' => 'Sessione supporto [:session] contrassegnata come [:status].',
     'support_session_started' => 'Sessione supporto [:session] avviata per tenant [:tenant].',

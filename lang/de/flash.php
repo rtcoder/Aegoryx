@@ -21,6 +21,7 @@ return [
     'license_verified' => 'Lizenz wurde verifiziert.',
     'support_session_ended' => 'Support-Sitzung wurde beendet.',
     'support_session_started' => 'Support-Sitzung wurde gestartet.',
+    'tenant_feature_override_cleared' => 'Manuelle Feature-Überschreibung des Mandanten wurde gelöscht.',
     'tenant_feature_override_saved' => 'Feature-Überschreibung des Mandanten wurde gespeichert.',
     'tenant_status_updated' => 'Mandantenstatus wurde aktualisiert.',
 ];

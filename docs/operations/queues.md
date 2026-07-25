@@ -2,7 +2,7 @@
 
 Kolejki są podzielone nazwami z `config/aegoryx.php`:
 
-- `system` - zadania globalne i landlord
+- `system` - zadania globalne i system
 - `tenant` - zadania wymagające tenant context
 - `exports` - eksporty danych i dłuższe prace plikowe
 - `default` - fallback dla prostych jobów
@@ -34,11 +34,11 @@ php artisan queue:work redis --queue=system,tenant,exports,default --tries=3
 php artisan horizon
 ```
 
-Dashboard jest pod `/horizon` i wymaga logowania jako landlord superadmin.
+Dashboard jest pod `/horizon` i wymaga logowania jako system superadmin.
 
 ## Operational Snapshot
 
-Szybki raport landlordowego stanu systemu:
+Szybki raport systemowego stanu systemu:
 
 ```bash
 php artisan aegoryx:ops-report

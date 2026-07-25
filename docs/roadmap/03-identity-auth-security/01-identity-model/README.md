@@ -6,7 +6,7 @@ Done.
 
 ## Cel
 
-Zbudować globalny model identity w landlord schema, oddzielony od tenant users.
+Zbudować globalny model identity w system schema, oddzielony od tenant users.
 
 ## Zakres
 
@@ -21,7 +21,7 @@ Zbudować globalny model identity w landlord schema, oddzielony od tenant users.
 
 ## Zależności
 
-- Landlord migrations.
+- System migrations.
 
 ## Kroki
 
@@ -41,5 +41,5 @@ Brak.
 
 ## Test Plan
 
-- Test migracji landlord.
+- Test migracji system.
 - Schema inspection dla FK.

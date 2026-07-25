@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Identity;
 
-use App\Models\Landlord\AuditLog;
-use App\Models\Landlord\Identity;
+use App\Models\System\AuditLog;
+use App\Models\System\Identity;
 use App\Modules\Audit\Enums\AuditLogAction;
 use App\Modules\Identity\Actions\DisableTwoFactorAuthAction;
 use App\Modules\Identity\Actions\EnableTwoFactorAuthAction;
@@ -21,7 +21,7 @@ final class TwoFactorAuthTest extends TestCase
 
         Artisan::call('migrate:fresh', [
             '--database' => 'sqlite',
-            '--path' => 'database/migrations/landlord',
+            '--path' => 'database/migrations/system',
         ]);
     }
 

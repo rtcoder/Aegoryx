@@ -3,6 +3,7 @@
 return [
     'billing_subscription_synced' => 'Subskrypcja [:subscription] zsynchronizowana jako [:status].',
     'license_verified' => 'Licencję [:license] zweryfikowano jako [:status].',
+    'manual_feature_override_cleared' => 'Ręczne nadpisanie funkcji [:feature] dla tenanta [:tenant] zostało wyczyszczone.',
     'manual_feature_override_set' => 'Ręczne nadpisanie funkcji [:feature] dla tenanta [:tenant] ustawiono na [:state].',
     'support_session_marked' => 'Sesję wsparcia [:session] oznaczono jako [:status].',
     'support_session_started' => 'Sesję wsparcia [:session] rozpoczęto dla tenanta [:tenant].',

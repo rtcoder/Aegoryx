@@ -3,6 +3,7 @@
 return [
     'billing_subscription_synced' => 'Abonnement [:subscription] wurde als [:status] synchronisiert.',
     'license_verified' => 'Lizenz [:license] wurde als [:status] verifiziert.',
+    'manual_feature_override_cleared' => 'Manuelle Feature-Überschreibung [:feature] für Mandant [:tenant] wurde gelöscht.',
     'manual_feature_override_set' => 'Manuelle Feature-Überschreibung [:feature] für Mandant [:tenant] wurde auf [:state] gesetzt.',
     'support_session_marked' => 'Support-Sitzung [:session] wurde als [:status] markiert.',
     'support_session_started' => 'Support-Sitzung [:session] wurde für Mandant [:tenant] gestartet.',

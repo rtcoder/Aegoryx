@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Landlord\TenantDomain;
+use App\Models\System\TenantDomain;
 use App\Modules\Tenancy\Enums\TenantDomainStatus;
 use App\Modules\Tenancy\Services\DnsTxtResolver;
 use Illuminate\Console\Command;

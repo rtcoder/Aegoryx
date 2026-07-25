@@ -2,7 +2,7 @@
 
 namespace App\Modules\AdminConsole\Providers;
 
-use App\Console\Commands\CreateLandlordCommand;
+use App\Console\Commands\CreateSuperadminCommand;
 use App\Support\Modules\ModuleServiceProvider;
 
 final class AdminConsoleServiceProvider extends ModuleServiceProvider
@@ -13,7 +13,7 @@ final class AdminConsoleServiceProvider extends ModuleServiceProvider
 
         if ($this->app->runningInConsole()) {
             $this->commands([
-                CreateLandlordCommand::class,
+                CreateSuperadminCommand::class,
             ]);
         }
     }

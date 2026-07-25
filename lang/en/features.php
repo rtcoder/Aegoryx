@@ -2,7 +2,18 @@
 
 return [
     'default_override_reason' => 'Manual tenant access configuration.',
+    'clear_override' => 'Clear manual override',
+    'effective_reason' => 'Reason',
+    'effective_source' => 'Source',
     'save_access' => 'Save access',
+    'source_labels' => [
+        'license' => 'license',
+        'manual' => 'manual',
+        'none' => 'none',
+        'plan' => 'plan',
+        'system' => 'system',
+        'trial' => 'trial',
+    ],
     'tenant_access' => 'Feature access',
     'tenant_access_description' => 'Available features are fixed in application code. The database stores only what this tenant has enabled.',
     'registry' => [

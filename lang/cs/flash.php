@@ -21,6 +21,7 @@ return [
     'license_verified' => 'Licence ověřena.',
     'support_session_ended' => 'Support session ukončena.',
     'support_session_started' => 'Support session spuštěna.',
+    'tenant_feature_override_cleared' => 'Ruční přepsání funkce tenanta vymazáno.',
     'tenant_feature_override_saved' => 'Přepsání funkce tenanta uloženo.',
     'tenant_status_updated' => 'Stav tenanta aktualizován.',
 ];

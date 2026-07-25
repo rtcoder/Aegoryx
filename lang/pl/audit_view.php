@@ -10,7 +10,7 @@ return [
     'activity_title' => 'Aktywność',
     'actor' => 'Aktor',
     'audit_description' => 'Globalny audyt operacji systemowych i administracyjnych.',
-    'audit_help' => 'Zdarzenia landlorda, billing, licencje, support i bezpieczeństwo.',
+    'audit_help' => 'Zdarzenia superadmina, billing, licencje, support i bezpieczeństwo.',
     'audit_log' => 'Audit log',
     'audit_title' => 'Audyt',
     'created_at' => 'Utworzono',

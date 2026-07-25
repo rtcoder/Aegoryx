@@ -2,7 +2,7 @@
 
 namespace App\Modules\PublicApi\Support;
 
-use App\Models\Landlord\Tenant;
+use App\Models\System\Tenant;
 use App\Models\Tenant\PublishedPage;
 
 final readonly class PublicApiCacheKeys

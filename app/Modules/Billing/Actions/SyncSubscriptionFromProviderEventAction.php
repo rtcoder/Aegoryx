@@ -2,9 +2,9 @@
 
 namespace App\Modules\Billing\Actions;
 
-use App\Models\Landlord\AuditLog;
-use App\Models\Landlord\BillingEvent;
-use App\Models\Landlord\Subscription;
+use App\Models\System\AuditLog;
+use App\Models\System\BillingEvent;
+use App\Models\System\Subscription;
 use App\Modules\Audit\Enums\AuditLogAction;
 use App\Modules\Billing\Enums\BillingEventStatus;
 use App\Modules\Billing\Enums\BillingProvider;

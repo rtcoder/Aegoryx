@@ -6,11 +6,11 @@ Done.
 
 ## Cel
 
-Potwierdzić, że migracje landlord/tenant działają w schema-per-tenant i nie mieszają danych.
+Potwierdzić, że migracje system/tenant działają w schema-per-tenant i nie mieszają danych.
 
 ## Zakres
 
-- Testy landlord migrations.
+- Testy system migrations.
 - Testy tenant migrations dla minimum dwóch tenantów.
 - Test osobnej tabeli `migrations` per schema.
 - Test resetu tenant context.
@@ -27,7 +27,7 @@ Potwierdzić, że migracje landlord/tenant działają w schema-per-tenant i nie 
 ## Kroki
 
 - Przygotować helper tworzenia schem testowych.
-- Uruchomić landlord migrations.
+- Uruchomić system migrations.
 - Uruchomić tenant migrations dla dwóch tenantów.
 - Sprawdzić `to_regclass`.
 

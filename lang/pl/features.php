@@ -2,7 +2,18 @@
 
 return [
     'default_override_reason' => 'Ręczna konfiguracja dostępu tenanta.',
+    'clear_override' => 'Wyczyść ręczne nadpisanie',
+    'effective_reason' => 'Powód',
+    'effective_source' => 'Źródło',
     'save_access' => 'Zapisz dostęp',
+    'source_labels' => [
+        'license' => 'licencja',
+        'manual' => 'ręcznie',
+        'none' => 'brak',
+        'plan' => 'plan',
+        'system' => 'system',
+        'trial' => 'trial',
+    ],
     'tenant_access' => 'Dostęp do funkcji',
     'tenant_access_description' => 'Dostępne funkcje są stałe w kodzie aplikacji. W bazie zapisujemy tylko to, co ten tenant ma włączone.',
     'registry' => [

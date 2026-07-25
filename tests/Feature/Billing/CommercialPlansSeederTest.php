@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Billing;
 
-use App\Models\Landlord\Plan;
-use App\Models\Landlord\PlanFeature;
+use App\Models\System\Plan;
+use App\Models\System\PlanFeature;
 use App\Modules\Entitlements\Enums\SystemFeature;
 use Database\Seeders\CommercialPlansSeeder;
 use Illuminate\Support\Facades\Artisan;
@@ -17,7 +17,7 @@ final class CommercialPlansSeederTest extends TestCase
 
         Artisan::call('migrate:fresh', [
             '--database' => 'sqlite',
-            '--path' => 'database/migrations/landlord',
+            '--path' => 'database/migrations/system',
         ]);
     }
 

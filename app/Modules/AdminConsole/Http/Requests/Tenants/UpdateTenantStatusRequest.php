@@ -10,7 +10,7 @@ final class UpdateTenantStatusRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return $this->user('landlord')?->is_super_admin === true;
+        return $this->user('admin')?->is_super_admin === true;
     }
 
     /**

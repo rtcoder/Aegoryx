@@ -8,8 +8,8 @@ Przegląd obejmuje akcje zapisu w CMS, CRM, Files, Admin Console oraz operacje e
 
 - CRM create/update/delete używa policy przez akcje domenowe i kontrolery.
 - Files download/delete/export używa `TenantFilePolicy` oraz `ActivityEntryPolicy`.
-- Admin Console jest chroniony middleware `EnsureLandlordAuthenticated`.
-- License verification wymaga landlord `Identity` z `is_super_admin=true`.
+- Admin Console jest chroniony middleware `EnsureAdminAuthenticated`.
+- License verification wymaga system `Identity` z `is_super_admin=true`.
 - Tenant panel routes wymagają tenant auth i feature entitlement middleware.
 
 ## Gates

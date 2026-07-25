@@ -2,7 +2,7 @@
 
 namespace App\Modules\TenantPanel\Http\Middleware;
 
-use App\Models\Landlord\TenantDomain;
+use App\Models\System\TenantDomain;
 use App\Modules\Entitlements\Services\EffectiveEntitlements;
 use App\Modules\Tenancy\Enums\TenantDomainStatus;
 use App\Modules\TenantPanel\Navigation\TenantNavigation;
@@ -26,7 +26,7 @@ final readonly class ResolveTenantFromDomain
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->getHost() === config('aegoryx.landlord.domain')) {
+        if ($request->getHost() === config('aegoryx.admin.domain')) {
             abort(404);
         }
 

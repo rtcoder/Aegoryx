@@ -3,8 +3,8 @@
 namespace Tests\Feature\TenantPanel;
 
 use App\Livewire\Tenant\Security\TwoFactorSettings;
-use App\Models\Landlord\Tenant;
-use App\Models\Landlord\TenantDomain;
+use App\Models\System\Tenant;
+use App\Models\System\TenantDomain;
 use App\Models\Tenant\User;
 use App\Modules\Identity\Enums\TenantUserRole;
 use App\Modules\Identity\Support\TwoFactorAuthenticator;
@@ -26,7 +26,7 @@ final class TenantSecurityTest extends TestCase
 
         Artisan::call('migrate:fresh', [
             '--database' => 'sqlite',
-            '--path' => 'database/migrations/landlord',
+            '--path' => 'database/migrations/system',
         ]);
 
         Artisan::call('migrate', [

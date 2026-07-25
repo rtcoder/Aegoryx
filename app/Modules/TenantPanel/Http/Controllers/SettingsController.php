@@ -2,8 +2,8 @@
 
 namespace App\Modules\TenantPanel\Http\Controllers;
 
-use App\Models\Landlord\Tenant;
-use App\Models\Landlord\TenantDomain;
+use App\Models\System\Tenant;
+use App\Models\System\TenantDomain;
 use App\Modules\Tenancy\Enums\TenantDomainStatus;
 use App\Modules\Tenancy\Enums\TenantDomainType;
 use App\Support\Localization\Locale;
@@ -71,7 +71,7 @@ final class SettingsController extends Controller
                     'string',
                     'max:255',
                     'regex:/^(?!-)[a-z0-9.-]+(?<!-)$/',
-                    'not_in:'.config('aegoryx.landlord.domain'),
+                    'not_in:'.config('aegoryx.admin.domain'),
                     Rule::unique('tenant_domains', 'domain'),
                 ],
             ],

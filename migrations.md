@@ -31,7 +31,7 @@ database per tenant
 This means one physical PostgreSQL database contains:
 
 ```txt
-public                  -> landlord/system schema
+public                  -> system/system schema
 tenant_acme             -> tenant business schema
 tenant_demo             -> tenant business schema
 tenant_client_x         -> tenant business schema
@@ -71,15 +71,15 @@ public.identities
 There are two migration categories:
 
 ```txt
-1. Landlord migrations
+1. System migrations
 2. Tenant migrations
 ```
 
-### 3.1 Landlord migrations
+### 3.1 System migrations
 
-Landlord migrations create and modify tables in the `public` schema.
+System migrations create and modify tables in the `public` schema.
 
-Landlord data includes:
+System data includes:
 
 - tenants,
 - tenant domains,
@@ -112,7 +112,7 @@ Tenant data includes:
 Use separate folders:
 
 ```txt
-database/migrations/landlord
+database/migrations/system
   2026_01_01_000001_create_tenants_table.php
   2026_01_01_000002_create_tenant_domains_table.php
   2026_01_01_000003_create_features_table.php
@@ -133,7 +133,7 @@ database/migrations/tenant
   2026_01_01_000010_create_audit_logs_table.php
 ```
 
-Do not put landlord and tenant migrations in the same folder.
+Do not put system and tenant migrations in the same folder.
 
 Do not rely on default `database/migrations` for this project.
 
@@ -146,7 +146,7 @@ Implement explicit migration commands.
 Required commands:
 
 ```bash
-php artisan landlord:migrate
+php artisan system:migrate
 php artisan tenants:migrate
 php artisan tenant:migrate {tenant}
 php artisan tenants:rollback
@@ -157,7 +157,7 @@ php artisan tenants:fresh --env=local
 Optional project-prefixed aliases:
 
 ```bash
-php artisan aegoryx:migrate-landlord
+php artisan aegoryx:migrate-system
 php artisan aegoryx:migrate-tenants
 php artisan aegoryx:migrate-tenant {tenant}
 ```
@@ -166,7 +166,7 @@ Recommended deploy commands:
 
 ```bash
 php artisan down
-php artisan landlord:migrate --force
+php artisan system:migrate --force
 php artisan tenants:migrate --force
 php artisan optimize:clear
 php artisan optimize
@@ -188,8 +188,8 @@ must not be used as the production command for the entire system.
 Recommended rule:
 
 ```txt
-php artisan migrate              -> landlord only, or disabled with a clear warning
-php artisan landlord:migrate     -> public schema only
+php artisan migrate              -> system only, or disabled with a clear warning
+php artisan system:migrate     -> public schema only
 php artisan tenants:migrate      -> all tenant schemas
 php artisan tenant:migrate acme  -> one tenant schema
 ```
@@ -202,7 +202,7 @@ Codex must not implement logic that assumes plain `php artisan migrate` automati
 
 Tenant migrations depend on PostgreSQL `search_path`.
 
-For landlord migrations:
+For system migrations:
 
 ```sql
 SET search_path TO public;
@@ -284,7 +284,7 @@ Therefore, before running tenant migrations, the active `search_path` must point
 
 ---
 
-## 9. Landlord migration command
+## 9. System migration command
 
 Implement a command similar to this.
 
@@ -297,18 +297,18 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 
-final class MigrateLandlordCommand extends Command
+final class MigrateSystemCommand extends Command
 {
-    protected $signature = 'landlord:migrate {--force : Force migrations in production}';
+    protected $signature = 'system:migrate {--force : Force migrations in production}';
 
-    protected $description = 'Run landlord migrations on the public schema.';
+    protected $description = 'Run system migrations on the public schema.';
 
     public function handle(): int
     {
         DB::statement('SET search_path TO public');
 
         $exitCode = Artisan::call('migrate', [
-            '--path' => 'database/migrations/landlord',
+            '--path' => 'database/migrations/system',
             '--database' => 'pgsql',
             '--force' => (bool) $this->option('force'),
         ]);
@@ -331,7 +331,7 @@ Implement a command similar to this.
 
 namespace App\Console\Commands;
 
-use App\Models\Landlord\Tenant;
+use App\Models\System\Tenant;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
@@ -567,7 +567,7 @@ Always quote identifiers in raw schema SQL.
 
 ---
 
-## 14. Example landlord migration
+## 14. Example system migration
 
 ```php
 <?php
@@ -603,7 +603,7 @@ return new class extends Migration
 This migration belongs in:
 
 ```txt
-database/migrations/landlord
+database/migrations/system
 ```
 
 ---
@@ -660,14 +660,14 @@ It must not include `tenant_id` unless there is a specific technical reason.
 Use separate model namespaces:
 
 ```txt
-App\Models\Landlord\Tenant
-App\Models\Landlord\Feature
-App\Models\Landlord\Plan
+App\Models\System\Tenant
+App\Models\System\Feature
+App\Models\System\Plan
 App\Models\Tenant\CrmContact
 App\Models\Tenant\CmsPage
 ```
 
-Landlord models use the landlord/public connection/context.
+System models use the system/public connection/context.
 
 Tenant models require initialized tenant context.
 
@@ -696,7 +696,7 @@ Rollback must also be schema-aware.
 Commands:
 
 ```bash
-php artisan landlord:rollback
+php artisan system:rollback
 php artisan tenants:rollback
 php artisan tenant:rollback acme
 ```
@@ -734,7 +734,7 @@ Never run tenant fresh/reset in production.
 Allowed in local development:
 
 ```bash
-php artisan landlord:fresh --env=local
+php artisan system:fresh --env=local
 php artisan tenants:fresh --env=local
 ```
 
@@ -827,7 +827,7 @@ Create tests for migration behavior.
 Required tests:
 
 ```txt
-- landlord:migrate creates public.tenants.
+- system:migrate creates public.tenants.
 - tenants:migrate creates crm_contacts in every tenant schema.
 - tenants:migrate creates separate migrations table in every tenant schema.
 - tenant:migrate acme migrates only tenant_acme.
@@ -863,7 +863,7 @@ public.crm_contacts             null / does not exist
 CI should test at least:
 
 ```txt
-1. landlord migrations
+1. system migrations
 2. tenant migrations for at least two tenants
 3. tenant isolation
 4. tenant rollback in testing
@@ -872,7 +872,7 @@ CI should test at least:
 Example CI flow:
 
 ```bash
-php artisan landlord:migrate --force
+php artisan system:migrate --force
 php artisan tenants:create acme --no-interaction
 php artisan tenants:create demo --no-interaction
 php artisan tenants:migrate --force
@@ -892,7 +892,7 @@ Recommended production deployment:
 ```bash
 php artisan down
 
-php artisan landlord:migrate --force
+php artisan system:migrate --force
 php artisan tenants:migrate --force
 
 php artisan optimize:clear
@@ -929,7 +929,7 @@ Rules:
 - no schema-qualified table names in models
 - tenant context must be centralized
 - jobs must carry tenant_id
-- landlord and tenant migrations must be separate
+- system and tenant migrations must be separate
 - tenant code should not know whether tenant storage is schema or database
 ```
 
@@ -1003,14 +1003,14 @@ Do not create cross-schema foreign keys from tenant schema to public schema.
 When implementing this migration system, Codex should create or update:
 
 ```txt
-1. database/migrations/landlord directory
+1. database/migrations/system directory
 2. database/migrations/tenant directory
-3. Landlord migration command
+3. System migration command
 4. Tenant migration command
 5. Single tenant migration alias command
 6. Tenant schema creation service
 7. Tenancy manager / search_path manager
-8. Tests for landlord migrations
+8. Tests for system migrations
 9. Tests for tenant migrations
 10. Tests for migration table per schema
 11. Tests for tenant data isolation
@@ -1022,7 +1022,7 @@ Minimum service names:
 ```txt
 App\Services\Tenancy\TenancyManager
 App\Services\Tenancy\PostgresSchemaManager
-App\Console\Commands\MigrateLandlordCommand
+App\Console\Commands\MigrateSystemCommand
 App\Console\Commands\MigrateTenantsCommand
 App\Console\Commands\MigrateTenantCommand
 ```
@@ -1036,7 +1036,7 @@ App\Console\Commands\MigrateTenantCommand
 
 namespace App\Services\Tenancy;
 
-use App\Models\Landlord\Tenant;
+use App\Models\System\Tenant;
 
 interface TenancyManager
 {
@@ -1055,7 +1055,7 @@ Suggested PostgreSQL implementation:
 
 namespace App\Services\Tenancy;
 
-use App\Models\Landlord\Tenant;
+use App\Models\System\Tenant;
 use Illuminate\Support\Facades\DB;
 
 final class PostgresSchemaTenancyManager implements TenancyManager
@@ -1100,7 +1100,7 @@ Aegoryx migrations must be explicit and tenant-aware.
 Final rule set:
 
 ```txt
-public schema       -> landlord migrations
+public schema       -> system migrations
  tenant schemas      -> tenant migrations
 search_path         -> set centrally
 migrations table    -> one per schema

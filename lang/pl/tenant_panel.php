@@ -7,7 +7,7 @@ return [
     'workspace_for' => 'Przestrzeń robocza dla :tenant.',
     'workspace_overview_for' => 'Przegląd przestrzeni roboczej dla :tenant.',
     'dashboard_heading' => 'Panel tenanta',
-    'dashboard_description' => 'Ta powłoka jest gotowa na moduły tenanta i ukrywa szczegóły dostępne wyłącznie dla landlorda.',
+    'dashboard_description' => 'Ta powłoka jest gotowa na moduły tenanta i ukrywa szczegóły dostępne wyłącznie dla superadmina.',
     'context' => 'Kontekst tenanta',
     'not_enabled' => 'Nie włączono dla tego tenanta.',
     'enabled_features' => ':count włączonych funkcji',

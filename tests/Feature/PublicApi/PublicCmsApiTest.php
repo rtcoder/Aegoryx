@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\PublicApi;
 
-use App\Models\Landlord\Tenant;
-use App\Models\Landlord\TenantDomain;
+use App\Models\System\Tenant;
+use App\Models\System\TenantDomain;
 use App\Models\Tenant\CmsPage;
 use App\Models\Tenant\PublishedPage;
 use App\Models\Tenant\User;
@@ -30,7 +30,7 @@ final class PublicCmsApiTest extends TestCase
 
         Artisan::call('migrate:fresh', [
             '--database' => 'sqlite',
-            '--path' => 'database/migrations/landlord',
+            '--path' => 'database/migrations/system',
         ]);
 
         Artisan::call('migrate', [

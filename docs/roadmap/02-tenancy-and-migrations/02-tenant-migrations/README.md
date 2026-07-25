@@ -16,12 +16,12 @@ Przygotować migracje tenantowe wykonywane w każdej tenant schema z osobną tab
 
 ## Poza Zakresem
 
-- Landlord migrations.
+- System migrations.
 - Tenant creation UI.
 
 ## Zależności
 
-- Landlord `tenants`.
+- System `tenants`.
 - Schema manager.
 
 ## Kroki

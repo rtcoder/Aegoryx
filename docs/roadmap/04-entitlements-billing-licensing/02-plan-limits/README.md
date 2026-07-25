@@ -28,7 +28,7 @@ Modelować limity planów SaaS w sposób konsumowany przez Entitlements.
 ## Zależności
 
 - Entitlement keys.
-- Landlord migrations.
+- System migrations.
 
 ## Kroki
 

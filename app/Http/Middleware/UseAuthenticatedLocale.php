@@ -15,7 +15,7 @@ final class UseAuthenticatedLocale
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $locale = Auth::guard('landlord')->user()?->locale
+        $locale = Auth::guard('admin')->user()?->locale
             ?? Auth::guard('web')->user()?->locale;
 
         if ($locale instanceof Locale) {

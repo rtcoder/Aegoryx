@@ -2,9 +2,9 @@
 
 namespace App\Modules\AdminConsole\Actions;
 
-use App\Models\Landlord\AuditLog;
-use App\Models\Landlord\Identity;
-use App\Models\Landlord\Tenant;
+use App\Models\System\AuditLog;
+use App\Models\System\Identity;
+use App\Models\System\Tenant;
 use App\Modules\Audit\Enums\AuditLogAction;
 use App\Modules\Tenancy\Enums\TenantStatus;
 use Illuminate\Support\Facades\DB;

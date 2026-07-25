@@ -7,7 +7,7 @@ return [
     'workspace_for' => 'Workspace for :tenant.',
     'workspace_overview_for' => 'Workspace overview for :tenant.',
     'dashboard_heading' => 'Tenant panel',
-    'dashboard_description' => 'This shell is ready for tenant modules while keeping landlord-only details out of the workspace.',
+    'dashboard_description' => 'This shell is ready for tenant modules while keeping system-only details out of the workspace.',
     'context' => 'Tenant context',
     'not_enabled' => 'Not enabled for this tenant.',
     'enabled_features' => ':count enabled features',

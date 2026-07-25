@@ -17,7 +17,7 @@ Przygotować checklistę bezpiecznego uruchamiania migracji produkcyjnych.
 
 ## Zależności
 
-- Landlord/tenant migration commands.
+- System/tenant migration commands.
 
 ## Kroki
 

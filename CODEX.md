@@ -91,7 +91,7 @@ Docelowy model:
 Jedna fizyczna baza PostgreSQL
 
 public schema:
-- landlord/system data
+- system/system data
 - tenants
 - domains
 - features
@@ -135,7 +135,7 @@ tenant_acme.audit_logs
 
 ## 4. Zasady multi-tenancy
 
-### 4.1 Landlord vs tenant
+### 4.1 System vs tenant
 
 Dane systemowe trzymamy w schemie `public`.
 
@@ -188,7 +188,7 @@ Powód:
 
 * utrudnia migrację tenanta do osobnej bazy,
 * komplikuje dump/restore,
-* mocniej sprzęga tenant data z landlord data.
+* mocniej sprzęga tenant data z system data.
 
 Dopuszczalne:
 
@@ -895,9 +895,9 @@ Nie trzymać prywatnego klucza podpisującego w aplikacji klienta.
 
 ---
 
-## 16. Struktura bazowa tabel landlord
+## 16. Struktura bazowa tabel system
 
-Minimalne tabele landlord:
+Minimalne tabele system:
 
 ```txt
 tenants
@@ -1073,14 +1073,14 @@ Nie dodawać `tenant_id` do tych tabel, chyba że istnieje konkretny powód tech
 Migracje dzielimy na:
 
 ```txt
-database/migrations/landlord
+database/migrations/system
 database/migrations/tenant
 ```
 
 Komendy:
 
 ```txt
-php artisan migrate:landlord
+php artisan migrate:system
 php artisan tenants:migrate
 php artisan tenants:rollback
 php artisan tenants:seed
@@ -1311,7 +1311,7 @@ license_status
 ```txt
 app/
   Actions/
-    Landlord/
+    System/
     Tenant/
     Cms/
     Crm/
@@ -1339,7 +1339,7 @@ app/
     Requests/
 
   Models/
-    Landlord/
+    System/
     Tenant/
 
   Services/
@@ -1358,10 +1358,10 @@ app/
 
 database/
   migrations/
-    landlord/
+    system/
     tenant/
   seeders/
-    landlord/
+    system/
     tenant/
 ```
 
@@ -1373,7 +1373,7 @@ Pierwszy MVP powinien zawierać:
 
 ### 25.1 Core
 
-* landlord schema,
+* system schema,
 * tenant creation,
 * schema creation,
 * tenant context,
@@ -1485,7 +1485,7 @@ APP_DEPLOYMENT_TYPE=saas
 APP_BILLING_PROVIDER=paddle
 
 TENANCY_MODE=schema
-TENANCY_LANDLORD_SCHEMA=public
+TENANCY_SYSTEM_SCHEMA=public
 
 LICENSE_MODE=online
 LICENSE_SERVER_URL=https://license.example.com
@@ -1504,7 +1504,7 @@ APP_DEPLOYMENT_TYPE=self_hosted
 APP_BILLING_PROVIDER=none
 
 TENANCY_MODE=schema
-TENANCY_LANDLORD_SCHEMA=public
+TENANCY_SYSTEM_SCHEMA=public
 
 LICENSE_MODE=offline
 LICENSE_FILE_PATH=storage/license/license.json
@@ -1534,7 +1534,7 @@ Nie robić:
 
 Każda większa funkcja jest ukończona tylko jeśli:
 
-* ma migracje landlord/tenant w odpowiednim miejscu,
+* ma migracje system/tenant w odpowiednim miejscu,
 * respektuje tenant context,
 * ma feature/entitlement check, jeśli dotyczy,
 * ma permission/policy check, jeśli dotyczy,
@@ -1554,7 +1554,7 @@ Kolejność prac:
 ```txt
 1. Laravel base + auth foundation
 2. PostgreSQL schema tenancy
-3. landlord models: Tenant, Domain, Feature
+3. system models: Tenant, Domain, Feature
 4. tenant creation + schema creation
 5. tenant migrations runner
 6. tenant resolving by domain/subdomain

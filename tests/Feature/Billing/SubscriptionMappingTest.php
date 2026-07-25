@@ -2,11 +2,11 @@
 
 namespace Tests\Feature\Billing;
 
-use App\Models\Landlord\AuditLog;
-use App\Models\Landlord\BillingEvent;
-use App\Models\Landlord\Plan;
-use App\Models\Landlord\Subscription;
-use App\Models\Landlord\Tenant;
+use App\Models\System\AuditLog;
+use App\Models\System\BillingEvent;
+use App\Models\System\Plan;
+use App\Models\System\Subscription;
+use App\Models\System\Tenant;
 use App\Modules\Audit\Enums\AuditLogAction;
 use App\Modules\Billing\Actions\SyncSubscriptionFromProviderEventAction;
 use App\Modules\Billing\Enums\BillingEventStatus;
@@ -29,7 +29,7 @@ final class SubscriptionMappingTest extends TestCase
 
         Artisan::call('migrate:fresh', [
             '--database' => 'sqlite',
-            '--path' => 'database/migrations/landlord',
+            '--path' => 'database/migrations/system',
         ]);
     }
 

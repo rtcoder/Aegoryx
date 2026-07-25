@@ -8,7 +8,7 @@
 - `APP_DEBUG=false`
 - `QUEUE_CONNECTION=redis`
 - Redis dostępny dla Horizon
-- lista pending landlord migrations przejrzana
+- lista pending system migrations przejrzana
 - lista pending tenant migrations przejrzana
 - liczba tenantów znana
 - okno maintenance potwierdzone
@@ -19,7 +19,7 @@
 scripts/deploy.sh
 ```
 
-Nie używamy plain `php artisan migrate` jako pełnego deployu. Landlord i tenant migrations są oddzielone celowo.
+Nie używamy plain `php artisan migrate` jako pełnego deployu. System i tenant migrations są oddzielone celowo.
 
 ## Failed Tenant Migration
 
@@ -39,6 +39,6 @@ php artisan tenant:migrate tenant-slug --force
 - `php artisan horizon:terminate`
 - sprawdzić logi aplikacji
 - sprawdzić failed jobs
-- sprawdzić login landlord
+- sprawdzić login system
 - sprawdzić jeden tenant panel
 - sprawdzić public API published CMS

@@ -9,19 +9,21 @@ use App\Modules\AdminConsole\Http\Controllers\LicenseController;
 use App\Modules\AdminConsole\Http\Controllers\SectionController;
 use App\Modules\AdminConsole\Http\Controllers\Security\SecurityController;
 use App\Modules\AdminConsole\Http\Controllers\TenantController;
-use App\Modules\AdminConsole\Http\Middleware\EnsureLandlordAuthenticated;
-use App\Modules\AdminConsole\Http\Middleware\UseLandlordSchema;
+use App\Modules\AdminConsole\Http\Middleware\EnsureAdminAuthenticated;
+use App\Modules\AdminConsole\Http\Middleware\UseSystemSchema;
 use Illuminate\Support\Facades\Route;
 
-Route::domain(config('aegoryx.landlord.domain'))
-    ->middleware(UseLandlordSchema::class)
-    ->name('landlord.')
+Route::domain(config('aegoryx.admin.domain'))
+    ->middleware(UseSystemSchema::class)
+    ->name('admin.')
     ->group(function (): void {
         Route::get('/login', [LoginController::class, 'create'])->name('login');
         Route::post('/login', [LoginController::class, 'store'])->name('login.store');
-        Route::get('/two-factor-challenge', fn () => view('landlord.auth.two-factor-challenge'))->name('two-factor.challenge');
+        Route::get('/forgot-password', fn () => view('admin.auth.request-password-reset'))->name('password.request');
+        Route::get('/reset-password/{token}', fn (string $token) => view('admin.auth.reset-password', ['token' => $token]))->name('password.reset');
+        Route::get('/two-factor-challenge', fn () => view('admin.auth.two-factor-challenge'))->name('two-factor.challenge');
 
-        Route::middleware([EnsureLandlordAuthenticated::class, UseAuthenticatedLocale::class])->group(function (): void {
+        Route::middleware([EnsureAdminAuthenticated::class, UseAuthenticatedLocale::class])->group(function (): void {
             Route::get('/', DashboardController::class)->name('dashboard');
             Route::get('/security', [SecurityController::class, 'index'])->name('security.index');
             Route::get('/tenants', [TenantController::class, 'index'])->name('tenants.index');

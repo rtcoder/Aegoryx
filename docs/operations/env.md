@@ -5,7 +5,7 @@ Aegoryx zakłada PostgreSQL jako runtime dla local, SaaS production i self-hoste
 ## Minimalny local
 
 - `APP_URL=http://aegoryx.test`
-- `LANDLORD_DOMAIN=admin.aegoryx.test`
+- `ADMIN_DOMAIN=admin.aegoryx.test`
 - `DB_CONNECTION=pgsql`
 - `DB_DATABASE=aegoryx`
 - `QUEUE_CONNECTION=redis`
@@ -17,7 +17,7 @@ Aegoryx zakłada PostgreSQL jako runtime dla local, SaaS production i self-hoste
 - PostgreSQL z uprawnieniem do tworzenia schema
 - Redis dla cache, queue i Horizon
 - trwały storage dla `storage/app`
-- poprawnie ustawione `APP_KEY`, domena landlord i domeny tenantów
+- poprawnie ustawione `APP_KEY`, domena system i domeny tenantów
 
 ## Sekrety
 

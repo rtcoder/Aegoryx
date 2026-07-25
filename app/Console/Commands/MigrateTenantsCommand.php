@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Landlord\Tenant;
+use App\Models\System\Tenant;
 use App\Services\Tenancy\PostgresSchemaManager;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;

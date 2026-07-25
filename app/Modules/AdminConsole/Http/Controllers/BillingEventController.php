@@ -3,7 +3,7 @@
 namespace App\Modules\AdminConsole\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\Landlord\BillingEvent;
+use App\Models\System\BillingEvent;
 use App\Modules\Billing\Actions\SyncSubscriptionFromProviderEventAction;
 use App\Modules\Billing\Enums\BillingEventStatus;
 use Illuminate\Http\RedirectResponse;
@@ -14,7 +14,7 @@ final class BillingEventController extends Controller
 {
     public function show(BillingEvent $event): View
     {
-        return view('landlord.billing.show', [
+        return view('admin.billing.show', [
             'event' => $event->load(['subscription', 'tenant']),
         ]);
     }
@@ -23,19 +23,19 @@ final class BillingEventController extends Controller
     {
         if ($event->status !== BillingEventStatus::Failed) {
             return redirect()
-                ->route('landlord.billing.events.show', $event)
-                ->with('error', __('landlord.billing.retry_only_failed'));
+                ->route('admin.billing.events.show', $event)
+                ->with('error', __('admin.billing.retry_only_failed'));
         }
 
         $syncSubscription->retry(
             event: $event,
-            actorId: $request->user('landlord')?->id,
+            actorId: $request->user('admin')?->id,
             ip: $request->ip(),
             userAgent: $request->userAgent(),
         );
 
         return redirect()
-            ->route('landlord.billing.events.show', $event)
-            ->with('success', __('landlord.billing.retry_succeeded'));
+            ->route('admin.billing.events.show', $event)
+            ->with('success', __('admin.billing.retry_succeeded'));
     }
 }

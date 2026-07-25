@@ -3,9 +3,9 @@
 namespace Tests\Feature\TenantPanel;
 
 use App\Livewire\Tenant\Cms\Pages\Index;
-use App\Models\Landlord\Tenant;
-use App\Models\Landlord\TenantDomain;
-use App\Models\Landlord\TenantFeature;
+use App\Models\System\Tenant;
+use App\Models\System\TenantDomain;
+use App\Models\System\TenantFeature;
 use App\Models\Tenant\CmsPage;
 use App\Models\Tenant\PublishedPage;
 use App\Models\Tenant\User;
@@ -30,7 +30,7 @@ final class TenantCmsPagesTest extends TestCase
 
         Artisan::call('migrate:fresh', [
             '--database' => 'sqlite',
-            '--path' => 'database/migrations/landlord',
+            '--path' => 'database/migrations/system',
         ]);
 
         Artisan::call('migrate', [

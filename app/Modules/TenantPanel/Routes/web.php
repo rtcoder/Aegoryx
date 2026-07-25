@@ -25,6 +25,8 @@ Route::middleware(ResolveTenantFromDomain::class)
     ->name('tenant.')
     ->group(function (): void {
         Route::get('/login', [LoginController::class, 'create'])->name('login');
+        Route::get('/forgot-password', fn () => view('tenant.auth.request-password-reset'))->name('password.request');
+        Route::get('/reset-password/{token}', fn (string $token) => view('tenant.auth.reset-password', ['token' => $token]))->name('password.reset');
 
         Route::middleware(EnsureTenantAuthenticated::class)->group(function (): void {
             Route::prefix('panel')->group(function (): void {

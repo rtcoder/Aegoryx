@@ -7,7 +7,7 @@ return [
     'workspace_for' => 'Arbeitsbereich für :tenant.',
     'workspace_overview_for' => 'Arbeitsbereichsübersicht für :tenant.',
     'dashboard_heading' => 'Mandantenbereich',
-    'dashboard_description' => 'Diese Oberfläche ist für Mandantenmodule bereit und hält Landlord-Details aus dem Arbeitsbereich heraus.',
+    'dashboard_description' => 'Diese Oberfläche ist für Mandantenmodule bereit und hält System-Details aus dem Arbeitsbereich heraus.',
     'context' => 'Mandantenkontext',
     'not_enabled' => 'Für diesen Mandanten nicht aktiviert.',
     'enabled_features' => ':count aktivierte Features',

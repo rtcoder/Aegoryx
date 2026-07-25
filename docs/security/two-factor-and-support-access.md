@@ -2,7 +2,7 @@
 
 ## 2FA Storage
 
-Landlord `Identity` i tenant `User` mają pola:
+System `Identity` i tenant `User` mają pola:
 
 - `two_factor_secret` - encrypted string
 - `two_factor_recovery_codes` - encrypted array
@@ -23,7 +23,7 @@ Audit log nie zawiera TOTP secret ani plaintext recovery codes.
 
 Start support session wymaga:
 
-- landlord superadmin
+- system superadmin
 - aktywne 2FA
 - jawny reason
 - expiration

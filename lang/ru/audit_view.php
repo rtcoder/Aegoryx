@@ -10,7 +10,7 @@ return [
     'activity_title' => 'Активность',
     'actor' => 'Актор',
     'audit_description' => 'Глобальный аудит системных и административных операций.',
-    'audit_help' => 'События landlord, billing, лицензий, поддержки и безопасности.',
+    'audit_help' => 'События system, billing, лицензий, поддержки и безопасности.',
     'audit_log' => 'Audit log',
     'audit_title' => 'Аудит',
     'created_at' => 'Создано',

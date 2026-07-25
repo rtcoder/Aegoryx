@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Operations;
 
-use App\Models\Landlord\AuditLog;
-use App\Models\Landlord\Tenant;
+use App\Models\System\AuditLog;
+use App\Models\System\Tenant;
 use App\Models\Tenant\ActivityEntry;
 use App\Models\Tenant\TenantFile;
 use App\Models\Tenant\User;
@@ -26,7 +26,7 @@ final class RetentionPurgeTest extends TestCase
 
         Artisan::call('migrate:fresh', [
             '--database' => 'sqlite',
-            '--path' => 'database/migrations/landlord',
+            '--path' => 'database/migrations/system',
         ]);
 
         Artisan::call('migrate', [

@@ -12,7 +12,7 @@ Na tym etapie nie używamy Jetstream ani Inertia, bo panel ma być Livewire-firs
 
 ## Konsekwencje
 
-- Landlord auth używa guard `landlord` i modelu `Identity`.
+- System auth używa guard `system` i modelu `Identity`.
 - Tenant auth używa guard `web` i modelu `App\Models\Tenant\User` po ustawieniu tenant context.
 - UI logowania pozostaje w Livewire.
 - 2FA będzie projektowane jako własny moduł Security albo jako selektywna integracja Fortify bez Jetstream UI.

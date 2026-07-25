@@ -3,26 +3,26 @@
 namespace App\Modules\AdminConsole\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\Landlord\BillingEvent;
-use App\Models\Landlord\License;
-use App\Models\Landlord\Subscription;
+use App\Models\System\BillingEvent;
+use App\Models\System\License;
+use App\Models\System\Subscription;
 use Illuminate\View\View;
 
 final class SectionController extends Controller
 {
     public function tenants(): View
     {
-        return $this->section(__('common.tenants'), __('landlord.sections.tenants'));
+        return $this->section(__('common.tenants'), __('admin.sections.tenants'));
     }
 
     public function licenses(): View
     {
-        return $this->section(__('common.licenses'), __('landlord.sections.licenses'));
+        return $this->section(__('common.licenses'), __('admin.sections.licenses'));
     }
 
     public function billing(): View
     {
-        return view('landlord.billing.index', [
+        return view('admin.billing.index', [
             'billingEvents' => BillingEvent::query()
                 ->with('tenant')
                 ->latest()
@@ -43,12 +43,12 @@ final class SectionController extends Controller
 
     public function support(): View
     {
-        return view('landlord.support.index');
+        return view('admin.support.index');
     }
 
     private function section(string $title, string $description): View
     {
-        return view('landlord.section', [
+        return view('admin.section', [
             'title' => $title,
             'description' => $description,
         ]);

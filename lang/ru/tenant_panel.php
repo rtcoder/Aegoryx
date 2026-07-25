@@ -7,7 +7,7 @@ return [
     'workspace_for' => 'Рабочая область для :tenant.',
     'workspace_overview_for' => 'Обзор рабочей области для :tenant.',
     'dashboard_heading' => 'Панель tenant',
-    'dashboard_description' => 'Эта оболочка готова для модулей tenant и скрывает детали, доступные только landlord.',
+    'dashboard_description' => 'Эта оболочка готова для модулей tenant и скрывает детали, доступные только system.',
     'context' => 'Контекст tenant',
     'not_enabled' => 'Не включено для этого tenant.',
     'enabled_features' => ':count включенных функций',
