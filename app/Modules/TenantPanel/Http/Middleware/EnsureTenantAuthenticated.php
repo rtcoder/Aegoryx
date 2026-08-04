@@ -16,7 +16,7 @@ final class EnsureTenantAuthenticated
     public function handle(Request $request, Closure $next): Response|RedirectResponse
     {
         if (! Auth::guard('web')->check()) {
-            if ($request->expectsJson()) {
+            if ($request->routeIs('tenant.theme.update') && $request->expectsJson()) {
                 return response()->json(['message' => 'Unauthenticated.'], 401);
             }
 

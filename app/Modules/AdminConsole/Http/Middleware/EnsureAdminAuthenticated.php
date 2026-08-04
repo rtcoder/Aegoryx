@@ -15,7 +15,7 @@ final class EnsureAdminAuthenticated
     public function handle(Request $request, Closure $next): Response|RedirectResponse
     {
         if (! Auth::guard('admin')->check()) {
-            if ($request->expectsJson()) {
+            if ($request->routeIs('admin.theme.update') && $request->expectsJson()) {
                 return response()->json(['message' => 'Unauthenticated.'], 401);
             }
 
