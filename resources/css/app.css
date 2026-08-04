@@ -25,15 +25,16 @@
         --ui-border-subtle: #e8edf3;
         --ui-border-strong: #aebccc;
         --ui-text: #101827;
-        --ui-text-muted: #526071;
-        --ui-text-subtle: #768294;
-        --ui-nav-text: #526071;
+        --ui-text-muted: #475569;
+        --ui-text-subtle: #5f6f85;
+        --ui-nav-text: #475569;
         --ui-nav-hover-bg: #eef6fb;
         --ui-nav-hover-text: #0f172a;
-        --ui-nav-active-bg: #0284c7;
+        --ui-nav-active-bg: #0369a1;
         --ui-nav-active-text: #ffffff;
-        --ui-accent: #0284c7;
-        --ui-accent-hover: #0369a1;
+        --ui-accent: #0369a1;
+        --ui-accent-hover: #075985;
+        --ui-accent-contrast: #ffffff;
         --ui-accent-soft: #dff3ff;
         --ui-accent-text: #075985;
         --ui-success: #047857;
@@ -41,9 +42,17 @@
         --ui-warning: #b45309;
         --ui-warning-soft: #fff1cf;
         --ui-danger: #c0262d;
+        --ui-danger-bg: #b91c1c;
+        --ui-danger-bg-hover: #991b1b;
+        --ui-danger-contrast: #ffffff;
         --ui-danger-soft: #ffe3e5;
         --ui-info: #2563eb;
         --ui-info-soft: #dbeafe;
+        --ui-link: #0369a1;
+        --ui-link-hover: #075985;
+        --ui-disabled-bg: #e2e8f0;
+        --ui-disabled-border: #cbd5e1;
+        --ui-disabled-text: #5f6f85;
         --ui-focus: #38bdf8;
         --ui-shadow: 0 1px 2px rgb(15 23 42 / 0.08);
     }
@@ -61,25 +70,34 @@
         --ui-border-subtle: #24252b;
         --ui-border-strong: #52525b;
         --ui-text: #f4f4f5;
-        --ui-text-muted: #a1a1aa;
-        --ui-text-subtle: #71717a;
+        --ui-text-muted: #d4d4d8;
+        --ui-text-subtle: #a1a1aa;
         --ui-nav-text: #d4d4d8;
         --ui-nav-hover-bg: #202024;
         --ui-nav-hover-text: #ffffff;
-        --ui-nav-active-bg: #0ea5e9;
+        --ui-nav-active-bg: #0369a1;
         --ui-nav-active-text: #ffffff;
-        --ui-accent: #0ea5e9;
-        --ui-accent-hover: #38bdf8;
+        --ui-accent: #0369a1;
+        --ui-accent-hover: #075985;
+        --ui-accent-contrast: #ffffff;
         --ui-accent-soft: #082f49;
         --ui-accent-text: #bae6fd;
         --ui-success: #34d399;
         --ui-success-soft: #052e1b;
         --ui-warning: #f59e0b;
         --ui-warning-soft: #451a03;
-        --ui-danger: #f87171;
+        --ui-danger: #fca5a5;
+        --ui-danger-bg: #b91c1c;
+        --ui-danger-bg-hover: #991b1b;
+        --ui-danger-contrast: #ffffff;
         --ui-danger-soft: #450a0a;
         --ui-info: #60a5fa;
         --ui-info-soft: #172554;
+        --ui-link: #7dd3fc;
+        --ui-link-hover: #bae6fd;
+        --ui-disabled-bg: #27272a;
+        --ui-disabled-border: #3f3f46;
+        --ui-disabled-text: #a1a1aa;
         --ui-focus: #7dd3fc;
         --ui-shadow: 0 1px 2px rgb(0 0 0 / 0.35);
     }
@@ -204,12 +222,12 @@
     }
 
     .ui-link {
-        color: var(--ui-accent);
+        color: var(--ui-link);
         font-weight: 500;
     }
 
     .ui-link:hover {
-        color: var(--ui-accent-hover);
+        color: var(--ui-link-hover);
     }
 
     .ui-btn {
@@ -244,7 +262,7 @@
 
     .ui-btn-primary {
         background: var(--ui-accent);
-        color: white;
+        color: var(--ui-accent-contrast);
     }
 
     .ui-btn-primary:hover {
@@ -272,12 +290,23 @@
     }
 
     .ui-btn-danger {
-        background: var(--ui-danger);
-        color: white;
+        background: var(--ui-danger-bg);
+        color: var(--ui-danger-contrast);
     }
 
     .ui-btn-danger:hover {
-        filter: brightness(1.05);
+        background: var(--ui-danger-bg-hover);
+    }
+
+    .ui-btn:disabled,
+    .ui-btn[aria-disabled='true'] {
+        cursor: not-allowed;
+        border-color: var(--ui-disabled-border);
+        background: var(--ui-disabled-bg);
+        color: var(--ui-disabled-text);
+        box-shadow: none;
+        opacity: 1;
+        pointer-events: none;
     }
 
     .ui-input,
@@ -315,6 +344,16 @@
     .ui-input::placeholder,
     .ui-textarea::placeholder {
         color: var(--ui-text-subtle);
+    }
+
+    .ui-input:disabled,
+    .ui-select:disabled,
+    .ui-textarea:disabled {
+        cursor: not-allowed;
+        border-color: var(--ui-disabled-border);
+        background: var(--ui-disabled-bg);
+        color: var(--ui-disabled-text);
+        opacity: 1;
     }
 
     .ui-error {

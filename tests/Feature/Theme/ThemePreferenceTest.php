@@ -157,6 +157,33 @@ final class ThemePreferenceTest extends TestCase
             ->assertSee('data-theme-endpoint="http://acme.aegoryx.test/panel/theme"', false);
     }
 
+    public function test_theme_bootstrap_renders_before_vite_assets_on_base_layouts(): void
+    {
+        $this->domain($this->tenant());
+
+        $responses = [
+            $this->get('http://aegoryx.test/'),
+            $this->get('http://admin.aegoryx.test/login'),
+            $this->get('http://acme.aegoryx.test/login'),
+        ];
+
+        foreach ($responses as $response) {
+            $response->assertOk();
+
+            $content = $response->getContent();
+            $bootstrapPosition = strpos($content, 'data-theme-bootstrap');
+            $assetPositions = array_filter([
+                strpos($content, '<link rel="preload"'),
+                strpos($content, '<link rel="stylesheet"'),
+                strpos($content, '<script type="module"'),
+            ], static fn (int|false $position): bool => $position !== false);
+
+            $this->assertNotFalse($bootstrapPosition);
+            $this->assertNotEmpty($assetPositions);
+            $this->assertLessThan(min($assetPositions), $bootstrapPosition);
+        }
+    }
+
     public function test_invalid_theme_preference_is_rejected(): void
     {
         $identity = Identity::query()->create([

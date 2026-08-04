@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ __('errors.403_title') }} | Aegoryx</title>
+    <x-theme.bootstrap />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="ds-app antialiased">

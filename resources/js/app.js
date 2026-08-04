@@ -1,5 +1,6 @@
 const THEME_KEY = 'aegoryx.theme';
 const THEMES = ['light', 'dark'];
+const themePersistStates = new Map();
 
 function validTheme(theme) {
     return THEMES.includes(theme);
@@ -56,6 +57,64 @@ async function persistTheme(endpoint, theme) {
     return response.json();
 }
 
+function statusSwitchersForEndpoint(endpoint, state) {
+    document.querySelectorAll('[data-theme-switcher]').forEach((switcher) => {
+        if (switcher.dataset.themeEndpoint === endpoint) {
+            state.switchers.add(switcher);
+        }
+    });
+
+    return state.switchers;
+}
+
+function updateThemeStatus(endpoint, state, status) {
+    statusSwitchersForEndpoint(endpoint, state).forEach((switcher) => {
+        switcher.dataset.themeStatus = status;
+    });
+}
+
+function persistLatestTheme(endpoint, theme, switcher) {
+    const state = themePersistStates.get(endpoint) ?? {
+        inFlight: false,
+        latestTheme: null,
+        persistedTheme: null,
+        switchers: new Set(),
+    };
+
+    state.latestTheme = theme;
+    state.switchers.add(switcher);
+    themePersistStates.set(endpoint, state);
+    updateThemeStatus(endpoint, state, 'saving');
+
+    if (!state.inFlight) {
+        processThemePersistQueue(endpoint, state);
+    }
+}
+
+async function processThemePersistQueue(endpoint, state) {
+    state.inFlight = true;
+
+    while (state.persistedTheme !== state.latestTheme) {
+        const savingTheme = state.latestTheme;
+
+        try {
+            await persistTheme(endpoint, savingTheme);
+            state.persistedTheme = savingTheme;
+
+            if (state.latestTheme === savingTheme) {
+                updateThemeStatus(endpoint, state, 'saved');
+            }
+        } catch {
+            if (state.latestTheme === savingTheme) {
+                updateThemeStatus(endpoint, state, 'error');
+                break;
+            }
+        }
+    }
+
+    state.inFlight = false;
+}
+
 applyTheme(currentTheme());
 
 document.addEventListener('click', (event) => {
@@ -73,8 +132,6 @@ document.addEventListener('click', (event) => {
     }
 
     const nextTheme = applyTheme(theme);
-    switcher.dataset.themeStatus = 'saving';
-
     const endpoint = switcher.dataset.themeEndpoint;
 
     if (!endpoint) {
@@ -82,13 +139,7 @@ document.addEventListener('click', (event) => {
         return;
     }
 
-    persistTheme(endpoint, nextTheme)
-        .then(() => {
-            switcher.dataset.themeStatus = 'saved';
-        })
-        .catch(() => {
-            switcher.dataset.themeStatus = 'error';
-        });
+    persistLatestTheme(endpoint, nextTheme, switcher);
 });
 
 window.aegoryxTheme = {
