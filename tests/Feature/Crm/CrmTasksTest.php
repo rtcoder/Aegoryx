@@ -10,6 +10,8 @@ use App\Models\Tenant\CrmCompany;
 use App\Models\Tenant\CrmTask;
 use App\Models\Tenant\User;
 use App\Modules\Audit\Enums\ActivityEntryAction;
+use App\Modules\Crm\Actions\CreateTaskAction;
+use App\Modules\Crm\Actions\UpdateTaskAction;
 use App\Modules\Crm\Enums\CrmSubjectType;
 use App\Modules\Crm\Enums\CrmTaskStatus;
 use App\Modules\Entitlements\Enums\TenantFeatureSource;
@@ -20,6 +22,7 @@ use App\Modules\Tenancy\Enums\TenantDomainType;
 use App\Modules\Tenancy\Enums\TenantLicenseType;
 use App\Modules\Tenancy\Enums\TenantStatus;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Validation\ValidationException;
 use Tests\TestCase;
 
 final class CrmTasksTest extends TestCase
@@ -117,7 +120,14 @@ final class CrmTasksTest extends TestCase
 
         $this->assertSame(CrmTaskStatus::Completed, $task->refresh()->status);
         $this->assertNotNull($task->completed_at);
-        $this->assertSame(ActivityEntryAction::CrmTaskUpdated, ActivityEntry::query()->latest('id')->firstOrFail()->action);
+
+        $activity = ActivityEntry::query()->latest('id')->firstOrFail();
+
+        $this->assertSame(ActivityEntryAction::CrmTaskUpdated, $activity->action);
+        $this->assertSame(CrmTaskStatus::Pending->value, $activity->before_json['status']);
+        $this->assertNull($activity->before_json['assigned_to']);
+        $this->assertSame(CrmTaskStatus::Completed->value, $activity->after_json['status']);
+        $this->assertSame($this->user->id, $activity->after_json['assigned_to']);
 
         $this
             ->delete("http://acme.aegoryx.test/panel/crm/tasks/{$task->id}")
@@ -126,6 +136,48 @@ final class CrmTasksTest extends TestCase
         $this->assertSoftDeleted('crm_tasks', ['id' => $task->id]);
         $this->assertSame($this->user->id, $task->refresh()->deleted_by);
         $this->assertSame(ActivityEntryAction::CrmTaskDeleted, ActivityEntry::query()->latest('id')->firstOrFail()->action);
+    }
+
+    public function test_create_task_action_rejects_missing_subject(): void
+    {
+        $this->expectException(ValidationException::class);
+
+        app(CreateTaskAction::class)->handle([
+            'subject_type' => CrmSubjectType::Company->value,
+            'subject_id' => 999,
+            'title' => 'Call missing company',
+            'status' => CrmTaskStatus::Pending->value,
+        ], $this->user);
+    }
+
+    public function test_update_task_action_rejects_soft_deleted_assignee(): void
+    {
+        $company = CrmCompany::query()->create(['name' => 'Acme Corp']);
+        $deletedUser = User::query()->create([
+            'name' => 'Deleted User',
+            'email' => 'deleted@example.test',
+            'password' => 'secret-password',
+        ]);
+        $deletedUser->delete();
+
+        $task = CrmTask::query()->create([
+            'subject_type' => CrmSubjectType::Company,
+            'subject_id' => $company->id,
+            'title' => 'Call buyer',
+            'status' => CrmTaskStatus::Pending,
+            'created_by' => $this->user->id,
+            'updated_by' => $this->user->id,
+        ]);
+
+        $this->expectException(ValidationException::class);
+
+        app(UpdateTaskAction::class)->handle($task, [
+            'subject_type' => CrmSubjectType::Company->value,
+            'subject_id' => $company->id,
+            'title' => 'Call buyer',
+            'status' => CrmTaskStatus::Pending->value,
+            'assigned_to' => $deletedUser->id,
+        ], $this->user);
     }
 
     public function test_tasks_index_renders(): void

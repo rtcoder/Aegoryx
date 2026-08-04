@@ -7,6 +7,8 @@ use App\Models\Tenant\User;
 use App\Modules\Audit\Enums\ActivityEntryAction;
 use App\Modules\Audit\Services\ActivityLogger;
 use App\Modules\Crm\Enums\CrmTaskStatus;
+use App\Modules\Crm\Support\CrmAssigneeGuard;
+use App\Modules\Crm\Support\CrmSubjectGuard;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 
@@ -14,6 +16,8 @@ final readonly class CreateTaskAction
 {
     public function __construct(
         private ActivityLogger $activity,
+        private CrmSubjectGuard $subjects,
+        private CrmAssigneeGuard $assignees,
     ) {}
 
     /**
@@ -23,6 +27,8 @@ final readonly class CreateTaskAction
     {
         Gate::forUser($actor)->authorize('create', CrmTask::class);
         unset($data['subject']);
+        $this->subjects->assertExists((string) ($data['subject_type'] ?? ''), (int) ($data['subject_id'] ?? 0));
+        $this->assignees->assertAssignable($data['assigned_to'] ?? null);
 
         return DB::transaction(function () use ($data, $actor): CrmTask {
             $status = CrmTaskStatus::from((string) $data['status']);
