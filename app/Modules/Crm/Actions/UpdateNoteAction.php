@@ -6,6 +6,7 @@ use App\Models\Tenant\CrmNote;
 use App\Models\Tenant\User;
 use App\Modules\Audit\Enums\ActivityEntryAction;
 use App\Modules\Audit\Services\ActivityLogger;
+use App\Modules\Crm\Support\CrmSubjectGuard;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 
@@ -13,6 +14,7 @@ final readonly class UpdateNoteAction
 {
     public function __construct(
         private ActivityLogger $activity,
+        private CrmSubjectGuard $subjects,
     ) {}
 
     /**
@@ -22,6 +24,7 @@ final readonly class UpdateNoteAction
     {
         Gate::forUser($actor)->authorize('update', $note);
         unset($data['subject']);
+        $this->subjects->assertExists((string) ($data['subject_type'] ?? ''), (int) ($data['subject_id'] ?? 0));
 
         return DB::transaction(function () use ($note, $data, $actor): CrmNote {
             $before = $this->activityPayload($note);

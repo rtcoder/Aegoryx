@@ -3,7 +3,7 @@
 namespace App\Modules\Crm\Http\Requests\Concerns;
 
 use App\Modules\Crm\Enums\CrmSubjectType;
-use Illuminate\Support\Facades\DB;
+use App\Modules\Crm\Support\CrmSubjectGuard;
 use Illuminate\Validation\Validator;
 
 trait ValidatesCrmSubject
@@ -34,12 +34,7 @@ trait ValidatesCrmSubject
                 return;
             }
 
-            $exists = DB::table($type->table())
-                ->where('id', $subjectId)
-                ->whereNull('deleted_at')
-                ->exists();
-
-            if (! $exists) {
+            if (! app(CrmSubjectGuard::class)->exists($type, $subjectId)) {
                 $validator->errors()->add('subject_id', __('validation.exists', ['attribute' => __('crm.subject')]));
             }
         });

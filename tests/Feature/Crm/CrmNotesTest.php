@@ -10,6 +10,8 @@ use App\Models\Tenant\CrmCompany;
 use App\Models\Tenant\CrmNote;
 use App\Models\Tenant\User;
 use App\Modules\Audit\Enums\ActivityEntryAction;
+use App\Modules\Crm\Actions\CreateNoteAction;
+use App\Modules\Crm\Actions\UpdateNoteAction;
 use App\Modules\Crm\Enums\CrmSubjectType;
 use App\Modules\Entitlements\Enums\TenantFeatureSource;
 use App\Modules\Tenancy\Enums\TenantBillingModel;
@@ -19,6 +21,7 @@ use App\Modules\Tenancy\Enums\TenantDomainType;
 use App\Modules\Tenancy\Enums\TenantLicenseType;
 use App\Modules\Tenancy\Enums\TenantStatus;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Validation\ValidationException;
 use Tests\TestCase;
 
 final class CrmNotesTest extends TestCase
@@ -118,6 +121,40 @@ final class CrmNotesTest extends TestCase
         $this->assertSoftDeleted('crm_notes', ['id' => $note->id]);
         $this->assertSame($this->user->id, $note->refresh()->deleted_by);
         $this->assertSame(ActivityEntryAction::CrmNoteDeleted, ActivityEntry::query()->latest('id')->firstOrFail()->action);
+    }
+
+    public function test_create_note_action_rejects_missing_subject(): void
+    {
+        $this->expectException(ValidationException::class);
+
+        app(CreateNoteAction::class)->handle([
+            'subject_type' => CrmSubjectType::Company->value,
+            'subject_id' => 999,
+            'body' => 'This should not attach.',
+        ], $this->user);
+    }
+
+    public function test_update_note_action_rejects_soft_deleted_subject(): void
+    {
+        $company = CrmCompany::query()->create(['name' => 'Acme Corp']);
+        $otherCompany = CrmCompany::query()->create(['name' => 'Deleted Corp']);
+        $otherCompany->delete();
+
+        $note = CrmNote::query()->create([
+            'subject_type' => CrmSubjectType::Company,
+            'subject_id' => $company->id,
+            'body' => 'Initial note.',
+            'created_by' => $this->user->id,
+            'updated_by' => $this->user->id,
+        ]);
+
+        $this->expectException(ValidationException::class);
+
+        app(UpdateNoteAction::class)->handle($note, [
+            'subject_type' => CrmSubjectType::Company->value,
+            'subject_id' => $otherCompany->id,
+            'body' => 'Moved to deleted subject.',
+        ], $this->user);
     }
 
     public function test_notes_index_renders(): void
