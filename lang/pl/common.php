@@ -78,4 +78,7 @@ return [
     'updated' => 'Zaktualizowano',
     'yes' => 'tak',
     'cancel' => 'Anuluj',
+    'theme' => 'Motyw',
+    'theme_light' => 'Jasny motyw',
+    'theme_dark' => 'Ciemny motyw',
 ];

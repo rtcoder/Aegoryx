@@ -1,13 +1,15 @@
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 @php
+    $currentTheme = auth('web')->user()?->theme?->value ?? 'light';
     $tenantNavigation = $tenantNavigation ?? [];
     $tenantModuleCards = $tenantModuleCards ?? [];
     $tenantEntitlements = $tenantEntitlements ?? [];
 @endphp
+<!doctype html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-theme="{{ $currentTheme }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', __('app.tenant_panel_title'))</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
@@ -68,6 +70,7 @@
                     </div>
 
                     <div class="flex items-center gap-3">
+                        <x-theme.switcher :theme="$currentTheme" :action="route('tenant.theme.update')" />
                         <div class="rounded border border-neutral-800 bg-neutral-900 px-4 py-2 text-sm">
                             <p class="text-neutral-300">{{ auth()->user()?->name ?? __('common.tenant_user') }}</p>
                             <p class="mt-1 text-xs text-neutral-500">{{ auth()->user()?->email }}</p>

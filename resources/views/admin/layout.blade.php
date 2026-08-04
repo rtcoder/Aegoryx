@@ -1,6 +1,6 @@
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 @php
+    $currentTheme = auth('admin')->user()?->theme?->value ?? 'light';
+
     $navigation = [
         ['label' => __('common.dashboard'), 'route' => 'admin.dashboard'],
         ['label' => __('common.tenants'), 'route' => 'admin.tenants.index'],
@@ -20,9 +20,12 @@
             ->first()
         : null;
 @endphp
+<!doctype html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-theme="{{ $currentTheme }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', __('app.admin_title'))</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
@@ -56,12 +59,15 @@
                         <p class="mt-1 text-sm text-neutral-400">@yield('subheading', __('admin.system_controls'))</p>
                     </div>
 
-                    <form method="POST" action="{{ route('admin.logout') }}">
-                        @csrf
-                        <x-ui.button type="submit" variant="secondary" size="sm">
-                            {{ __('admin.sign_out') }}
-                        </x-ui.button>
-                    </form>
+                    <div class="flex items-center gap-3">
+                        <x-theme.switcher :theme="$currentTheme" :action="route('admin.theme.update')" />
+                        <form method="POST" action="{{ route('admin.logout') }}">
+                            @csrf
+                            <x-ui.button type="submit" variant="secondary" size="sm">
+                                {{ __('admin.sign_out') }}
+                            </x-ui.button>
+                        </form>
+                    </div>
                 </div>
 
                 <nav class="mt-5 flex gap-2 overflow-x-auto md:hidden" aria-label="{{ __('admin.navigation_label') }}">

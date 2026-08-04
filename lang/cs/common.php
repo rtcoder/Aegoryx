@@ -78,4 +78,7 @@ return [
     'updated' => 'Aktualizováno',
     'yes' => 'ano',
     'cancel' => 'Zrušit',
+    'theme' => 'Vzhled',
+    'theme_light' => 'Světlý vzhled',
+    'theme_dark' => 'Tmavý vzhled',
 ];

@@ -114,6 +114,49 @@ final class ThemePreferenceTest extends TestCase
         $this->assertSame(ThemePreference::Dark, $user->refresh()->theme);
     }
 
+    public function test_admin_layout_renders_saved_theme_and_switcher_endpoint(): void
+    {
+        $identity = Identity::query()->create([
+            'email' => 'admin@example.test',
+            'is_super_admin' => true,
+            'status' => IdentityStatus::Active,
+            'locale' => Locale::Polish,
+            'theme' => ThemePreference::Dark,
+        ]);
+
+        $this->actingAs($identity, 'admin');
+
+        $this
+            ->get('http://admin.aegoryx.test/')
+            ->assertOk()
+            ->assertSee('data-theme="dark"', false)
+            ->assertSee('data-theme-switcher', false)
+            ->assertSee('data-theme-endpoint="http://admin.aegoryx.test/theme"', false);
+    }
+
+    public function test_tenant_layout_renders_saved_theme_and_switcher_endpoint(): void
+    {
+        $this->domain($this->tenant());
+
+        $user = User::query()->create([
+            'name' => 'Member',
+            'email' => 'member@example.test',
+            'password' => 'secret-password',
+            'role' => TenantUserRole::Member,
+            'locale' => Locale::Polish,
+            'theme' => ThemePreference::Dark,
+        ]);
+
+        $this->actingAs($user, 'web');
+
+        $this
+            ->get('http://acme.aegoryx.test/panel')
+            ->assertOk()
+            ->assertSee('data-theme="dark"', false)
+            ->assertSee('data-theme-switcher', false)
+            ->assertSee('data-theme-endpoint="http://acme.aegoryx.test/panel/theme"', false);
+    }
+
     public function test_invalid_theme_preference_is_rejected(): void
     {
         $identity = Identity::query()->create([
