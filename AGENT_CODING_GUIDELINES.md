@@ -20,6 +20,39 @@ Agent pracujący nad projektem musi traktować te zasady jako obowiązujące. Ni
 
 ---
 
+## 1.1 Roadmapa i praca z YouTrack
+
+Roadmapa projektu nie jest już utrzymywana w plikach repozytorium. Katalog `docs/roadmap` został przeniesiony do YouTracka i nie wolno go odtwarzać ani dopisywać nowych plików roadmapy/backlogu w repo.
+
+Obowiązuje:
+
+- nowe zadania, decyzje roadmapowe i backlog zapisujemy w YouTracku,
+- ukończone prace oznaczamy w YouTracku statusem `Done`,
+- przed dodaniem nowego zadania sprawdzamy, czy podobne issue już istnieje,
+- dokumentację techniczną nadal trzymamy w repo, jeśli opisuje aktualny stan systemu, decyzję architektoniczną albo instrukcję operacyjną.
+
+Projekt ma lokalnie podpięte CLI `ytrack` z konfiguracją YouTracka:
+
+```txt
+YouTrack URL: https://youtrack.v-code.click
+Project ID: 0-4
+Project key: AEG
+```
+
+Przydatne komendy:
+
+```bash
+ytrack show
+ytrack project list issues
+ytrack project list issues --status "To do"
+ytrack issue create "Tytuł" "Opis"
+ytrack issue status AEG-123 Done
+```
+
+Lokalny katalog `.ytrack/` zawiera konfigurację narzędzia i nie powinien być commitowany, chyba że właściciel projektu wyraźnie poprosi inaczej.
+
+---
+
 ## 2. Główne zasady projektowe
 
 Kod ma być:
