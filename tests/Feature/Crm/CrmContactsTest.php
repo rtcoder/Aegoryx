@@ -163,6 +163,31 @@ final class CrmContactsTest extends TestCase
             ->assertDontSee('Grace Hopper');
     }
 
+    public function test_contacts_index_can_find_email_by_hash_lookup(): void
+    {
+        $this->actingAs($this->user, 'web');
+
+        CrmContact::query()->create([
+            'first_name' => 'Ada',
+            'last_name' => 'Lovelace',
+            'email' => 'ada@example.test',
+            'position' => 'Founder',
+        ]);
+
+        CrmContact::query()->create([
+            'first_name' => 'Grace',
+            'last_name' => 'Hopper',
+            'email' => 'grace@example.test',
+            'position' => 'Engineer',
+        ]);
+
+        $this
+            ->get('http://acme.aegoryx.test/panel/crm?search=%20ADA%40EXAMPLE.TEST%20')
+            ->assertOk()
+            ->assertSee('Ada Lovelace')
+            ->assertDontSee('Grace Hopper');
+    }
+
     public function test_contacts_index_can_be_sorted(): void
     {
         $this->actingAs($this->user, 'web');

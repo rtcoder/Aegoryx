@@ -34,7 +34,9 @@ final class ContactController extends Controller
                     $query
                         ->where('first_name', 'like', "%{$search}%")
                         ->orWhere('last_name', 'like', "%{$search}%")
-                        ->orWhere('position', 'like', "%{$search}%");
+                        ->orWhere('position', 'like', "%{$search}%")
+                        ->orWhere('email_hash', CrmContact::hashLookup($search))
+                        ->orWhere('phone_hash', CrmContact::hashLookup($search));
                 }))
                 ->when($sort === 'name', fn ($query) => $query->orderBy('last_name', $direction)->orderBy('first_name', $direction))
                 ->when($sort === 'position', fn ($query) => $query->orderBy('position', $direction))
