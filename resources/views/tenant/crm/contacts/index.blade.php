@@ -21,12 +21,12 @@
             </form>
         </x-ui.card>
 
-        <section class="rounded border border-neutral-800 bg-neutral-900">
-            <div class="border-b border-neutral-800 px-5 py-4">
+        <section class="ui-card">
+            <div class="ui-card-header">
                 <div class="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
                     <div>
-                        <h2 class="text-lg font-semibold">{{ __('crm.contact_list') }}</h2>
-                        <p class="mt-1 text-sm text-neutral-400">{{ __('crm.contact_sensitive_note') }}</p>
+                        <h2 class="ui-heading-2">{{ __('crm.contact_list') }}</h2>
+                        <p class="ui-body mt-1">{{ __('crm.contact_sensitive_note') }}</p>
                     </div>
                     <form method="GET" action="{{ route('tenant.crm.index') }}" class="flex flex-col gap-2 sm:flex-row">
                         <input name="search" value="{{ $search }}" class="ui-input min-w-64" placeholder="{{ __('common.search_placeholder') }}">
@@ -39,8 +39,8 @@
             </div>
 
             <div class="overflow-x-auto">
-                <table class="min-w-full divide-y divide-neutral-800 text-left text-sm">
-                    <thead class="bg-neutral-950 text-xs uppercase tracking-wide text-neutral-500">
+                <table class="ui-table">
+                    <thead>
                         <tr>
                             <th class="px-5 py-3 font-medium"><x-table.sort-link sort="name" :current-sort="$sort" :current-direction="$direction">{{ __('common.name') }}</x-table.sort-link></th>
                             <th class="px-5 py-3 font-medium">{{ __('common.email') }}</th>
@@ -49,14 +49,14 @@
                             <th class="px-5 py-3 font-medium"></th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-neutral-800">
+                    <tbody>
                         @forelse ($contacts as $contact)
                             <tr>
-                                <td class="px-5 py-4 font-medium text-neutral-100">{{ trim($contact->first_name.' '.$contact->last_name) }}</td>
-                                <td class="px-5 py-4 text-neutral-400">{{ $contact->email ?? __('common.not_set') }}</td>
-                                <td class="px-5 py-4 text-neutral-400">{{ $contact->phone ?? __('common.not_set') }}</td>
-                                <td class="px-5 py-4 text-neutral-400">{{ $contact->position ?? __('common.not_set') }}</td>
-                                <td class="px-5 py-4 text-right">
+                                <td class="font-medium text-[var(--ui-text)]">{{ trim($contact->first_name.' '.$contact->last_name) }}</td>
+                                <td class="text-[var(--ui-text-muted)]">{{ $contact->email ?? __('common.not_set') }}</td>
+                                <td class="text-[var(--ui-text-muted)]">{{ $contact->phone ?? __('common.not_set') }}</td>
+                                <td class="text-[var(--ui-text-muted)]">{{ $contact->position ?? __('common.not_set') }}</td>
+                                <td class="text-right">
                                     <div class="inline-flex items-center gap-3">
                                         <a href="{{ route('tenant.crm.contacts.edit', $contact) }}" wire:navigate class="ui-link">
                                             {{ __('common.manage') }}
@@ -73,7 +73,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="5" class="px-5 py-10 text-center text-neutral-400">
+                                <td colspan="5" class="py-10 text-center text-[var(--ui-text-muted)]">
                                     @if ($search === '')
                                         <x-ui.empty-state :title="__('crm.no_contacts')" :action-label="__('crm.create_contact')" action-href="#create-contact" />
                                     @else
@@ -86,7 +86,7 @@
                 </table>
             </div>
 
-            <div class="border-t border-neutral-800 px-5 py-4">
+            <div class="ui-divider border-t px-5 py-4">
                 {{ $contacts->links() }}
             </div>
         </section>

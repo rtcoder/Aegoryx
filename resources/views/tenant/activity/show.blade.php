@@ -57,7 +57,7 @@
                 <h2 class="ui-heading-2">{{ __('audit_view.metadata') }}</h2>
             </div>
             <div class="ui-card-body">
-                <pre class="overflow-x-auto rounded border border-[var(--ui-border)] bg-[var(--ui-surface-muted)] p-4 text-xs text-[var(--ui-text)]">{{ $metadata }}</pre>
+                <pre class="ui-code-block text-xs">{{ $metadata }}</pre>
             </div>
         </aside>
     </section>
@@ -68,7 +68,7 @@
                 <h2 class="ui-heading-2">{{ __('audit_view.before') }}</h2>
             </div>
             <div class="ui-card-body">
-                <pre class="overflow-x-auto rounded border border-[var(--ui-border)] bg-[var(--ui-surface-muted)] p-4 text-xs text-[var(--ui-text)]">{{ $before }}</pre>
+                <pre class="ui-code-block text-xs">{{ $before }}</pre>
             </div>
         </div>
 
@@ -77,7 +77,7 @@
                 <h2 class="ui-heading-2">{{ __('audit_view.after') }}</h2>
             </div>
             <div class="ui-card-body">
-                <pre class="overflow-x-auto rounded border border-[var(--ui-border)] bg-[var(--ui-surface-muted)] p-4 text-xs text-[var(--ui-text)]">{{ $after }}</pre>
+                <pre class="ui-code-block text-xs">{{ $after }}</pre>
             </div>
         </div>
     </section>

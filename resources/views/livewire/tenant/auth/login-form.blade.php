@@ -7,9 +7,9 @@
         </div>
 
         @if (session('success'))
-            <div class="mt-6 rounded border border-emerald-700 bg-emerald-950 px-4 py-3 text-sm text-emerald-100">
+            <x-ui.alert variant="success" class="mt-6">
                 {{ session('success') }}
-            </div>
+            </x-ui.alert>
         @endif
 
         <form wire:submit="login" class="mt-6 space-y-4">
@@ -26,7 +26,7 @@
         </form>
 
         <p class="mt-5 text-center text-sm">
-            <a href="{{ route('tenant.password.request') }}" class="text-sky-300 hover:text-sky-200">{{ __('common.forgot_password') }}</a>
+            <a href="{{ route('tenant.password.request') }}" class="ui-link">{{ __('common.forgot_password') }}</a>
         </p>
     </x-ui.card>
 </main>

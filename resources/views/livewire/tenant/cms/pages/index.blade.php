@@ -5,9 +5,9 @@
         </div>
         <div class="ui-card-body space-y-4">
             @if (session('success'))
-                <div class="rounded border border-emerald-700 bg-emerald-950 px-4 py-3 text-sm text-emerald-100">
+                <x-ui.alert variant="success">
                     {{ session('success') }}
-                </div>
+                </x-ui.alert>
             @endif
 
             <div>
@@ -47,15 +47,15 @@
                     </div>
                     <x-ui.button type="button" wire:click="closePreview" variant="ghost" size="sm">{{ __('cms.close_preview') }}</x-ui.button>
                 </div>
-                <article class="ui-card-body prose prose-invert max-w-none">
+                <article class="ui-card-body ui-prose max-w-none">
                     <h1>{{ $previewTitle }}</h1>
-                    <div class="whitespace-pre-line text-neutral-300">{{ $previewBody }}</div>
+                    <div class="whitespace-pre-line text-[var(--ui-text-muted)]">{{ $previewBody }}</div>
                 </article>
             </section>
         @endif
 
-        <div class="overflow-hidden rounded border border-neutral-800">
-            <div class="border-b border-neutral-800 bg-neutral-900 px-4 py-4">
+        <div class="ui-card overflow-hidden">
+            <div class="ui-card-header">
                 <div class="flex flex-col gap-2 sm:flex-row">
                     <input wire:model.live.debounce.400ms="search" class="ui-input min-w-64" placeholder="{{ __('common.search_placeholder') }}">
                     @if (trim($search) !== '')
@@ -64,23 +64,23 @@
                 </div>
             </div>
 
-            <table class="min-w-full divide-y divide-neutral-800 text-sm">
-                <thead class="bg-neutral-900 text-left text-xs uppercase tracking-wide text-neutral-500">
+            <table class="ui-table">
+                <thead>
                     <tr>
                         <th class="px-4 py-3">
-                            <button type="button" wire:click="sortBy('title')" class="inline-flex items-center gap-2 hover:text-neutral-100">
+                            <button type="button" wire:click="sortBy('title')" class="inline-flex items-center gap-2 hover:text-[var(--ui-text)]">
                                 {{ __('cms.fields.title') }}
                                 @if ($sort === 'title')<span class="font-mono text-[10px] uppercase">{{ $direction }}</span>@endif
                             </button>
                         </th>
                         <th class="px-4 py-3">
-                            <button type="button" wire:click="sortBy('slug')" class="inline-flex items-center gap-2 hover:text-neutral-100">
+                            <button type="button" wire:click="sortBy('slug')" class="inline-flex items-center gap-2 hover:text-[var(--ui-text)]">
                                 {{ __('cms.fields.slug') }}
                                 @if ($sort === 'slug')<span class="font-mono text-[10px] uppercase">{{ $direction }}</span>@endif
                             </button>
                         </th>
                         <th class="px-4 py-3">
-                            <button type="button" wire:click="sortBy('status')" class="inline-flex items-center gap-2 hover:text-neutral-100">
+                            <button type="button" wire:click="sortBy('status')" class="inline-flex items-center gap-2 hover:text-[var(--ui-text)]">
                                 {{ __('cms.fields.status') }}
                                 @if ($sort === 'status')<span class="font-mono text-[10px] uppercase">{{ $direction }}</span>@endif
                             </button>
@@ -88,13 +88,13 @@
                         <th class="px-4 py-3 text-right">{{ __('cms.actions') }}</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-neutral-800 bg-neutral-950">
+                <tbody>
                     @forelse ($pages as $page)
                         <tr>
-                            <td class="px-4 py-3 font-medium text-neutral-100">{{ $page->title }}</td>
-                            <td class="px-4 py-3 font-mono text-xs text-neutral-500">{{ $page->slug }}</td>
-                            <td class="px-4 py-3"><x-ui.badge>{{ $page->status->value }}</x-ui.badge></td>
-                            <td class="px-4 py-3">
+                            <td class="font-medium text-[var(--ui-text)]">{{ $page->title }}</td>
+                            <td class="ui-caption font-mono">{{ $page->slug }}</td>
+                            <td><x-ui.badge>{{ $page->status->value }}</x-ui.badge></td>
+                            <td>
                                 <div class="flex justify-end gap-2">
                                     <x-ui.button type="button" wire:click="edit({{ $page->id }})" size="sm" variant="secondary">{{ __('cms.edit') }}</x-ui.button>
                                     <x-ui.button type="button" wire:click="preview({{ $page->id }})" size="sm" variant="secondary">{{ __('cms.preview') }}</x-ui.button>
@@ -108,7 +108,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="4" class="px-4 py-8 text-center text-neutral-500">
+                            <td colspan="4" class="py-8 text-center text-[var(--ui-text-muted)]">
                                 @if (trim($search) === '')
                                     <x-ui.empty-state :title="__('cms.empty')" :action-label="__('cms.new_page')" action-href="#cms-page-form" />
                                 @else

@@ -7,20 +7,20 @@
 @section('content')
     <section class="space-y-5">
         @if (session('success'))
-            <div class="rounded border border-emerald-700 bg-emerald-950 px-4 py-3 text-sm text-emerald-100">
+            <x-ui.alert variant="success">
                 {{ session('success') }}
-            </div>
+            </x-ui.alert>
         @endif
 
         <x-ui.card :title="__('tenant_settings.general_title')" :subtitle="__('tenant_settings.general_description')">
             <dl class="grid gap-4 text-sm md:grid-cols-2">
                 <div>
                     <dt class="ui-label">{{ __('tenant_settings.name') }}</dt>
-                    <dd class="mt-1 text-neutral-100">{{ $tenant->name }}</dd>
+                    <dd class="mt-1 text-[var(--ui-text)]">{{ $tenant->name }}</dd>
                 </div>
                 <div>
                     <dt class="ui-label">{{ __('tenant_settings.slug') }}</dt>
-                    <dd class="mt-1 font-mono text-neutral-100">{{ $tenant->slug }}</dd>
+                    <dd class="mt-1 font-mono text-[var(--ui-text)]">{{ $tenant->slug }}</dd>
                 </div>
                 <div>
                     <dt class="ui-label">{{ __('tenant_settings.status') }}</dt>
@@ -62,7 +62,7 @@
                 @if ($canManageSettings)
                     <x-ui.button type="submit">{{ __('tenant_settings.save') }}</x-ui.button>
                 @else
-                    <p class="text-sm text-neutral-500">{{ __('tenant_settings.read_only') }}</p>
+                    <p class="ui-caption">{{ __('tenant_settings.read_only') }}</p>
                 @endif
             </form>
         </x-ui.card>
@@ -75,11 +75,11 @@
                 </div>
                 <div>
                     <dt class="ui-label">{{ __('tenant_settings.plan') }}</dt>
-                    <dd class="mt-1 text-neutral-100">{{ $latestSubscription?->plan?->name ?? __('common.not_set') }}</dd>
+                    <dd class="mt-1 text-[var(--ui-text)]">{{ $latestSubscription?->plan?->name ?? __('common.not_set') }}</dd>
                 </div>
                 <div>
                     <dt class="ui-label">{{ __('tenant_settings.current_period_ends_at') }}</dt>
-                    <dd class="mt-1 text-neutral-100">{{ $latestSubscription?->current_period_ends_at?->format('Y-m-d') ?? __('common.not_set') }}</dd>
+                    <dd class="mt-1 text-[var(--ui-text)]">{{ $latestSubscription?->current_period_ends_at?->format('Y-m-d') ?? __('common.not_set') }}</dd>
                 </div>
                 <div>
                     <dt class="ui-label">{{ __('tenant_settings.license_status') }}</dt>
@@ -87,11 +87,11 @@
                 </div>
                 <div>
                     <dt class="ui-label">{{ __('tenant_settings.license_expires_at') }}</dt>
-                    <dd class="mt-1 text-neutral-100">{{ $latestLicense?->expires_at?->format('Y-m-d') ?? __('common.not_set') }}</dd>
+                    <dd class="mt-1 text-[var(--ui-text)]">{{ $latestLicense?->expires_at?->format('Y-m-d') ?? __('common.not_set') }}</dd>
                 </div>
                 <div>
                     <dt class="ui-label">{{ __('tenant_settings.license_last_verified_at') }}</dt>
-                    <dd class="mt-1 text-neutral-100">{{ $latestLicense?->last_verified_at?->format('Y-m-d H:i') ?? __('common.not_set') }}</dd>
+                    <dd class="mt-1 text-[var(--ui-text)]">{{ $latestLicense?->last_verified_at?->format('Y-m-d H:i') ?? __('common.not_set') }}</dd>
                 </div>
             </dl>
         </x-ui.card>
@@ -147,7 +147,7 @@
                         <x-ui.button type="submit">{{ __('tenant_settings.request_domain_submit') }}</x-ui.button>
                     </form>
                 @else
-                    <p class="text-sm text-neutral-500">{{ __('tenant_settings.domains_read_only') }}</p>
+                    <p class="ui-caption">{{ __('tenant_settings.domains_read_only') }}</p>
                 @endif
             </div>
         </x-ui.card>

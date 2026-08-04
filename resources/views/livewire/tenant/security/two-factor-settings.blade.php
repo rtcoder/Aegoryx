@@ -1,8 +1,8 @@
 <div class="space-y-5">
     @if (session('success'))
-        <div class="rounded border border-emerald-700 bg-emerald-950 px-4 py-3 text-sm text-emerald-100">
+        <x-ui.alert variant="success">
             {{ session('success') }}
-        </div>
+        </x-ui.alert>
     @endif
 
     <section class="ui-card">
