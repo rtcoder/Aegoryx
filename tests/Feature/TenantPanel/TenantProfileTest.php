@@ -13,6 +13,7 @@ use App\Modules\Tenancy\Enums\TenantDomainType;
 use App\Modules\Tenancy\Enums\TenantLicenseType;
 use App\Modules\Tenancy\Enums\TenantStatus;
 use App\Support\Localization\Locale;
+use App\Support\Theme\ThemePreference;
 use Illuminate\Support\Facades\Artisan;
 use Tests\TestCase;
 
@@ -43,6 +44,7 @@ final class TenantProfileTest extends TestCase
             'password' => 'secret-password',
             'role' => TenantUserRole::Member,
             'locale' => Locale::Polish,
+            'theme' => ThemePreference::Dark,
         ]);
         $this->actingAs($user, 'web');
 
@@ -63,6 +65,7 @@ final class TenantProfileTest extends TestCase
 
         $this->assertSame('Updated Member', $user->name);
         $this->assertSame(Locale::French, $user->locale);
+        $this->assertSame(ThemePreference::Dark, $user->theme);
         $this->assertSame($user->id, $user->updated_by);
     }
 
