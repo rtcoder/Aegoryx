@@ -110,8 +110,8 @@ final class PreflightCommand extends Command
             'aegoryx:smoke',
             'aegoryx:launch-check',
             'aegoryx:ops-report',
-            'aegoryx:retention:purge'
-        ], fn($command) => in_array($command, $commands, true));
+            'aegoryx:retention:purge',
+        ], fn ($command) => in_array($command, $commands, true));
 
     }
 

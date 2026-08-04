@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Middleware\UseAuthenticatedLocale;
 use App\Http\Controllers\ThemePreferenceController;
+use App\Http\Middleware\UseAuthenticatedLocale;
 use App\Modules\AdminConsole\Http\Controllers\AuditLogController;
 use App\Modules\AdminConsole\Http\Controllers\Auth\LoginController;
 use App\Modules\AdminConsole\Http\Controllers\BillingEventController;

@@ -134,6 +134,7 @@ final class ModuleBootstrapTest extends TestCase
 
                 if (stripos($relativePath, $deprecatedTerm) !== false) {
                     $matches[] = $relativePath;
+
                     continue;
                 }
 

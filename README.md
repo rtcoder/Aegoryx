@@ -155,6 +155,31 @@ Run preflight checks without touching the database:
 php artisan aegoryx:preflight --skip-db
 ```
 
+## Quality Gates
+
+Detailed coding rules live in `AGENT_CODING_GUIDELINES.md`. The short version for every change is:
+
+- keep controllers thin and move business changes into Actions or Services,
+- use DTOs for complex validated input, not for trivial one-field calls,
+- use Query Objects for complex listing, filtering, and sorting,
+- enforce authorization in policies, gates, or middleware, not only in UI,
+- keep module boundaries clear and use Entitlements for feature access decisions,
+- add or update tests for business behavior, tenant isolation, authorization, audit/activity history, and public API exposure,
+- avoid abstractions that do not remove real duplication or clarify a boundary.
+
+Minimum checks before a PR or direct push:
+
+```bash
+vendor/bin/pint --test
+composer test
+```
+
+For frontend or design-system changes, also run:
+
+```bash
+npm run build
+```
+
 ## Common Local Issues
 
 - `could not find driver`: install or enable the PHP PostgreSQL extension used by your PHP CLI.
