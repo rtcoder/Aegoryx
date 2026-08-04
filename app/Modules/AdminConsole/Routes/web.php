@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\UseAuthenticatedLocale;
+use App\Http\Controllers\ThemePreferenceController;
 use App\Modules\AdminConsole\Http\Controllers\AuditLogController;
 use App\Modules\AdminConsole\Http\Controllers\Auth\LoginController;
 use App\Modules\AdminConsole\Http\Controllers\BillingEventController;
@@ -37,6 +38,7 @@ Route::domain(config('aegoryx.admin.domain'))
             Route::post('/billing/events/{event}/retry', [BillingEventController::class, 'retry'])->name('billing.events.retry');
             Route::get('/support', [SectionController::class, 'support'])->name('support.index');
             Route::get('/audit', [AuditLogController::class, 'index'])->name('audit.index');
+            Route::patch('/theme', [ThemePreferenceController::class, 'admin'])->name('theme.update');
             Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
         });
     });
