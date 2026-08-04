@@ -5,8 +5,8 @@
 @section('subheading', $description)
 
 @section('content')
-    <section class="rounded border border-neutral-800 bg-neutral-900 p-5">
-        <h2 class="text-lg font-semibold">{{ $title }}</h2>
-        <p class="mt-2 text-sm leading-6 text-neutral-400">{{ $description }}</p>
+    <section class="ui-card p-5">
+        <h2 class="ui-heading-2">{{ $title }}</h2>
+        <p class="ui-body mt-2">{{ $description }}</p>
     </section>
 @endsection

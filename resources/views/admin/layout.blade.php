@@ -32,7 +32,7 @@
 </head>
 <body class="ds-app antialiased">
     <div class="ds-shell flex">
-        <aside class="hidden w-64 shrink-0 border-r border-[var(--ui-border)] px-5 py-6 md:block">
+        <aside class="ui-sidebar ui-shell-border hidden w-64 shrink-0 border-r px-5 py-6 md:block">
             <div>
                 <p class="text-lg font-semibold">Aegoryx</p>
                 <p class="ui-caption mt-1 uppercase tracking-wide">{{ __('admin.console') }}</p>
@@ -43,7 +43,7 @@
                     <a
                         href="{{ route($item['route']) }}"
                         wire:navigate
-                        class="block rounded px-3 py-2 text-sm {{ request()->routeIs($item['route']) || request()->routeIs($item['route'].'.*') ? 'bg-[var(--ui-accent)] text-white' : 'text-[var(--ui-text-muted)] hover:bg-[var(--ui-surface-muted)] hover:text-[var(--ui-text)]' }}"
+                        class="ui-nav-link block rounded px-3 py-2 text-sm {{ request()->routeIs($item['route']) || request()->routeIs($item['route'].'.*') ? 'ui-nav-link-active' : '' }}"
                     >
                         {{ $item['label'] }}
                     </a>
@@ -52,7 +52,7 @@
         </aside>
 
         <div class="flex min-w-0 flex-1 flex-col">
-            <header class="border-b border-[var(--ui-border)] px-5 py-4 md:px-8">
+            <header class="ui-header ui-shell-border border-b px-5 py-4 md:px-8">
                 <div class="flex flex-wrap items-center justify-between gap-4">
                     <div>
                         <h1 class="ui-heading-1">@yield('heading', __('admin.admin_console'))</h1>
@@ -75,7 +75,7 @@
                         <a
                             href="{{ route($item['route']) }}"
                             wire:navigate
-                            class="shrink-0 rounded px-3 py-2 text-sm {{ request()->routeIs($item['route']) || request()->routeIs($item['route'].'.*') ? 'bg-[var(--ui-accent)] text-white' : 'bg-[var(--ui-surface-muted)] text-[var(--ui-text-muted)]' }}"
+                            class="shrink-0 rounded px-3 py-2 text-sm {{ request()->routeIs($item['route']) || request()->routeIs($item['route'].'.*') ? 'ui-nav-pill-active' : 'ui-nav-pill' }}"
                         >
                             {{ $item['label'] }}
                         </a>
@@ -85,18 +85,18 @@
 
             <main class="flex-1 px-5 py-6 md:px-8">
                 @if ($supportSession && $supportSession->expires_at->isFuture())
-                    <div class="mb-5 rounded border border-[var(--ui-warning)] bg-[var(--ui-warning-soft)] px-4 py-3 text-sm text-[var(--ui-warning)]">
+                    <x-ui.alert variant="warning" class="mb-5">
                         {{ __('admin.support_mode_banner', ['tenant' => $supportSession->tenant?->name, 'expires' => $supportSession->expires_at->format('Y-m-d H:i')]) }}
                         <a href="{{ route('admin.support.index') }}" wire:navigate class="ui-link ml-2 underline">
                             {{ __('common.manage') }}
                         </a>
-                    </div>
+                    </x-ui.alert>
                 @endif
 
                 @if (session('success'))
-                    <div class="mb-5 rounded border border-[var(--ui-success)] bg-[var(--ui-success-soft)] px-4 py-3 text-sm text-[var(--ui-success)]">
+                    <x-ui.alert variant="success" class="mb-5">
                         {{ session('success') }}
-                    </div>
+                    </x-ui.alert>
                 @endif
 
                 @yield('content')

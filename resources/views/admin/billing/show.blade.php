@@ -25,15 +25,15 @@
     </div>
 
     @if (session('success'))
-        <div class="mb-6 rounded border border-emerald-700 bg-emerald-950 px-4 py-3 text-sm text-emerald-100">
+        <x-ui.alert variant="success" class="mb-6">
             {{ session('success') }}
-        </div>
+        </x-ui.alert>
     @endif
 
     @if (session('error'))
-        <div class="mb-6 rounded border border-red-700 bg-red-950 px-4 py-3 text-sm text-red-100">
+        <x-ui.alert variant="danger" class="mb-6">
             {{ session('error') }}
-        </div>
+        </x-ui.alert>
     @endif
 
     <section class="grid gap-6 xl:grid-cols-[minmax(0,1fr)_minmax(320px,420px)]">

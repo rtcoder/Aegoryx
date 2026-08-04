@@ -1,71 +1,71 @@
 <div>
     @if (session('success'))
-        <div class="mb-5 rounded border border-emerald-800 bg-emerald-950 px-4 py-3 text-sm text-emerald-200">
+        <x-ui.alert variant="success" class="mb-5">
             {{ session('success') }}
-        </div>
+        </x-ui.alert>
     @endif
 
     <div class="grid gap-5 lg:grid-cols-[1fr_320px]">
-        <section class="rounded border border-neutral-800 bg-neutral-900 p-5">
-            <h2 class="text-lg font-semibold">{{ __('tenants.information') }}</h2>
+        <section class="ui-card p-5">
+            <h2 class="ui-heading-2">{{ __('tenants.information') }}</h2>
 
             <dl class="mt-5 grid gap-4 sm:grid-cols-2">
                 <div>
-                    <dt class="text-xs uppercase tracking-wide text-neutral-500">{{ __('common.slug') }}</dt>
-                    <dd class="mt-1 text-neutral-100">{{ $tenant->slug }}</dd>
+                    <dt class="ui-caption uppercase tracking-wide">{{ __('common.slug') }}</dt>
+                    <dd class="mt-1 text-[var(--ui-text)]">{{ $tenant->slug }}</dd>
                 </div>
                 <div>
-                    <dt class="text-xs uppercase tracking-wide text-neutral-500">{{ __('common.schema') }}</dt>
-                    <dd class="mt-1 font-mono text-sm text-neutral-100">{{ $tenant->schema_name }}</dd>
+                    <dt class="ui-caption uppercase tracking-wide">{{ __('common.schema') }}</dt>
+                    <dd class="mt-1 font-mono text-sm text-[var(--ui-text)]">{{ $tenant->schema_name }}</dd>
                 </div>
                 <div>
-                    <dt class="text-xs uppercase tracking-wide text-neutral-500">{{ __('common.status') }}</dt>
-                    <dd class="mt-1 text-neutral-100">{{ $tenant->status->value }}</dd>
+                    <dt class="ui-caption uppercase tracking-wide">{{ __('common.status') }}</dt>
+                    <dd class="mt-1 text-[var(--ui-text)]">{{ $tenant->status->value }}</dd>
                 </div>
                 <div>
-                    <dt class="text-xs uppercase tracking-wide text-neutral-500">{{ __('common.deployment') }}</dt>
-                    <dd class="mt-1 text-neutral-100">{{ $tenant->deployment_type->value }}</dd>
+                    <dt class="ui-caption uppercase tracking-wide">{{ __('common.deployment') }}</dt>
+                    <dd class="mt-1 text-[var(--ui-text)]">{{ $tenant->deployment_type->value }}</dd>
                 </div>
                 <div>
-                    <dt class="text-xs uppercase tracking-wide text-neutral-500">{{ __('common.billing_model') }}</dt>
-                    <dd class="mt-1 text-neutral-100">{{ $tenant->billing_model->value }}</dd>
+                    <dt class="ui-caption uppercase tracking-wide">{{ __('common.billing_model') }}</dt>
+                    <dd class="mt-1 text-[var(--ui-text)]">{{ $tenant->billing_model->value }}</dd>
                 </div>
                 <div>
-                    <dt class="text-xs uppercase tracking-wide text-neutral-500">{{ __('common.license_type') }}</dt>
-                    <dd class="mt-1 text-neutral-100">{{ $tenant->license_type->value }}</dd>
+                    <dt class="ui-caption uppercase tracking-wide">{{ __('common.license_type') }}</dt>
+                    <dd class="mt-1 text-[var(--ui-text)]">{{ $tenant->license_type->value }}</dd>
                 </div>
             </dl>
         </section>
 
-        <section class="rounded border border-neutral-800 bg-neutral-900 p-5">
-            <h2 class="text-lg font-semibold">{{ __('features.tenant_access') }}</h2>
-            <p class="mt-2 text-sm leading-6 text-neutral-400">{{ __('features.tenant_access_description') }}</p>
+        <section class="ui-card p-5">
+            <h2 class="ui-heading-2">{{ __('features.tenant_access') }}</h2>
+            <p class="ui-body mt-2">{{ __('features.tenant_access_description') }}</p>
 
             <form wire:submit="saveFeatures" class="mt-5 space-y-4">
                 <div class="grid gap-3 md:grid-cols-3">
                     @foreach ($systemFeatures as $feature)
                         @php($entitlement = $effectiveEntitlements[$feature->value] ?? null)
-                        <div class="rounded border border-neutral-800 bg-neutral-950 p-4">
+                        <div class="ui-muted-panel p-4">
                             <span class="flex items-start gap-3">
                                 <input
                                     id="feature-{{ $feature->value }}"
                                     type="checkbox"
                                     wire:model="features.{{ $feature->value }}"
-                                    class="mt-1 rounded border-neutral-700 bg-neutral-950 text-sky-500 focus:ring-sky-400"
+                                    class="mt-1 rounded border-[var(--ui-border)] bg-[var(--ui-surface)] text-[var(--ui-accent)] focus:ring-[var(--ui-focus)]"
                                 >
                                 <span>
-                                    <label for="feature-{{ $feature->value }}" class="block text-sm font-medium text-neutral-100">{{ $feature->label() }}</label>
-                                    <span class="mt-1 block text-xs leading-5 text-neutral-500">{{ $feature->description() }}</span>
-                                    <span class="mt-2 block font-mono text-xs text-neutral-500">{{ $feature->value }}</span>
-                                    <span class="mt-3 grid gap-1 text-xs text-neutral-400">
+                                    <label for="feature-{{ $feature->value }}" class="block text-sm font-medium text-[var(--ui-text)]">{{ $feature->label() }}</label>
+                                    <span class="ui-caption mt-1 block leading-5">{{ $feature->description() }}</span>
+                                    <span class="ui-caption mt-2 block font-mono">{{ $feature->value }}</span>
+                                    <span class="mt-3 grid gap-1 text-xs text-[var(--ui-text-muted)]">
                                         <span>
                                             {{ __('features.effective_source') }}:
-                                            <span class="text-neutral-200">{{ __('features.source_labels.'.($entitlement['source'] ?? 'none')) }}</span>
+                                            <span class="text-[var(--ui-text)]">{{ __('features.source_labels.'.($entitlement['source'] ?? 'none')) }}</span>
                                         </span>
                                         @if ($entitlement['reason'] ?? null)
                                             <span>
                                                 {{ __('features.effective_reason') }}:
-                                                <span class="font-mono text-neutral-300">{{ $entitlement['reason'] }}</span>
+                                                <span class="font-mono text-[var(--ui-text-muted)]">{{ $entitlement['reason'] }}</span>
                                             </span>
                                         @endif
                                     </span>
@@ -74,7 +74,7 @@
                                             type="button"
                                             wire:click="clearFeatureOverride('{{ $feature->value }}')"
                                             wire:loading.attr="disabled"
-                                            class="mt-3 text-xs font-medium text-sky-300 hover:text-sky-200 disabled:cursor-not-allowed disabled:opacity-70"
+                                            class="ui-link mt-3 text-xs disabled:cursor-not-allowed disabled:opacity-70"
                                         >
                                             {{ __('features.clear_override') }}
                                         </button>
@@ -86,54 +86,54 @@
                 </div>
 
                 <div>
-                    <label for="featureReason" class="block text-sm font-medium text-neutral-300">{{ __('common.reason') }}</label>
+                    <label for="featureReason" class="ui-label">{{ __('common.reason') }}</label>
                     <textarea
                         id="featureReason"
                         wire:model="featureReason"
                         rows="3"
-                        class="mt-2 block w-full rounded border border-neutral-700 bg-neutral-950 px-3 py-2 text-neutral-100 outline-none focus:border-sky-400"
+                        class="ui-textarea"
                     ></textarea>
                     @error('featureReason')
-                        <p class="mt-2 text-sm text-red-400">{{ $message }}</p>
+                        <p class="ui-error">{{ $message }}</p>
                     @enderror
                 </div>
 
-                <button type="submit" wire:loading.attr="disabled" class="rounded bg-sky-500 px-4 py-2 font-medium text-white hover:bg-sky-400 disabled:cursor-not-allowed disabled:opacity-70">
+                <x-ui.button type="submit" wire:loading.attr="disabled" class="disabled:cursor-not-allowed disabled:opacity-70">
                     {{ __('features.save_access') }}
-                </button>
+                </x-ui.button>
             </form>
         </section>
 
         <aside class="space-y-5">
-            <section class="rounded border border-neutral-800 bg-neutral-900 p-5">
-                <h2 class="text-lg font-semibold">{{ __('common.status') }}</h2>
+            <section class="ui-card p-5">
+                <h2 class="ui-heading-2">{{ __('common.status') }}</h2>
 
                 <form wire:submit="updateStatus" class="mt-4 space-y-4">
                     <div>
-                        <label for="status" class="block text-sm font-medium text-neutral-300">{{ __('tenants.tenant_status') }}</label>
+                        <label for="status" class="ui-label">{{ __('tenants.tenant_status') }}</label>
                         <select
                             id="status"
                             wire:model="status"
-                            class="mt-2 block w-full rounded border border-neutral-700 bg-neutral-950 px-3 py-2 text-neutral-100 outline-none focus:border-sky-400"
+                            class="ui-select"
                         >
                             <option value="active">{{ __('common.active') }}</option>
                             <option value="suspended">{{ __('common.suspended') }}</option>
                         </select>
                         @error('status')
-                            <p class="mt-2 text-sm text-red-400">{{ $message }}</p>
+                            <p class="ui-error">{{ $message }}</p>
                         @enderror
                     </div>
 
-                    <button type="submit" wire:loading.attr="disabled" class="w-full rounded bg-sky-500 px-4 py-2 font-medium text-white hover:bg-sky-400 disabled:cursor-not-allowed disabled:opacity-70">
+                    <x-ui.button type="submit" wire:loading.attr="disabled" class="w-full disabled:cursor-not-allowed disabled:opacity-70">
                         {{ __('tenants.update_status') }}
-                    </button>
+                    </x-ui.button>
                 </form>
             </section>
 
-            <section class="rounded border border-neutral-800 bg-neutral-900 p-5">
-                <h2 class="text-lg font-semibold">{{ __('common.support') }}</h2>
-                <p class="mt-2 text-sm leading-6 text-neutral-400">{{ __('tenants.support_description') }}</p>
-                <a href="{{ route('admin.support.index') }}" wire:navigate class="mt-4 inline-flex text-sm text-sky-300 hover:text-sky-200">
+            <section class="ui-card p-5">
+                <h2 class="ui-heading-2">{{ __('common.support') }}</h2>
+                <p class="ui-body mt-2">{{ __('tenants.support_description') }}</p>
+                <a href="{{ route('admin.support.index') }}" wire:navigate class="ui-link mt-4 inline-flex text-sm">
                     {{ __('tenants.open_support') }}
                 </a>
             </section>

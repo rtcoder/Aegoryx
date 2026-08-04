@@ -1,11 +1,11 @@
-<section class="overflow-hidden rounded border border-neutral-800 bg-neutral-900">
-    <div class="border-b border-neutral-800 px-5 py-4">
-        <p class="text-sm text-neutral-400">{{ __('licenses.index_note') }}</p>
+<section class="ui-card overflow-hidden">
+    <div class="ui-card-header">
+        <p class="ui-body">{{ __('licenses.index_note') }}</p>
     </div>
 
     <div class="overflow-x-auto">
-        <table class="min-w-full divide-y divide-neutral-800 text-sm">
-            <thead class="bg-neutral-950 text-left text-neutral-400">
+        <table class="ui-table">
+            <thead>
                 <tr>
                     <th class="px-5 py-3 font-medium">{{ __('common.tenant') }}</th>
                     <th class="px-5 py-3 font-medium">{{ __('common.type') }}</th>
@@ -15,24 +15,24 @@
                     <th class="px-5 py-3 font-medium"></th>
                 </tr>
             </thead>
-            <tbody class="divide-y divide-neutral-800">
+            <tbody>
                 @forelse ($licenses as $license)
                     <tr wire:key="license-{{ $license->id }}">
-                        <td class="px-5 py-4">
-                            <div class="font-medium text-neutral-100">{{ $license->tenant?->name ?? __('common.unassigned') }}</div>
-                            <div class="mt-1 font-mono text-xs text-neutral-500">{{ $license->tenant?->slug }}</div>
+                        <td>
+                            <div class="font-medium text-[var(--ui-text)]">{{ $license->tenant?->name ?? __('common.unassigned') }}</div>
+                            <div class="ui-caption mt-1 font-mono">{{ $license->tenant?->slug }}</div>
                         </td>
-                        <td class="px-5 py-4 text-neutral-300">{{ $license->type }}</td>
-                        <td class="px-5 py-4 text-neutral-300">{{ $license->status->value }}</td>
-                        <td class="px-5 py-4 text-neutral-400">{{ $license->expires_at?->format('Y-m-d') ?? __('common.perpetual') }}</td>
-                        <td class="px-5 py-4 text-neutral-400">{{ $license->last_verified_at?->format('Y-m-d H:i') ?? __('common.never') }}</td>
-                        <td class="px-5 py-4 text-right">
-                            <a href="{{ route('admin.licenses.show', $license) }}" wire:navigate class="text-sky-300 hover:text-sky-200">{{ __('common.open') }}</a>
+                        <td class="text-[var(--ui-text-muted)]">{{ $license->type }}</td>
+                        <td class="text-[var(--ui-text-muted)]">{{ $license->status->value }}</td>
+                        <td class="text-[var(--ui-text-muted)]">{{ $license->expires_at?->format('Y-m-d') ?? __('common.perpetual') }}</td>
+                        <td class="text-[var(--ui-text-muted)]">{{ $license->last_verified_at?->format('Y-m-d H:i') ?? __('common.never') }}</td>
+                        <td class="text-right">
+                            <a href="{{ route('admin.licenses.show', $license) }}" wire:navigate class="ui-link">{{ __('common.open') }}</a>
                         </td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="6" class="px-5 py-10 text-center text-neutral-400">{{ __('licenses.empty') }}</td>
+                        <td colspan="6" class="py-10 text-center text-[var(--ui-text-muted)]">{{ __('licenses.empty') }}</td>
                     </tr>
                 @endforelse
             </tbody>
@@ -40,7 +40,7 @@
     </div>
 
     @if ($licenses->hasPages())
-        <div class="border-t border-neutral-800 px-5 py-4">
+        <div class="ui-divider border-t px-5 py-4">
             {{ $licenses->links() }}
         </div>
     @endif
