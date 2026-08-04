@@ -125,10 +125,11 @@ final class ThemePreferenceTest extends TestCase
 
         $this->actingAs($identity, 'admin');
 
-        $this
-            ->patchJson('http://admin.aegoryx.test/theme', ['theme' => 'system'])
+        $response = $this->patchJson('http://admin.aegoryx.test/theme', ['theme' => 'system']);
+
+        $response
             ->assertUnprocessable()
-            ->assertJsonValidationErrors('theme');
+            ->assertJsonValidationErrors(['theme']);
 
         $this->assertSame(ThemePreference::Light, $identity->refresh()->theme);
     }
