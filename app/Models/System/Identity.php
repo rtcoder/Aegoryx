@@ -4,6 +4,7 @@ namespace App\Models\System;
 
 use App\Modules\Identity\Enums\IdentityStatus;
 use App\Support\Localization\Locale;
+use App\Support\Theme\ThemePreference;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -19,6 +20,7 @@ use Illuminate\Support\Carbon;
  * @property string|null $password
  * @property IdentityStatus $status
  * @property Locale $locale
+ * @property ThemePreference $theme
  * @property bool $is_super_admin
  * @property string|null $remember_token
  * @property string|null $two_factor_secret
@@ -39,6 +41,7 @@ use Illuminate\Support\Carbon;
     'password',
     'status',
     'locale',
+    'theme',
     'is_super_admin',
     'last_login_at',
     'created_by',
@@ -62,6 +65,7 @@ final class Identity extends Authenticatable
             'locale' => Locale::class,
             'password' => 'hashed',
             'status' => IdentityStatus::class,
+            'theme' => ThemePreference::class,
             'two_factor_confirmed_at' => 'datetime',
             'two_factor_recovery_codes' => 'encrypted:array',
             'two_factor_secret' => 'encrypted',
