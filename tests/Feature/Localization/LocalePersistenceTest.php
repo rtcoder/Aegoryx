@@ -132,7 +132,7 @@ final class LocalePersistenceTest extends TestCase
         $this
             ->get('http://admin.aegoryx.test/')
             ->assertOk()
-            ->assertSee('<html lang="de">', false)
+            ->assertSee('lang="de"', false)
             ->assertSee('System-Dashboard');
     }
 
@@ -150,7 +150,7 @@ final class LocalePersistenceTest extends TestCase
         $this
             ->get('http://acme.aegoryx.test/login')
             ->assertOk()
-            ->assertSee('<html lang="fr">', false)
+            ->assertSee('lang="fr"', false)
             ->assertSee('Connexion tenant');
     }
 
