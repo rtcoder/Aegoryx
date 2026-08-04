@@ -17,7 +17,7 @@
         </form>
 
         <p class="mt-5 text-center text-sm">
-            <a href="{{ route('admin.login') }}" class="text-sky-300 hover:text-sky-200">{{ __('common.back_to_login') }}</a>
+            <a href="{{ route('admin.login') }}" class="ui-link">{{ __('common.back_to_login') }}</a>
         </p>
     </x-ui.card>
 </main>

@@ -3,15 +3,17 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ __('errors.403_title') }} | Aegoryx</title>
+    <x-theme.bootstrap />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="min-h-screen bg-neutral-950 text-neutral-100 antialiased">
+<body class="ds-app antialiased">
     <main class="mx-auto flex min-h-screen w-full max-w-2xl items-center px-6 py-12">
-        <section class="w-full rounded border border-neutral-800 bg-neutral-900 p-6">
-            <p class="text-xs uppercase tracking-wide text-neutral-500">403</p>
-            <h1 class="mt-3 text-2xl font-semibold">{{ __('errors.403_title') }}</h1>
-            <p class="mt-3 text-sm leading-6 text-neutral-400">
+        <section class="ui-card w-full p-6">
+            <p class="ui-caption uppercase tracking-wide">403</p>
+            <h1 class="ui-heading-1 mt-3">{{ __('errors.403_title') }}</h1>
+            <p class="ui-body mt-3">
                 {{ $exception->getMessage() ?: __('errors.403_default') }}
             </p>
         </section>

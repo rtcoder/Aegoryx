@@ -5,11 +5,11 @@
 @section('subheading', $description)
 
 @section('content')
-    <section class="rounded border border-neutral-800 bg-neutral-900 p-5">
-        <h2 class="text-lg font-semibold">{{ $title }}</h2>
-        <p class="mt-2 text-sm leading-6 text-neutral-400">{{ $description }}</p>
-        <div class="mt-6 rounded border border-neutral-800 bg-neutral-950 p-4">
-            <p class="text-sm text-neutral-300">{{ __('tenant_panel.module_placeholder') }}</p>
+    <section class="ui-card p-5">
+        <h2 class="ui-heading-2">{{ $title }}</h2>
+        <p class="ui-body mt-2">{{ $description }}</p>
+        <div class="ui-muted-panel mt-6 p-4">
+            <p class="ui-body">{{ __('tenant_panel.module_placeholder') }}</p>
         </div>
     </section>
 @endsection

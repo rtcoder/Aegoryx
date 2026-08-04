@@ -14,14 +14,14 @@ UI Aegoryx ma być robocze, czytelne i spokojne. To panel operacyjny dla CMS/CRM
 
 ## Motywy
 
-Motyw działa przez `data-theme` na elemencie `html`.
-
 ```html
 <html data-theme="light">
 <html data-theme="dark">
 ```
 
-`resources/js/app.js` ustawia motyw z `localStorage` pod kluczem `aegoryx.theme`, a jeśli nie ma zapisu, używa preferencji systemowej.
+Motyw działa przez `data-theme` na elemencie `html`. Po zalogowaniu źródłem prawdy jest preferencja użytkownika w bazie: `identities.theme` dla panelu admina i `users.theme` dla panelu tenantowego. Globalny przełącznik zapisuje wybór bez przeładowania strony: najpierw zmienia `data-theme`, potem zapisuje `localStorage` pod `aegoryx.theme`, a następnie wysyła `PATCH` do endpointu preferencji.
+
+Dla stron niezalogowanych fallback to `localStorage`, a przy pierwszej wizycie preferencja przeglądarki `prefers-color-scheme`.
 
 Do ręcznego przełączenia można użyć:
 

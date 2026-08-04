@@ -78,4 +78,7 @@ return [
     'updated' => 'Updated',
     'yes' => 'yes',
     'cancel' => 'Cancel',
+    'theme' => 'Theme',
+    'theme_light' => 'Light theme',
+    'theme_dark' => 'Dark theme',
 ];

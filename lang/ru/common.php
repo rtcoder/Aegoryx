@@ -78,4 +78,7 @@ return [
     'updated' => 'Обновлено',
     'yes' => 'да',
     'cancel' => 'Отмена',
+    'theme' => 'Тема',
+    'theme_light' => 'Светлая тема',
+    'theme_dark' => 'Темная тема',
 ];

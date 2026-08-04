@@ -1,15 +1,15 @@
 <section class="space-y-5">
     @if (session('success'))
-        <div class="rounded border border-emerald-700 bg-emerald-950 px-4 py-3 text-sm text-emerald-100">
+        <x-ui.alert variant="success">
             {{ session('success') }}
-        </div>
+        </x-ui.alert>
     @endif
 
     @if ($generatedPassword)
-        <div class="rounded border border-sky-700 bg-sky-950 px-4 py-3 text-sm text-sky-100">
+        <x-ui.alert variant="info">
             <p class="font-medium">{{ __('tenant_panel.users.generated_password') }}</p>
             <p class="mt-2 font-mono">{{ $generatedPassword }}</p>
-        </div>
+        </x-ui.alert>
     @endif
 
     @if ($canManageUsers)
@@ -55,9 +55,9 @@
         </form>
     @endif
 
-    <div class="overflow-hidden rounded border border-neutral-800">
-        <table class="min-w-full divide-y divide-neutral-800 text-sm">
-            <thead class="bg-neutral-900 text-left text-xs uppercase tracking-wide text-neutral-500">
+    <div class="ui-card overflow-hidden">
+        <table class="ui-table">
+            <thead>
                 <tr>
                     <th class="px-4 py-3">{{ __('tenant_panel.users.name') }}</th>
                     <th class="px-4 py-3">{{ __('tenant_panel.users.email') }}</th>
@@ -65,12 +65,12 @@
                     <th class="px-4 py-3 text-right">{{ __('tenant_panel.users.actions') }}</th>
                 </tr>
             </thead>
-            <tbody class="divide-y divide-neutral-800 bg-neutral-950">
+            <tbody>
                 @foreach ($users as $user)
                     <tr>
-                        <td class="px-4 py-3 font-medium text-neutral-100">{{ $user->name }}</td>
-                        <td class="px-4 py-3 text-neutral-400">{{ $user->email }}</td>
-                        <td class="px-4 py-3">
+                        <td class="font-medium text-[var(--ui-text)]">{{ $user->name }}</td>
+                        <td class="text-[var(--ui-text-muted)]">{{ $user->email }}</td>
+                        <td>
                             @if ($canManageUsers)
                                 <select wire:model="roles.{{ $user->id }}" class="ui-select max-w-48">
                                     @foreach ($roleOptions as $roleValue => $roleLabel)
@@ -82,13 +82,13 @@
                                 <x-ui.badge>{{ __("tenant_panel.roles.{$user->role->value}") }}</x-ui.badge>
                             @endif
                         </td>
-                        <td class="px-4 py-3 text-right">
+                        <td class="text-right">
                             @if ($canManageUsers)
                                 <x-ui.button wire:click="updateRole({{ $user->id }})" size="sm" variant="secondary">
                                     {{ __('tenant_panel.users.save_role') }}
                                 </x-ui.button>
                             @else
-                                <span class="text-xs text-neutral-500">{{ __('tenant_panel.users.read_only') }}</span>
+                                <span class="ui-caption">{{ __('tenant_panel.users.read_only') }}</span>
                             @endif
                         </td>
                     </tr>

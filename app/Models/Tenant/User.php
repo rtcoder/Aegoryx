@@ -5,6 +5,7 @@ namespace App\Models\Tenant;
 use App\Modules\Identity\Enums\TenantPermission;
 use App\Modules\Identity\Enums\TenantUserRole;
 use App\Support\Localization\Locale;
+use App\Support\Theme\ThemePreference;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
@@ -21,6 +22,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $email_verified_at
  * @property string $password
  * @property Locale $locale
+ * @property ThemePreference $theme
  * @property TenantUserRole $role
  * @property string|null $remember_token
  * @property string|null $two_factor_secret
@@ -33,7 +35,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $updated_at
  * @property Carbon|null $deleted_at
  */
-#[Fillable(['name', 'email', 'password', 'locale', 'role'])]
+#[Fillable(['name', 'email', 'password', 'locale', 'role', 'theme'])]
 #[Hidden(['password', 'remember_token', 'two_factor_secret', 'two_factor_recovery_codes'])]
 final class User extends Authenticatable
 {
@@ -71,6 +73,7 @@ final class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'locale' => Locale::class,
             'role' => TenantUserRole::class,
+            'theme' => ThemePreference::class,
             'password' => 'hashed',
             'two_factor_confirmed_at' => 'datetime',
             'two_factor_recovery_codes' => 'encrypted:array',

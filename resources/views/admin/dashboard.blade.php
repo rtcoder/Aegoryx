@@ -5,9 +5,9 @@
 @section('subheading', __('admin.system_controls'))
 
 @section('content')
-    <section class="rounded border border-neutral-800 bg-neutral-900 p-5">
-        <h2 class="text-lg font-semibold">{{ __('admin.dashboard_title') }}</h2>
-        <p class="mt-2 text-sm leading-6 text-neutral-400">
+    <section class="ui-card p-5">
+        <h2 class="ui-heading-2">{{ __('admin.dashboard_title') }}</h2>
+        <p class="ui-body mt-2">
             {{ __('admin.dashboard_description') }}
         </p>
     </section>

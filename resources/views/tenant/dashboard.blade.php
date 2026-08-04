@@ -6,43 +6,43 @@
 
 @section('content')
     <div class="grid gap-5 xl:grid-cols-[1fr_360px]">
-        <section class="rounded border border-neutral-800 bg-neutral-900 p-5">
-            <h2 class="text-lg font-semibold">{{ __('tenant_panel.dashboard_heading') }}</h2>
-            <p class="mt-2 text-sm leading-6 text-neutral-400">
+        <section class="ui-card p-5">
+            <h2 class="ui-heading-2">{{ __('tenant_panel.dashboard_heading') }}</h2>
+            <p class="ui-body mt-2">
                 {{ __('tenant_panel.dashboard_description') }}
             </p>
 
             <div class="mt-6 grid gap-4 sm:grid-cols-2">
                 @foreach ($tenantModuleCards as $module)
                     @if ($module['enabled'])
-                        <a href="{{ route($module['route']) }}" wire:navigate class="rounded border border-neutral-800 bg-neutral-950 p-4 hover:border-neutral-600">
-                            <p class="text-xs uppercase tracking-wide text-neutral-500">{{ $module['label'] }}</p>
-                            <p class="mt-2 text-sm text-neutral-300">{{ $module['description'] }}</p>
+                        <a href="{{ route($module['route']) }}" wire:navigate class="ui-muted-panel block p-4 hover:border-[var(--ui-border-strong)]">
+                            <p class="ui-caption uppercase tracking-wide">{{ $module['label'] }}</p>
+                            <p class="ui-body mt-2">{{ $module['description'] }}</p>
                         </a>
                     @else
-                        <div class="rounded border border-neutral-800 bg-neutral-950 p-4 opacity-60">
-                            <p class="text-xs uppercase tracking-wide text-neutral-500">{{ $module['label'] }}</p>
-                            <p class="mt-2 text-sm text-neutral-500">{{ __('tenant_panel.not_enabled') }}</p>
+                        <div class="ui-muted-panel p-4 opacity-60">
+                            <p class="ui-caption uppercase tracking-wide">{{ $module['label'] }}</p>
+                            <p class="ui-caption mt-2">{{ __('tenant_panel.not_enabled') }}</p>
                         </div>
                     @endif
                 @endforeach
             </div>
         </section>
 
-        <aside class="rounded border border-neutral-800 bg-neutral-900 p-5">
-            <h2 class="text-lg font-semibold">{{ __('tenant_panel.context') }}</h2>
+        <aside class="ui-card p-5">
+            <h2 class="ui-heading-2">{{ __('tenant_panel.context') }}</h2>
             <dl class="mt-5 space-y-4">
                 <div>
-                    <dt class="text-xs uppercase tracking-wide text-neutral-500">{{ __('common.tenant') }}</dt>
-                    <dd class="mt-1 text-neutral-100">{{ $tenant->name }}</dd>
+                    <dt class="ui-caption uppercase tracking-wide">{{ __('common.tenant') }}</dt>
+                    <dd class="mt-1 text-[var(--ui-text)]">{{ $tenant->name }}</dd>
                 </div>
                 <div>
-                    <dt class="text-xs uppercase tracking-wide text-neutral-500">{{ __('common.slug') }}</dt>
-                    <dd class="mt-1 font-mono text-sm text-neutral-100">{{ $tenant->slug }}</dd>
+                    <dt class="ui-caption uppercase tracking-wide">{{ __('common.slug') }}</dt>
+                    <dd class="mt-1 font-mono text-sm text-[var(--ui-text)]">{{ $tenant->slug }}</dd>
                 </div>
                 <div>
-                    <dt class="text-xs uppercase tracking-wide text-neutral-500">{{ __('common.status') }}</dt>
-                    <dd class="mt-1 text-neutral-100">{{ $tenant->status->value }}</dd>
+                    <dt class="ui-caption uppercase tracking-wide">{{ __('common.status') }}</dt>
+                    <dd class="mt-1 text-[var(--ui-text)]">{{ $tenant->status->value }}</dd>
                 </div>
             </dl>
         </aside>

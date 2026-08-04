@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ThemePreferenceController;
 use App\Modules\Crm\Http\Controllers\CompanyController;
 use App\Modules\Crm\Http\Controllers\ContactController;
 use App\Modules\Crm\Http\Controllers\DealController;
@@ -56,6 +57,7 @@ Route::middleware(ResolveTenantFromDomain::class)
                 });
                 Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');
                 Route::patch('profile', [ProfileController::class, 'update'])->name('profile.update');
+                Route::patch('theme', [ThemePreferenceController::class, 'tenant'])->name('theme.update');
 
                 Route::prefix('crm')
                     ->name('crm.')
