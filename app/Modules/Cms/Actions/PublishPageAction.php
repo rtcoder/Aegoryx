@@ -26,13 +26,25 @@ final readonly class PublishPageAction
         Gate::forUser($actor)->authorize('publish', $page);
 
         return DB::transaction(function () use ($page, $actor): CmsPage {
+            $revision = $page->revisions()
+                ->orderByDesc('version')
+                ->orderByDesc('id')
+                ->first();
+
+            $snapshotTitle = $revision?->title ?? $page->title;
+            $snapshotSlug = $revision?->slug ?? $page->slug;
+            $snapshotContent = $revision?->content ?? $page->draft_content;
+
             $before = [
                 'status' => $page->status->value,
                 'published_at' => $page->published_at?->toISOString(),
             ];
 
             $page->forceFill([
+                'title' => $snapshotTitle,
+                'slug' => $snapshotSlug,
                 'status' => CmsPageStatus::Published,
+                'draft_content' => $snapshotContent,
                 'published_at' => now(),
                 'published_by' => $actor->id,
                 'updated_by' => $actor->id,
@@ -41,9 +53,9 @@ final readonly class PublishPageAction
             $page->publishedSnapshot()->updateOrCreate(
                 ['cms_page_id' => $page->id],
                 [
-                    'title' => $page->title,
-                    'slug' => $page->slug,
-                    'content' => $page->draft_content,
+                    'title' => $snapshotTitle,
+                    'slug' => $snapshotSlug,
+                    'content' => $snapshotContent,
                     'published_at' => $page->published_at,
                     'published_by' => $actor->id,
                 ],

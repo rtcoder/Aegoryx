@@ -11,7 +11,7 @@ final readonly class CmsContent
 
     /**
      * @param  array<string, mixed>  $content
-     * @return array{schema_version: int, blocks: list<array<string, mixed>>}
+     * @return array{version: int, schema_version: int, blocks: list<array<string, mixed>>}
      */
     public function normalize(array $content): array
     {
@@ -22,7 +22,7 @@ final readonly class CmsContent
             ];
         }
 
-        $schemaVersion = (int) ($content['schema_version'] ?? self::SCHEMA_VERSION);
+        $schemaVersion = (int) ($content['version'] ?? $content['schema_version'] ?? self::SCHEMA_VERSION);
 
         if ($schemaVersion !== self::SCHEMA_VERSION) {
             throw new InvalidArgumentException('Unsupported CMS content schema version.');
@@ -35,6 +35,7 @@ final readonly class CmsContent
         }
 
         return [
+            'version' => self::SCHEMA_VERSION,
             'schema_version' => self::SCHEMA_VERSION,
             'blocks' => array_values(array_map(
                 fn (mixed $block): array => $this->normalizeBlock($block),

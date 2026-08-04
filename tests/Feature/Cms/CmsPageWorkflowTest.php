@@ -14,6 +14,7 @@ use App\Modules\Cms\Actions\UnpublishPageAction;
 use App\Modules\Cms\Actions\UpdatePageAction;
 use App\Modules\Cms\Enums\CmsBlockType;
 use App\Modules\Cms\Enums\CmsPageStatus;
+use App\Modules\Cms\Support\CmsContent;
 use App\Support\Localization\Locale;
 use Illuminate\Support\Facades\Artisan;
 use InvalidArgumentException;
@@ -101,6 +102,40 @@ final class CmsPageWorkflowTest extends TestCase
         $this->assertSame(ActivityEntryAction::CmsPageUpdated, ActivityEntry::query()->latest('id')->firstOrFail()->action);
     }
 
+    public function test_content_support_normalizes_versioned_blocks_and_removes_unknown_fields(): void
+    {
+        $content = app(CmsContent::class)->normalize([
+            'version' => 1,
+            'blocks' => [
+                [
+                    'id' => ' heading ',
+                    'type' => CmsBlockType::Heading->value,
+                    'data' => [
+                        'text' => '  Public heading  ',
+                        'level' => '2',
+                        'secret' => 'not allowed',
+                    ],
+                    'metadata' => 'ignored',
+                ],
+            ],
+        ]);
+
+        $this->assertSame([
+            'version' => 1,
+            'schema_version' => 1,
+            'blocks' => [
+                [
+                    'id' => 'heading',
+                    'type' => 'heading',
+                    'data' => [
+                        'text' => 'Public heading',
+                        'level' => 2,
+                    ],
+                ],
+            ],
+        ], $content);
+    }
+
     public function test_publish_creates_snapshot_and_activity(): void
     {
         $actor = $this->user();
@@ -127,6 +162,35 @@ final class CmsPageWorkflowTest extends TestCase
         $this->assertSame('home', $snapshot->slug);
         $this->assertSame($published->draft_content, $snapshot->content);
         $this->assertSame(ActivityEntryAction::CmsPagePublished, ActivityEntry::query()->latest('id')->firstOrFail()->action);
+    }
+
+    public function test_publish_snapshot_uses_latest_revision_content(): void
+    {
+        $actor = $this->user();
+        $page = app(CreatePageAction::class)->handle('Homepage', 'home', ['body' => 'Approved body'], $actor);
+
+        $page->forceFill([
+            'draft_content' => [
+                'version' => 1,
+                'schema_version' => 1,
+                'blocks' => [
+                    [
+                        'id' => 'unapproved',
+                        'type' => CmsBlockType::Text->value,
+                        'data' => [
+                            'body' => 'Unapproved direct edit',
+                        ],
+                    ],
+                ],
+            ],
+        ])->save();
+
+        app(PublishPageAction::class)->handle($page->refresh(), $actor);
+
+        $snapshot = PublishedPage::query()->where('cms_page_id', $page->id)->firstOrFail();
+
+        $this->assertSame('Approved body', $snapshot->content['blocks'][0]['data']['body']);
+        $this->assertSame('Approved body', $page->refresh()->draft_content['blocks'][0]['data']['body']);
     }
 
     public function test_invalid_block_structure_is_rejected(): void
