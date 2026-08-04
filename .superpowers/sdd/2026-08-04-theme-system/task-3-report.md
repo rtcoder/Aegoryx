@@ -73,3 +73,33 @@ After the minimal Task 3 implementation, the same targeted suite passed with 8 t
 ## Concerns
 
 No functional concerns. The PHP test command emits pre-existing Xdebug client connection warnings in this environment, but PHPUnit reports all tests passing.
+
+## Fix Round 1
+
+### Changes
+
+- Replaced all dark-first raw color utilities in the Task 3 admin layout, tenant layout, welcome page, and 403 page with semantic UI classes or existing CSS variable arbitrary values.
+- Confirmed the Task 3 admin and tenant auth wrapper views contained no raw dark-first color utilities, so no changes were needed there.
+- Updated `window.aegoryxTheme.set` to accept the required optional `options = {}` argument while preserving its existing local theme application behavior.
+
+### Scoped Color Audit
+
+```text
+rg -n "\\b(bg|text|border|divide)-(neutral|slate|zinc|gray|stone|red|emerald|amber|sky)-" resources/views/admin/layout.blade.php resources/views/tenant/layout.blade.php resources/views/admin/auth resources/views/tenant/auth resources/views/welcome.blade.php resources/views/errors/403.blade.php
+Exit code: 1
+Output: no matches
+```
+
+The non-zero `rg` exit code is expected when the audit finds no matches. There are no remaining intentional fixed-accent raw color classes in the scoped files.
+
+### Verification
+
+```text
+APP_KEY=base64:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA= php artisan test tests/Feature/Theme/ThemePreferenceTest.php
+PASS: 8 tests, 26 assertions
+
+npm run build
+PASS: Vite production build completed successfully
+```
+
+The PHP command continues to emit the environment's pre-existing Xdebug connection warnings; PHPUnit itself passes.

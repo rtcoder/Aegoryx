@@ -32,10 +32,10 @@
 </head>
 <body class="ds-app antialiased">
     <div class="ds-shell flex">
-        <aside class="hidden w-64 shrink-0 border-r border-neutral-800 px-5 py-6 md:block">
+        <aside class="hidden w-64 shrink-0 border-r border-[var(--ui-border)] px-5 py-6 md:block">
             <div>
                 <p class="text-lg font-semibold">Aegoryx</p>
-                <p class="mt-1 text-xs uppercase tracking-wide text-neutral-500">{{ __('admin.console') }}</p>
+                <p class="ui-caption mt-1 uppercase tracking-wide">{{ __('admin.console') }}</p>
             </div>
 
             <nav class="mt-8 space-y-1" aria-label="{{ __('admin.navigation_label') }}">
@@ -43,7 +43,7 @@
                     <a
                         href="{{ route($item['route']) }}"
                         wire:navigate
-                        class="block rounded px-3 py-2 text-sm {{ request()->routeIs($item['route']) || request()->routeIs($item['route'].'.*') ? 'bg-sky-500 text-white' : 'text-neutral-300 hover:bg-neutral-900 hover:text-white' }}"
+                        class="block rounded px-3 py-2 text-sm {{ request()->routeIs($item['route']) || request()->routeIs($item['route'].'.*') ? 'bg-[var(--ui-accent)] text-white' : 'text-[var(--ui-text-muted)] hover:bg-[var(--ui-surface-muted)] hover:text-[var(--ui-text)]' }}"
                     >
                         {{ $item['label'] }}
                     </a>
@@ -52,11 +52,11 @@
         </aside>
 
         <div class="flex min-w-0 flex-1 flex-col">
-            <header class="border-b border-neutral-800 px-5 py-4 md:px-8">
+            <header class="border-b border-[var(--ui-border)] px-5 py-4 md:px-8">
                 <div class="flex flex-wrap items-center justify-between gap-4">
                     <div>
-                        <h1 class="text-xl font-semibold">@yield('heading', __('admin.admin_console'))</h1>
-                        <p class="mt-1 text-sm text-neutral-400">@yield('subheading', __('admin.system_controls'))</p>
+                        <h1 class="ui-heading-1">@yield('heading', __('admin.admin_console'))</h1>
+                        <p class="ui-body mt-1">@yield('subheading', __('admin.system_controls'))</p>
                     </div>
 
                     <div class="flex items-center gap-3">
@@ -75,7 +75,7 @@
                         <a
                             href="{{ route($item['route']) }}"
                             wire:navigate
-                            class="shrink-0 rounded px-3 py-2 text-sm {{ request()->routeIs($item['route']) || request()->routeIs($item['route'].'.*') ? 'bg-sky-500 text-white' : 'bg-neutral-900 text-neutral-300' }}"
+                            class="shrink-0 rounded px-3 py-2 text-sm {{ request()->routeIs($item['route']) || request()->routeIs($item['route'].'.*') ? 'bg-[var(--ui-accent)] text-white' : 'bg-[var(--ui-surface-muted)] text-[var(--ui-text-muted)]' }}"
                         >
                             {{ $item['label'] }}
                         </a>

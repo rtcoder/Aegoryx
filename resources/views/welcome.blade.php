@@ -7,20 +7,17 @@
     <title>{{ __('welcome.title') }}</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="min-h-screen bg-neutral-950 text-neutral-100 antialiased">
+<body class="ds-app antialiased">
     <main class="mx-auto flex min-h-screen w-full max-w-3xl items-center px-6 py-12">
         <section>
-            <p class="text-sm uppercase tracking-wide text-neutral-500">Aegoryx</p>
-            <h1 class="mt-3 text-3xl font-semibold">{{ __('welcome.heading') }}</h1>
-            <p class="mt-4 max-w-xl text-sm leading-6 text-neutral-400">
+            <p class="ui-caption uppercase tracking-wide">Aegoryx</p>
+            <h1 class="ui-heading-1 mt-3">{{ __('welcome.heading') }}</h1>
+            <p class="ui-body mt-4 max-w-xl">
                 {{ __('welcome.description') }}
             </p>
-            <a
-                href="http://{{ config('aegoryx.admin.domain') }}"
-                class="mt-6 inline-flex rounded bg-sky-500 px-4 py-2 text-sm font-medium text-white hover:bg-sky-400"
-            >
+            <x-ui.button :href="'http://'.config('aegoryx.admin.domain')" class="mt-6">
                 {{ __('welcome.admin_link') }}
-            </a>
+            </x-ui.button>
         </section>
     </main>
 </body>

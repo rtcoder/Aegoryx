@@ -92,7 +92,7 @@ document.addEventListener('click', (event) => {
 });
 
 window.aegoryxTheme = {
-    set(theme) {
+    set(theme, options = {}) {
         return applyTheme(theme);
     },
     clear() {
